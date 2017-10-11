@@ -9,15 +9,14 @@ public class Arrow : MonoBehaviour
     private SpriteRenderer sprite;
     private bool isTap = false;
     float rotationZ;
-    int rotationCount = 0;
-
-    private Vector2 touchStartPos;
-    private Vector2 touchEndPos;
+    private Vector3 touchStartPos;
+    private Vector3 touchEndPos;
     public float flickMagnitude = 100f;
     public float alphaRestriction;
     float tapTimer = 0.0f;
     Vector3 curPoint;
-
+    public GameObject look;
+    GameObject lookClone;
     // Use this for initialization
     void Start()
     {
@@ -30,23 +29,25 @@ public class Arrow : MonoBehaviour
     void Update()
     {
         TapHit();
+        Flick();
         if (Input.GetMouseButton(0))
         {
+            touchStartPos = Input.mousePosition;
             sprite.enabled = true;
-            var cameraPos = Camera.main.WorldToScreenPoint(transform.localPosition);
-            var rotation = Quaternion.LookRotation(Vector3.forward, Input.mousePosition - cameraPos);
+            transform.position = touchStartPos;
+            //var cameraPos = Camera.main.WorldToScreenPoint(transform.localPosition);
+            var rotation = Quaternion.LookRotation(Vector3.forward, Input.mousePosition - touchStartPos);
             transform.localRotation = rotation; //マウスの方向に向く
-            if (transform.rotation.z < rotationZ) rotationCount--;//左回転
-            else if (transform.rotation.z > rotationZ) rotationCount++;//右回転
-            else if (transform.rotation.z == rotationZ) rotationCount = 0;//リセット
         }
         if (Input.GetMouseButtonUp(0))
         {
             sprite.enabled = false;
             isTap = false;
             rotationZ = transform.rotation.z;
+            touchEndPos = Input.mousePosition;
+            
         }
-        touchStartPos = player.transform.position; //タッチ位置に合わせる
+        transform.position = player.transform.position; //タッチ位置に合わせる
     }
 
     /// <summary>
@@ -54,8 +55,8 @@ public class Arrow : MonoBehaviour
     /// </summary>
     private void Flick()
     {
-        if (Input.GetMouseButtonDown(0)) touchStartPos = Input.mousePosition;
-
+        if (Input.GetMouseButtonDown(0))
+            touchStartPos = Input.mousePosition;
         if (Input.GetMouseButton(0))
         {
             tapTimer += 0.01f;
@@ -65,11 +66,9 @@ public class Arrow : MonoBehaviour
         {
             touchEndPos = Input.mousePosition;
 
-            if (tapTimer < 0.15f)
+            //if (tapTimer < 0.15f)
             {
-                GameObject obj = new GameObject();
-                obj.transform.LookAt(touchEndPos);
-
+               
             }
             tapTimer = 0.0f;
         }
@@ -87,7 +86,7 @@ public class Arrow : MonoBehaviour
                 var hitObject = Physics2D.Raycast(tapPoint, -Vector2.up);
 
                 //プレイヤー
-                if (hitObject.collider.gameObject.tag != "UI")
+                if (hitObject.collider.gameObject.tag != "Player" || hitObject == null)
                 {
                     isTap = true;
                     Debug.Log("hit object is " + hitObject.collider.gameObject.name);

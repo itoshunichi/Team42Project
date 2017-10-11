@@ -33,30 +33,46 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (playerMode == PlayerMode.NONE) return;
+        PlayerChange();
+        RotationMove();
+
+        //  Move();
+    }
+
+    private void RotationMove()
+    {
         if (Input.GetMouseButtonUp(0)) transform.rotation = arrow.transform.rotation;
-        //Flick();
         //自身の向きベクトル取得
         //自身の角度をラジアンで取得
         float angleDirection = transform.eulerAngles.z * (Mathf.PI / 180.0f);
         //
         Vector3 dir = new Vector3(-Mathf.Sin(angleDirection), Mathf.Cos(angleDirection), 0.0f);
         transform.position += dir * speed;
-
-        //  Move();
     }
 
-    
-
-    /// <summary>
-    /// 方向転換
-    /// </summary>
-    /// <param name="directionRotate"></param>
-    private void DirectionRotate(float directionRotate)
+    //プレイヤーにタップしたら
+    private void PlayerChange()
     {
-        var angle = transform.rotation.eulerAngles;
-        angle.z = directionRotate;
-        transform.rotation = Quaternion.Euler(angle);
+        if (Input.GetMouseButtonDown(0))
+        {
+            var tapPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            var collition2d = Physics2D.OverlapPoint(tapPoint);
+            if (collition2d)
+            {
+                var hitObject = Physics2D.Raycast(tapPoint, -Vector2.up);
+
+                //プレイヤー
+                if (hitObject.collider.gameObject.tag == "Player")
+                {
+                    playerMode = PlayerMode.NONE;
+                    ball.GetComponent<PlayerController>().playerMode = PlayerMode.PLAYER;
+                    Debug.Log("Hit");
+                }
+
+            }
+        }
     }
+
     //線より右側
     bool LineRight(Vector2 pos1,Vector2 pos2,Vector2 dot)
     {

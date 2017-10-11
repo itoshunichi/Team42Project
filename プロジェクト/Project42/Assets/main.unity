@@ -169,7 +169,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 77810931}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1130, z: 0}
+  m_LocalPosition: {x: 0, y: 304, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 707088097}
@@ -177,8 +177,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -150}
-  m_SizeDelta: {x: 1300, y: 300}
+  m_AnchoredPosition: {x: 0, y: -80}
+  m_SizeDelta: {x: 800, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &122263544
 GameObject:
@@ -567,6 +567,10 @@ Prefab:
       propertyPath: m_Name
       value: PlayerBig
       objectReference: {fileID: 0}
+    - target: {fileID: 1740486924461016, guid: a756353e5ce08284fbcab4b2f1f3f87c, type: 2}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 96484159884899714, guid: a756353e5ce08284fbcab4b2f1f3f87c, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: a756353e5ce08284fbcab4b2f1f3f87c, type: 2}
@@ -690,14 +694,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25e5c98c774e4954bb7b078bb82c8009, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 843692970}
-  chain:
-  - {fileID: 907893516}
-  - {fileID: 2110532074}
-  - {fileID: 1053656754}
-  - {fileID: 1522368032}
-  ball: {fileID: 1418667847}
-  chainCountMax: 4
 --- !u!1 &707088093
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,7 +776,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 707088093}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 800, y: 1280, z: 0}
+  m_LocalPosition: {x: 512, y: 384, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1199868733}
@@ -824,9 +820,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.1
-  flickMagnitude: 100
   power: 30
-  alphaRestriction: 0.4
   playerMode: 1
   ball: {fileID: 1418667847}
   arrow: {fileID: 1099144304}
@@ -864,7 +858,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 0.9448278, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -882,7 +876,7 @@ Transform:
   m_GameObject: {fileID: 843692969}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.5917816, y: -0.34354997, z: 0.041622415}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children: []
   m_Father: {fileID: 1018071915}
   m_RootOrder: 0
@@ -1485,6 +1479,7 @@ MonoBehaviour:
   player: {fileID: 843692969}
   flickMagnitude: 100
   alphaRestriction: 0
+  look: {fileID: 1945712978564680, guid: 12c5aff220dc24140a46a77f27883e52, type: 2}
 --- !u!1 &1199868732
 GameObject:
   m_ObjectHideFlags: 0
@@ -1510,7 +1505,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1199868732}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -547.73, y: 1127.5, z: 0}
+  m_LocalPosition: {x: -259.72998, y: 231.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 707088097}
@@ -1605,10 +1600,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4451b874e24a0345bba7062cef13acd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  flickMagnitude: 100
+  speed: 0.03
   power: 10
-  alphaRestriction: 0
   playerMode: 0
   ball: {fileID: 843692969}
   arrow: {fileID: 1099144304}
