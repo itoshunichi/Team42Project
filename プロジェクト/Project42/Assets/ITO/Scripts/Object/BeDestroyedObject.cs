@@ -83,7 +83,7 @@ public abstract class BeDestroyedObject : MonoBehaviour
         {
             //ボスにエネルギーを追加
             boss.GetComponent<Boss>().AddEnergy(parameter.giveEnergyPoint);
-            GameObject.Find("FormBeDestroyedObject").GetComponent<FormBeDestroyedObject>().DestoryObject(gameObject);
+            //GameObject.Find("FormBeDestroyedObject").GetComponent<FormBeDestroyedObject>().DestoryObject(gameObject);
         }
     }
 

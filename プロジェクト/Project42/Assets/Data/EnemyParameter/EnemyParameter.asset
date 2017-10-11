@@ -11,8 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8299bd415f268d049b24e736e6eb0243, type: 3}
   m_Name: EnemyParameter
   m_EditorClassIdentifier: 
-  type: 0
-  adrenalinPoint: 5
   maxHp: 10
   stunning_HP: 5
   recoveryTime: 7

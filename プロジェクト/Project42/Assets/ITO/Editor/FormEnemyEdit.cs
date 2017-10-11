@@ -5,18 +5,18 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 
 /// <summary>
-/// 破壊されるものを生成するエディタ
+/// エネミーを生成するエディタ
 /// </summary>
-[CustomEditor(typeof(FormBeDestroyedObject))]
-public class FormBeDestroyedObjectEdit :Editor
+[CustomEditor(typeof(FormEnemyObject))]
+public class FormEnemyEdit :Editor
 {
 
     Vector3 snap;
-    SerializedProperty objectType;
-    SerializedProperty formObjects;
-    List<GameObject> objectsTypeList = new List<GameObject>();
-    string[] objectNames;
-    FormBeDestroyedObject component;
+    SerializedProperty enemysType;
+    SerializedProperty formEnemys;
+    List<GameObject> enemysTypeList = new List<GameObject>();
+    string[] enemyNames;
+    FormEnemyObject component;
 
     Vector2 formPos;
     //SerializedProperty positionLists;
@@ -32,19 +32,19 @@ public class FormBeDestroyedObjectEdit :Editor
 
 
         ///////////////////////////////////////////////////////////////////////
-        objectType= serializedObject.FindProperty("objectsType");
-        formObjects = serializedObject.FindProperty("formObjects");
+        enemysType= serializedObject.FindProperty("enemysType");
+        formEnemys = serializedObject.FindProperty("formEnemys");
 
-        foreach (SerializedProperty t in objectType)
+        foreach (SerializedProperty t in enemysType)
         {
             //既にObjectがリストに入ったいたら処理しない
-            if (objectsTypeList.Contains((GameObject)t.objectReferenceValue)) return;                
-            objectsTypeList.Add((GameObject)t.objectReferenceValue);
+            if (enemysTypeList.Contains((GameObject)t.objectReferenceValue)) return;                
+            enemysTypeList.Add((GameObject)t.objectReferenceValue);
         }
-        objectNames = new string[objectsTypeList.Count];
-       for(int i = 0;i<objectsTypeList.Count;i++)
+        enemyNames = new string[enemysTypeList.Count];
+       for(int i = 0;i<enemysTypeList.Count;i++)
         {
-            objectNames[i] = objectsTypeList[i].name;
+            enemyNames[i] = enemysTypeList[i].name;
         }
 
     }
@@ -53,7 +53,7 @@ public class FormBeDestroyedObjectEdit :Editor
     {
 
         
-        component = target as FormBeDestroyedObject;
+        component = target as FormEnemyObject;
 
         // serializedPropertyの更新開始
         serializedObject.Update();
@@ -142,17 +142,17 @@ public class FormBeDestroyedObjectEdit :Editor
     {
         Handles.BeginGUI();
 
-        selectPop = EditorGUILayout.Popup("生成する敵", selectPop, objectNames);
+        selectPop = EditorGUILayout.Popup("生成する敵", selectPop, enemyNames);
         //生成ボタンを押したら
         if(GUILayout.Button("生成",GUILayout.Width(50)))
         {
             //リストの名前と一致するオブジェクトを生成する
-           foreach(var t in objectsTypeList)
+           foreach(var t in enemysTypeList)
             {
-                if(t.name == objectNames[selectPop])
+                if(t.name == enemyNames[selectPop])
                 {
-                    formObjects.arraySize += 1;
-                    formObjects.GetArrayElementAtIndex(formObjects.arraySize - 1).objectReferenceValue = (GameObject)Instantiate(t, (Vector2)component.transform.position + formPos,Quaternion.identity);
+                    formEnemys.arraySize += 1;
+                    formEnemys.GetArrayElementAtIndex(formEnemys.arraySize - 1).objectReferenceValue = (GameObject)Instantiate(t, (Vector2)component.transform.position + formPos,Quaternion.identity);
                     
                     //component.AddEnemy(t, (Vector2)component.transform.position + formPos);                   
                 }
@@ -172,11 +172,11 @@ public class FormBeDestroyedObjectEdit :Editor
 
         if(GUILayout.Button("削除",GUILayout.Width(50)))
         {
-            if (formObjects.arraySize <= 0) return;
-            int index = formObjects.arraySize - 1;
-            GameObject g = (GameObject)formObjects.GetArrayElementAtIndex(index).objectReferenceValue;
+            if (formEnemys.arraySize <= 0) return;
+            int index = formEnemys.arraySize - 1;
+            GameObject g = (GameObject)formEnemys.GetArrayElementAtIndex(index).objectReferenceValue;
             DestroyImmediate(g);
-            formObjects.arraySize -= 1;
+            formEnemys.arraySize -= 1;
             //formEnemys.DeleteArrayElementAtIndex(formEnemys.arraySize-1);
         }
 
@@ -193,12 +193,12 @@ public class FormBeDestroyedObjectEdit :Editor
         if(GUILayout.Button("リセット",GUILayout.Width(70)))
         {
            
-            foreach(SerializedProperty e in formObjects)
+            foreach(SerializedProperty e in formEnemys)
             {
                 DestroyImmediate(e.objectReferenceValue);
             }
 
-           formObjects.ClearArray();
+           formEnemys.ClearArray();
 
 
         }

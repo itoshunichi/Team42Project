@@ -15,7 +15,7 @@ using UnityEngine;
 //    {
 //    }
 //}
-public class FormBeDestroyedObject : MonoBehaviour
+public class FormEnemyObject : MonoBehaviour
 {
 
 
@@ -23,19 +23,19 @@ public class FormBeDestroyedObject : MonoBehaviour
     /// エネミーの種類のリスト
     /// </summary>
     [SerializeField]
-    private List<GameObject> objectsType;
+    private List<GameObject> enemysType;
 
     /// <summary>
     /// 生成するエネミーのリスト
     /// </summary>
     [SerializeField]
-    protected List<GameObject> formObjects;
+    protected List<GameObject> formEnemys;
 
 
     //生成するエネミーの取得
-    public List<GameObject> FormObjects
+    public List<GameObject> FormEnemys
     {
-        get { return formObjects; }
+        get { return formEnemys; }
     }
 
 
@@ -49,31 +49,40 @@ public class FormBeDestroyedObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("リストの数" + formObjects.Count);
+        Debug.Log("リストの数" + formEnemys.Count);
     }
 
 
     /// <summary>
-    /// 途中でオブジェクトーを追加する時など
+    /// 途中でエネミーを追加する時など
     /// </summary>
     /// <param name="enemy"></param>
-    public void AddObject(GameObject enemy,Vector2 pos)
+    public void AddEnemy(GameObject enemy,Vector2 pos)
     {
         GameObject g = (GameObject)Instantiate(enemy);
         g.transform.position = pos;
-        formObjects.Add(g);
-        Debug.Log("オブジェクトの数" + formObjects.Count);
+        formEnemys.Add(g);
+        Debug.Log("エネミーの数" + formEnemys.Count);
     }
 
     /// <summary>
-    /// リストからオブジェクトを削除
+    /// リストからエネミーを削除
     /// </summary>
     /// <param name="enemy"></param>
-    public void DestoryObject(GameObject enemy)
+    public void RemoveNenemy(GameObject enemy)
     {
-        formObjects.Remove(enemy);
-        Destroy(enemy);
+        formEnemys.Remove(enemy);
     }
 
-   
+    /// <summary>
+    /// 全てのエネミーの削除
+    /// </summary>
+    public void AllDestroyEnemy()
+    {
+        foreach(var e in formEnemys)
+        {
+            Destroy(e);
+        }
+        formEnemys.Clear();
+    }
 }

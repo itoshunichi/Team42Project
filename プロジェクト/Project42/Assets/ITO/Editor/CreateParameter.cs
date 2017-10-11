@@ -3,27 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class CreateParameter{
+public class CreateEnemyParameter{
 
     [MenuItem("Assets/Create/CreateEnemyParameter")]
-    public static void CreateEnemyParameter()
+    public static void CreateAsset()
     {
         CreateAsset<EnemyParameter>();
     }
-
-    [MenuItem("Assets/Create/CreatePlayerParameter")]
-    public static void CreatePlayerParameter()
-    {
-        //CreateAsset<PlayerParameter>();
-    }
-
-
-    [MenuItem("Assets/Create/CreateBeDestroyedObjectParameter")]
-    public static void CreateBeDestroyedObjectParameter()
-    {
-        CreateAsset<BeDestroyedObjectParameter>();
-    }
-
 
     public static void CreateAsset<Type>()where Type:ScriptableObject
     {
