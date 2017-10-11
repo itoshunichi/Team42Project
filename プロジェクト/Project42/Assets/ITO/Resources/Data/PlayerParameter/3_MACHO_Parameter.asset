@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44d8a3074ad944b44b9af826c8f4bdc9, type: 3}
+  m_Name: 3_MACHO_Parameter
+  m_EditorClassIdentifier: 
+  bodyType: 2
+  attackPower: 4
+  minAdrenalinePoint: 31
+  maxAdrenalinePoint: 70
+  animatorContoller: {fileID: 9100000, guid: d60ca5a5b19eb9c4ab94263d62aeaf45, type: 2}
