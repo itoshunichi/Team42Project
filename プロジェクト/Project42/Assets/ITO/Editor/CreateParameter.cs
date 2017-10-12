@@ -29,7 +29,7 @@ public class CreateParameter{
     {
         Type item = ScriptableObject.CreateInstance<Type>();
 
-        string path = AssetDatabase.GenerateUniqueAssetPath("Assets/Data/EnemyParameter/" + typeof(Type) + ".asset");
+        string path = AssetDatabase.GenerateUniqueAssetPath("Assets/Data/Parameter/" + typeof(Type) + ".asset");
 
         AssetDatabase.CreateAsset(item, path);
         AssetDatabase.SaveAssets();
