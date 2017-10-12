@@ -12,19 +12,27 @@ public class FormBeDestroyedObjectEdit :Editor
 {
 
     Vector3 snap;
+
+    /// <summary>
+    /// オブジェクトの種類
+    /// </summary>
     SerializedProperty objectType;
+    /// <summary>
+    /// 生成するオブジェクト
+    /// </summary>
     SerializedProperty formObjects;
+    /// <summary>
+    /// ランダムで生成する位置
+    /// </summary>
+    SerializedProperty randomFomrmPoints;
+
     List<GameObject> objectsTypeList = new List<GameObject>();
     string[] objectNames;
     FormBeDestroyedObject component;
 
-    Vector2 formPos;
-    //SerializedProperty positionLists;
-    //SerializedProperty enemysLists;
 
     void OnEnable()
     {
-        Debug.Log("ena");
         //SnapSettingsの値を取得する
         var snapX = EditorPrefs.GetFloat("MoveSnapX", 1f);
         var snapY = EditorPrefs.GetFloat("MoveSnapY", 1f);
@@ -34,6 +42,7 @@ public class FormBeDestroyedObjectEdit :Editor
         ///////////////////////////////////////////////////////////////////////
         objectType= serializedObject.FindProperty("objectsType");
         formObjects = serializedObject.FindProperty("formObjects");
+        randomFomrmPoints = serializedObject.FindProperty("randomFormPoints");
 
         foreach (SerializedProperty t in objectType)
         {
@@ -50,47 +59,27 @@ public class FormBeDestroyedObjectEdit :Editor
     }
 
     void OnSceneGUI()
-    {
-
-        
+    {       
         component = target as FormBeDestroyedObject;
 
         // serializedPropertyの更新開始
         serializedObject.Update();
-        //formEnemys.arraySize = component.FormEnemys.Count;
         CreateEnemy();
         DeleateEnemy();
         ResetEnemy();
-        
+
+        foreach (SerializedProperty l in randomFomrmPoints)
+        {
+
+            Vector2 tmp = l.vector2Value;
+            l.vector2Value = PositionHandle2D((Vector2)component.transform.position + tmp) - (Vector2)component.transform.position;
+        }
+
+        Undo.RegisterCompleteObjectUndo(component, "resetNavi");
+
+
         // serializedPropertyの更新を適用
         serializedObject.ApplyModifiedProperties();
-
-        Vector2 tmp = formPos;
-        formPos = PositionHandle2D((Vector2)component.transform.position + tmp) - (Vector2)component.transform.position;
-        Undo.RegisterCompleteObjectUndo(component, "resetNavi");
-       
-
-
-        Debug.Log(formPos);
-
-        
-        //if (positionLists.arraySize <= 1)
-        //{
-        //    //list.arraySize = 2;
-        //}
-
-
-        //foreach (SerializedProperty l in positionLists)
-        //{
-
-        //    Vector2 temp = l.vector2Value;
-        //    l.vector2Value = PositionHandle2D((Vector2)component.transform.position + temp) - (Vector2)component.transform.position;
-        //}
-
-
-        //positionLists.arraySize = enemysLists.arraySize;
-
-       
 
        
     }
@@ -152,7 +141,8 @@ public class FormBeDestroyedObjectEdit :Editor
                 if(t.name == objectNames[selectPop])
                 {
                     formObjects.arraySize += 1;
-                    formObjects.GetArrayElementAtIndex(formObjects.arraySize - 1).objectReferenceValue = (GameObject)Instantiate(t, (Vector2)component.transform.position + formPos,Quaternion.identity);
+                    formObjects.GetArrayElementAtIndex(formObjects.arraySize - 1).objectReferenceValue = 
+                        (GameObject)Instantiate(t);
                     
                     //component.AddEnemy(t, (Vector2)component.transform.position + formPos);                   
                 }

@@ -17,8 +17,6 @@ using UnityEngine;
 //}
 public class FormBeDestroyedObject : MonoBehaviour
 {
-
-
     /// <summary>
     /// エネミーの種類のリスト
     /// </summary>
@@ -29,7 +27,28 @@ public class FormBeDestroyedObject : MonoBehaviour
     /// 生成するエネミーのリスト
     /// </summary>
     [SerializeField]
-    protected List<GameObject> formObjects;
+    private List<GameObject> formObjects;
+
+    /// <summary>
+    /// ランダムで生成するオブジェクトのグループ
+    /// </summary>
+    [SerializeField]
+    private List<GameObject> randomFormObjectsGroup;
+
+    /// <summary>
+    /// オブジェクトをランダムで生成する位置の候補
+    /// </summary>
+    [SerializeField]
+    private List<Vector2> randomFormPoints;
+
+    /// <summary>
+    /// ランダムでオブジェクトを生成する間隔
+    /// </summary>
+    [SerializeField]
+    private float randomFormTime;
+
+    
+
 
 
     //生成するエネミーの取得
@@ -42,7 +61,7 @@ public class FormBeDestroyedObject : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        
+        StartCoroutine(RandomFormObject());
         //FormEnemy();
     }
 
@@ -56,13 +75,25 @@ public class FormBeDestroyedObject : MonoBehaviour
     /// <summary>
     /// 途中でオブジェクトーを追加する時など
     /// </summary>
-    /// <param name="enemy"></param>
-    public void AddObject(GameObject enemy,Vector2 pos)
+    /// <param name="obj"></param>
+    public void AddObject(GameObject obj,Vector2 pos)
     {
-        GameObject g = (GameObject)Instantiate(enemy);
+        GameObject g = (GameObject)Instantiate(obj);
         g.transform.position = pos;
-        formObjects.Add(g);
-        Debug.Log("オブジェクトの数" + formObjects.Count);
+        //子オブジェクトがなかったらそのまま生成
+        if (g.transform.childCount == 0)
+        {
+            formObjects.Add(g);
+        }
+        //子オブジェクトがあったら
+        else
+        {
+            for(int i = 0;i<g.transform.childCount;i++)
+            {
+                formObjects.Add(g.transform.GetChild(i).gameObject);
+            }
+        }
+       
     }
 
     /// <summary>
@@ -75,5 +106,20 @@ public class FormBeDestroyedObject : MonoBehaviour
         Destroy(enemy);
     }
 
-   
+    /// <summary>
+    /// 秒間隔でランダムな位置にランダムでオブジェクトを生成
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator RandomFormObject()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(randomFormTime);
+            GameObject obj = randomFormObjectsGroup[Random.Range(0, randomFormObjectsGroup.Count)];
+            Vector2 pos = randomFormPoints[Random.Range(0, randomFormPoints.Count)]+(Vector2)transform.position;
+            AddObject(obj, pos);
+        }
+    }
+
+
 }
