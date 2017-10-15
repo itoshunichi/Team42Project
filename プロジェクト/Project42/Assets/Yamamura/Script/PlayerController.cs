@@ -8,19 +8,22 @@ public enum PlayerMode
    PLAYER,
 }
 
+public enum PlayerType
+{
+    SMALL,
+    BIG,
+}
+
 public class PlayerController : MonoBehaviour
 {
-    public float speed;
-    Vector2 movePosition;
-
-    //タッチ移動
-    
-    public float power = 10f;
-
-
+    public float speed;     //プレイヤースピード
+    public float power;
+   
     public PlayerMode playerMode;                 //自機速度の段階
+    public PlayerType playerType;                   //プレイヤータイプ
     public GameObject ball;
     public GameObject arrow;
+    Vector3 dir;    //進行方向の位置
 
     // Use this for initialization
     void Start()
@@ -33,11 +36,9 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (playerMode == PlayerMode.NONE) return;
-        PlayerChange();
         RotationMove();
-
-        //  Move();
-    }
+        Mass();
+   }
 
     private void RotationMove()
     {
@@ -46,40 +47,27 @@ public class PlayerController : MonoBehaviour
         //自身の角度をラジアンで取得
         float angleDirection = transform.eulerAngles.z * (Mathf.PI / 180.0f);
         //
-        Vector3 dir = new Vector3(-Mathf.Sin(angleDirection), Mathf.Cos(angleDirection), 0.0f);
+     
+        if(playerType == PlayerType.BIG)dir = new Vector3(Mathf.Sin(angleDirection), -Mathf.Cos(angleDirection), 0.0f);
+        else if(playerType == PlayerType.SMALL)dir = new Vector3(Mathf.Sin(angleDirection), Mathf.Cos(angleDirection), 0.0f);
         transform.position += dir * speed;
     }
 
-    //プレイヤーにタップしたら
-    private void PlayerChange()
+    private void Mass()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            var tapPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            var collition2d = Physics2D.OverlapPoint(tapPoint);
-            if (collition2d)
-            {
-                var hitObject = Physics2D.Raycast(tapPoint, -Vector2.up);
-
-                //プレイヤー
-                if (hitObject.collider.gameObject.tag == "Player")
-                {
-                    playerMode = PlayerMode.NONE;
-                    ball.GetComponent<PlayerController>().playerMode = PlayerMode.PLAYER;
-                    Debug.Log("Hit");
-                }
-
-            }
-        }
+        if (playerMode == PlayerMode.PLAYER) GetComponent<Rigidbody2D>().mass = 1;
+        else if (playerMode == PlayerMode.NONE) GetComponent<Rigidbody2D>().mass = 0.005f;
     }
 
-    //線より右側
-    bool LineRight(Vector2 pos1,Vector2 pos2,Vector2 dot)
+    public void R(bool isRight)
     {
-        Vector2 v1 = new Vector2(pos2.x - pos1.x, pos2.y - pos1.y);
-        Vector2 v2 = new Vector2(dot.x - pos1.x, dot.y - pos1.y);
-        float det = v1.x * v2.y - v2.x * v1.y;
-        if (det < 0) return true;
-        return false;
+        if (isRight)
+        {
+            ball.GetComponent<Rigidbody2D>().AddForce(Vector2.right * power);
+        }
+        else
+        {
+            ball.GetComponent<Rigidbody2D>().AddForce(Vector2.left * power);
+        }
     }
 }

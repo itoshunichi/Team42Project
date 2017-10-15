@@ -5,49 +5,29 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
 
-    public GameObject player;
-    private SpriteRenderer sprite;
-    private bool isTap = false;
-    float rotationZ;
-    private Vector3 touchStartPos;
-    private Vector3 touchEndPos;
-    public float flickMagnitude = 100f;
-    public float alphaRestriction;
-    float tapTimer = 0.0f;
-    Vector3 curPoint;
-    public GameObject look;
-    GameObject lookClone;
+    public GameObject playerSmall;      //プレイヤースモール
+    public GameObject playerBig;        //プレイヤービッグ
+    private SpriteRenderer sprite;      //矢印画像
+    private bool isTap = false;         //Tapしたかどうか
+    private Vector3 touchStartPos;      //タッチした場所
+    private Vector3 touchEndPos;        //タッチ終わりの場所
+    float tapTimer = 0.0f;              //タッチしている時間
+    public float flickTime;           //フリック判定時間
+    public float flickMagnitude = 100;
     // Use this for initialization
     void Start()
     {
         sprite = GetComponentInChildren<SpriteRenderer>();
         sprite.enabled = false;
-        rotationZ = transform.rotation.z;
     }
 
     // Update is called once per frame
     void Update()
     {
-        TapHit();
+        //TapHit();
         Flick();
-        if (Input.GetMouseButton(0))
-        {
-            touchStartPos = Input.mousePosition;
-            sprite.enabled = true;
-            transform.position = touchStartPos;
-            //var cameraPos = Camera.main.WorldToScreenPoint(transform.localPosition);
-            var rotation = Quaternion.LookRotation(Vector3.forward, Input.mousePosition - touchStartPos);
-            transform.localRotation = rotation; //マウスの方向に向く
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            sprite.enabled = false;
-            isTap = false;
-            rotationZ = transform.rotation.z;
-            touchEndPos = Input.mousePosition;
-            
-        }
-        transform.position = player.transform.position; //タッチ位置に合わせる
+
+        if (!isTap) transform.position = playerSmall.transform.position; //タッチ位置に合わせる
     }
 
     /// <summary>
@@ -56,22 +36,43 @@ public class Arrow : MonoBehaviour
     private void Flick()
     {
         if (Input.GetMouseButtonDown(0))
+        {
             touchStartPos = Input.mousePosition;
+            transform.position = touchStartPos;
+            isTap = true;
+        }
         if (Input.GetMouseButton(0))
         {
             tapTimer += 0.01f;
-            Debug.Log(tapTimer);
         }
         if (Input.GetMouseButtonUp(0))
         {
             touchEndPos = Input.mousePosition;
-
-            //if (tapTimer < 0.15f)
+            Vector2 dir = touchEndPos - touchStartPos;
+            if (dir.magnitude >= flickMagnitude && tapTimer <= flickTime)
             {
-               
+                var rotation = Quaternion.LookRotation(Vector3.forward, Input.mousePosition - touchStartPos);
+                transform.localRotation = rotation; //マウスの方向に向く
+                if(LineRight(touchStartPos,touchEndPos,playerSmall.transform.position))
+                {
+                    playerSmall.GetComponent<PlayerController>().R(true);
+                }
             }
             tapTimer = 0.0f;
+            isTap = false;
         }
+    }
+
+    
+
+    //線より右側
+    bool LineRight(Vector2 pos1, Vector2 pos2, Vector2 dot)
+    {
+        Vector2 v1 = new Vector2(pos2.x - pos1.x, pos2.y - pos1.y);
+        Vector2 v2 = new Vector2(dot.x - pos1.x, dot.y - pos1.y);
+        float det = v1.x * v2.y - v2.x * v1.y;
+        if (det < 0) return true;
+        return false;
     }
 
     #region タップした位置にプレイヤー、エネミーがいるかどうか
