@@ -729,8 +729,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4451b874e24a0345bba7062cef13acd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.1
-  power: 20
+  speed: 0.5
+  power: 10
   playerMode: 1
   playerType: 0
   ball: {fileID: 1418667847}
@@ -1431,6 +1431,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSmall: {fileID: 843692969}
   playerBig: {fileID: 1418667847}
+  spriteobj: {fileID: 953882345}
   flickTime: 0.15
   flickMagnitude: 100
 --- !u!1 &1199868732
@@ -1530,18 +1531,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4403746959519296, guid: a756353e5ce08284fbcab4b2f1f3f87c,
     type: 2}
   m_PrefabInternal: {fileID: 263682409}
---- !u!114 &1418667853
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1418667847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6369c380088550348b3e0d8ca6eddf43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  image: {fileID: 77810932}
 --- !u!114 &1418667854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1554,7 +1543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.03
-  power: 20
+  power: 10
   playerMode: 0
   playerType: 1
   ball: {fileID: 843692969}

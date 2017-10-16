@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
     private void RotationMove()
     {
         transform.rotation = arrow.transform.rotation;
-        //自身の向きベクトル取得
+         //自身の向きベクトル取得
         //自身の角度をラジアンで取得
         float angleDirection = transform.eulerAngles.z * (Mathf.PI / 180.0f);
         //

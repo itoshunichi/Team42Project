@@ -8,6 +8,7 @@ public class Arrow : MonoBehaviour
     public GameObject playerSmall;      //プレイヤースモール
     public GameObject playerBig;        //プレイヤービッグ
     private SpriteRenderer sprite;      //矢印画像
+    public GameObject spriteobj;
     private bool isTap = false;         //Tapしたかどうか
     private Vector3 touchStartPos;      //タッチした場所
     private Vector3 touchEndPos;        //タッチ終わりの場所
@@ -17,7 +18,7 @@ public class Arrow : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        sprite = GetComponentInChildren<SpriteRenderer>();
+        sprite = spriteobj.GetComponent<SpriteRenderer>();
         //sprite.enabled = false;
     }
 
@@ -53,9 +54,16 @@ public class Arrow : MonoBehaviour
             {
                 var rotation = Quaternion.LookRotation(Vector3.forward, Input.mousePosition - touchStartPos);
                 transform.localRotation = rotation; //マウスの方向に向く
-                if(LineRight(touchStartPos,touchEndPos,playerSmall.transform.position))
+                PlayerController pc = new PlayerController();
+                if (playerSmall.GetComponent<PlayerController>().playerMode == PlayerMode.PLAYER) pc = playerSmall.GetComponent<PlayerController>();
+                else if (playerBig.GetComponent<PlayerController>().playerMode == PlayerMode.PLAYER) pc = playerBig.GetComponent<PlayerController>();
+                if (LineRight(touchStartPos, touchEndPos, spriteobj.transform.position))
                 {
-                    playerSmall.GetComponent<PlayerController>().R(true);
+                    pc.R(true);
+                }
+                else if (!LineRight(touchStartPos, touchEndPos, spriteobj.transform.position))
+                {
+                    pc.R(false);
                 }
             }
             tapTimer = 0.0f;
