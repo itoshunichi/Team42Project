@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
         else if (playerMode == PlayerMode.NONE) GetComponent<Rigidbody2D>().mass = 0.005f;
     }
 
-    public void R(bool isRight)
+    public void AddForceBall(bool isRight)
     {
         if (isRight)
         {

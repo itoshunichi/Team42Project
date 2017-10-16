@@ -12,9 +12,15 @@ public class Arrow : MonoBehaviour
     private bool isTap = false;         //Tapしたかどうか
     private Vector3 touchStartPos;      //タッチした場所
     private Vector3 touchEndPos;        //タッチ終わりの場所
+    private Vector3 beforeEndPos;       //前回のタッチ終わりの場所
+    int flickCount = 0;
     float tapTimer = 0.0f;              //タッチしている時間
     public float flickTime;           //フリック判定時間
     public float flickMagnitude = 100;
+    float beforeRadian = 0; //フリックする前の角度
+    float afterRadian = 0;  //フリックした後の角度
+    public float radianMax = 30;
+
     // Use this for initialization
     void Start()
     {
@@ -37,41 +43,70 @@ public class Arrow : MonoBehaviour
     private void Flick()
     {
         if (Input.GetMouseButtonDown(0))
-        {
+        {   //位置セット
             touchStartPos = Input.mousePosition;
             transform.position = touchStartPos;
+
             isTap = true;
         }
         if (Input.GetMouseButton(0))
-        {
+        {   //タップカウント
             tapTimer += 0.01f;
         }
         if (Input.GetMouseButtonUp(0))
         {
+            if (flickCount == 0) beforeEndPos = Vector2.up;
+            else beforeEndPos = touchEndPos;
             touchEndPos = Input.mousePosition;
+
             Vector2 dir = touchEndPos - touchStartPos;
             if (dir.magnitude >= flickMagnitude && tapTimer <= flickTime)
             {
                 var rotation = Quaternion.LookRotation(Vector3.forward, Input.mousePosition - touchStartPos);
                 transform.localRotation = rotation; //マウスの方向に向く
-                PlayerController pc = new PlayerController();
-                if (playerSmall.GetComponent<PlayerController>().playerMode == PlayerMode.PLAYER) pc = playerSmall.GetComponent<PlayerController>();
-                else if (playerBig.GetComponent<PlayerController>().playerMode == PlayerMode.PLAYER) pc = playerBig.GetComponent<PlayerController>();
-                if (LineRight(touchStartPos, touchEndPos, spriteobj.transform.position))
+                Vector2 afterDirection = touchEndPos - touchStartPos;
+
+                if (flickCount == 0) beforeRadian = 90; //初期90
+                else beforeRadian = afterRadian;        //二回目以降afterRadianセット
+                //角度取得
+                afterRadian = Mathf.Atan2(afterDirection.y, afterDirection.x) * Mathf.Rad2Deg;
+                //0より小さかったら+360足す
+                if (beforeRadian < 0) beforeRadian += 360;
+                if (afterRadian < 0) afterRadian += 360;
+                //radian = 値が大きい方 - 値が小さい方
+                float radian;
+                if (beforeRadian < afterRadian) radian = afterRadian - beforeRadian;
+                else radian = beforeRadian - afterRadian;
+
+                Debug.Log("Before"+beforeRadian);
+                Debug.Log("After"+afterRadian);
+                Debug.Log("Radian" + radian);
+                //radianの値が規定値以下だったらそれ以降は処理しない
+                if (radian > radianMax)
                 {
-                    pc.R(true);
+                    PlayerController pc = new PlayerController();
+
+                    //操作キャラのスクリプトを入れる
+                    if (playerSmall.GetComponent<PlayerController>().playerMode == PlayerMode.PLAYER) pc = playerSmall.GetComponent<PlayerController>();
+                    else if (playerBig.GetComponent<PlayerController>().playerMode == PlayerMode.PLAYER) pc = playerBig.GetComponent<PlayerController>();
+
+                    if (LineRight(touchStartPos, beforeEndPos, spriteobj.transform.position))
+                    {
+                        pc.AddForceBall(true);
+                    }
+                    else if (!LineRight(touchStartPos, beforeEndPos, spriteobj.transform.position))
+                    {
+                        pc.AddForceBall(false);
+                    }
                 }
-                else if (!LineRight(touchStartPos, touchEndPos, spriteobj.transform.position))
-                {
-                    pc.R(false);
-                }
+                flickCount += 1;//フリックした回数をカウント
             }
             tapTimer = 0.0f;
             isTap = false;
         }
     }
 
-    
+
 
     //線より右側
     bool LineRight(Vector2 pos1, Vector2 pos2, Vector2 dot)
