@@ -68,7 +68,7 @@ public class FormBeDestroyedObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("リストの数" + formObjects.Count);
+        //Debug.Log("リストの数" + formObjects.Count);
     }
 
 
@@ -78,8 +78,8 @@ public class FormBeDestroyedObject : MonoBehaviour
     /// <param name="obj"></param>
     public void AddObject(GameObject obj,Vector2 pos)
     {
-        GameObject g = (GameObject)Instantiate(obj);
-        g.transform.position = pos;
+        GameObject g = (GameObject)Instantiate(obj,pos,Quaternion.identity);
+       // g.transform.position = pos;
         //子オブジェクトがなかったらそのまま生成
         if (g.transform.childCount == 0)
         {
@@ -116,7 +116,8 @@ public class FormBeDestroyedObject : MonoBehaviour
         {
             yield return new WaitForSeconds(randomFormTime);
             GameObject obj = randomFormObjectsGroup[Random.Range(0, randomFormObjectsGroup.Count)];
-            Vector2 pos = randomFormPoints[Random.Range(0, randomFormPoints.Count)]+(Vector2)transform.position;
+            Vector2 pos = randomFormPoints[Random.Range(0, randomFormPoints.Count)];
+            Debug.Log(pos);
             AddObject(obj, pos);
         }
     }
