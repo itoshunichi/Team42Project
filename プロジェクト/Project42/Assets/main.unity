@@ -634,7 +634,7 @@ GameObject:
   - component: {fileID: 843692970}
   - component: {fileID: 843692973}
   - component: {fileID: 843692975}
-  - component: {fileID: 843692974}
+  - component: {fileID: 843692976}
   m_Layer: 18
   m_Name: PlayerSmall
   m_TagString: Player
@@ -650,13 +650,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 843692969}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4451b874e24a0345bba7062cef13acd, type: 3}
+  m_Script: {fileID: 11500000, guid: 7fec23fc3e6c91845a8775cf9125c207, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
-  power: 10
   playerMode: 1
-  playerType: 0
+  speed: 0.04
+  power: 10
   ball: {fileID: 1418667847}
   arrow: {fileID: 1099144304}
 --- !u!212 &843692971
@@ -731,29 +730,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.08
---- !u!233 &843692974
-HingeJoint2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 843692969}
-  m_Enabled: 0
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 907893517}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 0
-  m_Anchor: {x: 0, y: -0.07}
-  m_ConnectedAnchor: {x: 0, y: 0.07}
-  m_UseMotor: 0
-  m_Motor:
-    m_MotorSpeed: 0
-    m_MaximumMotorForce: 10000
-  m_UseLimits: 0
-  m_AngleLimits:
-    m_LowerAngle: 0
-    m_UpperAngle: 359
 --- !u!50 &843692975
 Rigidbody2D:
   serializedVersion: 4
@@ -774,6 +750,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &843692976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 843692969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b073ec1e704c3d4989aaaf01098de24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionPower: 100
+  noMoveCount: 40
 --- !u!1 &907893516
 GameObject:
   m_ObjectHideFlags: 0
@@ -928,7 +917,7 @@ GameObject:
   - component: {fileID: 921808448}
   m_Layer: 0
   m_Name: Obj
-  m_TagString: Untagged
+  m_TagString: BeDestroyedObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1008,13 +997,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 921808447}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.72, y: 2.17291, z: -0.109961405}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 4.13, y: 3.08, z: -0.109961405}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!114 &921808451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1358,6 +1347,7 @@ MonoBehaviour:
   spriteobj: {fileID: 953882345}
   flickTime: 0.15
   flickMagnitude: 100
+  radianMax: 30
 --- !u!1 &1199868732
 GameObject:
   m_ObjectHideFlags: 0
@@ -1455,6 +1445,19 @@ Transform:
   m_PrefabParentObject: {fileID: 4403746959519296, guid: a756353e5ce08284fbcab4b2f1f3f87c,
     type: 2}
   m_PrefabInternal: {fileID: 263682409}
+--- !u!114 &1418667853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1418667847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b073ec1e704c3d4989aaaf01098de24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionPower: 100
+  noMoveCount: 40
 --- !u!114 &1418667854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1463,13 +1466,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1418667847}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4451b874e24a0345bba7062cef13acd, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f0cc414c51357c4aa3c2bcacccb300a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.03
-  power: 10
   playerMode: 0
-  playerType: 1
+  speed: 0.04
+  power: 20
   ball: {fileID: 843692969}
   arrow: {fileID: 1099144304}
 --- !u!1 &1522368032

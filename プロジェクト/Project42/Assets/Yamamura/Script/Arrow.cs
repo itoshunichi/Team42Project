@@ -7,7 +7,6 @@ public class Arrow : MonoBehaviour
 
     public GameObject playerSmall;      //プレイヤースモール
     public GameObject playerBig;        //プレイヤービッグ
-    private SpriteRenderer sprite;      //矢印画像
     public GameObject spriteobj;
     private bool isTap = false;         //Tapしたかどうか
     private Vector3 touchStartPos;      //タッチした場所
@@ -24,7 +23,7 @@ public class Arrow : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        sprite = spriteobj.GetComponent<SpriteRenderer>();
+        //sprite = spriteobj.GetComponent<SpriteRenderer>();
         //sprite.enabled = false;
     }
 
@@ -84,20 +83,20 @@ public class Arrow : MonoBehaviour
                 //radianの値が規定値以下だったらそれ以降は処理しない
                 if (radian > radianMax)
                 {
-                    PlayerController pc = new PlayerController();
-
+                    PlayerSmallController pcs = new PlayerSmallController();
+                    PlayerBigController pcb = new PlayerBigController();
                     //操作キャラのスクリプトを入れる
-                    if (playerSmall.GetComponent<PlayerController>().playerMode == PlayerMode.PLAYER) pc = playerSmall.GetComponent<PlayerController>();
-                    else if (playerBig.GetComponent<PlayerController>().playerMode == PlayerMode.PLAYER) pc = playerBig.GetComponent<PlayerController>();
-
-                    if (LineRight(touchStartPos, beforeEndPos, spriteobj.transform.position))
+                    if (playerSmall.GetComponent<PlayerSmallController>().playerMode == PlayerMode.PLAYER)
                     {
-                        pc.AddForceBall(true);
+                        pcs = playerSmall.GetComponent<PlayerSmallController>();
+                        pcs.AddForceBall(LineRight(touchStartPos, beforeEndPos, spriteobj.transform.position));
                     }
-                    else if (!LineRight(touchStartPos, beforeEndPos, spriteobj.transform.position))
+                    else if (playerBig.GetComponent<PlayerBigController>().playerMode == PlayerMode.PLAYER)
                     {
-                        pc.AddForceBall(false);
+                        pcb = playerBig.GetComponent<PlayerBigController>();
+                        pcb.AddForceBall(LineRight(touchStartPos, beforeEndPos, spriteobj.transform.position));
                     }
+                    
                 }
                 flickCount += 1;//フリックした回数をカウント
             }

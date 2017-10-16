@@ -9,6 +9,7 @@ TagManager:
   - Obj
   - Hammer
   - Chain
+  - BeDestroyedObject
   layers:
   - Default
   - TransparentFX
