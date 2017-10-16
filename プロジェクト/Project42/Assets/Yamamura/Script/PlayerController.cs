@@ -17,7 +17,7 @@ public enum PlayerType
 public class PlayerController : MonoBehaviour
 {
     public float speed;     //プレイヤースピード
-    public float power;
+    public float power;     //振り回す力
    
     public PlayerMode playerMode;                 //自機速度の段階
     public PlayerType playerType;                   //プレイヤータイプ
@@ -42,14 +42,14 @@ public class PlayerController : MonoBehaviour
 
     private void RotationMove()
     {
-        if (Input.GetMouseButtonUp(0)) transform.rotation = arrow.transform.rotation;
+        transform.rotation = arrow.transform.rotation;
         //自身の向きベクトル取得
         //自身の角度をラジアンで取得
         float angleDirection = transform.eulerAngles.z * (Mathf.PI / 180.0f);
         //
      
         if(playerType == PlayerType.BIG)dir = new Vector3(Mathf.Sin(angleDirection), -Mathf.Cos(angleDirection), 0.0f);
-        else if(playerType == PlayerType.SMALL)dir = new Vector3(Mathf.Sin(angleDirection), Mathf.Cos(angleDirection), 0.0f);
+        else if(playerType == PlayerType.SMALL) dir = new Vector3(-Mathf.Sin(angleDirection), Mathf.Cos(angleDirection), 0.0f);
         transform.position += dir * speed;
     }
 

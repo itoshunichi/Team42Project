@@ -18,7 +18,7 @@ public class Arrow : MonoBehaviour
     void Start()
     {
         sprite = GetComponentInChildren<SpriteRenderer>();
-        sprite.enabled = false;
+        //sprite.enabled = false;
     }
 
     // Update is called once per frame
