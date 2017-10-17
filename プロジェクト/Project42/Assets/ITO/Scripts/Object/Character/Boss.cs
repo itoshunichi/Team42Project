@@ -63,15 +63,39 @@ public class Boss : MonoBehaviour
 
     }
 
+    public void BeginDamage()
+    {
+        hp -= 1;
+        InterruptWave();
+    }
+
+    #region　エネルギー関係
+
     /// <summary>
     /// エネルギーの追加
     /// </summary>
     public void AddEnergy(float energy)
     {
         this.energy += energy;
-
+        MaxEnergy();
     }
 
+    /// <summary>
+    /// エネルギーが最大まで達したときの処理
+    /// </summary>
+    private void MaxEnergy()
+    {
+        //エネルギーが最大以上になったら
+        if(energy>=maxEnergy)
+        {
+            //ゲームオーバーシーンに
+            SceneNavigater.Instance.Change("GameOver");
+        }
+    }
+
+    #endregion
+
+    #region ウェーブ関係
     /// <summary>
     /// ウェーブの生成
     /// </summary>
@@ -88,12 +112,6 @@ public class Boss : MonoBehaviour
             wave = (GameObject)Instantiate(wavePrefab);
             waveTimer = 0;
         }
-    }
-
-    public void BeginDamage()
-    {
-        hp -= 1;
-        InterruptWave();
     }
 
     /// <summary>
@@ -114,8 +132,14 @@ public class Boss : MonoBehaviour
     /// <returns></returns>
     private bool IsReadyWaveTime()
     {
-        return waveTimer>=startReadyWaveTime;
+        return waveTimer >= startReadyWaveTime;
     }
+
+#endregion
+
+   
+
+   
 
 
 

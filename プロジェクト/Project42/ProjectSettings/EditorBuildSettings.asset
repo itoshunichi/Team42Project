@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/ITO/Scene/Result.unity
     guid: 7ac7517c105424249bd49c222959d3a1
-  - enabled: 1
+  - enabled: 0
     path: Assets/ITO/Scene/Test.unity
     guid: 54376ade16c2568489bfed7866322268
+  - enabled: 1
+    path: Assets/ITO/Scene/GameOver.unity
+    guid: b29d669e7a80f1c4d99c14e8a68a26fa
