@@ -6,11 +6,11 @@ public class MainCamera : MonoBehaviour {
 
     public GameObject playerSmall;  //プレイヤースモール
     public GameObject playerBig;    //プレイヤービッグ
-    PlayerController smallC;        //プレイヤースモールのスクリプト
+    PlayerSmallController smallC;        //プレイヤースモールのスクリプト
   
 	// Use this for initialization
 	void Start () {
-        smallC = playerSmall.GetComponent<PlayerController>();
+        smallC = playerSmall.GetComponent<PlayerSmallController>();
     }
 	
 	// Update is called once per frame

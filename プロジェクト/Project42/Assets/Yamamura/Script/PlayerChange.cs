@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerChange : MonoBehaviour
 {
 
-    public PlayerController small;
-    public PlayerController big;
+    public PlayerSmallController small;
+    public PlayerBigController big;
     public GameObject[] chains;
 
     // Use this for initialization
@@ -39,11 +39,12 @@ public class PlayerChange : MonoBehaviour
                     small.GetComponent<Rigidbody2D>().mass = 0.005f;
                     big.playerMode = PlayerMode.PLAYER;
                     Debug.Log("SmallTap");
-                  
+                    big.GetComponent<Rigidbody2D>().mass = 1;
                 }
                 else if (hitObject.collider.gameObject.name == "PlayerBig" && big.playerMode == PlayerMode.PLAYER)
                 {
                     small.playerMode = PlayerMode.PLAYER;
+                    small.GetComponent<Rigidbody2D>().mass = 1;
                     big.playerMode = PlayerMode.NONE;
                     big.GetComponent<Rigidbody2D>().mass = 0.005f;
                     Debug.Log("BigTap");
