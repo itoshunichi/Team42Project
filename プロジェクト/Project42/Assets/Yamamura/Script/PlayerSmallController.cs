@@ -13,11 +13,17 @@ public class PlayerSmallController :Player
     // Update is called once per frame
     void Update()
     {
-        if (playerMode == PlayerMode.PLAYER && !GetComponent<PlayerCollision>().GetIsHit())
+        NotMoveCount();
+        Move();
+    }
+
+    private void Move()
+    {
+        if (playerMode == PlayerMode.PLAYER && !isHit)
         {
             RotationMove();
         }
-   }
+    }
 
     private void RotationMove()
     {
@@ -26,18 +32,9 @@ public class PlayerSmallController :Player
          //自身の向きベクトル取得
         //自身の角度をラジアンで取得
         float angleDirection = transform.eulerAngles.z * (Mathf.PI / 180.0f);
-        //
-     
-        //if(playerType == PlayerType.BIG)dir = new Vector3(Mathf.Sin(angleDirection), -Mathf.Cos(angleDirection), 0.0f);
-        //else if(playerType == PlayerType.SMALL) 
+
         dir = new Vector3(-Mathf.Sin(angleDirection), Mathf.Cos(angleDirection), 0.0f);
         transform.position += dir * speed;
-    }
-
-    private void Mass()
-    {
-        if (playerMode == PlayerMode.PLAYER) GetComponent<Rigidbody2D>().mass = 1;
-        else if (playerMode == PlayerMode.NONE) GetComponent<Rigidbody2D>().mass = 0.005f;
     }
 
     public void AddForceBall(bool isRight)
@@ -53,5 +50,21 @@ public class PlayerSmallController :Player
         }
         ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+
+        if (col.gameObject.tag == "BeDestroyedObject" && playerMode == PlayerMode.PLAYER)
+        {
+            isHit = true;
+            Debug.Log("HIT");
+            Vector2 dir = transform.position - col.gameObject.transform.position;
+
+            float angleDirection = col.gameObject.transform.eulerAngles.z * (Mathf.PI / 180.0f);
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            GetComponent<Rigidbody2D>().AddForce(dir * collisionPower);
+
+        }
     }
 }

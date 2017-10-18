@@ -16,4 +16,23 @@ public abstract class Player : MonoBehaviour {
     public float power;             //振る力
     public GameObject ball;         //操作していないプレイヤー
     public GameObject arrow;        //矢印
+
+    protected bool isHit;           //
+    protected int count;            //
+    public float collisionPower;    //
+    public int noMoveCount;         //
+
+    protected void NotMoveCount()
+    {
+        if (isHit)
+        {
+            count++;
+            if (count > noMoveCount)
+            {
+                count = 0;
+                isHit = false;
+                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            }
+        }
+    }
 }

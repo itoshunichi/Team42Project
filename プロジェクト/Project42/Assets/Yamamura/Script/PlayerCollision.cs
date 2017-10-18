@@ -9,13 +9,21 @@ public class PlayerCollision : MonoBehaviour {
     public int noMoveCount;
     int count;
     PlayerSmallController pc;
+    PlayerBigController bc;
+    public bool isSmall;
 	// Use this for initialization
 	void Start () {
-        pc = GetComponent<PlayerSmallController>();
+        if (isSmall) pc = GetComponent<PlayerSmallController>();
+        else bc = GetComponent<PlayerBigController>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        NotMoveCount();
+	}
+
+    private void NotMoveCount()
+    {
         if (isHit)
         {
             count++;
@@ -26,10 +34,11 @@ public class PlayerCollision : MonoBehaviour {
                 GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             }
         }
-	}
+    }
 
     void OnCollisionEnter2D(Collision2D col)
     {
+        
         if (col.gameObject.tag == "BeDestroyedObject" && pc.playerMode == PlayerMode.PLAYER)
         {
             isHit = true;

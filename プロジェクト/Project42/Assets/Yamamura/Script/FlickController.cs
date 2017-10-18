@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arrow : MonoBehaviour
+public class FlickController : MonoBehaviour
 {
 
     public GameObject playerSmall;      //プレイヤースモール
     public GameObject playerBig;        //プレイヤービッグ
     public GameObject spriteobj;
+    public GameObject spriteArrow;
     private bool isTap = false;         //Tapしたかどうか
     private Vector3 touchStartPos;      //タッチした場所
     private Vector3 touchEndPos;        //タッチ終わりの場所
@@ -96,7 +97,7 @@ public class Arrow : MonoBehaviour
                         pcb = playerBig.GetComponent<PlayerBigController>();
                         pcb.AddForceBall(LineRight(touchStartPos, beforeEndPos, spriteobj.transform.position));
                     }
-                    
+                    Instantiate(spriteArrow,transform);
                 }
                 flickCount += 1;//フリックした回数をカウント
             }
