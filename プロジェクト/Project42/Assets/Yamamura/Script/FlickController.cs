@@ -24,8 +24,6 @@ public class FlickController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //sprite = spriteobj.GetComponent<SpriteRenderer>();
-        //sprite.enabled = false;
     }
 
     // Update is called once per frame

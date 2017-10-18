@@ -43,10 +43,12 @@ public class PlayerSmallController :Player
         if (isRight)
         {
             ball.GetComponent<Rigidbody2D>().AddForce(Vector2.right * power);
+            GetComponent<Rigidbody2D>().AddForce(Vector2.left * power*2);
         }
         else
         {
             ball.GetComponent<Rigidbody2D>().AddForce(Vector2.left * power);
+            GetComponent<Rigidbody2D>().AddForce(Vector2.right * power*2);
         }
         ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
