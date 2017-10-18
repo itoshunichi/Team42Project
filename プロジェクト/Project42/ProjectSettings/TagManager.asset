@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Boss
   - Enemy
+  - Wall
+  - BeDestoryedObject
+  - Wave
   layers:
   - Default
   - TransparentFX
