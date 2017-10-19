@@ -24,7 +24,7 @@ public class MotherWave : MonoBehaviour
     private void Reduction()
     {
         //スケールを小さくする値
-        float reductionScale = 0.02f;
+        float reductionScale = 0.06f;
         transform.localScale -= new Vector3(reductionScale, reductionScale, reductionScale);
     }
 

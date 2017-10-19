@@ -24,7 +24,7 @@ public class Player_StageOut : MonoBehaviour {
         if (!isStageOut&&isMove)
         {
 
-            GetComponent<Rigidbody2D>().MovePosition(transform.position+Direction() * 3f * Time.deltaTime);
+           // GetComponent<Rigidbody2D>().MovePosition(transform.position+Direction() * 3f * Time.deltaTime);
         }
     }
 

@@ -168,7 +168,8 @@ public class SceneNavigater : SingletonMonoBehaviour<SceneNavigater> {
     /// フェードインが完了した後に実行される
     /// </summary>
     private void OnFinishedFadeIn()
-    {
+    {  
+
         Debug.Log(SceneNavigater.Instance.CurrentSceneName + " に移行完了！前のシーンは" + SceneNavigater.Instance.BeforeSceneName);
     }
 }
