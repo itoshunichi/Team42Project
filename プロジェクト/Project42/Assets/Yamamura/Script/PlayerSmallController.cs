@@ -8,6 +8,7 @@ public class PlayerSmallController :Player
     // Use this for initialization
     void Start()
     {
+       flickController = flick.GetComponent<FlickController>();
     }
 
     // Update is called once per frame
@@ -27,8 +28,8 @@ public class PlayerSmallController :Player
 
     private void RotationMove()
     {
-        if (transform.rotation.z != arrow.transform.rotation.z) GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        transform.rotation = arrow.transform.rotation;
+        if (transform.rotation.z != flick.transform.rotation.z) GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        transform.rotation = flick.transform.rotation;
          //自身の向きベクトル取得
         //自身の角度をラジアンで取得
         float angleDirection = transform.eulerAngles.z * (Mathf.PI / 180.0f);
@@ -37,19 +38,39 @@ public class PlayerSmallController :Player
         transform.position += dir * speed;
     }
 
+    public void Change(bool isPlayer)
+    {
+        if (isPlayer)
+        {
+            playerMode = PlayerMode.PLAYER;
+            GetComponent<Rigidbody2D>().mass = 1;
+            GetComponent<SpriteRenderer>().sprite = eye;
+        }
+        else if (!isPlayer)
+        {
+            playerMode = PlayerMode.NONE;
+            GetComponent<Rigidbody2D>().mass = 0.005f;
+            GetComponent<SpriteRenderer>().sprite = normal;
+        }
+    }
+
     public void AddForceBall(bool isRight)
     {
-        
+        speed = 0;
+        ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        //ball.transform.rotation = transform.rotation;
         if (isRight)
         {
             ball.GetComponent<Rigidbody2D>().AddForce(Vector2.right * power);
         }
         else
         {
-            ball.GetComponent<Rigidbody2D>().AddForce(Vector2.left * power);
+            ball.GetComponent<Rigidbody2D>().AddForce(Vector2.right * -power);
         }
         ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        speed = 0.08f;
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -61,7 +82,7 @@ public class PlayerSmallController :Player
             Debug.Log("HIT");
             Vector2 dir = transform.position - col.gameObject.transform.position;
 
-            float angleDirection = col.gameObject.transform.eulerAngles.z * (Mathf.PI / 180.0f);
+            angleDirection = col.gameObject.transform.eulerAngles.z * (Mathf.PI / 180.0f);
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             GetComponent<Rigidbody2D>().AddForce(dir * collisionPower);
 

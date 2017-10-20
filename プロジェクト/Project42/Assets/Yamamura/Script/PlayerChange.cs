@@ -35,20 +35,13 @@ public class PlayerChange : MonoBehaviour
                 //プレイヤー
                 if (hitObject.collider.gameObject.name == "PlayerSmall" && small.playerMode == PlayerMode.PLAYER)
                 {
-                    small.playerMode = PlayerMode.NONE;
-                    small.GetComponent<Rigidbody2D>().mass = 0.005f;
-                    big.playerMode = PlayerMode.PLAYER;
-                    Debug.Log("SmallTap");
-                    big.GetComponent<Rigidbody2D>().mass = 1;
+                    small.Change(false);
+                    big.Change(true);
                 }
                 else if (hitObject.collider.gameObject.name == "PlayerBig" && big.playerMode == PlayerMode.PLAYER)
                 {
-                    small.playerMode = PlayerMode.PLAYER;
-                    small.GetComponent<Rigidbody2D>().mass = 1;
-                    big.playerMode = PlayerMode.NONE;
-                    big.GetComponent<Rigidbody2D>().mass = 0.005f;
-                    Debug.Log("BigTap");
-
+                    small.Change(true);
+                    big.Change(false);
                 }
             }
         }

@@ -7,6 +7,7 @@ public class FlickController : MonoBehaviour
 
     public GameObject playerSmall;      //プレイヤースモール
     public GameObject playerBig;        //プレイヤービッグ
+    public GameObject mainCamera;
     public GameObject spriteobj;
     public GameObject spriteArrow;
     private bool isTap = false;         //Tapしたかどうか
@@ -20,12 +21,14 @@ public class FlickController : MonoBehaviour
     float beforeRadian = 0; //フリックする前の角度
     float afterRadian = 0;  //フリックした後の角度
     public float radianMax = 30;
+    bool isFlick = false;
+
+    PlayerSmallController pcs;
+    PlayerBigController pcb;
 
     // Use this for initialization
     void Start()
     {
-        //sprite = spriteobj.GetComponent<SpriteRenderer>();
-        //sprite.enabled = false;
     }
 
     // Update is called once per frame
@@ -34,7 +37,7 @@ public class FlickController : MonoBehaviour
         //TapHit();
         Flick();
 
-        if (!isTap) transform.position = playerSmall.transform.position; //タッチ位置に合わせる
+        if (!isTap) transform.position = new Vector3(mainCamera.transform.position.x, transform.position.y, 0); //タッチ位置に合わせる
     }
 
     /// <summary>
@@ -46,7 +49,7 @@ public class FlickController : MonoBehaviour
         {   //位置セット
             touchStartPos = Input.mousePosition;
             transform.position = touchStartPos;
-
+            if (isFlick) isFlick = false;
             isTap = true;
         }
         if (Input.GetMouseButton(0))
@@ -62,6 +65,7 @@ public class FlickController : MonoBehaviour
             Vector2 dir = touchEndPos - touchStartPos;
             if (dir.magnitude >= flickMagnitude && tapTimer <= flickTime)
             {
+                
                 var rotation = Quaternion.LookRotation(Vector3.forward, Input.mousePosition - touchStartPos);
                 transform.localRotation = rotation; //マウスの方向に向く
                 Vector2 afterDirection = touchEndPos - touchStartPos;
@@ -78,26 +82,29 @@ public class FlickController : MonoBehaviour
                 if (beforeRadian < afterRadian) radian = afterRadian - beforeRadian;
                 else radian = beforeRadian - afterRadian;
 
-                Debug.Log("Before"+beforeRadian);
-                Debug.Log("After"+afterRadian);
+                Debug.Log("Before" + beforeRadian);
+                Debug.Log("After" + afterRadian);
                 Debug.Log("Radian" + radian);
+
+                isFlick = true;
                 //radianの値が規定値以下だったらそれ以降は処理しない
                 if (radian > radianMax)
                 {
-                    PlayerSmallController pcs = new PlayerSmallController();
-                    PlayerBigController pcb = new PlayerBigController();
+                    
                     //操作キャラのスクリプトを入れる
                     if (playerSmall.GetComponent<PlayerSmallController>().playerMode == PlayerMode.PLAYER)
                     {
                         pcs = playerSmall.GetComponent<PlayerSmallController>();
-                        pcs.AddForceBall(LineRight(touchStartPos, beforeEndPos, spriteobj.transform.position));
+                        //pcs.AddForceBall(LineRight(touchStartPos, beforeEndPos, spriteobj.transform.position));
+                        pcs.AddForceBall(RightFlick(touchStartPos, touchEndPos));
                     }
                     else if (playerBig.GetComponent<PlayerBigController>().playerMode == PlayerMode.PLAYER)
                     {
                         pcb = playerBig.GetComponent<PlayerBigController>();
-                        pcb.AddForceBall(LineRight(touchStartPos, beforeEndPos, spriteobj.transform.position));
+                        //pcb.AddForceBall(LineRight(touchStartPos, beforeEndPos, spriteobj.transform.position));
+                        pcb.AddForceBall(RightFlick(touchStartPos, touchEndPos));
                     }
-                    Instantiate(spriteArrow,transform);
+                    Instantiate(spriteArrow, new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 0),transform.rotation);
                 }
                 flickCount += 1;//フリックした回数をカウント
             }
@@ -106,7 +113,11 @@ public class FlickController : MonoBehaviour
         }
     }
 
-
+    bool RightFlick(Vector2 start,Vector2 end)
+    {
+        if (start.x > end.x) return true;
+        return false;
+    }
 
     //線より右側
     bool LineRight(Vector2 pos1, Vector2 pos2, Vector2 dot)
@@ -140,4 +151,9 @@ public class FlickController : MonoBehaviour
         }
     }
     #endregion
+
+    public bool GetFlick()
+    {
+        return isFlick;
+    }
 }
