@@ -7,6 +7,7 @@ public class DebugText : MonoBehaviour
 {
 
     public GameObject player;
+    public GameObject p;
     Text text;
     // Use this for initialization
     void Start()
@@ -21,6 +22,6 @@ public class DebugText : MonoBehaviour
         screenMousePos.z = -Camera.main.transform.position.z;
         var curPoint = Camera.main.ScreenToWorldPoint(screenMousePos);
         Vector2 dis = curPoint - player.transform.position;
-        text.text = "距離:" + dis.normalized;
+        text.text = "Small:" + player.GetComponent<Rigidbody2D>().velocity + "Big:" + p.GetComponent<Rigidbody2D>().velocity;
     }
 }

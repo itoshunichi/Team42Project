@@ -44,18 +44,22 @@ public class PlayerSmallController :Player
         {
             playerMode = PlayerMode.PLAYER;
             GetComponent<Rigidbody2D>().mass = 1;
+            GetComponent<SpriteRenderer>().sprite = eye;
         }
         else if (!isPlayer)
         {
             playerMode = PlayerMode.NONE;
             GetComponent<Rigidbody2D>().mass = 0.005f;
+            GetComponent<SpriteRenderer>().sprite = normal;
         }
     }
 
     public void AddForceBall(bool isRight)
     {
+        speed = 0;
         ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        //ball.transform.rotation = transform.rotation;
         if (isRight)
         {
             ball.GetComponent<Rigidbody2D>().AddForce(Vector2.right * power);
@@ -66,6 +70,7 @@ public class PlayerSmallController :Player
         }
         ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        speed = 0.08f;
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -77,7 +82,7 @@ public class PlayerSmallController :Player
             Debug.Log("HIT");
             Vector2 dir = transform.position - col.gameObject.transform.position;
 
-            float angleDirection = col.gameObject.transform.eulerAngles.z * (Mathf.PI / 180.0f);
+            angleDirection = col.gameObject.transform.eulerAngles.z * (Mathf.PI / 180.0f);
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             GetComponent<Rigidbody2D>().AddForce(dir * collisionPower);
 

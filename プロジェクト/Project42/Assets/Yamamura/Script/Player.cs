@@ -21,7 +21,9 @@ public abstract class Player : MonoBehaviour {
     protected int count;            //
     public float collisionPower;    //
     public int noMoveCount;         //
-    public GameObject[] chains;
+    public Sprite normal;
+    public Sprite eye;
+    protected float angleDirection;
 
     protected void NotMoveCount()
     {

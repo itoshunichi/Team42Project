@@ -22,6 +22,10 @@ public class FlickController : MonoBehaviour
     float afterRadian = 0;  //フリックした後の角度
     public float radianMax = 30;
     bool isFlick = false;
+
+    PlayerSmallController pcs;
+    PlayerBigController pcb;
+
     // Use this for initialization
     void Start()
     {
@@ -86,8 +90,7 @@ public class FlickController : MonoBehaviour
                 //radianの値が規定値以下だったらそれ以降は処理しない
                 if (radian > radianMax)
                 {
-                    PlayerSmallController pcs = new PlayerSmallController();
-                    PlayerBigController pcb = new PlayerBigController();
+                    
                     //操作キャラのスクリプトを入れる
                     if (playerSmall.GetComponent<PlayerSmallController>().playerMode == PlayerMode.PLAYER)
                     {
