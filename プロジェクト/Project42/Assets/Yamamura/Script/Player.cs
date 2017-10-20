@@ -15,12 +15,13 @@ public abstract class Player : MonoBehaviour {
     public float speed;             //移動速度
     public float power;             //振る力
     public GameObject ball;         //操作していないプレイヤー
-    public GameObject arrow;        //矢印
-
+    public GameObject flick;        //矢印
+    protected FlickController flickController;
     protected bool isHit;           //
     protected int count;            //
     public float collisionPower;    //
     public int noMoveCount;         //
+    public GameObject[] chains;
 
     protected void NotMoveCount()
     {
