@@ -75,16 +75,38 @@ public abstract class BeDestroyedObject : MonoBehaviour
     }
 
 
-
-    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         //ボスと衝突したら
         if(collision.tag == "Boss")
         {
-            //ボスにエネルギーを追加
-            boss.GetComponent<Boss>().AddEnergy(parameter.giveEnergyPoint);
-            //GameObject.Find("FormBeDestroyedObject").GetComponent<FormBeDestroyedObject>().DestoryObject(gameObject);
+            GiveEnergy();
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        //ウェーブが判定外にいったら
+        if(collision.tag == "Wave")
+        {
+            WaveAction();
+        }
+    }
+    /// <summary>
+    /// ボスにエネルギーを与える
+    /// </summary>
+    private void GiveEnergy()
+    {
+        //ボスにエネルギーを追加
+        boss.GetComponent<Boss>().AddEnergy(parameter.giveEnergyPoint);
+        //オブジェクト削除
+        GameObject.Find("FormBeDestroyedObject").GetComponent<FormBeDestroyedObject>().DestoryObject(gameObject);
+    }
+
+    
+    protected virtual void WaveAction()
+    {
+        Debug.Log("waveAction");
     }
 
     /// <summary>

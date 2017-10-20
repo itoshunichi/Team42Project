@@ -15,74 +15,112 @@ using UnityEngine;
 //    {
 //    }
 //}
-public class FormEnemyObject : MonoBehaviour
+public class FormBeDestroyedObject : MonoBehaviour
 {
-
-
     /// <summary>
     /// エネミーの種類のリスト
     /// </summary>
     [SerializeField]
-    private List<GameObject> enemysType;
+    private List<GameObject> objectsType;
 
     /// <summary>
     /// 生成するエネミーのリスト
     /// </summary>
     [SerializeField]
-    protected List<GameObject> formEnemys;
+    private List<GameObject> formObjects;
+
+    /// <summary>
+    /// ランダムで生成するオブジェクトのグループ
+    /// </summary>
+    [SerializeField]
+    private List<GameObject> randomFormObjectsGroup;
+
+    /// <summary>
+    /// オブジェクトをランダムで生成する位置の候補
+    /// </summary>
+    [SerializeField]
+    private List<Vector2> randomFormPoints;
+
+    /// <summary>
+    /// ランダムでオブジェクトを生成する間隔
+    /// </summary>
+    [SerializeField]
+    private float randomFormTime;
+
+    
+
 
 
     //生成するエネミーの取得
-    public List<GameObject> FormEnemys
+    public List<GameObject> FormObjects
     {
-        get { return formEnemys; }
+        get { return formObjects; }
     }
 
 
     // Use this for initialization
     void Start()
     {
-        
+        StartCoroutine(RandomFormObject());
         //FormEnemy();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("リストの数" + formEnemys.Count);
+        //Debug.Log("リストの数" + formObjects.Count);
     }
 
 
     /// <summary>
-    /// 途中でエネミーを追加する時など
+    /// 途中でオブジェクトーを追加する時など
     /// </summary>
-    /// <param name="enemy"></param>
-    public void AddEnemy(GameObject enemy,Vector2 pos)
+    /// <param name="obj"></param>
+    public void AddObject(GameObject obj,Vector2 pos)
     {
-        GameObject g = (GameObject)Instantiate(enemy);
-        g.transform.position = pos;
-        formEnemys.Add(g);
-        Debug.Log("エネミーの数" + formEnemys.Count);
-    }
-
-    /// <summary>
-    /// リストからエネミーを削除
-    /// </summary>
-    /// <param name="enemy"></param>
-    public void RemoveNenemy(GameObject enemy)
-    {
-        formEnemys.Remove(enemy);
-    }
-
-    /// <summary>
-    /// 全てのエネミーの削除
-    /// </summary>
-    public void AllDestroyEnemy()
-    {
-        foreach(var e in formEnemys)
+        GameObject g = (GameObject)Instantiate(obj,pos,Quaternion.identity);
+       // g.transform.position = pos;
+        //子オブジェクトがなかったらそのまま生成
+        if (g.transform.childCount == 0)
         {
-            Destroy(e);
+            formObjects.Add(g);
         }
-        formEnemys.Clear();
+        //子オブジェクトがあったら
+        else
+        {
+            for(int i = 0;i<g.transform.childCount;i++)
+            {
+                formObjects.Add(g.transform.GetChild(i).gameObject);
+            }
+        }
+       
     }
+
+    /// <summary>
+    /// リストからオブジェクトを削除
+    /// </summary>
+    /// <param name="enemy"></param>
+    public void DestoryObject(GameObject enemy)
+    {
+        formObjects.Remove(enemy);
+        Destroy(enemy);
+    }
+
+    /// <summary>
+    /// 秒間隔でランダムな位置にランダムでオブジェクトを生成
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator RandomFormObject()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(randomFormTime);
+            GameObject obj = randomFormObjectsGroup[Random.Range(0, randomFormObjectsGroup.Count)];
+            Vector2 pos = randomFormPoints[Random.Range(0, randomFormPoints.Count)];
+            Debug.Log(pos);
+            AddObject(obj, pos);
+        }
+    }
+
+
 }

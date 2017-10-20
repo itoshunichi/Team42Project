@@ -3,26 +3,73 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Boss : MonoBehaviour {
+public class Boss : MonoBehaviour
+{
+
+    /// <summary>
+    /// 体力
+    /// </summary>
+    [SerializeField]
+    private int hp;
 
     /// <summary>
     /// エネルギーの最大値
     /// </summary>
+    [SerializeField]
     private float maxEnergy;
 
+    /// <summary>
+    /// ウェーブ
+    /// </summary>
+    private GameObject wave;
+    private GameObject wavePrefab;
+
+    /// <summary>
+    /// ウェーブの間隔
+    /// </summary>
+    [SerializeField]
+    private int waveTime;
+
+    /// <summary>
+    /// ウェーブ準備開始時間
+    /// </summary>
+    [SerializeField]
+    private int startReadyWaveTime;
+
+    /// <summary>
+    /// ウェーブ用のタイマー
+    /// </summary>
+    private float waveTimer = 0;
+
+
+    /// <summary>
+    /// エネルギー
+    /// </summary>
     private float energy = 0;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    void Start()
+    {
+
+        wavePrefab = Resources.Load<GameObject>("Prefab/MotherWave");
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
 
         GameObject.Find("BossEnergyText").GetComponent<Text>().text = "ボスエネルギー" + energy;
-		
-	}
+        InstantiateWave();
+
+    }
+
+    public void BeginDamage()
+    {
+        hp -= 1;
+        InterruptWave();
+    }
+
+    #region　エネルギー関係
 
     /// <summary>
     /// エネルギーの追加
@@ -30,5 +77,72 @@ public class Boss : MonoBehaviour {
     public void AddEnergy(float energy)
     {
         this.energy += energy;
+        MaxEnergy();
     }
+
+    /// <summary>
+    /// エネルギーが最大まで達したときの処理
+    /// </summary>
+    private void MaxEnergy()
+    {
+        //エネルギーが最大以上になったら
+        if(energy>=maxEnergy)
+        {
+            //ゲームオーバーシーンに
+            SceneNavigater.Instance.Change("GameOver");
+        }
+    }
+
+    #endregion
+
+    #region ウェーブ関係
+    /// <summary>
+    /// ウェーブの生成
+    /// </summary>
+    private void InstantiateWave()
+    {
+        if (waveTimer <= waveTime)
+        {
+            waveTimer += Time.deltaTime;
+            Debug.Log((int)waveTimer);
+        }
+        else
+        {
+            Debug.Log("end");
+            wave = (GameObject)Instantiate(wavePrefab);
+            waveTimer = 0;
+        }
+    }
+
+    /// <summary>
+    /// ウェーブ中断
+    /// </summary>
+    private void InterruptWave()
+    {
+        //ウェーブ中断時間だったら
+        if (IsReadyWaveTime())
+        {
+            Destroy(wave);//ウェーブ削除
+        }
+    }
+
+    /// <summary>
+    /// ウェーブ準備時間に突入したかどうか
+    /// </summary>
+    /// <returns></returns>
+    private bool IsReadyWaveTime()
+    {
+        return waveTimer >= startReadyWaveTime;
+    }
+
+#endregion
+
+   
+
+   
+
+
+
+
+
 }

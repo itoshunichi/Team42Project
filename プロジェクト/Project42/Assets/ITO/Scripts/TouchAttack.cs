@@ -24,7 +24,7 @@ public class TouchAttack : MonoBehaviour
             if (hitObject.collider.tag == "Boss"||hitObject.collider.tag == "Enemy")
             {
                // hitObject.collider.gameObject.GetComponent<Enemy>().AddDamagePoint();
-                hitObject.collider.gameObject.GetComponent<Enemy>().BeginDamage(1);
+               // hitObject.collider.gameObject.GetComponent<Enemy>().BeginDamage(1);
             }
         }
 

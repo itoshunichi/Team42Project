@@ -267,14 +267,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a9c9421cc9bf044e8dbb90afe1810b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  formEnemys:
-  - {fileID: 1787953238411310, guid: 54667de545c142f43ba25520265e70af, type: 2}
-  - {fileID: 1787953238411310, guid: 54667de545c142f43ba25520265e70af, type: 2}
-  - {fileID: 1787953238411310, guid: 54667de545c142f43ba25520265e70af, type: 2}
-  formEnemyPositions:
-  - {x: -1.5482526, y: 3.4219303}
-  - {x: -2.5920205, y: 1.0598618}
-  - {x: 1.3997002, y: 1.1718006}
+  objectsType: []
+  formObjects: []
+  randomFormObjectsGroup: []
+  randomFormPoints: []
+  randomFormTime: 0
 --- !u!4 &200439155
 Transform:
   m_ObjectHideFlags: 0

@@ -11,6 +11,12 @@ public class EnemyParameter : ScriptableObject {
     public EnemyType type;
 
     /// <summary>
+    /// アドレナリンポイント
+    /// </summary>
+    [Tooltip("アドレナリンポイント"),Range(0,100)]
+    public int adrenalinPoint;
+
+    /// <summary>
     /// 体力の最大値
     /// </summary>
     [Tooltip("最大HP"),Range(0,100)]

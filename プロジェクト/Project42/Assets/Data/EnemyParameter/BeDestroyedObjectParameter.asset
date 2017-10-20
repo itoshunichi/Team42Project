@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Name: BeDestroyedObjectParameter
   m_EditorClassIdentifier: 
   maxHp: 3
-  giveEnergyPoint: 0
+  giveEnergyPoint: 10
   isNecessaryEnergy: 0
   beAbsorptionTime: 30
