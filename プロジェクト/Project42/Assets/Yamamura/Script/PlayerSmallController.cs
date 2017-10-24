@@ -19,8 +19,10 @@ public class PlayerSmallController :Player
 
     private void Move()
     {
+        
         if (playerMode == PlayerMode.PLAYER && !isHit)
         {
+            if (GetComponent<Player_StageOut>().IsStageOut()) return;
             RotationMove();
         }
     }
@@ -39,7 +41,7 @@ public class PlayerSmallController :Player
 
     public void AddForceBall(bool isRight)
     {
-        
+      
         if (isRight)
         {
             ball.GetComponent<Rigidbody2D>().AddForce(Vector2.right * power);

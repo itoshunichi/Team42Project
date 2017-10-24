@@ -14,18 +14,18 @@ public class MotherWave : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Reduction();
+        Enlargement();
         DestoryWave();
     }
 
     /// <summary>
-    /// 縮小
+    /// 拡大
     /// </summary>
-    private void Reduction()
+    private void Enlargement()
     {
         //スケールを小さくする値
-        float reductionScale = 0.06f;
-        transform.localScale -= new Vector3(reductionScale, reductionScale, reductionScale);
+        float enlargemenScale = 0.06f;
+        transform.localScale += new Vector3(enlargemenScale, enlargemenScale, enlargemenScale);
     }
 
     /// <summary>
@@ -34,7 +34,7 @@ public class MotherWave : MonoBehaviour
     private void DestoryWave()
     {
         //スケールが0以下になったら
-        if (transform.localScale.x <= 0 && transform.localScale.y <= 0)
+        if (transform.localScale.x >= 4 && transform.localScale.y >= 4)
         {
             Destroy(gameObject);
         }

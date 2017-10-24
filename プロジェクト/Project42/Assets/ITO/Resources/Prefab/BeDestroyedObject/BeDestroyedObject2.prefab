@@ -90,6 +90,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parameter: {fileID: 11400000, guid: 64429a96e1365cc458798ba30d806fab, type: 2}
+  bulletPrefab: {fileID: 1120898661210466, guid: 2f2c10a556f236a458a39486092b67ca,
+    type: 2}
 --- !u!212 &212286000212038052
 SpriteRenderer:
   m_ObjectHideFlags: 1

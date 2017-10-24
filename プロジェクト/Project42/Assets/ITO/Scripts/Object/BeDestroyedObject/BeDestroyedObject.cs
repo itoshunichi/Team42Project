@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 /// <summary>
 /// 破壊されるオブジェクト
 /// </summary>
@@ -22,22 +24,16 @@ public abstract class BeDestroyedObject : MonoBehaviour
     /// <summary>
     /// 吸収されるスピード
     /// </summary>
-    private float beAbsorptionSpeed = 1f;
+    private float beAbsorptionSpeed = 0.01f;
 
     /// <summary>
     /// ボス
     /// </summary>
     protected GameObject boss;
 
-    /// <summary>
-    /// 移動開始位置
-    /// </summary>
-    protected Vector3 startPosition;
 
-    /// <summary>
-    /// 移動開始時間
-    /// </summary>
-    protected float startTime;
+
+    protected bool isWaveMode;
 
     public float GiveEnergyPoint
     {
@@ -48,8 +44,7 @@ public abstract class BeDestroyedObject : MonoBehaviour
     protected virtual void Start()
     {
         boss = GameObject.Find("Boss");
-        startTime = Time.timeSinceLevelLoad;
-        startPosition = transform.position;
+        beAbsorptionSpeed = parameter.beAbsorptionSpeed;
     }
 
     protected virtual void Update()
@@ -63,15 +58,12 @@ public abstract class BeDestroyedObject : MonoBehaviour
     /// </summary>
     protected void BeAbsorption()
     {
-
-        var diff = Time.timeSinceLevelLoad - startTime;
-        if (diff > parameter.beAbsorptionTime)
-        {
-            transform.position = boss.transform.position;
-        }
-
-        var rate = diff / parameter.beAbsorptionTime;
-        GetComponent<Rigidbody2D>().position = Vector3.Lerp(startPosition, boss.transform.position, rate * beAbsorptionSpeed);
+        float rad = Mathf.Atan2(boss.transform.position.y - transform.position.y,
+            boss.transform.position.x - transform.position.x);
+        Vector2 pos = transform.position;
+        pos.x += beAbsorptionSpeed * Mathf.Cos(rad);
+        pos.y += beAbsorptionSpeed * Mathf.Sin(rad);
+        transform.position = pos;
     }
 
 
@@ -87,9 +79,14 @@ public abstract class BeDestroyedObject : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         //ウェーブが判定外にいったら
-        if(collision.tag == "Wave")
+        if(collision.tag == "AttackWave")
         {
-            WaveAction();
+            isWaveMode = true;
+        }
+
+        if(collision.tag == "StopWave")
+        {
+            isWaveMode = false;
         }
     }
     /// <summary>
@@ -104,9 +101,12 @@ public abstract class BeDestroyedObject : MonoBehaviour
     }
 
     
+    /// <summary>
+    /// ウェーブにあった後の行動
+    /// </summary>
     protected virtual void WaveAction()
     {
-        Debug.Log("waveAction");
+        if (!isWaveMode) return;
     }
 
     /// <summary>
@@ -117,6 +117,7 @@ public abstract class BeDestroyedObject : MonoBehaviour
     {
         hp -= damagePoint;
         BreakObject();
+        Destroy(gameObject);
     }
 
     private void BreakObject()
