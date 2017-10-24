@@ -16,7 +16,6 @@ public class PlayerBigController : Player
     // Update is called once per frame
     void Update()
     {
-       // transform.rotation = Quaternion.LookRotation(Vector3.forward, ball.transform.position);
         NotMoveCount();
         Move();
     }
@@ -35,6 +34,7 @@ public class PlayerBigController : Player
     {
         if (transform.rotation.z != flick.transform.rotation.z) GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         if(flickController.GetFlick())transform.rotation = flick.transform.rotation;
+        if (speed < speedMax) speed += 0.001f;
         //自身の向きベクトル取得
         //自身の角度をラジアンで取得
         float angleDirection = transform.eulerAngles.z * (Mathf.PI / 180.0f);
@@ -60,14 +60,17 @@ public class PlayerBigController : Player
             GetComponent<Rigidbody2D>().mass = 0.005f;
             transform.localScale = new Vector3(1.5f, 1.5f, 1.0f);
         }
+        speed = 0;
     }
    
     public void AddForceBall(bool isRight)
     {
         speed = 0;
+        //Velocityをいったん０に  
         ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        //ball.transform.rotation = transform.rotation;
+        //ボールの向きをプレイヤーに向ける
+        ball.transform.rotation = Quaternion.LookRotation(Vector3.forward, ball.transform.position - transform.position);
         if (isRight)
         {
             ball.GetComponent<Rigidbody2D>().AddForce(Vector2.right * power);
@@ -78,12 +81,10 @@ public class PlayerBigController : Player
        }
         ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        speed = 0.04f;
     }
    
     void OnCollisionEnter2D(Collision2D col)
     {
-
         if (col.gameObject.tag == "BeDestroyedObject" && playerMode == PlayerMode.PLAYER)
         {
             isHit = true;

@@ -29,6 +29,7 @@ public class PlayerSmallController :Player
     private void RotationMove()
     {
         if (transform.rotation.z != flick.transform.rotation.z) GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        if (speed < speedMax) speed += 0.001f;
         transform.rotation = flick.transform.rotation;
          //自身の向きベクトル取得
         //自身の角度をラジアンで取得
@@ -52,30 +53,31 @@ public class PlayerSmallController :Player
             GetComponent<Rigidbody2D>().mass = 0.005f;
             GetComponent<SpriteRenderer>().sprite = normal;
         }
+        speed = 0;
     }
 
     public void AddForceBall(bool isRight)
     {
-        speed = 0;
+        //Velocityをいったん０に
         ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        //ball.transform.rotation = transform.rotation;
+        //ボールの向きをプレイヤーに向ける
+        ball.transform.rotation = Quaternion.LookRotation(Vector3.forward, ball.transform.position -transform.position);
         if (isRight)
         {
             ball.GetComponent<Rigidbody2D>().AddForce(Vector2.right * power);
         }
         else
         {
-            ball.GetComponent<Rigidbody2D>().AddForce(Vector2.right * -power);
+            ball.GetComponent<Rigidbody2D>().AddForce(Vector2.left * power);
         }
         ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        speed = 0.08f;
+        speed = 0;
     }
 
     void OnCollisionEnter2D(Collision2D col)
     {
-
         if (col.gameObject.tag == "BeDestroyedObject" && playerMode == PlayerMode.PLAYER)
         {
             isHit = true;

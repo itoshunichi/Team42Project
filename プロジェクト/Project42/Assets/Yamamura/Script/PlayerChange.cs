@@ -7,6 +7,8 @@ public class PlayerChange : MonoBehaviour
 
     public PlayerSmallController small;
     public PlayerBigController big;
+    public GameObject bigPlayer;
+    public GameObject smallPlayer;
     public GameObject[] chains;
 
     // Use this for initialization
@@ -45,6 +47,25 @@ public class PlayerChange : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void Chain()
+    {
+        //smallがプレイヤーの時
+        //ジョイントのつなぎ　bigPlayer -> chains -> smallPlayer
+        for (int i = 0; i < chains.Length - 1; i++)
+        {
+            chains[i].GetComponent<HingeJoint2D>().connectedBody = chains[i + 1].GetComponent<Rigidbody2D>();
+        }
+        chains[chains.Length].GetComponent<HingeJoint2D>().connectedBody = bigPlayer.GetComponent<Rigidbody2D>();
+
+        //bigがプレイヤーの時  
+        //ジョイントのつなぎ　smallPlayer -> chains -> bigPlayer
+        for (int i = 1; i < chains.Length; i++)
+        {
+            chains[i].GetComponent<HingeJoint2D>().connectedBody = chains[i - 1].GetComponent<Rigidbody2D>();
+        }
+        chains[0].GetComponent<HingeJoint2D>().connectedBody = smallPlayer.GetComponent<Rigidbody2D>();
     }
 
 }
