@@ -12,10 +12,8 @@ public class TestObject : BeDestroyedObject {
 
     protected override void WaveAction()
     {
-        base.WaveAction();
         GameObject bullet = (GameObject)Instantiate(bulletPrefab);
         bullet.transform.position = transform.position;
-
     }
 
 

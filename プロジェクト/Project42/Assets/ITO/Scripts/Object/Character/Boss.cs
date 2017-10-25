@@ -21,8 +21,10 @@ public class Boss : MonoBehaviour
     /// <summary>
     /// ウェーブ
     /// </summary>
-    private GameObject wave;
-    private GameObject wavePrefab;
+    private GameObject attckWave;
+    private GameObject stopWave;
+   // private GameObject wavePrefab;
+    
 
     /// <summary>
     /// ウェーブの間隔
@@ -50,8 +52,10 @@ public class Boss : MonoBehaviour
 
     void Start()
     {
-
-        wavePrefab = Resources.Load<GameObject>("Prefab/MotherWave");
+        
+        attckWave = Resources.Load<GameObject>("Prefab/Wave/AttackWave");
+        stopWave = Resources.Load<GameObject>("Prefab/Wave/StopWave");
+        InstantiateAttackWave();
     }
 
     // Update is called once per frame
@@ -59,14 +63,15 @@ public class Boss : MonoBehaviour
     {
 
         GameObject.Find("BossEnergyText").GetComponent<Text>().text = "ボスエネルギー" + energy;
-        InstantiateWave();
+       // InstantiateWave();
 
     }
 
     public void BeginDamage()
     {
         hp -= 1;
-        InterruptWave();
+        InstantiateStopWave();
+        //InterruptWave();
     }
 
     #region　エネルギー関係
@@ -96,44 +101,54 @@ public class Boss : MonoBehaviour
     #endregion
 
     #region ウェーブ関係
-    /// <summary>
-    /// ウェーブの生成
-    /// </summary>
-    private void InstantiateWave()
+    ///// <summary>
+    ///// ウェーブの生成
+    ///// </summary>
+    //private void InstantiateWave()
+    //{
+    //    if (waveTimer <= waveTime)
+    //    {
+    //        waveTimer += Time.deltaTime;
+    //        Debug.Log((int)waveTimer);
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("end");
+    //        wave = (GameObject)Instantiate(wavePrefab);
+    //        waveTimer = 0;
+    //    }
+    //}
+
+    public void InstantiateAttackWave()
     {
-        if (waveTimer <= waveTime)
-        {
-            waveTimer += Time.deltaTime;
-            Debug.Log((int)waveTimer);
-        }
-        else
-        {
-            Debug.Log("end");
-            wave = (GameObject)Instantiate(wavePrefab);
-            waveTimer = 0;
-        }
+        Instantiate(attckWave);
     }
 
-    /// <summary>
-    /// ウェーブ中断
-    /// </summary>
-    private void InterruptWave()
+    private void InstantiateStopWave()
     {
-        //ウェーブ中断時間だったら
-        if (IsReadyWaveTime())
-        {
-            Destroy(wave);//ウェーブ削除
-        }
+        Instantiate(stopWave);
     }
 
-    /// <summary>
-    /// ウェーブ準備時間に突入したかどうか
-    /// </summary>
-    /// <returns></returns>
-    private bool IsReadyWaveTime()
-    {
-        return waveTimer >= startReadyWaveTime;
-    }
+    ///// <summary>
+    ///// ウェーブ中断
+    ///// </summary>
+    //private void InterruptWave()
+    //{
+    //    //ウェーブ準備時間だったら
+    //    if (IsReadyWaveTime())
+    //    {
+    //        Destroy(attckWave);//ウェーブ削除
+    //    }
+    //}
+
+    ///// <summary>
+    ///// ウェーブ準備時間に突入したかどうか
+    ///// </summary>
+    ///// <returns></returns>
+    //private bool IsReadyWaveTime()
+    //{
+    //    return waveTimer >= startReadyWaveTime;
+    //}
 
 #endregion
 

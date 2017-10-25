@@ -14,7 +14,7 @@ public abstract class BeDestroyedObject : MonoBehaviour
     /// パラメーター
     /// </summary>
     [SerializeField]
-    BeDestroyedObjectParameter parameter;
+    protected BeDestroyedObjectParameter parameter;
 
     /// <summary>
     /// 体力
@@ -24,7 +24,7 @@ public abstract class BeDestroyedObject : MonoBehaviour
     /// <summary>
     /// 吸収されるスピード
     /// </summary>
-    private float beAbsorptionSpeed = 0.01f;
+    protected float beAbsorptionSpeed = 0.01f;
 
     /// <summary>
     /// ボス
@@ -43,13 +43,15 @@ public abstract class BeDestroyedObject : MonoBehaviour
 
     protected virtual void Start()
     {
+        Debug.Log("ウェーブ"+isWaveMode);
+        isWaveMode = false;
         boss = GameObject.Find("Boss");
         beAbsorptionSpeed = parameter.beAbsorptionSpeed;
     }
 
     protected virtual void Update()
     {
-
+        if(isWaveMode)WaveAction();
         BeAbsorption();
     }
 
@@ -67,28 +69,25 @@ public abstract class BeDestroyedObject : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         //ボスと衝突したら
-        if(collision.tag == "Boss")
+        if (collision.tag == "Boss")
         {
             GiveEnergy();
         }
-    }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        //ウェーブが判定外にいったら
-        if(collision.tag == "AttackWave")
+        if (collision.tag == "AttackWave")
         {
             isWaveMode = true;
         }
 
-        if(collision.tag == "StopWave")
+        if (collision.tag == "StopWave")
         {
-            isWaveMode = false;
+            StopWave();
         }
     }
+
     /// <summary>
     /// ボスにエネルギーを与える
     /// </summary>
@@ -100,13 +99,18 @@ public abstract class BeDestroyedObject : MonoBehaviour
         GameObject.Find("FormBeDestroyedObject").GetComponent<FormBeDestroyedObject>().DestoryObject(gameObject);
     }
 
-    
+
     /// <summary>
     /// ウェーブにあった後の行動
     /// </summary>
-    protected virtual void WaveAction()
+    protected virtual void WaveAction() { }
+
+    /// <summary>
+    /// 停止ウェーブに当たったときの処理
+    /// </summary>
+    protected virtual void StopWave()
     {
-        if (!isWaveMode) return;
+        isWaveMode = false;
     }
 
     /// <summary>
@@ -122,7 +126,7 @@ public abstract class BeDestroyedObject : MonoBehaviour
 
     private void BreakObject()
     {
-        if(hp<=0)
+        if (hp <= 0)
         {
 
         }

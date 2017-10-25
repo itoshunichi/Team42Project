@@ -5,19 +5,7 @@ using UnityEditor;
 
 public class CreateParameter{
 
-    [MenuItem("Assets/Create/CreateEnemyParameter")]
-    public static void CreateEnemyParameter()
-    {
-        CreateAsset<EnemyParameter>();
-    }
-
-    [MenuItem("Assets/Create/CreatePlayerParameter")]
-    public static void CreatePlayerParameter()
-    {
-        //CreateAsset<PlayerParameter>();
-    }
-
-
+   
     [MenuItem("Assets/Create/CreateBeDestroyedObjectParameter")]
     public static void CreateBeDestroyedObjectParameter()
     {

@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114777988363184414}
   m_Layer: 0
   m_Name: StopWave
-  m_TagString: Wave
+  m_TagString: StopWave
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
