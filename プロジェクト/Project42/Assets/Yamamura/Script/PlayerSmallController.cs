@@ -74,8 +74,11 @@ public class PlayerSmallController :Player
         //ボールの向きをプレイヤーに向ける
         var vec = ball.transform.position - transform.position;
         ball.transform.rotation = Quaternion.LookRotation(Vector3.forward,vec.normalized);
+        var rotationZ = ball.transform.rotation.z;
+        if (rotationZ < 0) rotationZ += 360;
         if (isRight)
         {
+            
             ball.GetComponent<Rigidbody2D>().AddForce(Vector2.right * power);
         }
         else

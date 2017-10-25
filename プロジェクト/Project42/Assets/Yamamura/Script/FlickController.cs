@@ -51,6 +51,7 @@ public class FlickController : MonoBehaviour
             transform.position = touchStartPos;
             if (isFlick) isFlick = false;
             isTap = true;
+            Debug.Log("Tap");
         }
         if (Input.GetMouseButton(0))
         {   //タップカウント
@@ -81,10 +82,6 @@ public class FlickController : MonoBehaviour
                 float radian;
                 if (beforeRadian < afterRadian) radian = afterRadian - beforeRadian;
                 else radian = beforeRadian - afterRadian;
-
-                Debug.Log("Before" + beforeRadian);
-                Debug.Log("After" + afterRadian);
-                Debug.Log("Radian" + radian);
 
                 isFlick = true;
                 //radianの値が規定値以下だったらそれ以降は処理しない
