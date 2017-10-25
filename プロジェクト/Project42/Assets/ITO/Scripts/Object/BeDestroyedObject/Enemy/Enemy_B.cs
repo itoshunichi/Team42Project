@@ -18,6 +18,7 @@ public class Enemy_B : BeDestroyedObject {
     {
         Move();
         WaveAction();
+        SetSprite();
     }
 
     private void Move()
@@ -26,6 +27,7 @@ public class Enemy_B : BeDestroyedObject {
         {
             //プレイヤー追尾
             TrackingPlayer();
+            
         }
         else
         {

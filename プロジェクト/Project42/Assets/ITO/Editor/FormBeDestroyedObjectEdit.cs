@@ -30,6 +30,8 @@ public class FormBeDestroyedObjectEdit :Editor
     string[] objectNames;
     FormBeDestroyedObject component;
 
+    private Vector2 formObjectPos;
+
 
     void OnEnable()
     {
@@ -72,8 +74,11 @@ public class FormBeDestroyedObjectEdit :Editor
         {
 
             Vector2 tmp = l.vector2Value;
-            l.vector2Value = PositionHandle2D((Vector2)component.transform.position + tmp) - (Vector2)component.transform.position;
+            l.vector2Value = PositionHandle2D((Vector2)component.transform.position + tmp,Color.magenta,Color.yellow) - (Vector2)component.transform.position;
         }
+
+        
+        formObjectPos = PositionHandle2D((Vector2)component.transform.position + formObjectPos,Color.red,Color.green) - (Vector2)component.transform.position;
 
         Undo.RegisterCompleteObjectUndo(component, "resetNavi");
 
@@ -105,15 +110,15 @@ public class FormBeDestroyedObjectEdit :Editor
         return result;
     }
 
-    private Vector2 PositionHandle2D(Vector2 position)
+    private Vector2 PositionHandle2D(Vector2 position,Color xColor,Color yColor)
     {
         var result = new Vector2(position.x, position.y);
 
         float size = 2f;
 
-        Handles.color = Color.magenta;
+        Handles.color = xColor;
         result = Handles.Slider(result, Vector3.right, size, Handles.ArrowHandleCap, snap.x); //X 軸
-        Handles.color = Color.yellow;
+        Handles.color = yColor;
         result = Handles.Slider(result, Vector3.up, size, Handles.ArrowHandleCap, snap.y); //Y 軸
 
         Handles.color = Color.white;
@@ -142,9 +147,9 @@ public class FormBeDestroyedObjectEdit :Editor
                 {
                     formObjects.arraySize += 1;
                     formObjects.GetArrayElementAtIndex(formObjects.arraySize - 1).objectReferenceValue = 
-                        (GameObject)Instantiate(t);
+                        (GameObject)Instantiate(t,component.transform.position+(Vector3)formObjectPos,Quaternion.identity);
                     
-                    //component.AddEnemy(t, (Vector2)component.transform.position + formPos);                   
+                   //component.AddEnemy(t, (Vector2)component.transform.position + formPos);                   
                 }
             }
         }

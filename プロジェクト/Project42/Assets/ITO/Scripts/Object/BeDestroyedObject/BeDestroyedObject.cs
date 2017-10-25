@@ -53,6 +53,7 @@ public abstract class BeDestroyedObject : MonoBehaviour
     {
         if(isWaveMode)WaveAction();
         BeAbsorption();
+        SetSprite();
     }
 
     /// <summary>
@@ -60,12 +61,22 @@ public abstract class BeDestroyedObject : MonoBehaviour
     /// </summary>
     protected void BeAbsorption()
     {
+        LookBoss();
         float rad = Mathf.Atan2(boss.transform.position.y - transform.position.y,
             boss.transform.position.x - transform.position.x);
         Vector2 pos = transform.position;
         pos.x += beAbsorptionSpeed * Mathf.Cos(rad);
         pos.y += beAbsorptionSpeed * Mathf.Sin(rad);
         transform.position = pos;
+    }
+
+    /// <summary>
+    /// ボスの方を向く
+    /// </summary>
+    private void LookBoss()
+    {
+        Vector2 vec = (boss.transform.position - transform.position).normalized;
+        transform.rotation = Quaternion.FromToRotation(Vector2.up, vec);
     }
 
 
@@ -121,14 +132,26 @@ public abstract class BeDestroyedObject : MonoBehaviour
     {
         hp -= damagePoint;
         BreakObject();
-        Destroy(gameObject);
+        
     }
 
     private void BreakObject()
     {
         if (hp <= 0)
         {
-
+            Destroy(gameObject);
         }
+    }
+
+    /// <summary>
+    /// スプライトの設定
+    /// </summary>
+    protected void SetSprite()
+    {
+        if (isWaveMode)
+            GetComponent<SpriteRenderer>().sprite = parameter.actionSprite;
+
+        else
+            GetComponent<SpriteRenderer>().sprite = parameter.defaultSprite;
     }
 }
