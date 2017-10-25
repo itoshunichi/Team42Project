@@ -3,35 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //プレイヤーが画面外にいったときの処理
-public class Player_StageOut : MonoBehaviour {
+public class Player_StageOut : MonoBehaviour
+{
+
+    private bool isStageOut = false;
+    public bool IsStageOut() { return isStageOut; }
 
 
-    [SerializeField]
-    private bool isMove = true;
-    private bool isStageOut;
-    public bool IsStageOut
+
+
+    void Start()
     {
-        get { return IsStageOut; }
+        Debug.Log("子" + GetPlayerChildren().Count);
     }
 
+    void Update()
+    {
 
+        Debug.Log(isStageOut);
 
-	void Start () {
-    }
-	
-	void Update () {
-
-        if (!isStageOut&&isMove)
-        {
-
-            GetComponent<Rigidbody2D>().MovePosition(transform.position+Direction() * 3f * Time.deltaTime);
-        }
     }
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Wall")
+        if (collision.tag == "Wall")
         {
             Debug.Log("当たった");
             StartCoroutine(StageOut());
@@ -46,34 +42,59 @@ public class Player_StageOut : MonoBehaviour {
     private IEnumerator StageOut()
     {
         isStageOut = true;
-        //自分の向いてる方向に力を加える
+
+        foreach (var c in GetPlayerChildren())
+        {
+            c.GetComponent<Rigidbody2D>().freezeRotation = true;
+            //c.GetComponent<Rigidbody2D>().isKinematic = true;
+            c.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        }
+
+        yield return null;
+
         GetComponent<Rigidbody2D>().AddForce(Direction() * 50f);
 
         //0.5秒待つ
         yield return new WaitForSeconds(0.5f);
-        //加えられてる力をリセット
-        GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-       // GetComponent<Rigidbody2D>().angularVelocity = 0;
-        //反転
+        ////加えられてる力をリセット
+        foreach (var c in GetPlayerChildren())
+        {
+            c.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            c.GetComponent<Collider2D>().enabled = false;
+           // c.GetComponent<Rigidbody2D>().angularVelocity = 0;
+        }
+        //GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        //// GetComponent<Rigidbody2D>().angularVelocity = 0;
+        ////反転
         transform.eulerAngles += new Vector3(0, 0, 180);
-        yield return null;
+        //yield return null;
         //向いてる方向に力を加える
+
         GetComponent<Rigidbody2D>().AddForce(Direction() * 200f);
+
+        //GetComponent<Rigidbody2D>().AddForce(Direction() * 200f);
 
         yield return new WaitForSeconds(0.2f);
 
-        GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-        GetComponent<Rigidbody2D>().angularVelocity = 0;
-        isStageOut = false;
-        isMove = false;
-        transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z % 360);
+        foreach (var c in GetPlayerChildren())
+        {
+           // c.GetComponent<Rigidbody2D>().freezeRotation = false;
+            //c.GetComponent<Rigidbody2D>().isKinematic = true;
+            c.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        }
 
-       yield break;
+        //GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        //GetComponent<Rigidbody2D>().angularVelocity = 0;
+        //GetComponent<Rigidbody2D>().freezeRotation = false;
+        isStageOut = false;
+        //transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z % 360);
+
+        yield break;
     }
 
     private void FixedUpdate()
     {
-       
+
     }
 
     /// <summary>
@@ -87,4 +108,23 @@ public class Player_StageOut : MonoBehaviour {
         Vector3 dir = new Vector3(Mathf.Cos(angleDir), Mathf.Sin(angleDir), 0.0f);
         return dir;
     }
+
+    /// <summary>
+    /// プレイヤーの子オブジェクトを取得
+    /// </summary>
+    /// <returns></returns>
+    private List<GameObject> GetPlayerChildren()
+    {
+        List<GameObject> allChildren = new List<GameObject>();
+        Transform children = transform.parent.GetComponentInChildren<Transform>();
+
+        foreach (Transform ob in children)
+        {
+            allChildren.Add(ob.gameObject);
+        }
+
+        return allChildren;
+
+    }
+
 }

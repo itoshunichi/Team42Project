@@ -24,9 +24,9 @@ public class PlayerBigController : Player
 
     private void Move()
     {
-
         if (playerMode == PlayerMode.PLAYER && !isHit)
         {
+            if (GetComponent<Player_StageOut>().IsStageOut()) return;
             RotationMove();
         }
     }

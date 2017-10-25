@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 /// <summary>
 /// 破壊されるオブジェクト
 /// </summary>
@@ -12,7 +14,7 @@ public abstract class BeDestroyedObject : MonoBehaviour
     /// パラメーター
     /// </summary>
     [SerializeField]
-    BeDestroyedObjectParameter parameter;
+    protected BeDestroyedObjectParameter parameter;
 
     /// <summary>
     /// 体力
@@ -22,22 +24,16 @@ public abstract class BeDestroyedObject : MonoBehaviour
     /// <summary>
     /// 吸収されるスピード
     /// </summary>
-    private float beAbsorptionSpeed = 1f;
+    protected float beAbsorptionSpeed = 0.01f;
 
     /// <summary>
     /// ボス
     /// </summary>
     protected GameObject boss;
 
-    /// <summary>
-    /// 移動開始位置
-    /// </summary>
-    protected Vector3 startPosition;
 
-    /// <summary>
-    /// 移動開始時間
-    /// </summary>
-    protected float startTime;
+
+    protected bool isWaveMode;
 
     public float GiveEnergyPoint
     {
@@ -47,15 +43,17 @@ public abstract class BeDestroyedObject : MonoBehaviour
 
     protected virtual void Start()
     {
+        Debug.Log("ウェーブ"+isWaveMode);
+        isWaveMode = false;
         boss = GameObject.Find("Boss");
-        startTime = Time.timeSinceLevelLoad;
-        startPosition = transform.position;
+        beAbsorptionSpeed = parameter.beAbsorptionSpeed;
     }
 
     protected virtual void Update()
     {
-
+        if(isWaveMode)WaveAction();
         BeAbsorption();
+        SetSprite();
     }
 
     /// <summary>
@@ -63,35 +61,44 @@ public abstract class BeDestroyedObject : MonoBehaviour
     /// </summary>
     protected void BeAbsorption()
     {
+        LookBoss();
+        float rad = Mathf.Atan2(boss.transform.position.y - transform.position.y,
+            boss.transform.position.x - transform.position.x);
+        Vector2 pos = transform.position;
+        pos.x += beAbsorptionSpeed * Mathf.Cos(rad);
+        pos.y += beAbsorptionSpeed * Mathf.Sin(rad);
+        transform.position = pos;
+    }
 
-        var diff = Time.timeSinceLevelLoad - startTime;
-        if (diff > parameter.beAbsorptionTime)
-        {
-            transform.position = boss.transform.position;
-        }
-
-        var rate = diff / parameter.beAbsorptionTime;
-        GetComponent<Rigidbody2D>().position = Vector3.Lerp(startPosition, boss.transform.position, rate * beAbsorptionSpeed);
+    /// <summary>
+    /// ボスの方を向く
+    /// </summary>
+    private void LookBoss()
+    {
+        Vector2 vec = (boss.transform.position - transform.position).normalized;
+        transform.rotation = Quaternion.FromToRotation(Vector2.up, vec);
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         //ボスと衝突したら
-        if(collision.tag == "Boss")
+        if (collision.tag == "Boss")
         {
             GiveEnergy();
         }
-    }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        //ウェーブが判定外にいったら
-        if(collision.tag == "Wave")
+        if (collision.tag == "AttackWave")
         {
-            WaveAction();
+            isWaveMode = true;
+        }
+
+        if (collision.tag == "StopWave")
+        {
+            StopWave();
         }
     }
+
     /// <summary>
     /// ボスにエネルギーを与える
     /// </summary>
@@ -103,10 +110,18 @@ public abstract class BeDestroyedObject : MonoBehaviour
         GameObject.Find("FormBeDestroyedObject").GetComponent<FormBeDestroyedObject>().DestoryObject(gameObject);
     }
 
-    
-    protected virtual void WaveAction()
+
+    /// <summary>
+    /// ウェーブにあった後の行動
+    /// </summary>
+    protected virtual void WaveAction() { }
+
+    /// <summary>
+    /// 停止ウェーブに当たったときの処理
+    /// </summary>
+    protected virtual void StopWave()
     {
-        Debug.Log("waveAction");
+        isWaveMode = false;
     }
 
     /// <summary>
@@ -117,13 +132,26 @@ public abstract class BeDestroyedObject : MonoBehaviour
     {
         hp -= damagePoint;
         BreakObject();
+        
     }
 
     private void BreakObject()
     {
-        if(hp<=0)
+        if (hp <= 0)
         {
-
+            Destroy(gameObject);
         }
+    }
+
+    /// <summary>
+    /// スプライトの設定
+    /// </summary>
+    protected void SetSprite()
+    {
+        if (isWaveMode)
+            GetComponent<SpriteRenderer>().sprite = parameter.actionSprite;
+
+        else
+            GetComponent<SpriteRenderer>().sprite = parameter.defaultSprite;
     }
 }
