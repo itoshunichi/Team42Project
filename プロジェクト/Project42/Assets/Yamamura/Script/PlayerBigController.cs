@@ -6,7 +6,7 @@ public class PlayerBigController : Player
 {
 
     Quaternion rotation = Quaternion.identity;
-
+    float countVelocity = 0;
     // Use this for initialization
     void Start()
     {
@@ -16,6 +16,15 @@ public class PlayerBigController : Player
     // Update is called once per frame
     void Update()
     {
+        if (playerMode == PlayerMode.NONE && GetComponent<Rigidbody2D>().velocity != Vector2.zero)
+        {
+            countVelocity++;
+            if (countVelocity > 50)
+            {
+                 GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            }
+        }
+        else if (GetComponent<Rigidbody2D>().velocity == Vector2.zero) countVelocity = 0;
         NotMoveCount();
         Move();
     }
@@ -65,12 +74,14 @@ public class PlayerBigController : Player
    
     public void AddForceBall(bool isRight)
     {
+     
         speed = 0;
         //Velocityをいったん０に  
         ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         //ボールの向きをプレイヤーに向ける
-        ball.transform.rotation = Quaternion.LookRotation(Vector3.forward, ball.transform.position - transform.position);
+        var vec = ball.transform.position - transform.position;
+        ball.transform.rotation = Quaternion.LookRotation(Vector3.forward, vec.normalized);
         if (isRight)
         {
             ball.GetComponent<Rigidbody2D>().AddForce(Vector2.right * power);
