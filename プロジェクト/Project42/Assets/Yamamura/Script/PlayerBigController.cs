@@ -7,8 +7,7 @@ public class PlayerBigController : Player
 
     Quaternion rotation = Quaternion.identity;
     float countVelocity = 0;
-    bool isChange;
-
+   
     // Use this for initialization
     void Start()
     {
@@ -64,7 +63,6 @@ public class PlayerBigController : Player
             playerMode = PlayerMode.PLAYER;
             GetComponent<Rigidbody2D>().mass = 1;
             transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-            isChange = true;
         }
         else if(!isPlayer)
         {
@@ -78,7 +76,6 @@ public class PlayerBigController : Player
    
     public void AddForceBall(bool isRight)
     {
-        isChange = false;
         speed = 0;
         //Velocityをいったん０に  
         ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;

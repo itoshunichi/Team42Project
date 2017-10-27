@@ -5,17 +5,18 @@ using UnityEngine;
 public class PlayerChange : MonoBehaviour
 {
 
-    public PlayerSmallController small;
-    public PlayerBigController big;
+    PlayerSmallController small;
+    PlayerBigController big;
     public GameObject bigPlayer;
     public GameObject smallPlayer;
     public GameObject[] chains;
     public FlickController flick;
-
+    public SoulMove soul;
     // Use this for initialization
     void Start()
     {
-
+        small = smallPlayer.GetComponent<PlayerSmallController>();
+        big = bigPlayer.GetComponent<PlayerBigController>();
     }
 
     // Update is called once per frame
@@ -41,12 +42,14 @@ public class PlayerChange : MonoBehaviour
                     small.Change(false);
                     big.Change(true);
                     flick.AddRotation(360);
+                    soul.SetMove(false);
                 }
                 else if (hitObject.collider.gameObject.name == "PlayerBig" && big.playerMode == PlayerMode.PLAYER)
                 {
                     small.Change(true);
                     big.Change(false);
                     flick.AddRotation(360);
+                    soul.SetMove(true);
                 }
             }
         }
