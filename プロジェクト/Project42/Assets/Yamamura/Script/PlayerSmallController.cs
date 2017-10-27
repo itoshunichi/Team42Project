@@ -46,6 +46,8 @@ public class PlayerSmallController :Player
 
         dir = new Vector3(-Mathf.Sin(angleDirection), Mathf.Cos(angleDirection), 0.0f);
         transform.position += dir * speed;
+
+        ball.transform.rotation = Quaternion.LookRotation(Vector3.forward, transform.position);
     }
 
     public void Change(bool isPlayer)
@@ -78,12 +80,12 @@ public class PlayerSmallController :Player
         if (rotationZ < 0) rotationZ += 360;
         if (isRight)
         {
-            
-            ball.GetComponent<Rigidbody2D>().AddForce(Vector2.right * power);
+            //if(rotationZ)
+            ball.GetComponent<Rigidbody2D>().AddForce(ball.transform.right * power);
         }
         else
         {
-            ball.GetComponent<Rigidbody2D>().AddForce(Vector2.left * power);
+            ball.GetComponent<Rigidbody2D>().AddForce(-ball.transform.right * power);
         }
         ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;

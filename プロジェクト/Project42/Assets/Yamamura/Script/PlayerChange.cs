@@ -10,6 +10,7 @@ public class PlayerChange : MonoBehaviour
     public GameObject bigPlayer;
     public GameObject smallPlayer;
     public GameObject[] chains;
+    public FlickController flick;
 
     // Use this for initialization
     void Start()
@@ -39,11 +40,13 @@ public class PlayerChange : MonoBehaviour
                 {
                     small.Change(false);
                     big.Change(true);
+                    flick.AddRotation(360);
                 }
                 else if (hitObject.collider.gameObject.name == "PlayerBig" && big.playerMode == PlayerMode.PLAYER)
                 {
                     small.Change(true);
                     big.Change(false);
+                    flick.AddRotation(360);
                 }
             }
         }

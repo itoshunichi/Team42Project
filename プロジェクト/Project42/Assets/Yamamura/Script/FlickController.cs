@@ -149,6 +149,11 @@ public class FlickController : MonoBehaviour
     }
     #endregion
 
+    public void AddRotation(float rotationZ)
+    {
+        transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y, rotationZ, transform.rotation.w);
+    }
+
     public bool GetFlick()
     {
         return isFlick;

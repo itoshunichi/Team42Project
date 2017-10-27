@@ -7,6 +7,8 @@ public class PlayerBigController : Player
 
     Quaternion rotation = Quaternion.identity;
     float countVelocity = 0;
+    bool isChange;
+
     // Use this for initialization
     void Start()
     {
@@ -19,7 +21,7 @@ public class PlayerBigController : Player
         if (playerMode == PlayerMode.NONE && GetComponent<Rigidbody2D>().velocity != Vector2.zero)
         {
             countVelocity++;
-            if (countVelocity > 50)
+            if (countVelocity > 60)
             {
                  GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             }
@@ -42,7 +44,7 @@ public class PlayerBigController : Player
     private void RotationMove()
     {
         if (transform.rotation.z != flick.transform.rotation.z) GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        if(flickController.GetFlick())transform.rotation = flick.transform.rotation;
+        transform.rotation = flick.transform.rotation;
         if (speed < speedMax) speed += 0.001f;
         //自身の向きベクトル取得
         //自身の角度をラジアンで取得
@@ -56,11 +58,13 @@ public class PlayerBigController : Player
     {
         if (isPlayer)
         {
+            Debug.Log("Change");
             GetComponent<SpriteRenderer>().sprite = eye;
-            transform.rotation = rotation = new Quaternion(0, 0, ball.transform.rotation.z + 180, transform.rotation.w); ;
+           // transform.rotation = new Quaternion(0, 0, ball.transform.rotation.z, transform.rotation.w);
             playerMode = PlayerMode.PLAYER;
             GetComponent<Rigidbody2D>().mass = 1;
             transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            isChange = true;
         }
         else if(!isPlayer)
         {
@@ -74,7 +78,7 @@ public class PlayerBigController : Player
    
     public void AddForceBall(bool isRight)
     {
-     
+        isChange = false;
         speed = 0;
         //Velocityをいったん０に  
         ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -84,11 +88,11 @@ public class PlayerBigController : Player
         ball.transform.rotation = Quaternion.LookRotation(Vector3.forward, vec.normalized);
         if (isRight)
         {
-            ball.GetComponent<Rigidbody2D>().AddForce(Vector2.right * power);
+            ball.GetComponent<Rigidbody2D>().AddForce(ball.transform.right * power);
         }
         else
         {
-            ball.GetComponent<Rigidbody2D>().AddForce(Vector2.left * power);
+            ball.GetComponent<Rigidbody2D>().AddForce(-ball.transform.right * power);
        }
         ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
