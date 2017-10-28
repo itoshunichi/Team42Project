@@ -19,24 +19,45 @@ public abstract class Player : MonoBehaviour {
     public GameObject flick;        //矢印
     protected FlickController flickController;
     protected bool isHit;           //
-    protected int count;            //
+    protected int hitCount;         //
     public float collisionPower;    //
     public int noMoveCount;         //
     public Sprite normal;
     public Sprite eye;
     protected float angleDirection;
+    protected float countVelocity = 120;
+    protected int addForceCount = 60;
 
     protected void NotMoveCount()
     {
         if (isHit)
         {
-            count++;
-            if (count > noMoveCount)
+            hitCount++;
+            if (hitCount > noMoveCount)
             {
-                count = 0;
+                hitCount = 0;
                 isHit = false;
                 GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             }
         }
     }
+
+    protected void VelocityZero(int countMax)
+    {
+        if (playerMode == PlayerMode.NONE)
+        {
+            countVelocity++;
+            if (countVelocity > countMax)
+            {
+                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            }
+        }
+    }
+    public void Reset()
+    {
+        countVelocity = 0;
+        speed = 0;
+    }
+
+
 }

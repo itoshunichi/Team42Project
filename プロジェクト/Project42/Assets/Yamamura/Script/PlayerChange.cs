@@ -43,6 +43,7 @@ public class PlayerChange : MonoBehaviour
                     big.Change(true);
                     flick.AddRotation(360);
                     soul.SetMove(false);
+                    BigPlayerChain();
                 }
                 else if (hitObject.collider.gameObject.name == "PlayerBig" && big.playerMode == PlayerMode.PLAYER)
                 {
@@ -50,28 +51,39 @@ public class PlayerChange : MonoBehaviour
                     big.Change(false);
                     flick.AddRotation(360);
                     soul.SetMove(true);
+                    SmallPlayerChain();
                 }
             }
         }
     }
 
-    private void Chain()
+    private void SmallPlayerChain()
     {
-        //smallがプレイヤーの時
-        //ジョイントのつなぎ　bigPlayer -> chains -> smallPlayer
+
         for (int i = 0; i < chains.Length - 1; i++)
         {
             chains[i].GetComponent<HingeJoint2D>().connectedBody = chains[i + 1].GetComponent<Rigidbody2D>();
         }
-        chains[chains.Length].GetComponent<HingeJoint2D>().connectedBody = bigPlayer.GetComponent<Rigidbody2D>();
+        chains[chains.Length - 1].GetComponent<HingeJoint2D>().connectedBody = bigPlayer.GetComponent<Rigidbody2D>();
+        foreach (var chain in chains)
+        {
+            chain.GetComponent<HingeJoint2D>().anchor = new Vector2(0, -0.1f);
+            chain.GetComponent<HingeJoint2D>().connectedAnchor = new Vector2(0, 0.1f);
+        }
+    }
 
-        //bigがプレイヤーの時  
-        //ジョイントのつなぎ　smallPlayer -> chains -> bigPlayer
-        for (int i = 1; i < chains.Length; i++)
+    private void BigPlayerChain()
+    {
+        for (int i = chains.Length -1; i > 0; i--)
         {
             chains[i].GetComponent<HingeJoint2D>().connectedBody = chains[i - 1].GetComponent<Rigidbody2D>();
         }
         chains[0].GetComponent<HingeJoint2D>().connectedBody = smallPlayer.GetComponent<Rigidbody2D>();
+        foreach (var chain in chains)
+        {
+            chain.GetComponent<HingeJoint2D>().anchor = new Vector2(0, 0.1f);
+            chain.GetComponent<HingeJoint2D>().connectedAnchor = new Vector2(0, -0.1f);
+        }
     }
 
 }

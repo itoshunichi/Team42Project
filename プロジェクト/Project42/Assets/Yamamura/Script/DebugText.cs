@@ -26,6 +26,6 @@ public class DebugText : MonoBehaviour
         var rotationZ = Mathf.Atan2(ro.y,ro.x)*Mathf.Rad2Deg;
         if(rotationZ < 0)rotationZ += 360;
 
-        text.text = "Small:" + ro.normalized + "Big:" + rotationZ;
+        text.text = "Small:" + player.GetComponent<Rigidbody2D>().velocity + "Big:" + p.GetComponent<Rigidbody2D>().velocity;
     }
 }

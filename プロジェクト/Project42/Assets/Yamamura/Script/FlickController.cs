@@ -29,6 +29,8 @@ public class FlickController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        pcs = playerSmall.GetComponent<PlayerSmallController>();
+        pcb = playerBig.GetComponent<PlayerBigController>();
     }
 
     // Update is called once per frame
@@ -91,15 +93,14 @@ public class FlickController : MonoBehaviour
                     //操作キャラのスクリプトを入れる
                     if (playerSmall.GetComponent<PlayerSmallController>().playerMode == PlayerMode.PLAYER)
                     {
-                        pcs = playerSmall.GetComponent<PlayerSmallController>();
-                        //pcs.AddForceBall(LineRight(touchStartPos, beforeEndPos, spriteobj.transform.position));
-                        pcs.AddForceBall(RightFlick(touchStartPos, touchEndPos));
+                        pcs.Reset();
+                        pcb.RotationForce(RightFlick(touchStartPos, touchEndPos));
+
                     }
                     else if (playerBig.GetComponent<PlayerBigController>().playerMode == PlayerMode.PLAYER)
                     {
-                        pcb = playerBig.GetComponent<PlayerBigController>();
-                        //pcb.AddForceBall(LineRight(touchStartPos, beforeEndPos, spriteobj.transform.position));
-                        pcb.AddForceBall(RightFlick(touchStartPos, touchEndPos));
+                        pcb.Reset();
+                        pcs.RotationForce(RightFlick(touchStartPos, touchEndPos));
                     }
                     Instantiate(spriteArrow, new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 0),transform.rotation);
                 }
@@ -110,10 +111,16 @@ public class FlickController : MonoBehaviour
         }
     }
 
-    bool RightFlick(Vector2 start,Vector2 end)
+    //bool RightFlick(Vector2 start,Vector2 end)
+    //{
+    //    if (start.x > end.x) return true;
+    //    return false;
+    //}
+
+    float RightFlick(Vector2 start, Vector2 end)
     {
-        if (start.x > end.x) return true;
-        return false;
+        if (start.x > end.x) return 1;
+        return -1;
     }
 
     //線より右側

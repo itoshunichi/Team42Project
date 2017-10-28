@@ -25,7 +25,7 @@ public class SoulMove : MonoBehaviour
 
     private void Move()
     {
-        Debug.Log(playerNumber);
+       // Debug.Log(playerNumber);
         if (isMoveSmall)
         {
             FromSmall();
