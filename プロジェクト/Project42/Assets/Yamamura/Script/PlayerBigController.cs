@@ -18,10 +18,12 @@ public class PlayerBigController : Player
     // Update is called once per frame
     void Update()
     {
-        if (addForceCount < 60)
+        if (addForceCount < 90)
         {
             addForceCount++;
-            GetComponent<Rigidbody2D>().AddForce(transform.right * (power - 0.1f));
+            var force = transform.right * (power);
+            addForceAlpha += 0.01f;
+            GetComponent<Rigidbody2D>().AddForce(Vector2.Lerp(force, Vector2.zero, addForceAlpha));
         }
 
         VelocityZero(60);
@@ -75,6 +77,7 @@ public class PlayerBigController : Player
     public void RotationForce(float power)
     {
         addForceCount = 0;
+        addForceAlpha = 0;
         this.power *= power;
     }
 

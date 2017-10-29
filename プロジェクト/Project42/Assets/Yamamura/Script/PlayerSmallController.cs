@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerSmallController : Player
 {
     HingeJoint2D joint;
+    
+
     // Use this for initialization
     void Start()
     {
@@ -19,9 +21,12 @@ public class PlayerSmallController : Player
         if (addForceCount < 90)
         {
             addForceCount++;
-            GetComponent<Rigidbody2D>().AddForce(transform.right * (power));
+            var force = transform.right * (power);
+            addForceAlpha += 0.006f;
+            GetComponent<Rigidbody2D>().AddForce(Vector2.Lerp(force, Vector2.zero, addForceAlpha));
+            //GetComponent<Rigidbody2D>().AddForce(Vector2.right * power);
         }
-        //transform.rotation = Quaternion.LookRotation(Vector3.forward, ball.transform.position);
+       
         VelocityZero(60);
         NotMoveCount();
         Move();
@@ -70,6 +75,7 @@ public class PlayerSmallController : Player
     public void RotationForce(float power)
     {
         addForceCount = 0;
+        addForceAlpha = 0;
         this.power *= power;
     }
 

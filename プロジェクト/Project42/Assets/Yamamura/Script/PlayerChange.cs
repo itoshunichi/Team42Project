@@ -70,6 +70,7 @@ public class PlayerChange : MonoBehaviour
             chain.GetComponent<HingeJoint2D>().anchor = new Vector2(0, -0.1f);
             chain.GetComponent<HingeJoint2D>().connectedAnchor = new Vector2(0, 0.1f);
         }
+        
     }
 
     private void BigPlayerChain()
@@ -84,6 +85,8 @@ public class PlayerChange : MonoBehaviour
             chain.GetComponent<HingeJoint2D>().anchor = new Vector2(0, 0.1f);
             chain.GetComponent<HingeJoint2D>().connectedAnchor = new Vector2(0, -0.1f);
         }
+        chains[0].GetComponent<HingeJoint2D>().anchor = new Vector2(0, 0.12f);
+        chains[0].GetComponent<HingeJoint2D>().connectedAnchor = new Vector2(0, 0.1f);
     }
 
 }

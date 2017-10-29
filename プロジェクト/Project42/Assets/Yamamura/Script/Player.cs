@@ -26,7 +26,8 @@ public abstract class Player : MonoBehaviour {
     public Sprite eye;
     protected float angleDirection;
     protected float countVelocity = 120;
-    protected int addForceCount = 60;
+    protected int addForceCount = 120;
+    protected float addForceAlpha = 0;
 
     protected void NotMoveCount()
     {
@@ -57,6 +58,8 @@ public abstract class Player : MonoBehaviour {
     {
         countVelocity = 0;
         speed = 0;
+        addForceCount = 0;
+        addForceAlpha = 0;
     }
 
 
