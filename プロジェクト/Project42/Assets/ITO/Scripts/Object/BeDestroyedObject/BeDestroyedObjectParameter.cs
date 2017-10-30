@@ -26,8 +26,8 @@ public class BeDestroyedObjectParameter :ScriptableObject {
     /// <summary>
     /// 吸収されるまでの時間
     /// </summary>
-    [Range(0.01f,0.1f)]
-    [Tooltip("吸収されるまでの時間(秒数)")]
+    [Range(1f,10f)]
+    [Tooltip("吸収されるスピード")]
     public float beAbsorptionSpeed;
 
     public Sprite defaultSprite;

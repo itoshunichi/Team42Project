@@ -11,13 +11,13 @@ public class Enemy_A : BeDestroyedObject {
     {
         base.WaveAction();
         //吸い込まれるスピードを変更
-        beAbsorptionSpeed = parameter.beAbsorptionSpeed*2;
+        beAbsorptionSpeed = parameter.beAbsorptionSpeed*2*Time.deltaTime;
     }
 
     protected override void StopWave()
     {
         base.StopWave();
         //初期のスピードに戻す
-        beAbsorptionSpeed = parameter.beAbsorptionSpeed;
+        beAbsorptionSpeed = parameter.beAbsorptionSpeed*Time.deltaTime;
     }
 }
