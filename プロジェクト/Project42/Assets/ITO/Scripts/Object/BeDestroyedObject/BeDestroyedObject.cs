@@ -46,7 +46,7 @@ public abstract class BeDestroyedObject : MonoBehaviour
         Debug.Log("ウェーブ"+isWaveMode);
         isWaveMode = false;
         boss = GameObject.Find("Boss");
-        beAbsorptionSpeed = parameter.beAbsorptionSpeed;
+        beAbsorptionSpeed = parameter.beAbsorptionSpeed*Time.deltaTime;
     }
 
     protected virtual void Update()

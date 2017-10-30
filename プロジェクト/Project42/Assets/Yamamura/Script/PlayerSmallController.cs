@@ -23,7 +23,7 @@ public class PlayerSmallController :Player
         
         if (playerMode == PlayerMode.PLAYER && !isHit)
         {
-            //if (GetComponent<Player_StageOut>().IsStageOut()) return;
+            if (GetComponent<Player_StageOut>().IsStageOut()) return;
             RotationMove();
         }
     }
