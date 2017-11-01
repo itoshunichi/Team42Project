@@ -258,6 +258,16 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114194086653882230, guid: a8f6a94f5061c5c4b86790796167ad59,
+        type: 2}
+      propertyPath: soulEnergy
+      value: 
+      objectReference: {fileID: 173644731}
+    - target: {fileID: 114449207252082776, guid: a8f6a94f5061c5c4b86790796167ad59,
+        type: 2}
+      propertyPath: soulEnergy
+      value: 
+      objectReference: {fileID: 173644731}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a8f6a94f5061c5c4b86790796167ad59, type: 2}
   m_IsPrefabParent: 0
@@ -456,6 +466,17 @@ GameObject:
   m_PrefabParentObject: {fileID: 1963979306114700, guid: a8f6a94f5061c5c4b86790796167ad59,
     type: 2}
   m_PrefabInternal: {fileID: 57723264}
+--- !u!114 &173644731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 173644730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6369c380088550348b3e0d8ca6eddf43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &224866188 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1163210251521988, guid: 598256e62c60a2c45bfa6729904a5c82,

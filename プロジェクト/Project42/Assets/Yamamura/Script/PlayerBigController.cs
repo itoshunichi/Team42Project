@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerBigController : Player
 {
-    bool isAddForce;
     HingeJoint2D joint;
+    public Energy soulEnergy;
 
     // Use this for initialization
     void Start()
@@ -66,7 +66,7 @@ public class PlayerBigController : Player
         else if (!isPlayer)
         {
             GetComponent<SpriteRenderer>().sprite = normal;
-            playerMode = PlayerMode.NONE;
+            playerMode = PlayerMode.HAMMER;
             joint.enabled = false;
             GetComponent<Rigidbody2D>().mass = 0.005f;
             transform.localScale = new Vector3(1.5f, 1.5f, 1.0f);
@@ -81,25 +81,25 @@ public class PlayerBigController : Player
         this.power *= power;
     }
 
-    public void AddForceBall(bool isRight)
-    {
-        speed = 0;
-        //Velocityをいったん０に  
-        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        //ボールの向きをプレイヤーに向ける
-        var vec = ball.transform.position - transform.position;
-        ball.transform.rotation = Quaternion.LookRotation(Vector3.forward, vec.normalized);
-        ball.GetComponent<PlayerSmallController>().Reset();
-        if (isRight)
-        {
-            ball.GetComponent<Rigidbody2D>().AddForce(ball.transform.right * power);
-        }
-        else
-        {
-            ball.GetComponent<Rigidbody2D>().AddForce(-ball.transform.right * power);
-        }
-        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-    }
+    //public void AddForceBall(bool isRight)
+    //{
+    //    speed = 0;
+    //    //Velocityをいったん０に  
+    //    GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+    //    //ボールの向きをプレイヤーに向ける
+    //    var vec = ball.transform.position - transform.position;
+    //    ball.transform.rotation = Quaternion.LookRotation(Vector3.forward, vec.normalized);
+    //    ball.GetComponent<PlayerSmallController>().Reset();
+    //    if (isRight)
+    //    {
+    //        ball.GetComponent<Rigidbody2D>().AddForce(ball.transform.right * power);
+    //    }
+    //    else
+    //    {
+    //        ball.GetComponent<Rigidbody2D>().AddForce(-ball.transform.right * power);
+    //    }
+    //    GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+    //}
 
     void OnCollisionEnter2D(Collision2D col)
     {
@@ -113,6 +113,12 @@ public class PlayerBigController : Player
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             GetComponent<Rigidbody2D>().AddForce(dir * collisionPower);
 
+        }
+
+        else if (col.gameObject.tag == "BeDestroyedObject" && playerMode == PlayerMode.HAMMER && transform.GetComponent<Rigidbody2D>().velocity !=Vector2.zero)
+        {
+            Destroy(col.gameObject);
+            soulEnergy.AddEnergy(10);
         }
     }
 

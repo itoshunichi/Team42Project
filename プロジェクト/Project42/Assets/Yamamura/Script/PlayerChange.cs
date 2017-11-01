@@ -11,6 +11,7 @@ public class PlayerChange : MonoBehaviour
     public GameObject smallPlayer;
     public GameObject[] chains;
     public FlickController flick;
+
     public SoulMove soul;
     // Use this for initialization
     void Start()
@@ -41,7 +42,8 @@ public class PlayerChange : MonoBehaviour
                 {
                     small.Change(false);
                     big.Change(true);
-                    flick.AddRotation(360);
+                    flick.SetRotation(-small.GetDirectionVector());
+                    
                     soul.SetMove(false);
                     BigPlayerChain();
                 }
@@ -49,14 +51,14 @@ public class PlayerChange : MonoBehaviour
                 {
                     small.Change(true);
                     big.Change(false);
-                    flick.AddRotation(360);
+                    flick.SetRotation(-big.GetDirectionVector());
                     soul.SetMove(true);
                     SmallPlayerChain();
                 }
             }
         }
     }
-
+    //ジョイントの付け替え
     private void SmallPlayerChain()
     {
 
@@ -72,7 +74,7 @@ public class PlayerChange : MonoBehaviour
         }
         
     }
-
+    //ジョイントの付け替え
     private void BigPlayerChain()
     {
         for (int i = chains.Length -1; i > 0; i--)
