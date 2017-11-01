@@ -63,6 +63,7 @@ public class Boss : MonoBehaviour
     {
 
         GameObject.Find("BossEnergyText").GetComponent<Text>().text = "ボスエネルギー" + energy;
+        SetScale();
        // InstantiateWave();
 
     }
@@ -72,6 +73,18 @@ public class Boss : MonoBehaviour
         hp -= 1;
         InstantiateStopWave();
         //InterruptWave();
+    }
+
+    /// <summary>
+    /// スケールの設定
+    /// </summary>
+    private void SetScale()
+    {
+        //エネルギーが0以下だったらスケールは変わらない
+        if (energy <= 0) transform.localScale = new Vector3(1, 1, 1);
+
+        float scale = energy / 100;
+        transform.localScale = new Vector3(1+scale, 1+scale, 1);
     }
 
     #region　エネルギー関係

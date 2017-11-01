@@ -45,8 +45,6 @@ public class Player_StageOut : MonoBehaviour
 
         foreach (var c in GetPlayerChildren())
         {
-            c.GetComponent<Rigidbody2D>().freezeRotation = true;
-            //c.GetComponent<Rigidbody2D>().isKinematic = true;
             c.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
 
@@ -61,33 +59,25 @@ public class Player_StageOut : MonoBehaviour
         {
             c.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             c.GetComponent<Collider2D>().enabled = false;
-           // c.GetComponent<Rigidbody2D>().angularVelocity = 0;
         }
-        //GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-        //// GetComponent<Rigidbody2D>().angularVelocity = 0;
-        ////反転
-        transform.eulerAngles += new Vector3(0, 0, 180);
-        //yield return null;
+        //反転
+        foreach (var c in GetPlayerChildren())
+        {
+           c.transform.eulerAngles += new Vector3(0, 0, 180);
+        }
+        yield return null;
         //向いてる方向に力を加える
 
         GetComponent<Rigidbody2D>().AddForce(Direction() * 200f);
-
-        //GetComponent<Rigidbody2D>().AddForce(Direction() * 200f);
-
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
 
         foreach (var c in GetPlayerChildren())
         {
-           // c.GetComponent<Rigidbody2D>().freezeRotation = false;
-            //c.GetComponent<Rigidbody2D>().isKinematic = true;
             c.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
 
-        //GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-        //GetComponent<Rigidbody2D>().angularVelocity = 0;
-        //GetComponent<Rigidbody2D>().freezeRotation = false;
         isStageOut = false;
-        //transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z % 360);
+        transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z % 360);
 
         yield break;
     }
@@ -105,7 +95,7 @@ public class Player_StageOut : MonoBehaviour
     {
         //自身の向きベクトル取得
         float angleDir = transform.eulerAngles.z * (Mathf.PI / 180f);
-        Vector3 dir = new Vector3(Mathf.Cos(angleDir), Mathf.Sin(angleDir), 0.0f);
+        Vector3 dir = new Vector3(-Mathf.Sin(angleDir), Mathf.Cos(angleDir), 0.0f);
         return dir;
     }
 
