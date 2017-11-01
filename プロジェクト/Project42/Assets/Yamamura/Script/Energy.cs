@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class Energy : MonoBehaviour {
 
-    public Image image;
-    float energy;
+    float playerEnergy = 0;
+
 	// Use this for initialization
 	void Start () {
 	}
@@ -16,8 +16,10 @@ public class Energy : MonoBehaviour {
 
 	}
 
-    void OnColisonEnter2D(Collider2D col)
+    public void AddEnergy(float energy)
     {
-      
+        playerEnergy += energy;
     }
+
+
 }
