@@ -43,10 +43,8 @@ public class Player_StageOut : MonoBehaviour
     {
         isStageOut = true;
 
-        foreach (var c in GetPlayerChildren())
-        {
-            c.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        }
+        //力のリセット
+        ResetPlayerVelocity();
 
         yield return null;
 
@@ -54,12 +52,9 @@ public class Player_StageOut : MonoBehaviour
 
         //0.5秒待つ
         yield return new WaitForSeconds(0.5f);
-        ////加えられてる力をリセット
-        foreach (var c in GetPlayerChildren())
-        {
-            c.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            c.GetComponent<Collider2D>().enabled = false;
-        }
+
+        //加えられてる力をリセット
+        ResetPlayerVelocity();
         //反転
         foreach (var c in GetPlayerChildren())
         {
@@ -71,13 +66,14 @@ public class Player_StageOut : MonoBehaviour
         GetComponent<Rigidbody2D>().AddForce(Direction() * 200f);
         yield return new WaitForSeconds(0.5f);
 
-        foreach (var c in GetPlayerChildren())
-        {
-            c.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        }
+        //力のリセット
+        ResetPlayerVelocity();
+
+        yield return new WaitForSeconds(0.2f);
 
         isStageOut = false;
         transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z % 360);
+        GameObject.Find("FlickController").transform.rotation = transform.rotation;
 
         yield break;
     }
@@ -85,6 +81,17 @@ public class Player_StageOut : MonoBehaviour
     private void FixedUpdate()
     {
 
+    }
+
+    /// <summary>
+    /// 加えられてる力のリセット
+    /// </summary>
+    private void ResetPlayerVelocity()
+    {
+        foreach (var c in GetPlayerChildren())
+        {
+            c.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        }
     }
 
     /// <summary>

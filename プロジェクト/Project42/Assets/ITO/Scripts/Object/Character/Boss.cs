@@ -70,9 +70,14 @@ public class Boss : MonoBehaviour
 
     public void BeginDamage()
     {
-        hp -= 1;
+       // hp -= 1;
         InstantiateStopWave();
         //InterruptWave();
+    }
+
+    public void Dead()
+    {
+        Destroy(gameObject);
     }
 
     /// <summary>
