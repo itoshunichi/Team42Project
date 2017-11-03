@@ -6,7 +6,7 @@ public class FlickController : MonoBehaviour
 {
 
     public GameObject playerSmall;      //プレイヤースモール
-    public GameObject playerBig;        //プレイヤービッグ
+    public GameObject hammer;        //プレイヤービッグ
     public GameObject mainCamera;
     public GameObject spriteobj;
     public GameObject spriteArrow;
@@ -24,13 +24,11 @@ public class FlickController : MonoBehaviour
     bool isFlick = false;
 
     PlayerSmallController pcs;
-    PlayerBigController pcb;
 
     // Use this for initialization
     void Start()
     {
         pcs = playerSmall.GetComponent<PlayerSmallController>();
-        pcb = playerBig.GetComponent<PlayerBigController>();
     }
 
     // Update is called once per frame
@@ -90,18 +88,9 @@ public class FlickController : MonoBehaviour
                 if (radian > radianMax)
                 {
 
-                    //操作キャラのスクリプトを入れる
-                    if (playerSmall.GetComponent<PlayerSmallController>().playerMode == PlayerMode.PLAYER)
-                    {
-                        pcs.Reset();
-                        pcb.RotationForce(RightFlick(touchStartPos, touchEndPos));
+                    pcs.Reset();
+                    hammer.GetComponent<Hammer>().RotationForce(RightFlick(touchStartPos, touchEndPos));
 
-                    }
-                    else if (playerBig.GetComponent<PlayerBigController>().playerMode == PlayerMode.PLAYER)
-                    {
-                        pcb.Reset();
-                        pcs.RotationForce(RightFlick(touchStartPos, touchEndPos));
-                    }
                     Instantiate(spriteArrow, new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 0), transform.rotation);
                 }
                 flickCount += 1;//フリックした回数をカウント
@@ -111,17 +100,18 @@ public class FlickController : MonoBehaviour
         }
     }
 
-    //bool RightFlick(Vector2 start,Vector2 end)
-    //{
-    //    if (start.x > end.x) return true;
-    //    return false;
-    //}
-
-    float RightFlick(Vector2 start, Vector2 end)
+    bool RightFlick(Vector2 start, Vector2 end)
     {
-        if (start.x > end.x) return 1;
-        return -1;
+        if (start.x > end.x) return true;
+        return false;
     }
+
+    //float RightFlick(Vector2 start, Vector2 end)
+    //{
+    //    Vector2 dir = end - start;
+    //    if (dir.normalized.x > start.x) return 1;
+    //    return -1;
+    //}
 
     //線より右側
     bool LineRight(Vector2 pos1, Vector2 pos2, Vector2 dot)
@@ -158,7 +148,7 @@ public class FlickController : MonoBehaviour
 
     public void SetRotation(Vector3 pos)
     {
-        transform.localRotation = Quaternion.LookRotation(Vector3.forward,pos);
+        transform.localRotation = Quaternion.LookRotation(Vector3.forward, pos);
     }
 
     public bool GetFlick()
