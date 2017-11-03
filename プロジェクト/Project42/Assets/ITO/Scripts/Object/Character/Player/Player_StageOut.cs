@@ -43,6 +43,10 @@ public class Player_StageOut : MonoBehaviour
     {
         isStageOut = true;
 
+        foreach (var c in GetPlayerChildren())
+        {
+            c.GetComponent<Rigidbody2D>().freezeRotation = true;
+        }
         //力のリセット
         ResetPlayerVelocity();
 
@@ -58,7 +62,7 @@ public class Player_StageOut : MonoBehaviour
         //反転
         foreach (var c in GetPlayerChildren())
         {
-           c.transform.eulerAngles += new Vector3(0, 0, 180);
+            c.transform.eulerAngles += new Vector3(0, 0, 180);
         }
         yield return null;
         //向いてる方向に力を加える
@@ -69,9 +73,14 @@ public class Player_StageOut : MonoBehaviour
         //力のリセット
         ResetPlayerVelocity();
 
+
         yield return new WaitForSeconds(0.2f);
 
         isStageOut = false;
+        foreach (var c in GetPlayerChildren())
+        {
+            c.GetComponent<Rigidbody2D>().freezeRotation = false;
+        }
         transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z % 360);
         GameObject.Find("FlickController").transform.rotation = transform.rotation;
 
@@ -117,7 +126,8 @@ public class Player_StageOut : MonoBehaviour
 
         foreach (Transform ob in children)
         {
-            allChildren.Add(ob.gameObject);
+            if (ob.name != "Player_Soul")
+                allChildren.Add(ob.gameObject);
         }
 
         return allChildren;
