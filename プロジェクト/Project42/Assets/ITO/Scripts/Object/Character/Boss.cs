@@ -23,8 +23,8 @@ public class Boss : MonoBehaviour
     /// </summary>
     private GameObject attckWave;
     private GameObject stopWave;
-   // private GameObject wavePrefab;
-    
+    // private GameObject wavePrefab;
+
 
     /// <summary>
     /// ウェーブの間隔
@@ -52,10 +52,10 @@ public class Boss : MonoBehaviour
 
     void Start()
     {
-        
+
         attckWave = Resources.Load<GameObject>("Prefab/Wave/AttackWave");
         stopWave = Resources.Load<GameObject>("Prefab/Wave/StopWave");
-        InstantiateAttackWave();
+        StartCoroutine(InstantiateWave());
     }
 
     // Update is called once per frame
@@ -64,13 +64,13 @@ public class Boss : MonoBehaviour
 
         GameObject.Find("BossEnergyText").GetComponent<Text>().text = "ボスエネルギー" + energy;
         SetScale();
-       // InstantiateWave();
+        // InstantiateWave();
 
     }
 
     public void BeginDamage()
     {
-       // hp -= 1;
+        // hp -= 1;
         InstantiateStopWave();
         //InterruptWave();
     }
@@ -89,7 +89,7 @@ public class Boss : MonoBehaviour
         if (energy <= 0) transform.localScale = new Vector3(1, 1, 1);
 
         float scale = energy / 100;
-        transform.localScale = new Vector3(1+scale, 1+scale, 1);
+        transform.localScale = new Vector3(1 + scale, 1 + scale, 1);
     }
 
     #region　エネルギー関係
@@ -109,7 +109,7 @@ public class Boss : MonoBehaviour
     private void MaxEnergy()
     {
         //エネルギーが最大以上になったら
-        if(energy>=maxEnergy)
+        if (energy >= maxEnergy)
         {
             //ゲームオーバーシーンに
             SceneNavigater.Instance.Change("GameOver");
@@ -136,6 +136,18 @@ public class Boss : MonoBehaviour
     //        waveTimer = 0;
     //    }
     //}
+
+
+    private IEnumerator InstantiateWave()
+    {
+        
+
+        while(true)
+        {
+            yield return new WaitForSeconds(waveTime);
+            InstantiateAttackWave();
+        }
+    }
 
     public void InstantiateAttackWave()
     {
@@ -168,11 +180,11 @@ public class Boss : MonoBehaviour
     //    return waveTimer >= startReadyWaveTime;
     //}
 
-#endregion
+    #endregion
 
-   
 
-   
+
+
 
 
 

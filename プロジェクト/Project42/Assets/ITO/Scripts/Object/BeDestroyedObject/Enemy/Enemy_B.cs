@@ -109,7 +109,6 @@ public class Enemy_B : BeDestroyedObject {
         yield return new WaitForSeconds(0.5f);
         obj.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         Destroy(gameObject);
-        Debug.Log("突進攻撃");
 
 
     }
