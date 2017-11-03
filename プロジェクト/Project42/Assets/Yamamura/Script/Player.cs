@@ -28,6 +28,8 @@ public abstract class Player : MonoBehaviour {
     protected float countVelocity = 120;
     protected int addForceCount = 120;
     protected float addForceAlpha = 0;
+    
+
 
     protected void NotMoveCount()
     {

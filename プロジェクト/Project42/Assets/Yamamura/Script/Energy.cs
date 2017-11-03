@@ -21,5 +21,8 @@ public class Energy : MonoBehaviour {
         playerEnergy += energy;
     }
 
-
+    public float GetEnergy()
+    {
+        return playerEnergy;
+    }
 }

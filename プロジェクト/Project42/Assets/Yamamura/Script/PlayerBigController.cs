@@ -115,12 +115,22 @@ public class PlayerBigController : Player
 
         }
 
-        else if (col.gameObject.tag == "BeDestroyedObject" && playerMode == PlayerMode.HAMMER && transform.GetComponent<Rigidbody2D>().velocity !=Vector2.zero)
+        else if (col.gameObject.tag == "BeDestroyedObject" && playerMode == PlayerMode.HAMMER && transform.GetComponent<Rigidbody2D>().velocity != Vector2.zero)
         {
             Destroy(col.gameObject);
+            col.gameObject.GetComponent<BeDestroyedObject>().BeginDamage(1);
             soulEnergy.AddEnergy(10);
         }
     }
 
-   
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Boss" && playerMode == PlayerMode.HAMMER &&
+            transform.GetComponent<Rigidbody2D>().velocity != Vector2.zero && soulEnergy.GetEnergy() >= 100)
+        {
+            col.gameObject.GetComponent<Boss>().BeginDamage();
+        }
+    }
+
+
 }

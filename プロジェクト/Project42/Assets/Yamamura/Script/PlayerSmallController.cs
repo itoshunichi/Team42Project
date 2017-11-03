@@ -119,6 +119,16 @@ public class PlayerSmallController : Player
             Destroy(col.gameObject);
             soulEnergy.AddEnergy(10);
         }
+
+      
     }
 
+    void OnTrigerrEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "Boss" && playerMode == PlayerMode.HAMMER &&
+            transform.GetComponent<Rigidbody2D>().velocity != Vector2.zero && soulEnergy.GetEnergy() >= 10)
+        {
+            Destroy(col.gameObject);
+        }
+    }
 }
