@@ -47,7 +47,7 @@ public class Hammer : MonoBehaviour
         addForceAlpha = 0;
     }
 
-    public void RotationForce(bool isRight)
+    public void RotationForce(bool isRight, float scalar)
     {
         addForceCount = 0;
         addForceAlpha = 0;
@@ -55,6 +55,7 @@ public class Hammer : MonoBehaviour
             power = -power;
         else if (isRight && power > 0)
             this.power = -power;
+        power *= scalar;
     }
 
     void OnCollisionEnter2D(Collision2D col)

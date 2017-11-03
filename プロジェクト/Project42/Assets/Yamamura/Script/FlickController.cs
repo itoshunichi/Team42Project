@@ -20,7 +20,10 @@ public class FlickController : MonoBehaviour
     public float flickMagnitude = 100;
     float beforeRadian = 0; //フリックする前の角度
     float afterRadian = 0;  //フリックした後の角度
-    public float radianMax = 30;
+    public float radianMaxOne = 30;
+    public float radianMaxTwo = 60;
+    public float radianMaxThree = 90;
+    public float radianMaxFour = 120;
     bool isFlick = false;
 
     PlayerSmallController pcs;
@@ -85,14 +88,15 @@ public class FlickController : MonoBehaviour
 
                 isFlick = true;
                 //radianの値が規定値以下だったらそれ以降は処理しない
-                if (radian > radianMax)
-                {
+                if (radian > radianMaxOne && radian < radianMaxTwo)
+                    hammer.GetComponent<Hammer>().RotationForce(RightFlick(touchStartPos, touchEndPos), 1f);
+                else if(radian > radianMaxTwo && radian < radianMaxThree)
+                    hammer.GetComponent<Hammer>().RotationForce(RightFlick(touchStartPos, touchEndPos), 1.5f);
+                else if(radian > radianMaxThree && radian < radianMaxFour)
+                    hammer.GetComponent<Hammer>().RotationForce(RightFlick(touchStartPos, touchEndPos), 2f);
+                pcs.Reset();
+                Instantiate(spriteArrow, new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 0), transform.rotation);
 
-                    pcs.Reset();
-                    hammer.GetComponent<Hammer>().RotationForce(RightFlick(touchStartPos, touchEndPos));
-
-                    Instantiate(spriteArrow, new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 0), transform.rotation);
-                }
                 flickCount += 1;//フリックした回数をカウント
             }
             tapTimer = 0.0f;
