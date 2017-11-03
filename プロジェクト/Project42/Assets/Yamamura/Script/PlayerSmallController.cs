@@ -42,6 +42,8 @@ public class PlayerSmallController : Player
 
     private void RotationMove()
     {
+        if (GetComponent<Player_StageOut>().IsStageOut()) return;
+
         if (transform.rotation.z != flick.transform.rotation.z) GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         if (speed < speedMax) speed += 0.001f;
         transform.rotation = flick.transform.rotation;
@@ -50,6 +52,7 @@ public class PlayerSmallController : Player
         float angleDirection = transform.eulerAngles.z * (Mathf.PI / 180.0f);
 
         dir = new Vector3(-Mathf.Sin(angleDirection), Mathf.Cos(angleDirection), 0.0f);
+
         transform.position += dir * speed;
     }
 

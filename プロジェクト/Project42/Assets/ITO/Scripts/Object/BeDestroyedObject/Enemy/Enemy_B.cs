@@ -86,13 +86,42 @@ public class Enemy_B : BeDestroyedObject {
         base.StopWave();
     }
 
-    protected override void OnTriggerEnter2D(Collider2D collision)
-    {
-        base.OnTriggerEnter2D(collision);
+   
 
-        if(collision.tag == "Player")
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Player"
+            &&collision.gameObject.GetComponent<Player>().playerMode == PlayerMode.PLAYER)
         {
-            
+            //StartCoroutine(AttackPlayer(collision.gameObject));
         }
+    }
+
+    /// <summary>
+    /// プレイヤーに攻撃
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator AttackPlayer(GameObject obj)
+    {
+        
+        obj.GetComponent<Rigidbody2D>().AddForce(Direction() * 1000);
+        
+        yield return new WaitForSeconds(0.5f);
+        obj.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        Destroy(gameObject);
+
+
+    }
+
+    /// <summary>
+    /// 自身の向きを取得
+    /// </summary>
+    /// <returns></returns>
+    private Vector3 Direction()
+    {
+        //自身の向きベクトル取得
+        float angleDir = transform.eulerAngles.z * (Mathf.PI / 180f);
+        Vector3 dir = new Vector3(-Mathf.Sin(angleDir), Mathf.Cos(angleDir), 0.0f);
+        return dir;
     }
 }
