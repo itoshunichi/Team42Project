@@ -22,6 +22,10 @@ public class DebugText : MonoBehaviour
         screenMousePos.z = -Camera.main.transform.position.z;
         var curPoint = Camera.main.ScreenToWorldPoint(screenMousePos);
         Vector2 dis = curPoint - player.transform.position;
+        var ro = p.transform.position - player.transform.position;
+        var rotationZ = Mathf.Atan2(ro.y,ro.x)*Mathf.Rad2Deg;
+        if(rotationZ < 0)rotationZ += 360;
+
         text.text = "Small:" + player.GetComponent<Rigidbody2D>().velocity + "Big:" + p.GetComponent<Rigidbody2D>().velocity;
     }
 }

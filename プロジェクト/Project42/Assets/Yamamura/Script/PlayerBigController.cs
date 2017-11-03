@@ -4,29 +4,38 @@ using UnityEngine;
 
 public class PlayerBigController : Player
 {
-
-    Quaternion rotation = Quaternion.identity;
+    HingeJoint2D joint;
+    public Energy soulEnergy;
 
     // Use this for initialization
     void Start()
     {
         flickController = flick.GetComponent<FlickController>();
+        joint = GetComponent<HingeJoint2D>();
+        joint.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-       // transform.rotation = Quaternion.LookRotation(Vector3.forward, ball.transform.position);
+        if (addForceCount < 90)
+        {
+            addForceCount++;
+            var force = transform.right * (power);
+            addForceAlpha += 0.01f;
+            GetComponent<Rigidbody2D>().AddForce(Vector2.Lerp(force, Vector2.zero, addForceAlpha));
+        }
+
+        VelocityZero(60);
         NotMoveCount();
         Move();
     }
- 
+
 
     private void Move()
     {
         if (playerMode == PlayerMode.PLAYER && !isHit)
         {
-            if (GetComponent<Player_StageOut>().IsStageOut()) return;
             RotationMove();
         }
     }
@@ -34,11 +43,12 @@ public class PlayerBigController : Player
     private void RotationMove()
     {
         if (transform.rotation.z != flick.transform.rotation.z) GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        if(flickController.GetFlick())transform.rotation = flick.transform.rotation;
+        transform.rotation = flick.transform.rotation;
+        if (speed < speedMax) speed += 0.001f;
         //自身の向きベクトル取得
         //自身の角度をラジアンで取得
         float angleDirection = transform.eulerAngles.z * (Mathf.PI / 180.0f);
-     
+
         dir = new Vector3(-Mathf.Sin(angleDirection), Mathf.Cos(angleDirection), 0.0f);
         transform.position += dir * speed;
     }
@@ -48,42 +58,51 @@ public class PlayerBigController : Player
         if (isPlayer)
         {
             GetComponent<SpriteRenderer>().sprite = eye;
-            transform.rotation = rotation = new Quaternion(0, 0, ball.transform.rotation.z + 180, transform.rotation.w); ;
             playerMode = PlayerMode.PLAYER;
+            joint.enabled = true;
             GetComponent<Rigidbody2D>().mass = 1;
             transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         }
-        else if(!isPlayer)
+        else if (!isPlayer)
         {
             GetComponent<SpriteRenderer>().sprite = normal;
-            playerMode = PlayerMode.NONE;
+            playerMode = PlayerMode.HAMMER;
+            joint.enabled = false;
             GetComponent<Rigidbody2D>().mass = 0.005f;
             transform.localScale = new Vector3(1.5f, 1.5f, 1.0f);
         }
-    }
-   
-    public void AddForceBall(bool isRight)
-    {
         speed = 0;
-        ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        //ball.transform.rotation = transform.rotation;
-        if (isRight)
-        {
-            ball.GetComponent<Rigidbody2D>().AddForce(Vector2.right * power);
-        }
-        else
-        {
-            ball.GetComponent<Rigidbody2D>().AddForce(Vector2.left * power);
-       }
-        ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        speed = 0.04f;
     }
-   
+
+    public void RotationForce(float power)
+    {
+        addForceCount = 0;
+        addForceAlpha = 0;
+        this.power *= power;
+    }
+
+    //public void AddForceBall(bool isRight)
+    //{
+    //    speed = 0;
+    //    //Velocityをいったん０に  
+    //    GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+    //    //ボールの向きをプレイヤーに向ける
+    //    var vec = ball.transform.position - transform.position;
+    //    ball.transform.rotation = Quaternion.LookRotation(Vector3.forward, vec.normalized);
+    //    ball.GetComponent<PlayerSmallController>().Reset();
+    //    if (isRight)
+    //    {
+    //        ball.GetComponent<Rigidbody2D>().AddForce(ball.transform.right * power);
+    //    }
+    //    else
+    //    {
+    //        ball.GetComponent<Rigidbody2D>().AddForce(-ball.transform.right * power);
+    //    }
+    //    GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+    //}
+
     void OnCollisionEnter2D(Collision2D col)
     {
-
         if (col.gameObject.tag == "BeDestroyedObject" && playerMode == PlayerMode.PLAYER)
         {
             isHit = true;
@@ -95,5 +114,23 @@ public class PlayerBigController : Player
             GetComponent<Rigidbody2D>().AddForce(dir * collisionPower);
 
         }
+
+        else if (col.gameObject.tag == "BeDestroyedObject" && playerMode == PlayerMode.HAMMER && transform.GetComponent<Rigidbody2D>().velocity != Vector2.zero)
+        {
+            Destroy(col.gameObject);
+            col.gameObject.GetComponent<BeDestroyedObject>().BeginDamage(1);
+            soulEnergy.AddEnergy(10);
+        }
     }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Boss" && playerMode == PlayerMode.HAMMER &&
+            transform.GetComponent<Rigidbody2D>().velocity != Vector2.zero && soulEnergy.GetEnergy() >= 100)
+        {
+            col.gameObject.GetComponent<Boss>().BeginDamage();
+        }
+    }
+
+
 }

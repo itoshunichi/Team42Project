@@ -25,7 +25,7 @@ public class RollMaker : MonoBehaviour {
     private void Pos()
     {
         if (psc.playerMode == PlayerMode.PLAYER) transform.position = playerSmall.transform.position;
-        else if (psc.playerMode == PlayerMode.NONE) transform.position = playerBig.transform.position;
+        else if (psc.playerMode == PlayerMode.HAMMER) transform.position = playerBig.transform.position;
         
     }
 
