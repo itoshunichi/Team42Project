@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Hammer : MonoBehaviour
 {
-    public float power;             //振る力
-    public Energy soulEnergy;
-    int addForceCount = 120;
-    float addForceAlpha = 0;
-    float countVelocity = 120;
+    private float power;             //振る力
+    public float powerOne;          //一段階目の力
+    public float powerTwo;          //二段階目の力
+    public float powerThree;        //三段階目の力
+    public Energy soulEnergy;       //Energy
+    int addForceCount = 120;        //
+    public int ForceCountMax;
+    float addForceAlpha = 0;        //
+    float countVelocity = 120;      //velocityをゼロにするカウント
+    public float velocityCountMax;
     // Use this for initialization
     void Start()
     {
@@ -18,22 +23,22 @@ public class Hammer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (addForceCount < 10)
-        {
-            addForceCount++;
-            var force = transform.right * (power);
-            addForceAlpha += 0.02f;
+        //if (addForceCount < ForceCountMax)
+        //{
+        //    addForceCount++;
+        //    var force = transform.right * (power);
+        //    addForceAlpha += 0.02f;
 
-            GetComponent<Rigidbody2D>().AddForce(Vector2.Lerp(force, Vector2.zero, addForceAlpha));
-        }
+        //    GetComponent<Rigidbody2D>().AddForce(Vector2.Lerp(transform.right * (power), Vector2.zero, addForceAlpha));
+        //}
 
-        VelocityZero(10);
+        VelocityZero();
     }
 
-    private void VelocityZero(int countMax)
+    private void VelocityZero()
     {
         countVelocity++;
-        if (countVelocity > countMax)
+        if (countVelocity > velocityCountMax)
         {
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
@@ -47,15 +52,35 @@ public class Hammer : MonoBehaviour
         addForceAlpha = 0;
     }
 
-    public void RotationForce(bool isRight, float scalar)
+    public void SetRotationForceOne(bool isRight)
     {
-        addForceCount = 0;
-        addForceAlpha = 0;
-        if (!isRight && power < 0)
-            power = -power;
-        else if (isRight && power > 0)
-            this.power = -power;
-        power *= scalar;
+        Reset();
+        power = powerOne;
+        SetPower(isRight);
+    }
+    public void SetRotationForceTwo(bool isRight)
+    {
+        Reset();
+        power = powerTwo;
+        SetPower(isRight);
+    }
+    public void SetRotationForceThree(bool isRight)
+    {
+        Reset();
+        power = powerThree;
+        SetPower(isRight);
+    }
+
+    private void SetPower(bool isRight)
+    {
+        if (isRight)
+            GetComponent<Rigidbody2D>().AddForce(transform.right * (power));
+        else if (!isRight)
+            GetComponent<Rigidbody2D>().AddForce(transform.right * (-power));
+        //if (isRight && power > 0)
+        //    power = -power;
+        //else if (!isRight && power < 0)
+        //    power = -power;
     }
 
     void OnCollisionEnter2D(Collision2D col)

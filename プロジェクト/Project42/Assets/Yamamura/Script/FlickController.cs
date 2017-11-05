@@ -54,7 +54,6 @@ public class FlickController : MonoBehaviour
             transform.position = touchStartPos;
             if (isFlick) isFlick = false;
             isTap = true;
-            Debug.Log("Tap");
         }
         if (Input.GetMouseButton(0))
         {   //タップカウント
@@ -87,14 +86,11 @@ public class FlickController : MonoBehaviour
                 else radian = beforeRadian - afterRadian;
 
                 isFlick = true;
-                //radianの値が規定値以下だったらそれ以降は処理しない
-                if (radian > radianMaxOne && radian < radianMaxTwo)
-                    hammer.GetComponent<Hammer>().RotationForce(RightFlick(touchStartPos, touchEndPos), 1f);
-                else if(radian > radianMaxTwo && radian < radianMaxThree)
-                    hammer.GetComponent<Hammer>().RotationForce(RightFlick(touchStartPos, touchEndPos), 1.5f);
-                else if(radian > radianMaxThree && radian < radianMaxFour)
-                    hammer.GetComponent<Hammer>().RotationForce(RightFlick(touchStartPos, touchEndPos), 2f);
-                pcs.Reset();
+                //radianの値が規定値以下だったら回転しない
+                RadianCheck(radian);
+
+                pcs.Reset();//プレイヤーの速度等リセット
+                //矢印画像生成
                 Instantiate(spriteArrow, new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 0), transform.rotation);
 
                 flickCount += 1;//フリックした回数をカウント
@@ -103,6 +99,17 @@ public class FlickController : MonoBehaviour
             isTap = false;
         }
     }
+
+    private void RadianCheck(float radian)
+    {       //前回の角度と比べて大きさくなるほど回す力を大きくするメソッドを呼ぶ
+        if (radian > radianMaxOne && radian < radianMaxTwo)
+            hammer.GetComponent<Hammer>().SetRotationForceOne(RightFlick(touchStartPos, touchEndPos));
+        else if (radian > radianMaxTwo && radian < radianMaxThree)
+            hammer.GetComponent<Hammer>().SetRotationForceTwo(RightFlick(touchStartPos, touchEndPos));
+        else if (radian >= radianMaxThree)
+            hammer.GetComponent<Hammer>().SetRotationForceThree(RightFlick(touchStartPos, touchEndPos));
+    }
+
 
     bool RightFlick(Vector2 start, Vector2 end)
     {

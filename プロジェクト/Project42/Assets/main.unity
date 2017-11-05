@@ -307,6 +307,12 @@ GameObject:
   m_PrefabParentObject: {fileID: 1452207734949528, guid: a8f6a94f5061c5c4b86790796167ad59,
     type: 2}
   m_PrefabInternal: {fileID: 2024961051}
+--- !u!114 &173644731 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114514729257099514, guid: a8f6a94f5061c5c4b86790796167ad59,
+    type: 2}
+  m_PrefabInternal: {fileID: 2024961051}
+  m_Script: {fileID: 11500000, guid: 6369c380088550348b3e0d8ca6eddf43, type: 3}
 --- !u!1 &247172857
 GameObject:
   m_ObjectHideFlags: 0
@@ -737,6 +743,21 @@ Prefab:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 1762769788}
+    - target: {fileID: 114676632969663324, guid: 598256e62c60a2c45bfa6729904a5c82,
+        type: 2}
+      propertyPath: radianMaxTwo
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 114676632969663324, guid: 598256e62c60a2c45bfa6729904a5c82,
+        type: 2}
+      propertyPath: radianMaxThree
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 114676632969663324, guid: 598256e62c60a2c45bfa6729904a5c82,
+        type: 2}
+      propertyPath: radianMaxFour
+      value: 210
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 598256e62c60a2c45bfa6729904a5c82, type: 2}
   m_IsPrefabParent: 0
@@ -957,6 +978,41 @@ Prefab:
       propertyPath: flick
       value: 
       objectReference: {fileID: 1099144304}
+    - target: {fileID: 114631399525845590, guid: a8f6a94f5061c5c4b86790796167ad59,
+        type: 2}
+      propertyPath: power
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114631399525845590, guid: a8f6a94f5061c5c4b86790796167ad59,
+        type: 2}
+      propertyPath: soulEnergy
+      value: 
+      objectReference: {fileID: 173644731}
+    - target: {fileID: 114631399525845590, guid: a8f6a94f5061c5c4b86790796167ad59,
+        type: 2}
+      propertyPath: powerOne
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114631399525845590, guid: a8f6a94f5061c5c4b86790796167ad59,
+        type: 2}
+      propertyPath: powerTwo
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114631399525845590, guid: a8f6a94f5061c5c4b86790796167ad59,
+        type: 2}
+      propertyPath: powerThree
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114631399525845590, guid: a8f6a94f5061c5c4b86790796167ad59,
+        type: 2}
+      propertyPath: ForceCountMax
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114631399525845590, guid: a8f6a94f5061c5c4b86790796167ad59,
+        type: 2}
+      propertyPath: velocityCountMax
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a8f6a94f5061c5c4b86790796167ad59, type: 2}
   m_IsPrefabParent: 0
