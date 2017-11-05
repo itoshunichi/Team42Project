@@ -14,6 +14,7 @@ public class Hammer : MonoBehaviour
     float addForceAlpha = 0;        //
     float countVelocity = 120;      //velocityをゼロにするカウント
     public float velocityCountMax;
+    public Shake shake;
     // Use this for initialization
     void Start()
     {
@@ -87,7 +88,9 @@ public class Hammer : MonoBehaviour
     {
         if (col.gameObject.tag == "BeDestroyedObject" && transform.GetComponent<Rigidbody2D>().velocity != Vector2.zero)
         {
+            
             //Time.timeScale = 0.5f;
+            shake.ShakeObject();
             col.gameObject.GetComponent<BeDestroyedObject>().BeginDamage(1);
             soulEnergy.AddEnergy(10);
         }
