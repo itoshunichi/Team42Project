@@ -1028,6 +1028,11 @@ Prefab:
       propertyPath: velocityCountMax
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 114631399525845590, guid: a8f6a94f5061c5c4b86790796167ad59,
+        type: 2}
+      propertyPath: shake
+      value: 
+      objectReference: {fileID: 1762769794}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a8f6a94f5061c5c4b86790796167ad59, type: 2}
   m_IsPrefabParent: 0
