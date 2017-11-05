@@ -87,6 +87,7 @@ public class Hammer : MonoBehaviour
     {
         if (col.gameObject.tag == "BeDestroyedObject" && transform.GetComponent<Rigidbody2D>().velocity != Vector2.zero)
         {
+            //Time.timeScale = 0.5f;
             col.gameObject.GetComponent<BeDestroyedObject>().BeginDamage(1);
             soulEnergy.AddEnergy(10);
         }
