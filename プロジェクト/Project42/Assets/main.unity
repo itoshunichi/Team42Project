@@ -457,7 +457,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 707088093}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 512, y: 384, z: 0}
+  m_LocalPosition: {x: 640, y: 360, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1199868733}
@@ -626,7 +626,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1199868732}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -259.72998, y: 231.5, z: 0}
+  m_LocalPosition: {x: -387.72998, y: 207.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 707088097}
@@ -648,8 +648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5073accfdf4114aa44a45b200eaaa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 843692969}
-  p: {fileID: 1418667847}
+  energy: {fileID: 173644731}
 --- !u!114 &1199868735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1011,12 +1010,12 @@ Prefab:
     - target: {fileID: 114631399525845590, guid: a8f6a94f5061c5c4b86790796167ad59,
         type: 2}
       propertyPath: powerTwo
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 114631399525845590, guid: a8f6a94f5061c5c4b86790796167ad59,
         type: 2}
       propertyPath: powerThree
-      value: 20
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 114631399525845590, guid: a8f6a94f5061c5c4b86790796167ad59,
         type: 2}
@@ -1033,6 +1032,16 @@ Prefab:
       propertyPath: shake
       value: 
       objectReference: {fileID: 1762769794}
+    - target: {fileID: 96364652938663282, guid: a8f6a94f5061c5c4b86790796167ad59,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114482358472413138, guid: a8f6a94f5061c5c4b86790796167ad59,
+        type: 2}
+      propertyPath: speedMax
+      value: 0.14
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a8f6a94f5061c5c4b86790796167ad59, type: 2}
   m_IsPrefabParent: 0
