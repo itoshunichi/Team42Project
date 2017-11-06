@@ -11,13 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9804a3297d00953479dc885927db3747, type: 3}
   m_Name: Enemy_A_Parameter
   m_EditorClassIdentifier: 
-<<<<<<< HEAD:プロジェクト/Project42/Assets/Data/EnemyParameter/BeDestroyedObjectParameter1.asset
-  maxHp: 3
-  giveEnergyPoint: 30
-=======
   maxHp: 1
   giveEnergyPoint: 10
->>>>>>> 統合_プロジェクト:プロジェクト/Project42/Assets/Data/Parameter/Enemy_A_Parameter.asset
   isNecessaryEnergy: 0
   beAbsorptionSpeed: 3.5
   defaultSprite: {fileID: 21300000, guid: abc3f12cd0fe3d142bd66a6bad3d5f96, type: 3}

@@ -9,30 +9,15 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-<<<<<<< HEAD
-  m_RootGameObject: {fileID: 1540104500919672}
-  m_IsPrefabParent: 1
---- !u!1 &1202960274561044
-GameObject:
-  m_ObjectHideFlags: 1
-=======
   m_RootGameObject: {fileID: 1533925860953752}
   m_IsPrefabParent: 1
 --- !u!1 &1151645131431924
 GameObject:
   m_ObjectHideFlags: 0
->>>>>>> 統合_プロジェクト
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-<<<<<<< HEAD
-  - component: {fileID: 4722430904594944}
-  - component: {fileID: 212132865595809892}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-=======
   - component: {fileID: 4257829858581934}
   - component: {fileID: 212652772020180998}
   - component: {fileID: 50175623371692604}
@@ -43,35 +28,17 @@ GameObject:
   m_Layer: 0
   m_Name: Hammer
   m_TagString: Player
->>>>>>> 統合_プロジェクト
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< HEAD
---- !u!1 &1267039144660198
-=======
 --- !u!1 &1204531302084842
->>>>>>> 統合_プロジェクト
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-<<<<<<< HEAD
-  - component: {fileID: 4448934377717650}
-  - component: {fileID: 212327971167395954}
-  - component: {fileID: 114138287774794846}
-  - component: {fileID: 58800225985730852}
-  - component: {fileID: 50857285869881680}
-  - component: {fileID: 233347712191644390}
-  - component: {fileID: 96298136558283780}
-  - component: {fileID: 232561578440884824}
-  m_Layer: 18
-  m_Name: PlayerSmall
-  m_TagString: Player
-=======
   - component: {fileID: 4600748047999338}
   - component: {fileID: 212640740990226126}
   - component: {fileID: 50435850270383466}
@@ -81,32 +48,17 @@ GameObject:
   m_Layer: 0
   m_Name: Chain3
   m_TagString: Chain
->>>>>>> 統合_プロジェクト
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< HEAD
---- !u!1 &1345411826231786
-=======
 --- !u!1 &1272694953410348
->>>>>>> 統合_プロジェクト
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-<<<<<<< HEAD
-  - component: {fileID: 4387393893381142}
-  - component: {fileID: 212084714710505332}
-  - component: {fileID: 50967357623444120}
-  - component: {fileID: 58884321551100462}
-  - component: {fileID: 233897702606045438}
-  - component: {fileID: 232614386340577656}
-  m_Layer: 0
-  m_Name: Chain5
-=======
   - component: {fileID: 4040778578494398}
   - component: {fileID: 50737678235665998}
   - component: {fileID: 58298544756128686}
@@ -115,33 +67,18 @@ GameObject:
   - component: {fileID: 232750798669730854}
   m_Layer: 0
   m_Name: Chain6
->>>>>>> 統合_プロジェクト
   m_TagString: Chain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< HEAD
---- !u!1 &1346383910008110
-=======
 --- !u!1 &1368384648111666
->>>>>>> 統合_プロジェクト
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-<<<<<<< HEAD
-  - component: {fileID: 4005882847868372}
-  - component: {fileID: 212271093564533930}
-  - component: {fileID: 50767186225487566}
-  - component: {fileID: 58411549010723918}
-  - component: {fileID: 233311764108143880}
-  - component: {fileID: 232888267533620376}
-  m_Layer: 0
-  m_Name: Chain4
-=======
   - component: {fileID: 4911188367062630}
   - component: {fileID: 50196576510697886}
   - component: {fileID: 58555643602336546}
@@ -150,33 +87,18 @@ GameObject:
   - component: {fileID: 232660935859616432}
   m_Layer: 0
   m_Name: Chain1
->>>>>>> 統合_プロジェクト
   m_TagString: Chain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< HEAD
---- !u!1 &1382457152484728
-=======
 --- !u!1 &1390518345991020
->>>>>>> 統合_プロジェクト
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-<<<<<<< HEAD
-  - component: {fileID: 4015948302282290}
-  - component: {fileID: 50138970302763290}
-  - component: {fileID: 58672832636691592}
-  - component: {fileID: 233458637525013152}
-  - component: {fileID: 212746048328428732}
-  - component: {fileID: 232245064522628764}
-  m_Layer: 0
-  m_Name: Chain1
-=======
   - component: {fileID: 4465877959880294}
   - component: {fileID: 212195852963782476}
   - component: {fileID: 50916858726943490}
@@ -185,29 +107,18 @@ GameObject:
   - component: {fileID: 232255536414294374}
   m_Layer: 0
   m_Name: Chain4
->>>>>>> 統合_プロジェクト
   m_TagString: Chain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< HEAD
---- !u!1 &1540104500919672
-=======
 --- !u!1 &1430858761280814
->>>>>>> 統合_プロジェクト
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-<<<<<<< HEAD
-  - component: {fileID: 4756691327105096}
-  m_Layer: 0
-  m_Name: Hanmmer
-  m_TagString: Untagged
-=======
   - component: {fileID: 4675174593453426}
   - component: {fileID: 212915983347120734}
   - component: {fileID: 114482358472413138}
@@ -219,35 +130,17 @@ GameObject:
   m_Layer: 18
   m_Name: PlayerSmall
   m_TagString: Player
->>>>>>> 統合_プロジェクト
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< HEAD
---- !u!1 &1542772768104896
-GameObject:
-  m_ObjectHideFlags: 0
-=======
 --- !u!1 &1452207734949528
 GameObject:
   m_ObjectHideFlags: 1
->>>>>>> 統合_プロジェクト
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-<<<<<<< HEAD
-  - component: {fileID: 4118570920547664}
-  - component: {fileID: 212515534028712204}
-  - component: {fileID: 50641931329262714}
-  - component: {fileID: 58658971018876534}
-  - component: {fileID: 233096656948470916}
-  - component: {fileID: 232834865662723172}
-  m_Layer: 0
-  m_Name: Chain2
-  m_TagString: Chain
-=======
   - component: {fileID: 4801124887165198}
   - component: {fileID: 212569070568537262}
   - component: {fileID: 114952522829605422}
@@ -255,63 +148,32 @@ GameObject:
   m_Layer: 0
   m_Name: Player_Soul
   m_TagString: Untagged
->>>>>>> 統合_プロジェクト
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< HEAD
---- !u!1 &1913566263111970
-=======
 --- !u!1 &1533925860953752
->>>>>>> 統合_プロジェクト
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-<<<<<<< HEAD
-  - component: {fileID: 4142783647855016}
-  - component: {fileID: 212248489203918448}
-  - component: {fileID: 50665563329267592}
-  - component: {fileID: 58193141342590854}
-  - component: {fileID: 233146162824916976}
-  - component: {fileID: 232882889088161178}
-  m_Layer: 0
-  m_Name: Chain3
-  m_TagString: Chain
-=======
   - component: {fileID: 4913505492280938}
   m_Layer: 0
   m_Name: Hanmmer
   m_TagString: Untagged
->>>>>>> 統合_プロジェクト
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< HEAD
---- !u!1 &1969376388319440
-=======
 --- !u!1 &1712495594737468
->>>>>>> 統合_プロジェクト
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-<<<<<<< HEAD
-  - component: {fileID: 4055869196988170}
-  - component: {fileID: 50545059154206910}
-  - component: {fileID: 58678785780615072}
-  - component: {fileID: 233969415375533746}
-  - component: {fileID: 212685294081242740}
-  - component: {fileID: 232265447044443840}
-  m_Layer: 0
-  m_Name: Chain6
-=======
   - component: {fileID: 4604166462492998}
   - component: {fileID: 212912015230260594}
   - component: {fileID: 50548524433900170}
@@ -320,36 +182,18 @@ GameObject:
   - component: {fileID: 232879531271882166}
   m_Layer: 0
   m_Name: Chain2
->>>>>>> 統合_プロジェクト
   m_TagString: Chain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< HEAD
---- !u!1 &1990995153222554
-=======
 --- !u!1 &1898260204652384
->>>>>>> 統合_プロジェクト
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-<<<<<<< HEAD
-  - component: {fileID: 4666492524438732}
-  - component: {fileID: 212511571631678176}
-  - component: {fileID: 50431539670618368}
-  - component: {fileID: 58968275497568188}
-  - component: {fileID: 233119088013168560}
-  - component: {fileID: 114428251275444514}
-  - component: {fileID: 232553999574949188}
-  - component: {fileID: 114592593742453566}
-  m_Layer: 0
-  m_Name: Hammer
-  m_TagString: Player
-=======
   - component: {fileID: 4823697702391992}
   - component: {fileID: 212232883720129154}
   - component: {fileID: 50042755975666834}
@@ -359,44 +203,15 @@ GameObject:
   m_Layer: 0
   m_Name: Chain5
   m_TagString: Chain
->>>>>>> 統合_プロジェクト
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< HEAD
---- !u!4 &4005882847868372
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1346383910008110}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.579452, y: -1.99, z: 0.041622415}
-  m_LocalScale: {x: 2, y: 2, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4756691327105096}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4015948302282290
-=======
 --- !u!4 &4040778578494398
->>>>>>> 統合_プロジェクト
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1382457152484728}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.591782, y: -0.48, z: 0.041622415}
-  m_LocalScale: {x: 2, y: 2, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4756691327105096}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4055869196988170
-=======
   m_GameObject: {fileID: 1272694953410348}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.583, y: -3.13, z: 0.041622415}
@@ -406,22 +221,10 @@ Transform:
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4257829858581934
->>>>>>> 統合_プロジェクト
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1969376388319440}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.583, y: -3.13, z: 0.041622415}
-  m_LocalScale: {x: 3, y: 3, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4756691327105096}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4118570920547664
-=======
   m_GameObject: {fileID: 1151645131431924}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.5899999, y: -3.72, z: 0}
@@ -431,22 +234,10 @@ Transform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4465877959880294
->>>>>>> 統合_プロジェクト
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1542772768104896}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.586, y: -0.97, z: 0.041622415}
-  m_LocalScale: {x: 2, y: 2, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4756691327105096}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4142783647855016
-=======
   m_GameObject: {fileID: 1390518345991020}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.579452, y: -1.99, z: 0.041622415}
@@ -456,46 +247,23 @@ Transform:
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4600748047999338
->>>>>>> 統合_プロジェクト
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1913566263111970}
-=======
   m_GameObject: {fileID: 1204531302084842}
->>>>>>> 統合_プロジェクト
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.584, y: -1.51, z: 0.041622415}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
-<<<<<<< HEAD
-  m_Father: {fileID: 4756691327105096}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4387393893381142
-=======
   m_Father: {fileID: 4913505492280938}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4604166462492998
->>>>>>> 統合_プロジェクト
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1345411826231786}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.58, y: -2.51, z: 0.041622415}
-  m_LocalScale: {x: 2, y: 2, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4756691327105096}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4448934377717650
-=======
   m_GameObject: {fileID: 1712495594737468}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.586, y: -0.97, z: 0.041622415}
@@ -505,22 +273,10 @@ Transform:
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4675174593453426
->>>>>>> 統合_プロジェクト
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1267039144660198}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5917816, y: -0.12, z: 0.041622415}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4756691327105096}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4666492524438732
-=======
   m_GameObject: {fileID: 1430858761280814}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.5917816, y: -0.12, z: 0.041622415}
@@ -531,23 +287,10 @@ Transform:
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4801124887165198
->>>>>>> 統合_プロジェクト
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1990995153222554}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5899999, y: -3.72, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
-  m_Children:
-  - {fileID: 4722430904594944}
-  m_Father: {fileID: 4756691327105096}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4722430904594944
-=======
   m_GameObject: {fileID: 1452207734949528}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: -0.041622415}
@@ -557,22 +300,10 @@ Transform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4823697702391992
->>>>>>> 統合_プロジェクト
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1202960274561044}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4666492524438732}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4756691327105096
-=======
   m_GameObject: {fileID: 1898260204652384}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.58, y: -2.51, z: 0.041622415}
@@ -595,34 +326,15 @@ Transform:
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4913505492280938
->>>>>>> 統合_プロジェクト
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1540104500919672}
-=======
   m_GameObject: {fileID: 1533925860953752}
->>>>>>> 統合_プロジェクト
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.47, y: 6.01, z: -0.041622415}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-<<<<<<< HEAD
-  - {fileID: 4666492524438732}
-  - {fileID: 4448934377717650}
-  - {fileID: 4015948302282290}
-  - {fileID: 4118570920547664}
-  - {fileID: 4142783647855016}
-  - {fileID: 4005882847868372}
-  - {fileID: 4387393893381142}
-  - {fileID: 4055869196988170}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50138970302763290
-=======
   - {fileID: 4257829858581934}
   - {fileID: 4675174593453426}
   - {fileID: 4911188367062630}
@@ -635,17 +347,12 @@ Transform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &50042755975666834
->>>>>>> 統合_プロジェクト
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1382457152484728}
-=======
   m_GameObject: {fileID: 1898260204652384}
->>>>>>> 統合_プロジェクト
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -659,21 +366,13 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
-<<<<<<< HEAD
---- !u!50 &50431539670618368
-=======
 --- !u!50 &50175623371692604
->>>>>>> 統合_プロジェクト
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1990995153222554}
-=======
   m_GameObject: {fileID: 1151645131431924}
->>>>>>> 統合_プロジェクト
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -687,21 +386,13 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
-<<<<<<< HEAD
---- !u!50 &50545059154206910
-=======
 --- !u!50 &50196576510697886
->>>>>>> 統合_プロジェクト
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1969376388319440}
-=======
   m_GameObject: {fileID: 1368384648111666}
->>>>>>> 統合_プロジェクト
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -715,21 +406,13 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
-<<<<<<< HEAD
---- !u!50 &50641931329262714
-=======
 --- !u!50 &50435850270383466
->>>>>>> 統合_プロジェクト
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1542772768104896}
-=======
   m_GameObject: {fileID: 1204531302084842}
->>>>>>> 統合_プロジェクト
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -743,30 +426,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
-<<<<<<< HEAD
---- !u!50 &50665563329267592
-=======
 --- !u!50 &50541881304271936
->>>>>>> 統合_プロジェクト
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1913566263111970}
-=======
   m_GameObject: {fileID: 1430858761280814}
->>>>>>> 統合_プロジェクト
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-<<<<<<< HEAD
-  m_Mass: 0.005
-=======
   m_Mass: 1
->>>>>>> 統合_プロジェクト
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -775,21 +446,13 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
-<<<<<<< HEAD
---- !u!50 &50767186225487566
-=======
 --- !u!50 &50548524433900170
->>>>>>> 統合_プロジェクト
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1346383910008110}
-=======
   m_GameObject: {fileID: 1712495594737468}
->>>>>>> 統合_プロジェクト
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -803,30 +466,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
-<<<<<<< HEAD
---- !u!50 &50857285869881680
-=======
 --- !u!50 &50737678235665998
->>>>>>> 統合_プロジェクト
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1267039144660198}
-=======
   m_GameObject: {fileID: 1272694953410348}
->>>>>>> 統合_プロジェクト
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-<<<<<<< HEAD
-  m_Mass: 1
-=======
   m_Mass: 0.005
->>>>>>> 統合_プロジェクト
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -835,21 +486,13 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
-<<<<<<< HEAD
---- !u!50 &50967357623444120
-=======
 --- !u!50 &50916858726943490
->>>>>>> 統合_プロジェクト
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1345411826231786}
-=======
   m_GameObject: {fileID: 1390518345991020}
->>>>>>> 統合_プロジェクト
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -863,20 +506,12 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
-<<<<<<< HEAD
---- !u!58 &58193141342590854
-=======
 --- !u!58 &58020982778054698
->>>>>>> 統合_プロジェクト
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1913566263111970}
-=======
   m_GameObject: {fileID: 1151645131431924}
->>>>>>> 統合_プロジェクト
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -885,22 +520,13 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-<<<<<<< HEAD
-  m_Radius: 0.1
---- !u!58 &58411549010723918
-=======
   m_Radius: 0.8
 --- !u!58 &58097857480387646
->>>>>>> 統合_プロジェクト
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1346383910008110}
-=======
   m_GameObject: {fileID: 1204531302084842}
->>>>>>> 統合_プロジェクト
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -910,20 +536,12 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1
-<<<<<<< HEAD
---- !u!58 &58658971018876534
-=======
 --- !u!58 &58298544756128686
->>>>>>> 統合_プロジェクト
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1542772768104896}
-=======
   m_GameObject: {fileID: 1272694953410348}
->>>>>>> 統合_プロジェクト
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -933,20 +551,12 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1
-<<<<<<< HEAD
---- !u!58 &58672832636691592
-=======
 --- !u!58 &58418754437977470
->>>>>>> 統合_プロジェクト
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1382457152484728}
-=======
   m_GameObject: {fileID: 1712495594737468}
->>>>>>> 統合_プロジェクト
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -956,20 +566,12 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1
-<<<<<<< HEAD
---- !u!58 &58678785780615072
-=======
 --- !u!58 &58555643602336546
->>>>>>> 統合_プロジェクト
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1969376388319440}
-=======
   m_GameObject: {fileID: 1368384648111666}
->>>>>>> 統合_プロジェクト
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -979,20 +581,12 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1
-<<<<<<< HEAD
---- !u!58 &58800225985730852
-=======
 --- !u!58 &58599288133845268
->>>>>>> 統合_プロジェクト
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1267039144660198}
-=======
   m_GameObject: {fileID: 1898260204652384}
->>>>>>> 統合_プロジェクト
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -1001,22 +595,13 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-<<<<<<< HEAD
-  m_Radius: 0.62
---- !u!58 &58884321551100462
-=======
   m_Radius: 0.1
 --- !u!58 &58607744759732192
->>>>>>> 統合_プロジェクト
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1345411826231786}
-=======
   m_GameObject: {fileID: 1430858761280814}
->>>>>>> 統合_プロジェクト
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -1025,22 +610,13 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-<<<<<<< HEAD
-  m_Radius: 0.1
---- !u!58 &58968275497568188
-=======
   m_Radius: 0.62
 --- !u!58 &58721743938621550
->>>>>>> 統合_プロジェクト
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1990995153222554}
-=======
   m_GameObject: {fileID: 1390518345991020}
->>>>>>> 統合_プロジェクト
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -1049,25 +625,15 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-<<<<<<< HEAD
-  m_Radius: 0.8
---- !u!96 &96298136558283780
-=======
   m_Radius: 0.1
 --- !u!96 &96364652938663282
->>>>>>> 統合_プロジェクト
 TrailRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1267039144660198}
-  m_Enabled: 0
-=======
   m_GameObject: {fileID: 1430858761280814}
   m_Enabled: 1
->>>>>>> 統合_プロジェクト
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1147,58 +713,27 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
-<<<<<<< HEAD
---- !u!114 &114138287774794846
-=======
 --- !u!114 &114482358472413138
->>>>>>> 統合_プロジェクト
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1267039144660198}
-=======
   m_GameObject: {fileID: 1430858761280814}
->>>>>>> 統合_プロジェクト
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7fec23fc3e6c91845a8775cf9125c207, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-  speedMax: 0.14
-  flick: {fileID: 0}
-  collisionPower: 130
-  noMoveCount: 45
---- !u!114 &114428251275444514
-=======
   speedMax: 0.08
   flick: {fileID: 0}
   collisionPower: 130
   noMoveCount: 45
   soulEnergy: {fileID: 114514729257099514}
 --- !u!114 &114514729257099514
->>>>>>> 統合_プロジェクト
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1990995153222554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9f5d69313a961e4992f17b4b931bd67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  powerOne: 30
-  powerTwo: 40
-  powerThree: 50
-  ForceCountMax: 10
-  velocityCountMax: 10
-  shake: {fileID: 0}
---- !u!114 &114592593742453566
-=======
   m_GameObject: {fileID: 1452207734949528}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -1206,20 +741,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114631399525845590
->>>>>>> 統合_プロジェクト
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1990995153222554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6369c380088550348b3e0d8ca6eddf43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!212 &212084714710505332
-=======
   m_GameObject: {fileID: 1151645131431924}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -1249,16 +774,11 @@ MonoBehaviour:
   - {fileID: 1272694953410348}
   - {fileID: 1151645131431924}
 --- !u!212 &212195852963782476
->>>>>>> 統合_プロジェクト
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1345411826231786}
-=======
   m_GameObject: {fileID: 1390518345991020}
->>>>>>> 統合_プロジェクト
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -1297,20 +817,12 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-<<<<<<< HEAD
---- !u!212 &212132865595809892
-=======
 --- !u!212 &212232883720129154
->>>>>>> 統合_プロジェクト
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1202960274561044}
-=======
   m_GameObject: {fileID: 1898260204652384}
->>>>>>> 統合_プロジェクト
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -1336,44 +848,25 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-<<<<<<< HEAD
-  m_SortingLayerID: 359995765
-  m_SortingLayer: 1
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 62af0b099b620ab45aff0565dc2d1204, type: 3}
-=======
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: daeb39652f7d680499bfb02a7e467933, type: 3}
->>>>>>> 統合_プロジェクト
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-<<<<<<< HEAD
-  m_Size: {x: 1.92, y: 1.92}
-=======
   m_Size: {x: 0.16, y: 0.16}
->>>>>>> 統合_プロジェクト
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-<<<<<<< HEAD
---- !u!212 &212248489203918448
-=======
 --- !u!212 &212530602132144726
->>>>>>> 統合_プロジェクト
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1913566263111970}
-=======
   m_GameObject: {fileID: 1368384648111666}
->>>>>>> 統合_プロジェクト
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -1407,29 +900,17 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-<<<<<<< HEAD
-  m_Size: {x: 0.16, y: 0.16}
-=======
   m_Size: {x: 0.64, y: 0.64}
->>>>>>> 統合_プロジェクト
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-<<<<<<< HEAD
---- !u!212 &212271093564533930
-=======
 --- !u!212 &212569070568537262
->>>>>>> 統合_プロジェクト
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1346383910008110}
-=======
   m_GameObject: {fileID: 1452207734949528}
->>>>>>> 統合_プロジェクト
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -1455,44 +936,25 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-<<<<<<< HEAD
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: daeb39652f7d680499bfb02a7e467933, type: 3}
-=======
   m_SortingLayerID: 359995765
   m_SortingLayer: 1
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: eb597911e486f8d44b732332ab8d1bc9, type: 3}
->>>>>>> 統合_プロジェクト
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-<<<<<<< HEAD
-  m_Size: {x: 0.16, y: 0.16}
-=======
   m_Size: {x: 0.53, y: 0.53}
->>>>>>> 統合_プロジェクト
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-<<<<<<< HEAD
---- !u!212 &212327971167395954
-=======
 --- !u!212 &212626687381091264
->>>>>>> 統合_プロジェクト
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1267039144660198}
-=======
   m_GameObject: {fileID: 1272694953410348}
->>>>>>> 統合_プロジェクト
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -1518,44 +980,25 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-<<<<<<< HEAD
-  m_SortingLayerID: 359995765
-  m_SortingLayer: 1
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 7c7d8846f42027640b3fba65f0501797, type: 3}
-=======
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: daeb39652f7d680499bfb02a7e467933, type: 3}
->>>>>>> 統合_プロジェクト
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-<<<<<<< HEAD
-  m_Size: {x: 0.16, y: 0.16}
-=======
   m_Size: {x: 0.64, y: 0.64}
->>>>>>> 統合_プロジェクト
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-<<<<<<< HEAD
---- !u!212 &212511571631678176
-=======
 --- !u!212 &212640740990226126
->>>>>>> 統合_プロジェクト
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1990995153222554}
-=======
   m_GameObject: {fileID: 1204531302084842}
->>>>>>> 統合_プロジェクト
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -1581,17 +1024,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-<<<<<<< HEAD
-  m_SortingLayerID: 359995765
-  m_SortingLayer: 1
-  m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: f3acd529d616f5848b7a1b46dbbe8f8f, type: 3}
-=======
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: daeb39652f7d680499bfb02a7e467933, type: 3}
->>>>>>> 統合_プロジェクト
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1601,20 +1037,12 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-<<<<<<< HEAD
---- !u!212 &212515534028712204
-=======
 --- !u!212 &212652772020180998
->>>>>>> 統合_プロジェクト
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1542772768104896}
-=======
   m_GameObject: {fileID: 1151645131431924}
->>>>>>> 統合_プロジェクト
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -1640,17 +1068,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-<<<<<<< HEAD
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: daeb39652f7d680499bfb02a7e467933, type: 3}
-=======
   m_SortingLayerID: 359995765
   m_SortingLayer: 1
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 078eca4a7cbaeff48ac780a21e9c0071, type: 3}
->>>>>>> 統合_プロジェクト
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1660,20 +1081,12 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-<<<<<<< HEAD
---- !u!212 &212685294081242740
-=======
 --- !u!212 &212912015230260594
->>>>>>> 統合_プロジェクト
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1969376388319440}
-=======
   m_GameObject: {fileID: 1712495594737468}
->>>>>>> 統合_プロジェクト
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -1707,29 +1120,17 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-<<<<<<< HEAD
-  m_Size: {x: 0.64, y: 0.64}
-=======
   m_Size: {x: 0.16, y: 0.16}
->>>>>>> 統合_プロジェクト
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-<<<<<<< HEAD
---- !u!212 &212746048328428732
-=======
 --- !u!212 &212915983347120734
->>>>>>> 統合_プロジェクト
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1382457152484728}
-=======
   m_GameObject: {fileID: 1430858761280814}
->>>>>>> 統合_プロジェクト
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -1755,55 +1156,24 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-<<<<<<< HEAD
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: daeb39652f7d680499bfb02a7e467933, type: 3}
-=======
   m_SortingLayerID: 359995765
   m_SortingLayer: 1
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 7c7d8846f42027640b3fba65f0501797, type: 3}
->>>>>>> 統合_プロジェクト
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-<<<<<<< HEAD
-  m_Size: {x: 0.64, y: 0.64}
-=======
   m_Size: {x: 0.16, y: 0.16}
->>>>>>> 統合_プロジェクト
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-<<<<<<< HEAD
---- !u!232 &232245064522628764
-=======
 --- !u!232 &232255536414294374
->>>>>>> 統合_プロジェクト
 DistanceJoint2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1382457152484728}
-  m_Enabled: 0
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 50641931329262714}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 0
-  m_Anchor: {x: 0, y: -0.1}
-  m_ConnectedAnchor: {x: 0, y: 0.1}
-  m_AutoConfigureDistance: 0
-  m_Distance: 0.5
-  m_MaxDistanceOnly: 0
---- !u!232 &232265447044443840
-=======
   m_GameObject: {fileID: 1390518345991020}
   m_Enabled: 0
   serializedVersion: 4
@@ -1818,24 +1188,15 @@ DistanceJoint2D:
   m_Distance: 0.4
   m_MaxDistanceOnly: 0
 --- !u!232 &232542157596156170
->>>>>>> 統合_プロジェクト
 DistanceJoint2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1969376388319440}
-  m_Enabled: 0
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 50431539670618368}
-=======
   m_GameObject: {fileID: 1204531302084842}
   m_Enabled: 0
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 50916858726943490}
->>>>>>> 統合_プロジェクト
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 0
@@ -1844,28 +1205,16 @@ DistanceJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.4
   m_MaxDistanceOnly: 0
-<<<<<<< HEAD
---- !u!232 &232553999574949188
-=======
 --- !u!232 &232582045625504396
->>>>>>> 統合_プロジェクト
 DistanceJoint2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1990995153222554}
-  m_Enabled: 0
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 50545059154206910}
-=======
   m_GameObject: {fileID: 1151645131431924}
   m_Enabled: 0
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 50737678235665998}
->>>>>>> 統合_プロジェクト
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 0
@@ -1874,63 +1223,29 @@ DistanceJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.4
   m_MaxDistanceOnly: 0
-<<<<<<< HEAD
---- !u!232 &232561578440884824
-=======
 --- !u!232 &232659364672331158
->>>>>>> 統合_プロジェクト
 DistanceJoint2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1267039144660198}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 50431539670618368}
-=======
   m_GameObject: {fileID: 1898260204652384}
   m_Enabled: 0
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 50737678235665998}
->>>>>>> 統合_プロジェクト
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 0
-<<<<<<< HEAD
-  m_Distance: 3.3
-  m_MaxDistanceOnly: 0
---- !u!232 &232614386340577656
-=======
   m_Distance: 0.4
   m_MaxDistanceOnly: 0
 --- !u!232 &232660935859616432
->>>>>>> 統合_プロジェクト
 DistanceJoint2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1345411826231786}
-  m_Enabled: 0
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 50545059154206910}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 0
-  m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 0}
-  m_AutoConfigureDistance: 0
-  m_Distance: 0.4
-  m_MaxDistanceOnly: 0
---- !u!232 &232834865662723172
-=======
   m_GameObject: {fileID: 1368384648111666}
   m_Enabled: 0
   serializedVersion: 4
@@ -1945,24 +1260,15 @@ DistanceJoint2D:
   m_Distance: 0.5
   m_MaxDistanceOnly: 0
 --- !u!232 &232750798669730854
->>>>>>> 統合_プロジェクト
 DistanceJoint2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1542772768104896}
-  m_Enabled: 0
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 50665563329267592}
-=======
   m_GameObject: {fileID: 1272694953410348}
   m_Enabled: 0
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 50175623371692604}
->>>>>>> 統合_プロジェクト
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 0
@@ -1971,60 +1277,34 @@ DistanceJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.4
   m_MaxDistanceOnly: 0
-<<<<<<< HEAD
---- !u!232 &232882889088161178
-=======
 --- !u!232 &232755934699229340
->>>>>>> 統合_プロジェクト
 DistanceJoint2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1913566263111970}
-  m_Enabled: 0
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 50767186225487566}
-=======
   m_GameObject: {fileID: 1430858761280814}
   m_Enabled: 1
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 50175623371692604}
->>>>>>> 統合_プロジェクト
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 0
-<<<<<<< HEAD
-  m_Distance: 0.4
-  m_MaxDistanceOnly: 0
---- !u!232 &232888267533620376
-=======
   m_Distance: 3
   m_MaxDistanceOnly: 0
 --- !u!232 &232879531271882166
->>>>>>> 統合_プロジェクト
 DistanceJoint2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1346383910008110}
-  m_Enabled: 0
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 50967357623444120}
-=======
   m_GameObject: {fileID: 1712495594737468}
   m_Enabled: 0
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 50435850270383466}
->>>>>>> 統合_プロジェクト
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 0
@@ -2033,28 +1313,16 @@ DistanceJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.4
   m_MaxDistanceOnly: 0
-<<<<<<< HEAD
---- !u!233 &233096656948470916
-=======
 --- !u!233 &233115897635799434
->>>>>>> 統合_プロジェクト
 HingeJoint2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1542772768104896}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 50665563329267592}
-=======
   m_GameObject: {fileID: 1204531302084842}
   m_Enabled: 1
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 50916858726943490}
->>>>>>> 統合_プロジェクト
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 0
@@ -2068,28 +1336,16 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
-<<<<<<< HEAD
---- !u!233 &233119088013168560
-=======
 --- !u!233 &233148407368747282
->>>>>>> 統合_プロジェクト
 HingeJoint2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1990995153222554}
-  m_Enabled: 0
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 50545059154206910}
-=======
   m_GameObject: {fileID: 1151645131431924}
   m_Enabled: 0
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 50737678235665998}
->>>>>>> 統合_プロジェクト
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 0
@@ -2103,28 +1359,16 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
-<<<<<<< HEAD
---- !u!233 &233146162824916976
-=======
 --- !u!233 &233417625273062632
->>>>>>> 統合_プロジェクト
 HingeJoint2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1913566263111970}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 50767186225487566}
-=======
   m_GameObject: {fileID: 1272694953410348}
   m_Enabled: 1
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 50175623371692604}
->>>>>>> 統合_プロジェクト
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 0
@@ -2138,28 +1382,16 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
-<<<<<<< HEAD
---- !u!233 &233311764108143880
-=======
 --- !u!233 &233516060059045406
->>>>>>> 統合_プロジェクト
 HingeJoint2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1346383910008110}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 50967357623444120}
-=======
   m_GameObject: {fileID: 1712495594737468}
   m_Enabled: 1
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 50435850270383466}
->>>>>>> 統合_プロジェクト
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 0
@@ -2173,27 +1405,11 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
-<<<<<<< HEAD
---- !u!233 &233347712191644390
-=======
 --- !u!233 &233572085602971868
->>>>>>> 統合_プロジェクト
 HingeJoint2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1267039144660198}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 50138970302763290}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 0
-  m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 0.12}
-=======
   m_GameObject: {fileID: 1368384648111666}
   m_Enabled: 1
   serializedVersion: 4
@@ -2204,7 +1420,6 @@ HingeJoint2D:
   m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: -0.1}
   m_ConnectedAnchor: {x: 0, y: 0.1}
->>>>>>> 統合_プロジェクト
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -2213,27 +1428,11 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
-<<<<<<< HEAD
---- !u!233 &233458637525013152
-=======
 --- !u!233 &233574055716773306
->>>>>>> 統合_プロジェクト
 HingeJoint2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1382457152484728}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 50641931329262714}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 0
-  m_Anchor: {x: 0, y: -0.1}
-  m_ConnectedAnchor: {x: 0, y: 0.1}
-=======
   m_GameObject: {fileID: 1430858761280814}
   m_Enabled: 1
   serializedVersion: 4
@@ -2244,7 +1443,6 @@ HingeJoint2D:
   m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0.12}
->>>>>>> 統合_プロジェクト
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -2253,28 +1451,16 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
-<<<<<<< HEAD
---- !u!233 &233897702606045438
-=======
 --- !u!233 &233659662542622656
->>>>>>> 統合_プロジェクト
 HingeJoint2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1345411826231786}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 50545059154206910}
-=======
   m_GameObject: {fileID: 1390518345991020}
   m_Enabled: 1
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 50042755975666834}
->>>>>>> 統合_プロジェクト
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 0
@@ -2288,28 +1474,16 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
-<<<<<<< HEAD
---- !u!233 &233969415375533746
-=======
 --- !u!233 &233721832042774976
->>>>>>> 統合_プロジェクト
 HingeJoint2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1969376388319440}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 50431539670618368}
-=======
   m_GameObject: {fileID: 1898260204652384}
   m_Enabled: 1
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 50737678235665998}
->>>>>>> 統合_プロジェクト
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 0
