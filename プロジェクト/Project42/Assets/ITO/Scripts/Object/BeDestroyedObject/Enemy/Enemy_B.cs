@@ -41,15 +41,8 @@ public class Enemy_B : BeDestroyedObject {
     /// </summary>
     private void SetPlayer()
     {
-        
-        if (GameObject.Find("PlayerSmall").GetComponent<PlayerSmallController>().playerMode == PlayerMode.PLAYER)
-        {
+
             player = GameObject.Find("PlayerSmall");
-        }
-        else
-        {
-            player = GameObject.Find("PlayerBig");
-        }
     }
 
     /// <summary>
@@ -90,8 +83,8 @@ public class Enemy_B : BeDestroyedObject {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag == "Player"
-            &&collision.gameObject.GetComponent<Player>().playerMode == PlayerMode.PLAYER)
+        if (collision.collider.tag == "Player")
+        //    &&collision.gameObject.GetComponent<Player>().playerMode == PlayerMode.PLAYER
         {
             //StartCoroutine(AttackPlayer(collision.gameObject));
         }

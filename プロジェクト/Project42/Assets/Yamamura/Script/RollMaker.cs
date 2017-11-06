@@ -7,7 +7,7 @@ public class RollMaker : MonoBehaviour {
     public GameObject playerSmall;
     public GameObject playerBig;
     PlayerSmallController psc;
-    PlayerBigController pbc;
+    Hammer pbc;
 
     float rotationZ = 60;
 
@@ -24,8 +24,8 @@ public class RollMaker : MonoBehaviour {
 
     private void Pos()
     {
-        if (psc.playerMode == PlayerMode.PLAYER) transform.position = playerSmall.transform.position;
-        else if (psc.playerMode == PlayerMode.HAMMER) transform.position = playerBig.transform.position;
+        //if (psc.playerMode == PlayerMode.PLAYER) transform.position = playerSmall.transform.position;
+        //else if (psc.playerMode == PlayerMode.HAMMER) transform.position = playerBig.transform.position;
         
     }
 
