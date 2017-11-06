@@ -4,14 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Boss
-  - Enemy
-  - Obj
-  - Hammer
-  - Chain
   - BeDestroyedObject
-  - Wave
-  - Energy
+  - Chain
+  - StopWave
+  - Boss
+  - AttackWave
   layers:
   - Default
   - TransparentFX
@@ -48,7 +45,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Player
-    uniqueID: 359995765
     locked: 0

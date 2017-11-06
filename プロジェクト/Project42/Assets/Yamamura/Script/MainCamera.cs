@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 public class MainCamera : MonoBehaviour
 {
-
     public GameObject player;
+
 
     // Use this for initialization
     void Start()

@@ -1,6 +1,10 @@
 fileFormatVersion: 2
 guid: a8f6a94f5061c5c4b86790796167ad59
+<<<<<<< HEAD
 timeCreated: 1509950288
+=======
+timeCreated: 1509689179
+>>>>>>> 統合_プロジェクト
 licenseType: Free
 NativeFormatImporter:
   externalObjects: {}

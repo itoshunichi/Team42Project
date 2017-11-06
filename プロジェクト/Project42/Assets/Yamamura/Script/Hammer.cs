@@ -9,6 +9,7 @@ public class Hammer : MonoBehaviour
     public float powerTwo;          //二段階目の力
     public float powerThree;        //三段階目の力
     Energy hammerEnergy;       //Energy
+    public Energy soulEnergy;       //Energy
     int addForceCount = 120;        //
     public int ForceCountMax;
     float addForceAlpha = 0;        //
@@ -88,10 +89,9 @@ public class Hammer : MonoBehaviour
     {
         if (col.gameObject.tag == "BeDestroyedObject" && transform.GetComponent<Rigidbody2D>().velocity != Vector2.zero)
         {
-            
             Time.timeScale = 0.7f;
             shake.ShakeObject();
-            col.gameObject.GetComponent<BeDestroyedObject>().BeginDamage(1);
+           // col.gameObject.GetComponent<BeDestroyedObject>().BeginDamage(1);
             hammerEnergy.AddEnergy(10);
             Time.timeScale = 1.0f;
         }
@@ -101,9 +101,7 @@ public class Hammer : MonoBehaviour
     {
         if (col.gameObject.tag == "Boss" && transform.GetComponent<Rigidbody2D>().velocity != Vector2.zero)
         {
-            col.gameObject.GetComponent<Boss>().BeginDamage();
+            //col.gameObject.GetComponent<Boss>().BeginDamage();
         }
-
-
     }
 }

@@ -6,6 +6,8 @@ public class PlayerSmallController : Player
 {
     HingeJoint2D joint;
 
+    public Energy soulEnergy;
+
     // Use this for initialization
     void Start()
     {
@@ -32,6 +34,7 @@ public class PlayerSmallController : Player
     private void RotationMove()
     {
         if (transform.rotation.z != flick.transform.rotation.z) GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
         if (speed < speedMax) speed += 0.008f;
         transform.rotation = flick.transform.rotation;
         //自身の向きベクトル取得
@@ -63,5 +66,4 @@ public class PlayerSmallController : Player
             col.gameObject.GetComponent<Energy>().AddEnergy(10);
         }
     }
-
 }

@@ -1,7 +1,12 @@
 fileFormatVersion: 2
 guid: f20fa42e65320f243ac5067ade646930
 folderAsset: yes
+<<<<<<< HEAD
 timeCreated: 1509911979
+=======
+timeCreated: 1509931191
+licenseType: Free
+>>>>>>> 統合_プロジェクト
 DefaultImporter:
   externalObjects: {}
   userData: 
