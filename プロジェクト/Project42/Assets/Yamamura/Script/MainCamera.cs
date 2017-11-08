@@ -4,7 +4,7 @@ using UnityEngine;
 public class MainCamera : MonoBehaviour
 {
 
-    public GameObject playerSoul;
+    public GameObject player;
 
     // Use this for initialization
     void Start()
@@ -15,7 +15,7 @@ public class MainCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(playerSoul.transform.position.x, playerSoul.transform.position.y, -10);
+        transform.position = new Vector3(player.transform.position.x, player.transform.position.y, -10);
     }
 
 }

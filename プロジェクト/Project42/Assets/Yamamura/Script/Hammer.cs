@@ -8,7 +8,7 @@ public class Hammer : MonoBehaviour
     public float powerOne;          //一段階目の力
     public float powerTwo;          //二段階目の力
     public float powerThree;        //三段階目の力
-    public Energy soulEnergy;       //Energy
+    Energy energy;       //Energy
     int addForceCount = 120;        //
     public int ForceCountMax;
     float addForceAlpha = 0;        //
@@ -18,7 +18,7 @@ public class Hammer : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-       
+        energy = GetComponent<Energy>();
     }
 
     // Update is called once per frame
@@ -88,19 +88,20 @@ public class Hammer : MonoBehaviour
     {
         if (col.gameObject.tag == "BeDestroyedObject" && transform.GetComponent<Rigidbody2D>().velocity != Vector2.zero)
         {
-            
-            //Time.timeScale = 0.5f;
+
+            Time.timeScale = 0.7f;
             shake.ShakeObject();
             col.gameObject.GetComponent<BeDestroyedObject>().BeginDamage(1);
-            soulEnergy.AddEnergy(10);
+            energy.AddEnergy(10);
+            Time.timeScale = 1f;
         }
     }
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Boss" && transform.GetComponent<Rigidbody2D>().velocity != Vector2.zero)
+        if (col.gameObject.tag == "Boss" && transform.GetComponent<Rigidbody2D>().velocity != Vector2.zero && energy.GetEnergy() >= 100)
         {
-            col.gameObject.GetComponent<Boss>().BeginDamage();
+            col.gameObject.GetComponent<Boss>().Dead();
         }
     }
 }

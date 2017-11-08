@@ -33,7 +33,7 @@ public class PlayerSmallController : Player
     private void RotationMove()
     {
         if (transform.rotation.z != flick.transform.rotation.z) GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        if (speed < speedMax) speed += 0.001f;
+        if (speed < speedMax) speed += 0.002f;
         transform.rotation = flick.transform.rotation;
         //自身の向きベクトル取得
         //自身の角度をラジアンで取得
@@ -49,6 +49,7 @@ public class PlayerSmallController : Player
         if (col.gameObject.tag == "BeDestroyedObject")
         {
             isHit = true;
+            speed = 0;
             Debug.Log("HIT");
             Vector2 dir = transform.position - col.gameObject.transform.position;
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
