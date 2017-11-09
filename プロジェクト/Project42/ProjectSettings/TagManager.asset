@@ -13,6 +13,7 @@ TagManager:
   - StopWave
   - Obj
   - BeDestroyedObject
+  - ActionEria
   layers:
   - Default
   - TransparentFX

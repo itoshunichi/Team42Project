@@ -33,7 +33,7 @@ public abstract class BeDestroyedObject : MonoBehaviour
 
 
 
-    protected bool isWaveMode;
+    protected bool isActionMode;
 
     public float GiveEnergyPoint
     {
@@ -43,16 +43,18 @@ public abstract class BeDestroyedObject : MonoBehaviour
 
     protected virtual void Start()
     {
-        Debug.Log("ウェーブ"+isWaveMode);
-        isWaveMode = false;
+        Debug.Log("ウェーブ"+isActionMode);
+        isActionMode = false;
         boss = GameObject.Find("Boss");
         beAbsorptionSpeed = parameter.beAbsorptionSpeed*Time.deltaTime;
     }
 
     protected virtual void Update()
     {
-        if(isWaveMode)WaveAction();
+        if(isActionMode)Action();
+        //ボスに吸収される
         BeAbsorption();
+        //スプライトの設定
         SetSprite();
     }
 
@@ -88,14 +90,19 @@ public abstract class BeDestroyedObject : MonoBehaviour
             GiveEnergy();
         }
 
-        if (collision.tag == "AttackWave")
+        //エリアに入ったら
+        if (collision.tag == "ActionEria")
         {
-            isWaveMode = true;
+            isActionMode = true;
         }
+    }
 
-        if (collision.tag == "StopWave")
+    protected void OnTriggerExit2D(Collider2D collision)
+    {
+        //エリアから出たら
+        if(collision.tag == "ActionEria")
         {
-            StopWave();
+            StopAction();
         }
     }
 
@@ -114,14 +121,14 @@ public abstract class BeDestroyedObject : MonoBehaviour
     /// <summary>
     /// ウェーブにあった後の行動
     /// </summary>
-    protected virtual void WaveAction() { }
+    protected virtual void Action() { }
 
     /// <summary>
     /// 停止ウェーブに当たったときの処理
     /// </summary>
-    protected virtual void StopWave()
+    protected virtual void StopAction()
     {
-        isWaveMode = false;
+        isActionMode = false;
     }
 
     /// <summary>
@@ -148,7 +155,7 @@ public abstract class BeDestroyedObject : MonoBehaviour
     /// </summary>
     protected void SetSprite()
     {
-        if (isWaveMode)
+        if (isActionMode)
             GetComponent<SpriteRenderer>().sprite = parameter.actionSprite;
 
         else

@@ -14,14 +14,10 @@ public class Player_StageOut : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("子" + GetPlayerChildren().Count);
     }
 
     void Update()
-    {
-
-        Debug.Log(isStageOut);
-
+    { 
     }
 
 
@@ -29,7 +25,6 @@ public class Player_StageOut : MonoBehaviour
     {
         if (collision.tag == "Wall")
         {
-            Debug.Log("当たった");
             StartCoroutine(StageOut());
         }
     }

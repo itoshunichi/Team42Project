@@ -6,11 +6,6 @@ using UnityEngine.UI;
 public class Boss : MonoBehaviour
 {
 
-    /// <summary>
-    /// 体力
-    /// </summary>
-    [SerializeField]
-    private int hp;
 
     /// <summary>
     /// エネルギーの最大値
@@ -18,30 +13,30 @@ public class Boss : MonoBehaviour
     [SerializeField]
     private float maxEnergy;
 
-    /// <summary>
-    /// ウェーブ
-    /// </summary>
-    private GameObject attckWave;
-    private GameObject stopWave;
-    // private GameObject wavePrefab;
+    ///// <summary>
+    ///// ウェーブ
+    ///// </summary>
+    //private GameObject attckWave;
+    //private GameObject stopWave;
 
 
-    /// <summary>
-    /// ウェーブの間隔
-    /// </summary>
-    [SerializeField]
-    private int waveTime;
 
-    /// <summary>
-    /// ウェーブ準備開始時間
-    /// </summary>
-    [SerializeField]
-    private int startReadyWaveTime;
+    ///// <summary>
+    ///// ウェーブの間隔
+    ///// </summary>
+    //[SerializeField]
+    //private int waveTime;
 
-    /// <summary>
-    /// ウェーブ用のタイマー
-    /// </summary>
-    private float waveTimer = 0;
+    ///// <summary>
+    ///// ウェーブ準備開始時間
+    ///// </summary>
+    //[SerializeField]
+    //private int startReadyWaveTime;
+
+    ///// <summary>
+    ///// ウェーブ用のタイマー
+    ///// </summary>
+    //private float waveTimer = 0;
 
 
     /// <summary>
@@ -53,9 +48,10 @@ public class Boss : MonoBehaviour
     void Start()
     {
 
-        attckWave = Resources.Load<GameObject>("Prefab/Wave/AttackWave");
-        stopWave = Resources.Load<GameObject>("Prefab/Wave/StopWave");
-        StartCoroutine(InstantiateWave());
+        //attckWave = Resources.Load<GameObject>("Prefab/Wave/AttackWave");
+        //stopWave = Resources.Load<GameObject>("Prefab/Wave/StopWave");
+        //StartCoroutine(InstantiateWave());
+        //InstantiateAttackWave();
     }
 
     // Update is called once per frame
@@ -71,13 +67,14 @@ public class Boss : MonoBehaviour
     public void BeginDamage()
     {
         // hp -= 1;
-        InstantiateStopWave();
+       // InstantiateStopWave();
         //InterruptWave();
     }
 
     public void Dead()
     {
-        Destroy(gameObject);
+        SceneNavigater.Instance.Change("GameClear");
+       // Destroy(gameObject);
     }
 
     /// <summary>
@@ -138,26 +135,26 @@ public class Boss : MonoBehaviour
     //}
 
 
-    private IEnumerator InstantiateWave()
-    {
+    //private IEnumerator InstantiateWave()
+    //{
         
 
-        while(true)
-        {
-            yield return new WaitForSeconds(waveTime);
-            InstantiateAttackWave();
-        }
-    }
+    //    while(true)
+    //    {
+    //        yield return new WaitForSeconds(waveTime);
+    //        InstantiateAttackWave();
+    //    }
+    //}
 
-    public void InstantiateAttackWave()
-    {
-        Instantiate(attckWave);
-    }
+    //public void InstantiateAttackWave()
+    //{
+    //    Instantiate(attckWave);
+    //}
 
-    private void InstantiateStopWave()
-    {
-        Instantiate(stopWave);
-    }
+    //private void InstantiateStopWave()
+    //{
+    //    Instantiate(stopWave);
+    //}
 
     ///// <summary>
     ///// ウェーブ中断

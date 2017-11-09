@@ -8,22 +8,22 @@ using UnityEngine;
 public class Enemy_B : BeDestroyedObject {
 
     GameObject player;
-    protected override void WaveAction()
+    protected override void Action()
     {
-        base.WaveAction();
+        base.Action();
         SetPlayer();
     }
 
     protected override void Update()
     {
         Move();
-        WaveAction();
+        Action();
         SetSprite();
     }
 
     private void Move()
     {
-        if (isWaveMode)
+        if (isActionMode)
         {
             //プレイヤー追尾
             TrackingPlayer();
@@ -81,19 +81,21 @@ public class Enemy_B : BeDestroyedObject {
         transform.rotation = Quaternion.FromToRotation(Vector2.up, vec);
     }
 
-    protected override void StopWave()
+    protected override void StopAction()
     {
-        base.StopWave();
+        base.StopAction();
     }
 
    
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag == "Player"
-            &&collision.gameObject.GetComponent<Player>().playerMode == PlayerMode.PLAYER)
+        if (isActionMode
+            &&collision.collider.tag == "Player"
+            &&collision.gameObject.GetComponent<Player>().playerMode == PlayerMode.PLAYER
+            &&!collision.gameObject.GetComponent<Player_StageOut>().IsStageOut())
         {
-            //StartCoroutine(AttackPlayer(collision.gameObject));
+           // StartCoroutine(AttackPlayer(collision.gameObject));
         }
     }
 
@@ -104,7 +106,8 @@ public class Enemy_B : BeDestroyedObject {
     private IEnumerator AttackPlayer(GameObject obj)
     {
         
-        obj.GetComponent<Rigidbody2D>().AddForce(Direction() * 1000);
+        obj.GetComponent<Rigidbody2D>().AddForce(Direction() * 300);
+        player.transform.rotation = Quaternion.FromToRotation(Vector3.up, Direction());
         
         yield return new WaitForSeconds(0.5f);
         obj.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
