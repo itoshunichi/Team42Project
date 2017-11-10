@@ -5,7 +5,8 @@ using UnityEngine;
 /// <summary>
 /// プレイヤーを追尾するエネミー
 /// </summary>
-public class Enemy_B : BeDestroyedObject {
+public class Enemy_B : BeDestroyedObject
+{
 
     GameObject player;
     protected override void WaveAction()
@@ -27,7 +28,7 @@ public class Enemy_B : BeDestroyedObject {
         {
             //プレイヤー追尾
             TrackingPlayer();
-            
+
         }
         else
         {
@@ -41,15 +42,7 @@ public class Enemy_B : BeDestroyedObject {
     /// </summary>
     private void SetPlayer()
     {
-        
-        if (GameObject.Find("PlayerSmall").GetComponent<PlayerSmallController>().playerMode == PlayerMode.PLAYER)
-        {
-            player = GameObject.Find("PlayerSmall");
-        }
-        else
-        {
-            player = GameObject.Find("PlayerBig");
-        }
+        player = GameObject.Find("PlayerSmall");
     }
 
     /// <summary>
@@ -86,15 +79,16 @@ public class Enemy_B : BeDestroyedObject {
         base.StopWave();
     }
 
-   
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag == "Player"
-            &&collision.gameObject.GetComponent<Player>().playerMode == PlayerMode.PLAYER)
-        {
-            //StartCoroutine(AttackPlayer(collision.gameObject));
-        }
+        //playerMode消したので取りあえずコメントアウトしました
+        //if (collision.collider.tag == "Player"
+        //    && collision.gameObject.GetComponent<Player>().playerMode == PlayerMode.PLAYER)
+        //{
+        //    //StartCoroutine(AttackPlayer(collision.gameObject));
+        //}
     }
 
     /// <summary>
@@ -103,9 +97,9 @@ public class Enemy_B : BeDestroyedObject {
     /// <returns></returns>
     private IEnumerator AttackPlayer(GameObject obj)
     {
-        
+
         obj.GetComponent<Rigidbody2D>().AddForce(Direction() * 1000);
-        
+
         yield return new WaitForSeconds(0.5f);
         obj.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         Destroy(gameObject);

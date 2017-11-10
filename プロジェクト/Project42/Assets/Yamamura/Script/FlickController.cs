@@ -6,31 +6,32 @@ public class FlickController : MonoBehaviour
 {
 
     public GameObject playerSmall;      //プレイヤースモール
-    public GameObject playerBig;        //プレイヤービッグ
+    public GameObject hammer;        //プレイヤービッグ
     public GameObject mainCamera;
     public GameObject spriteobj;
     public GameObject spriteArrow;
     private bool isTap = false;         //Tapしたかどうか
-    private Vector3 touchStartPos = Vector3.zero;      //タッチした場所
-    private Vector3 touchEndPos = Vector3.zero;        //タッチ終わりの場所
-    private Vector3 beforeEndPos = Vector3.zero;       //前回のタッチ終わりの場所
+    private Vector3 touchStartPos;      //タッチした場所
+    private Vector3 touchEndPos;        //タッチ終わりの場所
+    private Vector3 beforeEndPos;       //前回のタッチ終わりの場所
     int flickCount = 0;
     float tapTimer = 0.0f;              //タッチしている時間
     public float flickTime;           //フリック判定時間
     public float flickMagnitude = 100;
     float beforeRadian = 0; //フリックする前の角度
     float afterRadian = 0;  //フリックした後の角度
-    public float radianMax = 30;
+    public float radianMaxOne = 30;
+    public float radianMaxTwo = 60;
+    public float radianMaxThree = 90;
+    public float radianMaxFour = 120;
     bool isFlick = false;
 
     PlayerSmallController pcs;
-    PlayerBigController pcb;
 
     // Use this for initialization
     void Start()
     {
         pcs = playerSmall.GetComponent<PlayerSmallController>();
-        pcb = playerBig.GetComponent<PlayerBigController>();
     }
 
     // Update is called once per frame
@@ -85,24 +86,13 @@ public class FlickController : MonoBehaviour
                 else radian = beforeRadian - afterRadian;
 
                 isFlick = true;
-                //radianの値が規定値以下だったらそれ以降は処理しない
-                if (radian > radianMax)
-                {
+                //radianの値が規定値以下だったら回転しない
+                RadianCheck(radian);
 
-                    //操作キャラのスクリプトを入れる
-                    if (playerSmall.GetComponent<PlayerSmallController>().playerMode == PlayerMode.PLAYER)
-                    {
-                        pcs.Reset();
-                        pcb.RotationForce(RightFlick(touchStartPos, touchEndPos));
+                pcs.Reset();//プレイヤーの速度等リセット
+                //矢印画像生成
+                Instantiate(spriteArrow, new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 0), transform.rotation);
 
-                    }
-                    else if (playerBig.GetComponent<PlayerBigController>().playerMode == PlayerMode.PLAYER)
-                    {
-                        pcb.Reset();
-                        pcs.RotationForce(RightFlick(touchStartPos, touchEndPos));
-                    }
-                    Instantiate(spriteArrow, new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 0), transform.rotation);
-                }
                 flickCount += 1;//フリックした回数をカウント
             }
             tapTimer = 0.0f;
@@ -110,17 +100,29 @@ public class FlickController : MonoBehaviour
         }
     }
 
-    //bool RightFlick(Vector2 start,Vector2 end)
-    //{
-    //    if (start.x > end.x) return true;
-    //    return false;
-    //}
-
-    float RightFlick(Vector2 start, Vector2 end)
-    {
-        if (start.x > end.x) return 1;
-        return -1;
+    private void RadianCheck(float radian)
+    {       //前回の角度と比べて大きさくなるほど回す力を大きくするメソッドを呼ぶ
+        if (radian > radianMaxOne && radian < radianMaxTwo)
+            hammer.GetComponent<Hammer>().SetRotationForceOne(RightFlick(touchStartPos, touchEndPos));
+        else if (radian > radianMaxTwo && radian < radianMaxThree)
+            hammer.GetComponent<Hammer>().SetRotationForceTwo(RightFlick(touchStartPos, touchEndPos));
+        else if (radian >= radianMaxThree)
+            hammer.GetComponent<Hammer>().SetRotationForceThree(RightFlick(touchStartPos, touchEndPos));
     }
+
+
+    bool RightFlick(Vector2 start, Vector2 end)
+    {
+        if (start.x > end.x) return true;
+        return false;
+    }
+
+    //float RightFlick(Vector2 start, Vector2 end)
+    //{
+    //    Vector2 dir = end - start;
+    //    if (dir.normalized.x > start.x) return 1;
+    //    return -1;
+    //}
 
     //線より右側
     bool LineRight(Vector2 pos1, Vector2 pos2, Vector2 dot)
