@@ -118,7 +118,7 @@ public class PlayerBigController : Player
         else if (col.gameObject.tag == "BeDestroyedObject" && playerMode == PlayerMode.HAMMER && transform.GetComponent<Rigidbody2D>().velocity != Vector2.zero)
         {
             Destroy(col.gameObject);
-            col.gameObject.GetComponent<BeDestroyedObject>().BeginDamage(1);
+            col.gameObject.GetComponent<BeDestroyedObject>().BeginDamage();
             soulEnergy.AddEnergy(10);
         }
     }

@@ -66,10 +66,13 @@ public class ActionEria : MonoBehaviour
     /// <summary>
     /// ポイントが最大値あるかどうか
     /// </summary>
-    private bool isMaxPoint;
-    public bool IsMaxPoint
+    public bool IsMaxPoint()
     {
-        get { return isMaxPoint; }
+        if (eriaPointObjects.Count == maxPointIndex+2)
+        {
+            return true;
+        }
+        else return false;
     }
 
 
@@ -89,18 +92,7 @@ public class ActionEria : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        StopInstantiate();
-    }
-
-    /// <summary>
-    /// 生成中止
-    /// </summary>
-    private void StopInstantiate()
-    {
-        if (instantiatePosX.Count == 0)
-        {
-            isMaxPoint = true;
-        }
+        
     }
 
     /// <summary>
@@ -108,9 +100,8 @@ public class ActionEria : MonoBehaviour
     /// </summary>
     public void InstantiateEriaPoint()
     {
-        if (isMaxPoint) return;
-
-        float posX = instantiatePosX[Random.Range(0, instantiatePosX.Count)];
+        if (IsMaxPoint()) return;
+        float posX = instantiatePosX[Random.Range(0, instantiatePosX.Count-1)];
         //生成した位置をリストから削除(同じ列にポイントが生成されないように)
         instantiatePosX.Remove(posX);
         //Y座標は上の壁から下の壁までの間をランダム
@@ -130,12 +121,19 @@ public class ActionEria : MonoBehaviour
         eriaPointObjects.Remove(BottomEriaPoint);
         //指定した位置にエリアポイントを生成
         GameObject eriaP = Instantiate(eriaPointPrefab, position, Quaternion.identity);
+        //このオブジェクトを親に
+        eriaP.transform.parent = transform;
         //リストに追加
         eriaPointObjects.Add(eriaP);
         //並び替え
         eriaPointObjects.Sort(CompareByDistance);
         //一番下のポイントを追加
         eriaPointObjects.Add(BottomEriaPoint);
+        SetColliderPoint();
+    }
+
+    private void SetColliderPoint()
+    {
         //ポイントの座標を入れる配列を作成
         Vector2[] pos = new Vector2[eriaPointObjects.Count];
         //配列にオブジェクトの座標を格納
@@ -233,13 +231,21 @@ public class ActionEria : MonoBehaviour
         return 0;
     }
 
-    public void BreakEriaPoint()
+    /// <summary>
+    /// エリアポイントの破壊
+    /// </summary>
+    /// <param name="point"></param>
+    public void BreakEriaPoint(GameObject point)
     {
 
-    }
-
-    private void SetCollider()
-    {
+        //リストから削除
+        eriaPointObjects.Remove(point);
+        //生成位置の候補に追加
+        instantiatePosX.Add(point.transform.position.x);
+        SetColliderPoint();
+        CreatePolygon();
+        //削除
+        Destroy(point);
 
     }
 }

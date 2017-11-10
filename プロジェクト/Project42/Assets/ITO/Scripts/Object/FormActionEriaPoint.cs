@@ -38,13 +38,13 @@ public class FormActionEriaPoint : MonoBehaviour {
             if(rnd == 0)
             {
                 leftEria.GetComponent<ActionEria>().InstantiateEriaPoint();
-                if(leftEria.GetComponent<ActionEria>().IsMaxPoint)
+                if(leftEria.GetComponent<ActionEria>().IsMaxPoint())
                     rightEria.GetComponent<ActionEria>().InstantiateEriaPoint();
             }
             else
             {
                 rightEria.GetComponent<ActionEria>().InstantiateEriaPoint();
-                if (rightEria.GetComponent<ActionEria>().IsMaxPoint)
+                if (rightEria.GetComponent<ActionEria>().IsMaxPoint())
                     leftEria.GetComponent<ActionEria>().InstantiateEriaPoint();
             }
         }

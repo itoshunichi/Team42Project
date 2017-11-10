@@ -16,10 +16,6 @@ public abstract class BeDestroyedObject : MonoBehaviour
     [SerializeField]
     protected BeDestroyedObjectParameter parameter;
 
-    /// <summary>
-    /// 体力
-    /// </summary>
-    private int hp;
 
     /// <summary>
     /// 吸収されるスピード
@@ -43,7 +39,6 @@ public abstract class BeDestroyedObject : MonoBehaviour
 
     protected virtual void Start()
     {
-        Debug.Log("ウェーブ"+isActionMode);
         isActionMode = false;
         boss = GameObject.Find("Boss");
         beAbsorptionSpeed = parameter.beAbsorptionSpeed*Time.deltaTime;
@@ -84,6 +79,7 @@ public abstract class BeDestroyedObject : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
+        
         //ボスと衝突したら
         if (collision.tag == "Boss")
         {
@@ -135,19 +131,9 @@ public abstract class BeDestroyedObject : MonoBehaviour
     /// ダメージを与えられるときに呼び出し
     /// </summary>
     /// <param name="damagePoint"></param>
-    public void BeginDamage(int damagePoint)
+    public virtual void BeginDamage()
     {
-        hp -= damagePoint;
-        BreakObject();
-        
-    }
-
-    private void BreakObject()
-    {
-        if (hp <= 0)
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 
     /// <summary>
