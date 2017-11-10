@@ -6,13 +6,14 @@ public class PlayerSmallController : Player
 {
     HingeJoint2D joint;
     public Energy soulEnergy;
-
+    Player_StageOut stageOut;
     // Use this for initialization
     void Start()
     {
         flickController = flick.GetComponent<FlickController>();
         joint = GetComponent<HingeJoint2D>();
         joint.enabled = true;
+        stageOut = GetComponent<Player_StageOut>();
     }
 
     // Update is called once per frame
@@ -24,7 +25,7 @@ public class PlayerSmallController : Player
 
     private void Move()
     {
-        if (!isHit)
+        if (!isHit && !stageOut.IsStageOut())
         {
             RotationMove();
         }
@@ -33,7 +34,6 @@ public class PlayerSmallController : Player
     //向きに対して移動
     private void RotationMove()
     {
-        if (GetComponent<Player_StageOut>().IsStageOut()) return;
         if (transform.rotation.z != flick.transform.rotation.z) GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         if (speed < speedMax) speed += 0.002f;
         transform.rotation = flick.transform.rotation;
@@ -45,7 +45,7 @@ public class PlayerSmallController : Player
         transform.position += dir * speed;
     }
 
-   
+
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "BeDestroyedObject")
