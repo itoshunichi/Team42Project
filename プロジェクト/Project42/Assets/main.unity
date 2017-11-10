@@ -305,6 +305,26 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 2b7c7745dee6fbe4a9eb643c17354aeb,
         type: 3}
+    - target: {fileID: 212575435111283212, guid: a8f6a94f5061c5c4b86790796167ad59,
+        type: 2}
+      propertyPath: m_SortingLayerID
+      value: 1685970385
+      objectReference: {fileID: 0}
+    - target: {fileID: 212575435111283212, guid: a8f6a94f5061c5c4b86790796167ad59,
+        type: 2}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 212130052755915654, guid: a8f6a94f5061c5c4b86790796167ad59,
+        type: 2}
+      propertyPath: m_SortingLayerID
+      value: 1685970385
+      objectReference: {fileID: 0}
+    - target: {fileID: 212130052755915654, guid: a8f6a94f5061c5c4b86790796167ad59,
+        type: 2}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a8f6a94f5061c5c4b86790796167ad59, type: 2}
   m_IsPrefabParent: 0
@@ -649,6 +669,11 @@ Prefab:
         type: 2}
       propertyPath: levelUPEnergy
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 223233562509330226, guid: 598e72aa27145e549af26f036d242ffe,
+        type: 2}
+      propertyPath: m_SortingLayerID
+      value: 1685970385
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 598e72aa27145e549af26f036d242ffe, type: 2}
