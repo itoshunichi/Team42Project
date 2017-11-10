@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: Assets/ITO/Scene/LOGO.unity
+    guid: 3105b86585e0bb5499d384b59541d8d6
+  - enabled: 0
+    path: Assets/ITO/Scene/Title.unity
+    guid: 793facdb09ef85c4e9ece0a8c36b255d
+  - enabled: 0
+    path: Assets/__DELETED_GUID_Trash/3ac525cb247ca124489e840b824ba0dc
+    guid: 3ac525cb247ca124489e840b824ba0dc
+  - enabled: 1
+    path: Assets/ITO/Scene/GamePlay.unity
+    guid: 0ec2c7db91b4e2e498c701e5fc8ff76b
+  - enabled: 1
+    path: Assets/ITO/Scene/Result.unity
+    guid: 7ac7517c105424249bd49c222959d3a1
+  - enabled: 0
+    path: Assets/ITO/Scene/Test.unity
+    guid: 54376ade16c2568489bfed7866322268
+  - enabled: 1
+    path: Assets/ITO/Scene/GameOver.unity
+    guid: b29d669e7a80f1c4d99c14e8a68a26fa
