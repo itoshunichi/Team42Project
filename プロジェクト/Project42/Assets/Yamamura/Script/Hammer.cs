@@ -98,7 +98,7 @@ public class Hammer : MonoBehaviour
 
             Time.timeScale = 0.7f;
             shake.ShakeObject();
-            col.gameObject.GetComponent<BeDestroyedObject>().BeginDamage(1);
+            col.gameObject.GetComponent<BeDestroyedObject>().BeginDamage();
             energy.AddEnergy(25.0f);
             Time.timeScale = 1f;
         }

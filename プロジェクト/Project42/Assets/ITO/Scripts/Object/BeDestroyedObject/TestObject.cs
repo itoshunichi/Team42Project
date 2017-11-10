@@ -10,7 +10,7 @@ public class TestObject : BeDestroyedObject {
     [SerializeField]
     private GameObject bulletPrefab;
 
-    protected override void WaveAction()
+    protected override void Action()
     {
         GameObject bullet = (GameObject)Instantiate(bulletPrefab);
         bullet.transform.position = transform.position;

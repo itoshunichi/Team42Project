@@ -6,10 +6,10 @@ using UnityEngine;
 public class BeDestroyedObjectParameter :ScriptableObject {
 
     /// <summary>
-    /// 体力の最大値
+    /// オブジェクトの種類
     /// </summary>
-    [Tooltip("体力の最大値")]
-    public int maxHp;
+    [Tooltip("オブジェクトの種類")]
+    public ObjectType type;
 
     /// <summary>
     /// 与えるエネルギー

@@ -33,6 +33,7 @@ public class PlayerSmallController : Player
     //向きに対して移動
     private void RotationMove()
     {
+        if (GetComponent<Player_StageOut>().IsStageOut()) return;
         if (transform.rotation.z != flick.transform.rotation.z) GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         if (speed < speedMax) speed += 0.002f;
         transform.rotation = flick.transform.rotation;
