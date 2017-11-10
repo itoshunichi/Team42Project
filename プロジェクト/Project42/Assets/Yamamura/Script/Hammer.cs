@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Hammer : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class Hammer : MonoBehaviour
     float countVelocity = 120;      //velocityをゼロにするカウント
     public float velocityCountMax;
     public Shake shake;
+    public Sprite[] hammerLv;
+
     // Use this for initialization
     void Start()
     {
@@ -34,6 +37,7 @@ public class Hammer : MonoBehaviour
         //}
 
         VelocityZero();
+        SpriteChange();
     }
 
     private void VelocityZero()
@@ -43,7 +47,6 @@ public class Hammer : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
-
     }
 
     public void Reset()
@@ -78,10 +81,14 @@ public class Hammer : MonoBehaviour
             GetComponent<Rigidbody2D>().AddForce(transform.right * (power));
         else if (!isRight)
             GetComponent<Rigidbody2D>().AddForce(transform.right * (-power));
-        //if (isRight && power > 0)
-        //    power = -power;
-        //else if (!isRight && power < 0)
-        //    power = -power;
+    }
+
+
+    private void SpriteChange()
+    {
+        if (energy.GetEnergy() < 100) GetComponent<SpriteRenderer>().sprite = hammerLv[0];
+        else if (energy.GetEnergy() >= 100 && energy.GetEnergy() < 200) GetComponent<SpriteRenderer>().sprite = hammerLv[1];
+        else if (energy.GetEnergy() >= 200) GetComponent<SpriteRenderer>().sprite = hammerLv[2];
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -92,16 +99,17 @@ public class Hammer : MonoBehaviour
             Time.timeScale = 0.7f;
             shake.ShakeObject();
             col.gameObject.GetComponent<BeDestroyedObject>().BeginDamage(1);
-            energy.AddEnergy(10);
+            energy.AddEnergy(25.0f);
             Time.timeScale = 1f;
         }
     }
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Boss" && transform.GetComponent<Rigidbody2D>().velocity != Vector2.zero && energy.GetEnergy() >= 100)
+        if (col.gameObject.tag == "Boss" && transform.GetComponent<Rigidbody2D>().velocity != Vector2.zero && energy.LevelMax())
         {
-            col.gameObject.GetComponent<Boss>().Dead();
+            //col.gameObject.GetComponent<Boss>().Dead();
+            SceneNavigater.Instance.Change("Result");
         }
     }
 }
