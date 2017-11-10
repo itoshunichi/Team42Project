@@ -30,6 +30,7 @@ public class PlayerSmallController : Player
         }
     }
 
+    //向きに対して移動
     private void RotationMove()
     {
         if (transform.rotation.z != flick.transform.rotation.z) GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -49,6 +50,7 @@ public class PlayerSmallController : Player
         if (col.gameObject.tag == "BeDestroyedObject")
         {
             isHit = true;
+            speed = 0;
             Debug.Log("HIT");
             Vector2 dir = transform.position - col.gameObject.transform.position;
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
