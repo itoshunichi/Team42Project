@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 58888233411289280}
   - component: {fileID: 50650359778650312}
   - component: {fileID: 114563448283658520}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Enemy_B
   m_TagString: BeDestroyedObject
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchSeams: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5

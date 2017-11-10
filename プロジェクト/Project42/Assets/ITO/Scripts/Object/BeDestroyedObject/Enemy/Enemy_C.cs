@@ -38,7 +38,7 @@ public class Enemy_C : BeDestroyedObject
 
     protected override void Action()
     {
-        Debug.Log("攻撃");
+        //Debug.Log("攻撃");
         BulletAttack();
     }
 

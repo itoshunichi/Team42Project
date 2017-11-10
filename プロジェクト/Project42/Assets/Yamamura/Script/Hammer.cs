@@ -93,13 +93,16 @@ public class Hammer : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "BeDestroyedObject" && transform.GetComponent<Rigidbody2D>().velocity.x > 2.3f || transform.GetComponent<Rigidbody2D>().velocity.y > 2.3f)
+        if (col.gameObject.tag == "BeDestroyedObject" && transform.GetComponent<Rigidbody2D>().velocity.x > 1.8f || transform.GetComponent<Rigidbody2D>().velocity.y > 1.8f)
         {
-
             Time.timeScale = 0.7f;
             shake.ShakeObject();
-            col.gameObject.GetComponent<BeDestroyedObject>().BeginDamage();
-            if (col.gameObject.GetComponent<BeDestroyedObject>().Type == ObjectType.ENEMY) energy.AddEnergy(25.0f);
+            Debug.Log(col.gameObject.name);
+            if (col.gameObject.GetComponent<BeDestroyedObject>().Type == ObjectType.ENEMY)
+            {
+                col.gameObject.GetComponent<BeDestroyedObject>().BeginDamage();
+                energy.AddEnergy(25.0f);
+            }
             Time.timeScale = 1f;
         }
     }
