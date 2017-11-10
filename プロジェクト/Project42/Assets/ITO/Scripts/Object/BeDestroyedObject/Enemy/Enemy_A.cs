@@ -7,16 +7,16 @@ using UnityEngine;
 /// </summary>
 public class Enemy_A : BeDestroyedObject {
 
-    protected override void WaveAction()
+    protected override void Action()
     {
-        base.WaveAction();
+        base.Action();
         //吸い込まれるスピードを変更
         beAbsorptionSpeed = parameter.beAbsorptionSpeed*2*Time.deltaTime;
     }
 
-    protected override void StopWave()
+    protected override void StopAction()
     {
-        base.StopWave();
+        base.StopAction();
         //初期のスピードに戻す
         beAbsorptionSpeed = parameter.beAbsorptionSpeed*Time.deltaTime;
     }

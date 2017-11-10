@@ -16,10 +16,6 @@ public abstract class BeDestroyedObject : MonoBehaviour
     [SerializeField]
     protected BeDestroyedObjectParameter parameter;
 
-    /// <summary>
-    /// 体力
-    /// </summary>
-    private int hp;
 
     /// <summary>
     /// 吸収されるスピード
@@ -31,9 +27,15 @@ public abstract class BeDestroyedObject : MonoBehaviour
     /// </summary>
     protected GameObject boss;
 
+    protected bool isActionMode;
 
+    protected ObjectType type;
 
-    protected bool isWaveMode;
+    public ObjectType Type
+    {
+        get { return type; }
+    }
+    
 
     public float GiveEnergyPoint
     {
@@ -43,16 +45,18 @@ public abstract class BeDestroyedObject : MonoBehaviour
 
     protected virtual void Start()
     {
-        Debug.Log("ウェーブ"+isWaveMode);
-        isWaveMode = false;
+        isActionMode = false;
         boss = GameObject.Find("Boss");
-        beAbsorptionSpeed = parameter.beAbsorptionSpeed*Time.deltaTime;
+        beAbsorptionSpeed = parameter.beAbsorptionSpeed * Time.deltaTime;
+        type = parameter.type;
     }
 
     protected virtual void Update()
     {
-        if(isWaveMode)WaveAction();
+        if(isActionMode)Action();
+        //ボスに吸収される
         BeAbsorption();
+        //スプライトの設定
         SetSprite();
     }
 
@@ -82,20 +86,26 @@ public abstract class BeDestroyedObject : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
+        
         //ボスと衝突したら
         if (collision.tag == "Boss")
         {
             GiveEnergy();
         }
 
-        if (collision.tag == "AttackWave")
+        //エリアに入ったら
+        if (collision.tag == "ActionEria")
         {
-            isWaveMode = true;
+            isActionMode = true;
         }
+    }
 
-        if (collision.tag == "StopWave")
+    protected void OnTriggerExit2D(Collider2D collision)
+    {
+        //エリアから出たら
+        if(collision.tag == "ActionEria")
         {
-            StopWave();
+            StopAction();
         }
     }
 
@@ -114,33 +124,23 @@ public abstract class BeDestroyedObject : MonoBehaviour
     /// <summary>
     /// ウェーブにあった後の行動
     /// </summary>
-    protected virtual void WaveAction() { }
+    protected virtual void Action() { }
 
     /// <summary>
     /// 停止ウェーブに当たったときの処理
     /// </summary>
-    protected virtual void StopWave()
+    protected virtual void StopAction()
     {
-        isWaveMode = false;
+        isActionMode = false;
     }
 
     /// <summary>
     /// ダメージを与えられるときに呼び出し
     /// </summary>
     /// <param name="damagePoint"></param>
-    public void BeginDamage(int damagePoint)
+    public virtual void BeginDamage()
     {
-        hp -= damagePoint;
-        BreakObject();
-        
-    }
-
-    private void BreakObject()
-    {
-        if (hp <= 0)
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 
     /// <summary>
@@ -148,7 +148,7 @@ public abstract class BeDestroyedObject : MonoBehaviour
     /// </summary>
     protected void SetSprite()
     {
-        if (isWaveMode)
+        if (isActionMode)
             GetComponent<SpriteRenderer>().sprite = parameter.actionSprite;
 
         else

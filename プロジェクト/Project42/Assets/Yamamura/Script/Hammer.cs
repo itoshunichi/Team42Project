@@ -35,7 +35,7 @@ public class Hammer : MonoBehaviour
 
         //    GetComponent<Rigidbody2D>().AddForce(Vector2.Lerp(transform.right * (power), Vector2.zero, addForceAlpha));
         //}
-        Debug.Log(GetComponent<Rigidbody2D>().velocity);
+
         VelocityZero();
         SpriteChange();
     }
@@ -98,8 +98,8 @@ public class Hammer : MonoBehaviour
 
             Time.timeScale = 0.7f;
             shake.ShakeObject();
-            col.gameObject.GetComponent<BeDestroyedObject>().BeginDamage(1);
-            energy.AddEnergy(25.0f);
+            col.gameObject.GetComponent<BeDestroyedObject>().BeginDamage();
+            if (col.gameObject.GetComponent<BeDestroyedObject>().Type == ObjectType.ENEMY) energy.AddEnergy(25.0f);
             Time.timeScale = 1f;
         }
     }

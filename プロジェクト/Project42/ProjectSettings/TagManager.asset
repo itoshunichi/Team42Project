@@ -3,12 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - BeDestroyedObject
-  - Chain
-  - StopWave
-  - Boss
-  - AttackWave
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -46,9 +41,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Chain
-    uniqueID: 1792187679
-    locked: 0
   - name: Player
-    uniqueID: 1558849349
+    uniqueID: 2473358113
     locked: 0
