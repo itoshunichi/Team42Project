@@ -6,8 +6,7 @@ using UnityEngine.UI;
 public class DebugText : MonoBehaviour
 {
     Text text;
-    public Energy energy;
-
+    public GameObject obj;
     // Use this for initialization
     void Start()
     {
@@ -17,6 +16,6 @@ public class DebugText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = "Energy:" + energy.GetEnergy();
+        text.text = "velocity" + obj.GetComponent<Rigidbody2D>().velocity;
     }
 }

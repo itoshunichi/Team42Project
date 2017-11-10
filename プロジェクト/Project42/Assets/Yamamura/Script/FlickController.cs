@@ -6,7 +6,7 @@ public class FlickController : MonoBehaviour
 {
 
     public GameObject playerSmall;      //プレイヤースモール
-    public GameObject hammer;        //プレイヤービッグ
+    public GameObject hammer;           //ハンマー
     public GameObject mainCamera;
     public GameObject spriteobj;
     public GameObject spriteArrow;
@@ -26,19 +26,20 @@ public class FlickController : MonoBehaviour
     public float radianMaxFour = 120;
     bool isFlick = false;
 
+    Player_StageOut stageOut;
     PlayerSmallController pcs;
 
     // Use this for initialization
     void Start()
     {
         pcs = playerSmall.GetComponent<PlayerSmallController>();
+        stageOut = playerSmall.GetComponent<Player_StageOut>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //TapHit();
-        Flick();
+        if (!stageOut.IsStageOut()) Flick();
 
         if (!isTap) transform.position = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 0); //タッチ位置に合わせる
     }
@@ -52,7 +53,6 @@ public class FlickController : MonoBehaviour
         {   //位置セット
             touchStartPos = Input.mousePosition;
             transform.position = touchStartPos;
-            if (isFlick) isFlick = false;
             isTap = true;
         }
         if (Input.GetMouseButton(0))
@@ -85,7 +85,6 @@ public class FlickController : MonoBehaviour
                 if (beforeRadian < afterRadian) radian = afterRadian - beforeRadian;
                 else radian = beforeRadian - afterRadian;
 
-                isFlick = true;
                 //radianの値が規定値以下だったら回転しない
                 RadianCheck(radian);
 
@@ -116,13 +115,6 @@ public class FlickController : MonoBehaviour
         if (start.x > end.x) return true;
         return false;
     }
-
-    //float RightFlick(Vector2 start, Vector2 end)
-    //{
-    //    Vector2 dir = end - start;
-    //    if (dir.normalized.x > start.x) return 1;
-    //    return -1;
-    //}
 
     //線より右側
     bool LineRight(Vector2 pos1, Vector2 pos2, Vector2 dot)
@@ -160,10 +152,5 @@ public class FlickController : MonoBehaviour
     public void SetRotation(Vector3 pos)
     {
         transform.localRotation = Quaternion.LookRotation(Vector3.forward, pos);
-    }
-
-    public bool GetFlick()
-    {
-        return isFlick;
     }
 }

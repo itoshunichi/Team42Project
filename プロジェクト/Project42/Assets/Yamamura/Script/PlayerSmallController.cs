@@ -6,7 +6,6 @@ public class PlayerSmallController : Player
 {
     HingeJoint2D joint;
     public Energy soulEnergy;
-
     // Use this for initialization
     void Start()
     {
