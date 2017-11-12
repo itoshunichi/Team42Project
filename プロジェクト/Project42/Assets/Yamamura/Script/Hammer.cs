@@ -27,14 +27,14 @@ public class Hammer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (addForceCount < ForceCountMax)
-        //{
-        //    addForceCount++;
-        //    var force = transform.right * (power);
-        //    addForceAlpha += 0.02f;
+        if (addForceCount < ForceCountMax)
+        {
+            addForceCount++;
+            var force = transform.right * (power);
+            addForceAlpha += 0.02f;
 
-        //    GetComponent<Rigidbody2D>().AddForce(Vector2.Lerp(transform.right * (power), Vector2.zero, addForceAlpha));
-        //}
+            GetComponent<Rigidbody2D>().AddForce(Vector2.Lerp(transform.right * (power), Vector2.zero, addForceAlpha));
+        }
 
         VelocityZero();
         SpriteChange();
@@ -59,20 +59,23 @@ public class Hammer : MonoBehaviour
     public void SetRotationForceOne(bool isRight)
     {
         Reset();
-        power = powerOne;
-        SetPower(isRight);
+        if (isRight) power = powerOne;
+        else power = -powerOne;
+      //  SetPower(isRight);
     }
     public void SetRotationForceTwo(bool isRight)
     {
         Reset();
-        power = powerTwo;
-        SetPower(isRight);
+        if (isRight) power = powerTwo;
+        else power = -powerTwo;
+       // SetPower(isRight);
     }
     public void SetRotationForceThree(bool isRight)
     {
         Reset();
-        power = powerThree;
-        SetPower(isRight);
+        if(isRight)power = powerThree;
+        else power = -powerThree;
+       // SetPower(isRight);
     }
 
     private void SetPower(bool isRight)

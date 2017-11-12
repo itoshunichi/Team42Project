@@ -711,6 +711,11 @@ Prefab:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 114465737500974678, guid: a8f6a94f5061c5c4b86790796167ad59,
+        type: 2}
+      propertyPath: speedMax
+      value: 0.12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a8f6a94f5061c5c4b86790796167ad59, type: 2}
   m_IsPrefabParent: 0
