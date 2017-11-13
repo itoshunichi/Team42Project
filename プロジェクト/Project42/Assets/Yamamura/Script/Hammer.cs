@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class Hammer : MonoBehaviour
 {
-    public GameObject player;
     private float power;             //振る力
     public float powerOne;          //一段階目の力
     public float powerTwo;          //二段階目の力
@@ -28,7 +27,6 @@ public class Hammer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.rotation = player.transform.rotation;
         //if (addForceCount < ForceCountMax)
         //{
         //    addForceCount++;
@@ -61,25 +59,19 @@ public class Hammer : MonoBehaviour
     public void SetRotationForceOne(bool isRight)
     {
         Reset();
-        //if (isRight)
         power = powerOne;
-        //else power = -powerOne;
         SetPower(isRight);
     }
     public void SetRotationForceTwo(bool isRight)
     {
         Reset();
-        //if (isRight)
         power = powerTwo;
-        //else power = -powerTwo;
         SetPower(isRight);
     }
     public void SetRotationForceThree(bool isRight)
     {
         Reset();
-        //if(isRight)
         power = powerThree;
-        //else power = -powerThree;
         SetPower(isRight);
     }
 
@@ -101,16 +93,13 @@ public class Hammer : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "BeDestroyedObject" && transform.GetComponent<Rigidbody2D>().velocity.x > 1.8f || transform.GetComponent<Rigidbody2D>().velocity.y > 1.8f)
+        if (col.gameObject.tag == "BeDestroyedObject" && transform.GetComponent<Rigidbody2D>().velocity != Vector2.zero)
         {
+
             Time.timeScale = 0.7f;
             shake.ShakeObject();
-            Debug.Log(col.gameObject.name);
-            if (col.gameObject.GetComponent<BeDestroyedObject>().Type == ObjectType.ENEMY)
-            {
-                col.gameObject.GetComponent<BeDestroyedObject>().BeginDamage();
-                energy.AddEnergy(25.0f);
-            }
+            col.gameObject.GetComponent<BeDestroyedObject>().BeginDamage();
+            energy.AddEnergy(25.0f);
             Time.timeScale = 1f;
         }
     }
