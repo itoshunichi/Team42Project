@@ -25,7 +25,7 @@ public class PlayerSmallController : Player
 
     private void Move()
     {
-        if (!isHit && !stageOut.IsStageOut())
+        if (!isHit || !stageOut.IsStageOut())
         {
             RotationMove();
         }
@@ -45,6 +45,15 @@ public class PlayerSmallController : Player
         transform.position += dir * speed;
     }
 
+    public float GetSpeed()
+    {
+        return speed;
+    }
+
+    public bool GetHit()
+    {
+        return isHit;
+    }
 
     void OnCollisionEnter2D(Collision2D col)
     {

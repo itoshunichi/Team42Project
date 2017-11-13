@@ -77,14 +77,18 @@ public class FlickController : MonoBehaviour
                 else beforeRadian = afterRadian;        //二回目以降afterRadianセット
                 //角度取得
                 afterRadian = Mathf.Atan2(afterDirection.y, afterDirection.x) * Mathf.Rad2Deg;
+                
                 //0より小さかったら+360足す
                 if (beforeRadian < 0) beforeRadian += 360;
                 if (afterRadian < 0) afterRadian += 360;
-                //radian = 値が大きい方 - 値が小さい方
-                float radian;
-                if (beforeRadian < afterRadian) radian = afterRadian - beforeRadian;
-                else radian = beforeRadian - afterRadian;
 
+                //radian = 値が大きい方 - 値が小さい方
+                float radian = afterRadian - beforeRadian;
+                if (radian < 0) radian += 360;
+
+                //最短距離の場合(最大距離の場合は逆)
+                //radian 179以下 - 時計回り
+                //radina 181以上 + 反時計回り
                 //radianの値が規定値以下だったら回転しない
                 RadianCheck(radian);
 
@@ -102,13 +106,18 @@ public class FlickController : MonoBehaviour
     private void RadianCheck(float radian)
     {       //前回の角度と比べて大きさくなるほど回す力を大きくするメソッドを呼ぶ
         if (radian > radianMaxOne && radian < radianMaxTwo)
-            hammer.GetComponent<Hammer>().SetRotationForceOne(RightFlick(touchStartPos, touchEndPos));
+            hammer.GetComponent<Hammer>().SetRotationForceOne(RadinaShortest(radian));
         else if (radian > radianMaxTwo && radian < radianMaxThree)
-            hammer.GetComponent<Hammer>().SetRotationForceTwo(RightFlick(touchStartPos, touchEndPos));
+            hammer.GetComponent<Hammer>().SetRotationForceTwo(RadinaShortest(radian));
         else if (radian >= radianMaxThree)
-            hammer.GetComponent<Hammer>().SetRotationForceThree(RightFlick(touchStartPos, touchEndPos));
+            hammer.GetComponent<Hammer>().SetRotationForceThree(RadinaShortest(radian));
     }
-
+    //角度の最短距離
+    private bool RadinaShortest(float radian)
+    {
+        if (radian < 180) return true;//時計回り
+        return false;//反時計周り
+    }
 
     bool RightFlick(Vector2 start, Vector2 end)
     {
@@ -152,5 +161,10 @@ public class FlickController : MonoBehaviour
     public void SetRotation(Vector3 pos)
     {
         transform.localRotation = Quaternion.LookRotation(Vector3.forward, pos);
+    }
+
+    public float radian()
+    {
+        return afterRadian;
     }
 }

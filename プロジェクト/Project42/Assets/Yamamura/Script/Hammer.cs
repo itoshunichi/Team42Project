@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class Hammer : MonoBehaviour
 {
     public GameObject player;
-    private float power;             //振る力
     public float powerOne;          //一段階目の力
     public float powerTwo;          //二段階目の力
     public float powerThree;        //三段階目の力
@@ -44,10 +43,13 @@ public class Hammer : MonoBehaviour
 
     private void VelocityZero()
     {
-        countVelocity++;
         if (countVelocity > velocityCountMax)
         {
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        }
+        else if (countVelocity <= velocityCountMax)
+        {
+            countVelocity++;
         }
     }
 
@@ -62,28 +64,28 @@ public class Hammer : MonoBehaviour
     {
         Reset();
         //if (isRight)
-        power = powerOne;
+        //power = powerOne;
         //else power = -powerOne;
-        SetPower(isRight);
+        SetPower(isRight,powerOne);
     }
     public void SetRotationForceTwo(bool isRight)
     {
         Reset();
         //if (isRight)
-        power = powerTwo;
+        //power = powerTwo;
         //else power = -powerTwo;
-        SetPower(isRight);
+        SetPower(isRight,powerTwo);
     }
     public void SetRotationForceThree(bool isRight)
     {
         Reset();
         //if(isRight)
-        power = powerThree;
+        //power = powerThree;
         //else power = -powerThree;
-        SetPower(isRight);
+        SetPower(isRight,powerThree);
     }
 
-    private void SetPower(bool isRight)
+    private void SetPower(bool isRight,float power)
     {
         if (isRight)
             GetComponent<Rigidbody2D>().AddForce(transform.right * (power));
@@ -97,6 +99,12 @@ public class Hammer : MonoBehaviour
         if (energy.GetEnergy() < 100) GetComponent<SpriteRenderer>().sprite = hammerLv[0];
         else if (energy.GetEnergy() >= 100 && energy.GetEnergy() < 200) GetComponent<SpriteRenderer>().sprite = hammerLv[1];
         else if (energy.GetEnergy() >= 200) GetComponent<SpriteRenderer>().sprite = hammerLv[2];
+    }
+
+    public bool VelocityCountUp()
+    {
+        if (countVelocity < velocityCountMax) return true;
+        return false;
     }
 
     void OnCollisionEnter2D(Collision2D col)
