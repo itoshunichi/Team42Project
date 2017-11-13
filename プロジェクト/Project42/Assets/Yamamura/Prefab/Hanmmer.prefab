@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 58736242827743018}
   - component: {fileID: 114412223876527794}
   - component: {fileID: 114782539001819826}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hammer
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 233033174568134580}
   - component: {fileID: 212548735284526144}
   - component: {fileID: 232343630808542042}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Chain6
   m_TagString: Chain
   m_Icon: {fileID: 0}
@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 50005099942932858}
   - component: {fileID: 233192074295337320}
   - component: {fileID: 232742123806580390}
-  m_Layer: 18
+  m_Layer: 8
   m_Name: PlayerSmall
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 58023774391160342}
   - component: {fileID: 233373951663712068}
   - component: {fileID: 232222018252164236}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Chain2
   m_TagString: Chain
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 58268548373041112}
   - component: {fileID: 233743332918413984}
   - component: {fileID: 232284747459813146}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Chain3
   m_TagString: Chain
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 58806098667292422}
   - component: {fileID: 233816503141481614}
   - component: {fileID: 232635164071343474}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Chain5
   m_TagString: Chain
   m_Icon: {fileID: 0}
@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 58682451587411440}
   - component: {fileID: 233078518145648242}
   - component: {fileID: 232045419601071350}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Chain4
   m_TagString: Chain
   m_Icon: {fileID: 0}
@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 233404906958558922}
   - component: {fileID: 212196940625584262}
   - component: {fileID: 232813720486335376}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Chain1
   m_TagString: Chain
   m_Icon: {fileID: 0}
@@ -196,7 +196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4127434021092132}
   - component: {fileID: 212130052755915654}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -639,6 +639,7 @@ MonoBehaviour:
   ForceCountMax: 10
   velocityCountMax: 10
   shake: {fileID: 0}
+  hammerLv: []
 --- !u!114 &114465737500974678
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -666,6 +667,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6369c380088550348b3e0d8ca6eddf43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 1
+  levelUpEnergy: 0
+  levelMaxEnergy: 0
 --- !u!212 &212130052755915654
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -698,7 +702,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1558849349
-  m_SortingLayer: 2
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 62af0b099b620ab45aff0565dc2d1204, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1006,7 +1010,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1558849349
-  m_SortingLayer: 2
+  m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: f3acd529d616f5848b7a1b46dbbe8f8f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1050,7 +1054,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1558849349
-  m_SortingLayer: 2
+  m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 7c7d8846f42027640b3fba65f0501797, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
