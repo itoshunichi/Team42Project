@@ -313,7 +313,7 @@ Prefab:
     - target: {fileID: 212575435111283212, guid: a8f6a94f5061c5c4b86790796167ad59,
         type: 2}
       propertyPath: m_SortingLayer
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 212130052755915654, guid: a8f6a94f5061c5c4b86790796167ad59,
         type: 2}
@@ -323,7 +323,7 @@ Prefab:
     - target: {fileID: 212130052755915654, guid: a8f6a94f5061c5c4b86790796167ad59,
         type: 2}
       propertyPath: m_SortingLayer
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 232742123806580390, guid: a8f6a94f5061c5c4b86790796167ad59,
         type: 2}
@@ -1029,7 +1029,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5073accfdf4114aa44a45b200eaaa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obj: {fileID: 1895520465}
+  obj: {fileID: 0}
 --- !u!114 &1199868735
 MonoBehaviour:
   m_ObjectHideFlags: 0
