@@ -338,17 +338,17 @@ Prefab:
     - target: {fileID: 114412223876527794, guid: a8f6a94f5061c5c4b86790796167ad59,
         type: 2}
       propertyPath: powerOne
-      value: 25
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 114412223876527794, guid: a8f6a94f5061c5c4b86790796167ad59,
         type: 2}
       propertyPath: powerTwo
-      value: 30
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 114412223876527794, guid: a8f6a94f5061c5c4b86790796167ad59,
         type: 2}
       propertyPath: powerThree
-      value: 35
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1900295997811956, guid: a8f6a94f5061c5c4b86790796167ad59, type: 2}
       propertyPath: m_Layer
