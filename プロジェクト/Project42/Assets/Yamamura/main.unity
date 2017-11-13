@@ -338,17 +338,17 @@ Prefab:
     - target: {fileID: 114412223876527794, guid: a8f6a94f5061c5c4b86790796167ad59,
         type: 2}
       propertyPath: powerOne
-      value: 5
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 114412223876527794, guid: a8f6a94f5061c5c4b86790796167ad59,
         type: 2}
       propertyPath: powerTwo
-      value: 7
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 114412223876527794, guid: a8f6a94f5061c5c4b86790796167ad59,
         type: 2}
       propertyPath: powerThree
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1900295997811956, guid: a8f6a94f5061c5c4b86790796167ad59, type: 2}
       propertyPath: m_Layer
@@ -378,6 +378,26 @@ Prefab:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 114412223876527794, guid: a8f6a94f5061c5c4b86790796167ad59,
+        type: 2}
+      propertyPath: ForceCountMax
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 114412223876527794, guid: a8f6a94f5061c5c4b86790796167ad59,
+        type: 2}
+      propertyPath: velocityCountMax
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 50991069709947598, guid: a8f6a94f5061c5c4b86790796167ad59,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114412223876527794, guid: a8f6a94f5061c5c4b86790796167ad59,
+        type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1970875377}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a8f6a94f5061c5c4b86790796167ad59, type: 2}
   m_IsPrefabParent: 0
@@ -686,7 +706,7 @@ Prefab:
     - target: {fileID: 114644167601429938, guid: 598e72aa27145e549af26f036d242ffe,
         type: 2}
       propertyPath: m_FillAmount
-      value: 0.26
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224401831905447570, guid: 598e72aa27145e549af26f036d242ffe,
         type: 2}
