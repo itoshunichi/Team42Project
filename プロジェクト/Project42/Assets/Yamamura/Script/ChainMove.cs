@@ -26,7 +26,7 @@ public class ChainMove : MonoBehaviour
 
     private void Move()
     {
-        if (!stageOut.IsStageOut() || !playerSC.GetHit() || !hammer.VelocityCountUp())
+        if (!stageOut.IsStageOut() || !playerSC.GetHit() || hammer.VelocityCountUp())
         {
             transform.rotation = player.transform.rotation;
             float angleDirection = transform.eulerAngles.z * (Mathf.PI / 180.0f);

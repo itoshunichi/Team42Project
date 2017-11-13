@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Energy : MonoBehaviour
 {
 
-    float energy = 0;
+    float energy = 50;
     public int level = 1;
     public float levelUpEnergy;
     public float levelMaxEnergy;

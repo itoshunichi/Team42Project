@@ -17,30 +17,24 @@ public class Hammer : MonoBehaviour
     public float velocityCountMax;
     public Shake shake;
     public Sprite[] hammerLv;
+    DistanceJoint2D distance;
 
     // Use this for initialization
     void Start()
     {
         energy = GetComponent<Energy>();
+        distance = GetComponent<DistanceJoint2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.rotation = player.transform.rotation;
-        //if (addForceCount < ForceCountMax)
-        //{
-        //    addForceCount++;
-        //    var force = transform.right * (power);
-        //    addForceAlpha += 0.02f;
-
-        //    GetComponent<Rigidbody2D>().AddForce(Vector2.Lerp(transform.right * (power), Vector2.zero, addForceAlpha));
-        //}
-
+        
         VelocityZero();
         SpriteChange();
     }
-
+    //velocityをゼロにする処理
     private void VelocityZero()
     {
         if (countVelocity > velocityCountMax)
@@ -60,32 +54,16 @@ public class Hammer : MonoBehaviour
         addForceAlpha = 0;
     }
 
-    public void SetRotationForceOne(bool isRight)
+    public void SetRotationForce(bool isRight,int powerNum)
     {
+        transform.rotation = player.transform.rotation;
         Reset();
-        //if (isRight)
-        //power = powerOne;
-        //else power = -powerOne;
-        SetPower(isRight,powerOne);
+        if (powerNum == 0) FlickRotation(isRight, powerOne);
+        else if (powerNum == 1) FlickRotation(isRight, powerTwo);
+        else if (powerNum == 2) FlickRotation(isRight, powerThree);
     }
-    public void SetRotationForceTwo(bool isRight)
-    {
-        Reset();
-        //if (isRight)
-        //power = powerTwo;
-        //else power = -powerTwo;
-        SetPower(isRight,powerTwo);
-    }
-    public void SetRotationForceThree(bool isRight)
-    {
-        Reset();
-        //if(isRight)
-        //power = powerThree;
-        //else power = -powerThree;
-        SetPower(isRight,powerThree);
-    }
-
-    private void SetPower(bool isRight,float power)
+  
+    private void FlickRotation(bool isRight,float power)
     {
         if (isRight)
             GetComponent<Rigidbody2D>().AddForce(transform.right * (power));
@@ -93,14 +71,14 @@ public class Hammer : MonoBehaviour
             GetComponent<Rigidbody2D>().AddForce(transform.right * (-power));
     }
 
-
+    //レベルによって見た目を変える
     private void SpriteChange()
     {
         if (energy.GetEnergy() < 100) GetComponent<SpriteRenderer>().sprite = hammerLv[0];
         else if (energy.GetEnergy() >= 100 && energy.GetEnergy() < 200) GetComponent<SpriteRenderer>().sprite = hammerLv[1];
         else if (energy.GetEnergy() >= 200) GetComponent<SpriteRenderer>().sprite = hammerLv[2];
     }
-
+    
     public bool VelocityCountUp()
     {
         if (countVelocity < velocityCountMax) return true;

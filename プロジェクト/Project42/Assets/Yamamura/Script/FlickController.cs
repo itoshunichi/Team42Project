@@ -77,7 +77,7 @@ public class FlickController : MonoBehaviour
                 else beforeRadian = afterRadian;        //二回目以降afterRadianセット
                 //角度取得
                 afterRadian = Mathf.Atan2(afterDirection.y, afterDirection.x) * Mathf.Rad2Deg;
-                
+
                 //0より小さかったら+360足す
                 if (beforeRadian < 0) beforeRadian += 360;
                 if (afterRadian < 0) afterRadian += 360;
@@ -106,11 +106,11 @@ public class FlickController : MonoBehaviour
     private void RadianCheck(float radian)
     {       //前回の角度と比べて大きさくなるほど回す力を大きくするメソッドを呼ぶ
         if (radian > radianMaxOne && radian < radianMaxTwo)
-            hammer.GetComponent<Hammer>().SetRotationForceOne(RadinaShortest(radian));
+            hammer.GetComponent<Hammer>().SetRotationForce(RadinaShortest(radian), 0);
         else if (radian > radianMaxTwo && radian < radianMaxThree)
-            hammer.GetComponent<Hammer>().SetRotationForceTwo(RadinaShortest(radian));
+            hammer.GetComponent<Hammer>().SetRotationForce(RadinaShortest(radian), 1);
         else if (radian >= radianMaxThree)
-            hammer.GetComponent<Hammer>().SetRotationForceThree(RadinaShortest(radian));
+            hammer.GetComponent<Hammer>().SetRotationForce(RadinaShortest(radian), 2);
     }
     //角度の最短距離
     private bool RadinaShortest(float radian)
