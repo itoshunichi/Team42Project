@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class Hammer : MonoBehaviour
 {
     public GameObject player;
+    private float rotationPower;
     public float powerOne;          //一段階目の力
     public float powerTwo;          //二段階目の力
     public float powerThree;        //三段階目の力
@@ -29,10 +30,23 @@ public class Hammer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.rotation = player.transform.rotation;
-        
+        LerpRotaion();
+        //transform.rotation = player.transform.rotation;
+
         VelocityZero();
         SpriteChange();
+    }
+
+    private void LerpRotaion()
+    {
+        if (addForceCount < ForceCountMax)
+        {
+            addForceCount++;
+            var force = transform.right * (rotationPower);
+            addForceAlpha += 0.02f;
+
+            GetComponent<Rigidbody2D>().AddForce(Vector2.Lerp(transform.right * (rotationPower), Vector2.zero, addForceAlpha));
+        }
     }
     //velocityをゼロにする処理
     private void VelocityZero()
@@ -54,16 +68,28 @@ public class Hammer : MonoBehaviour
         addForceAlpha = 0;
     }
 
-    public void SetRotationForce(bool isRight,int powerNum)
+    public void SetRotationForce(bool isRight, int powerNum)
     {
         transform.rotation = player.transform.rotation;
         Reset();
-        if (powerNum == 0) FlickRotation(isRight, powerOne);
-        else if (powerNum == 1) FlickRotation(isRight, powerTwo);
-        else if (powerNum == 2) FlickRotation(isRight, powerThree);
+        if (isRight)
+        {
+            if (powerNum == 0) rotationPower = powerOne;
+            else if (powerNum == 1) rotationPower = powerTwo;
+            else if (powerNum == 2) rotationPower = powerThree;
+        }
+        else if (!isRight)
+        {
+            if (powerNum == 0) rotationPower = -powerOne;
+            else if (powerNum == 1) rotationPower = -powerTwo;
+            else if (powerNum == 2) rotationPower = -powerThree;
+        }
+        //if (powerNum == 0) FlickRotation(isRight, powerOne);
+        //else if (powerNum == 1) FlickRotation(isRight, powerTwo);
+        //else if (powerNum == 2) FlickRotation(isRight, powerThree);
     }
-  
-    private void FlickRotation(bool isRight,float power)
+
+    private void FlickRotation(bool isRight, float power)
     {
         if (isRight)
             GetComponent<Rigidbody2D>().AddForce(transform.right * (power));
@@ -78,7 +104,7 @@ public class Hammer : MonoBehaviour
         else if (energy.GetEnergy() >= 100 && energy.GetEnergy() < 200) GetComponent<SpriteRenderer>().sprite = hammerLv[1];
         else if (energy.GetEnergy() >= 200) GetComponent<SpriteRenderer>().sprite = hammerLv[2];
     }
-    
+
     public bool VelocityCountUp()
     {
         if (countVelocity < velocityCountMax) return true;
