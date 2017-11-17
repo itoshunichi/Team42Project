@@ -24,9 +24,9 @@ TagManager:
   - 
   - 
   - BeDestroyedObject
-  - 
-  - 
-  - 
+  - Player
+  - Chain
+  - Hammer
   - 
   - 
   - 
