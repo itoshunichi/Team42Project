@@ -6,6 +6,23 @@ public class PlayerSmallController : Player
 {
     HingeJoint2D joint;
     public Energy soulEnergy;
+    private bool isMoveStop;
+    public bool IsMoveStop
+    {
+        get { return isMoveStop; }
+        set { isMoveStop = value; }
+    }
+
+
+    /// <summary>
+    /// アクションエリアにいるかどうか
+    /// </summary>
+    private bool isActionEria;
+    public bool IsActionEria
+    {
+        get { return isActionEria; }
+    }
+
 
     // Use this for initialization
     void Start()
@@ -33,6 +50,7 @@ public class PlayerSmallController : Player
     //向きに対して移動
     private void RotationMove()
     {
+        
         if (GetComponent<Player_StageOut>().IsStageOut()) return;
         if (transform.rotation.z != flick.transform.rotation.z) GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         if (speed < speedMax) speed += 0.002f;
@@ -42,10 +60,27 @@ public class PlayerSmallController : Player
         float angleDirection = transform.eulerAngles.z * (Mathf.PI / 180.0f);
 
         dir = new Vector3(-Mathf.Sin(angleDirection), Mathf.Cos(angleDirection), 0.0f);
+        if (isMoveStop) return;
         transform.position += dir * speed;
     }
 
-   
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "ActionEria")
+        {
+            isActionEria = true;
+        }
+    }
+    
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.tag == "ActionEria")
+        {
+            isActionEria = false;
+        }
+    }
+
+
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "BeDestroyedObject")

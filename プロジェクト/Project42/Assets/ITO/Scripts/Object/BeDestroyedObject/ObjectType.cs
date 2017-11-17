@@ -4,7 +4,9 @@ using UnityEngine;
 
 public enum ObjectType{
 
+    NORMAL,
     ENEMY,//敵
     SATELLITE,//衛星
+    
 	
 }
