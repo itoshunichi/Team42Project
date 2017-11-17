@@ -9,9 +9,6 @@ public class Player_StageOut : MonoBehaviour
     private bool isStageOut = false;
     public bool IsStageOut() { return isStageOut; }
 
-
-
-
     void Start()
     {
     }

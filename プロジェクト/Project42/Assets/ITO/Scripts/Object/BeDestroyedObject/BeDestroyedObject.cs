@@ -31,6 +31,8 @@ public abstract class BeDestroyedObject : MonoBehaviour
 
     protected ObjectType type;
 
+    protected GameObject player;
+
     public ObjectType Type
     {
         get { return type; }
@@ -49,10 +51,12 @@ public abstract class BeDestroyedObject : MonoBehaviour
         boss = GameObject.Find("Boss");
         beAbsorptionSpeed = parameter.beAbsorptionSpeed * Time.deltaTime;
         type = parameter.type;
+        player = GameObject.Find("PlayerSmall");
     }
 
     protected virtual void Update()
     {
+        if (type != ObjectType.ENEMY) return;
         if(isActionMode)Action();
         //ボスに吸収される
         BeAbsorption();
@@ -65,6 +69,7 @@ public abstract class BeDestroyedObject : MonoBehaviour
     /// </summary>
     protected void BeAbsorption()
     {
+        
         LookBoss();
         float rad = Mathf.Atan2(boss.transform.position.y - transform.position.y,
             boss.transform.position.x - transform.position.x);

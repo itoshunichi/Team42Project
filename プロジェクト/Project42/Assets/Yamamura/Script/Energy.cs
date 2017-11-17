@@ -20,6 +20,8 @@ public class Energy : MonoBehaviour
     void Update()
     {
         Level();
+        Debug.Log(energy);
+        Debug.Log("max" + LevelMax());
     }
 
     public void AddEnergy(float energy)

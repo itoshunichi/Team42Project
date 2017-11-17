@@ -5,19 +5,12 @@ using UnityEngine;
 /// <summary>
 /// プレイヤーを追尾するエネミー
 /// </summary>
-public class Enemy_B : BeDestroyedObject {
-
-    GameObject player;
-    protected override void Action()
-    {
-        base.Action();
-        SetPlayer();
-    }
+public class Enemy_B : BeDestroyedObject
+{
 
     protected override void Update()
     {
         Move();
-        Action();
         SetSprite();
     }
 
@@ -25,24 +18,24 @@ public class Enemy_B : BeDestroyedObject {
     {
         if (isActionMode)
         {
-            //プレイヤー追尾
-            TrackingPlayer();
-            
+            //プレイヤーがエリアに入っていたら吸収
+            if (!player.GetComponent<PlayerSmallController>().IsActionEria)
+            {
+                //吸収
+                BeAbsorption();
+            }
+            else
+            {
+                //プレイヤー追尾
+                TrackingPlayer();
+            }
+
         }
         else
         {
             //吸収
             BeAbsorption();
         }
-    }
-
-    /// <summary>
-    /// プレイヤー取得
-    /// </summary>
-    private void SetPlayer()
-    {
-
-            player = GameObject.Find("PlayerSmall");
     }
 
     /// <summary>
@@ -79,11 +72,13 @@ public class Enemy_B : BeDestroyedObject {
         base.StopAction();
     }
 
-   
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
+        if (isActionMode)
+        {
+            StartCoroutine(AttackPlayer(collision.gameObject));
+        }
     }
 
     /// <summary>
@@ -92,10 +87,10 @@ public class Enemy_B : BeDestroyedObject {
     /// <returns></returns>
     private IEnumerator AttackPlayer(GameObject obj)
     {
-        
+
         obj.GetComponent<Rigidbody2D>().AddForce(Direction() * 300);
         player.transform.rotation = Quaternion.FromToRotation(Vector3.up, Direction());
-        
+
         yield return new WaitForSeconds(0.5f);
         obj.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         Destroy(gameObject);
