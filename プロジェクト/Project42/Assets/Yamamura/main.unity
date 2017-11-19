@@ -871,6 +871,11 @@ Prefab:
       propertyPath: flick
       value: 
       objectReference: {fileID: 1099144304}
+    - target: {fileID: 50404465445237398, guid: a8f6a94f5061c5c4b86790796167ad59,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a8f6a94f5061c5c4b86790796167ad59, type: 2}
   m_IsPrefabParent: 0

@@ -61,6 +61,7 @@ public class PlayerSmallController : Player
         {
             isHit = true;
             speed = 0;
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             Debug.Log("HIT");
             Vector2 dir = transform.position - col.gameObject.transform.position;
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
