@@ -7,13 +7,15 @@ public class PlayerSmallController : Player
     HingeJoint2D joint;
     public Energy soulEnergy;
     Player_StageOut stageOut;
+    float accelerator = 0;
+    public float acceleratorMax;
+
     private bool isMoveStop;
     public bool IsMoveStop
     {
         get { return isMoveStop; }
         set { isMoveStop = value; }
     }
-
 
     /// <summary>
     /// アクションエリアにいるかどうか
@@ -36,12 +38,13 @@ public class PlayerSmallController : Player
     // Update is called once per frame
     void Update()
     {
-        NotMoveCount();
-        Move();
+        Move();//移動処理
+        Accelerator();//加速処理
     }
 
     private void Move()
     {
+        NotMoveCount();
         if (!isHit || !stageOut.IsStageOut())
         {
             RotationMove();
@@ -61,13 +64,20 @@ public class PlayerSmallController : Player
 
         dir = new Vector3(-Mathf.Sin(angleDirection), Mathf.Cos(angleDirection), 0.0f);
         if (isMoveStop) return;
-        transform.position += dir * speed;
+        transform.position += dir * (speed + accelerator);
     }
-
-
-    public float GetSpeed()
+    //加速値を下げる
+    private void Accelerator()
     {
-        return speed;
+        if (accelerator > 0)
+        {
+            accelerator -= acceleratorMax / 30;
+        }
+    }
+    //加速数値セット
+    public void SetAccelerator()
+    {
+        accelerator = acceleratorMax;
     }
 
     public bool GetHit()
@@ -81,19 +91,20 @@ public class PlayerSmallController : Player
             isActionEria = true;
         }
     }
-    
+
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.tag == "ActionEria")
+        if (collision.tag == "ActionEria")
         {
             isActionEria = false;
         }
     }
-
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "BeDestroyedObject")
         {
+            AudioManager.Instance.PlaySE(AUDIO.SE_DAMAGE);
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             isHit = true;
             speed = 0;
             Debug.Log("HIT");

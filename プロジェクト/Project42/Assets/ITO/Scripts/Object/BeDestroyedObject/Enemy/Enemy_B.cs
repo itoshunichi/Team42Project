@@ -39,6 +39,22 @@ public class Enemy_B : BeDestroyedObject
     }
 
     /// <summary>
+    /// プレイヤー取得
+    /// </summary>
+    private void SetPlayer()
+    {
+        
+       // if (GameObject.Find("PlayerSmall").GetComponent<PlayerSmallController>().playerMode == PlayerMode.PLAYER)
+        {
+            player = GameObject.Find("PlayerSmall");
+        }
+        //else
+        //{
+        //    player = GameObject.Find("PlayerBig");
+        //}
+    }
+
+    /// <summary>
     /// プレイヤー追尾
     /// </summary>
     private void TrackingPlayer()

@@ -10,7 +10,8 @@ public class ChainMove : MonoBehaviour
     PlayerSmallController playerSC;
     Player_StageOut stageOut;
     public GameObject point;
-    float alpha;
+    float alpha = 1;
+    public float alphaPuls;
     // Use this for initialization
     void Start()
     {
@@ -21,25 +22,11 @@ public class ChainMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!stageOut.IsStageOut() || !playerSC.GetHit() || !hammer.VelocityCountUp())
+        if (//!stageOut.IsStageOut() && !playerSC.GetHit() && 
+            !hammer.VelocityCount())
         {
-            alpha += 0.01f;
+            alpha += alphaPuls;
             transform.position = Vector2.Lerp(transform.position, point.transform.position, alpha);
-        }
-        
-        speed = playerSC.GetSpeed();
-       // Move();
-    }
-
-    private void Move()
-    {
-        if (!stageOut.IsStageOut() || !playerSC.GetHit() || hammer.VelocityCountUp())
-        {
-            transform.rotation = player.transform.rotation;
-            float angleDirection = transform.eulerAngles.z * (Mathf.PI / 180.0f);
-
-            var dir = new Vector3(-Mathf.Sin(angleDirection), Mathf.Cos(angleDirection), 0.0f);
-            transform.position += dir * speed;
         }
     }
 

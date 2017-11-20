@@ -7,7 +7,7 @@ public class Energy : MonoBehaviour
 {
 
     float energy = 0;
-    public int level = 1;
+    public int level;
     public float levelUpEnergy;
     public float levelMaxEnergy;
 
@@ -20,8 +20,6 @@ public class Energy : MonoBehaviour
     void Update()
     {
         Level();
-        Debug.Log(energy);
-        Debug.Log("max" + LevelMax());
     }
 
     public void AddEnergy(float energy)
@@ -36,14 +34,15 @@ public class Energy : MonoBehaviour
     //レベルの上げ下げ
     private void Level()
     {
-        if (energy >= levelUpEnergy && level < 2)
-        {
+        if (energy >= levelUpEnergy * 2)
+            level = 3;
+        else if (energy >= levelUpEnergy)
             level = 2;
-        }
-        else if (energy < levelUpEnergy && level >= 2)
-        {
+        else if (energy < levelUpEnergy)
             level = 1;
-        }
+
+        if (energy >= levelMaxEnergy)
+            energy = levelMaxEnergy;
     }
 
     public bool LevelMax()

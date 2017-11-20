@@ -143,7 +143,7 @@ public class SceneNavigater : SingletonMonoBehaviour<SceneNavigater> {
 
     private void Update()
     {
-        Debug.Log(IsFading);
+        //Debug.Log(IsFading);
     }
 
     private void Start()
