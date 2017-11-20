@@ -3,7 +3,10 @@
 /// </summary>
 public static class AUDIO
 {
-	public const string BGM_MAIN = "main";
+	public const string BGM_ENDING = "ending";
+	public const string BGM_GAMEPLAY = "gamePlay";
+	public const string BGM_TITLE = "title";
 	
-	public const string SE_KETTEI = "kettei";
+	public const string SE_MATHEREAT = "matherEat";
+	public const string SE_MATHERSPAWN = "matherSpawn";
 }

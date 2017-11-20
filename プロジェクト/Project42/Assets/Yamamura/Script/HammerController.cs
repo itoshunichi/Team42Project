@@ -29,27 +29,30 @@ public class HammerController : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "BeDestroyedObject" && transform.GetComponent<Rigidbody2D>().velocity.x > DestroyValue || transform.GetComponent<Rigidbody2D>().velocity.y > DestroyValue)
-        {
-            Time.timeScale = 0.7f;
-            shake.ShakeObject();
-            Debug.Log(col.gameObject.name);
-            if (col.gameObject.GetComponent<BeDestroyedObject>().Type == ObjectType.ENEMY)
-            {
-                col.gameObject.GetComponent<BeDestroyedObject>().BeginDamage();
-                energy.AddEnergy(25.0f);
-            }
-            Time.timeScale = 1f;
-        }
+       
     }
 
     void OnTriggerEnter2D(Collider2D col)
     {
+
+        if (col.gameObject.tag == "BeDestroyedObject" && (transform.GetComponent<Rigidbody2D>().velocity.x > DestroyValue || transform.GetComponent<Rigidbody2D>().velocity.y > DestroyValue))
+        {
+            Time.timeScale = 0.7f;
+            shake.ShakeObject();
+            Debug.Log(col.gameObject.name);
+            col.gameObject.GetComponent<BeDestroyedObject>().BeginDamage();
+            if (col.gameObject.GetComponent<BeDestroyedObject>().Type != ObjectType.SATELLITE)
+            {
+
+                energy.AddEnergy(25.0f);
+            }
+            Time.timeScale = 1f;
+        }
         if (col.gameObject.tag == "Boss" && energy.LevelMax() &&
             (transform.GetComponent<Rigidbody2D>().velocity.x > DestroyValue || transform.GetComponent<Rigidbody2D>().velocity.y > DestroyValue))
         {
-           //col.gameObject.GetComponent<Boss>().Dead();
-            SceneNavigater.Instance.Change("Result");
+            col.gameObject.GetComponent<Boss>().Dead();
+           // SceneNavigater.Instance.Change("Result");
         }
     }
 }

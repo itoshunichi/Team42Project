@@ -29,6 +29,12 @@ public class FlickController : MonoBehaviour
     Player_StageOut stageOut;
     PlayerSmallController pcs;
     public ChainMove[] chains;
+
+    public int FlickCount
+    {
+        get { return flickCount; }
+    }
+
     // Use this for initialization
     void Start()
     {

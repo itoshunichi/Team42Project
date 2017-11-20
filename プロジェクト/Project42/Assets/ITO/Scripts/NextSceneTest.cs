@@ -20,7 +20,7 @@ public class NextSceneTest : MonoBehaviour {
         if (SceneNavigater.Instance.IsFading) return;
         if(Input.GetMouseButtonDown(0))
         {
-            AudioManager.Instance.PlaySE(AUDIO.SE_KETTEI);
+            //AudioManager.Instance.PlaySE(AUDIO.SE_KETTEI);
             SceneNavigater.Instance.Change(nextSceneName);
         }
 		

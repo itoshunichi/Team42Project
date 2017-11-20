@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4706148869430832}
   - component: {fileID: 212122696249918122}
   - component: {fileID: 61749678295975770}
+  - component: {fileID: 114332349991741512}
   m_Layer: 0
   m_Name: MiniBoss
   m_TagString: Boss
@@ -50,7 +51,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -66,6 +67,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.56, y: 2.56}
   m_EdgeRadius: 0
+--- !u!114 &114332349991741512
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1315643040533180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d771ac0edd27804c95cc3dbbe3ded47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxEnergy: 0
 --- !u!212 &212122696249918122
 SpriteRenderer:
   m_ObjectHideFlags: 1
