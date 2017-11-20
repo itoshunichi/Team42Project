@@ -89,8 +89,9 @@ public class Enemy_B : BeDestroyedObject
     }
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected override void OnCollisionEnter2D(Collision2D collision)
     {
+        base.OnCollisionEnter2D(collision);
         if (isActionMode)
         {
             StartCoroutine(AttackPlayer(collision.gameObject));

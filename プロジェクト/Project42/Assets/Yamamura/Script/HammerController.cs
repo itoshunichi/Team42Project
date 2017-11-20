@@ -31,15 +31,17 @@ public class HammerController : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
+
         if (col.gameObject.tag == "BeDestroyedObject" && 
             (transform.GetComponent<Rigidbody2D>().velocity.x > DestroyValue || transform.GetComponent<Rigidbody2D>().velocity.y > DestroyValue))
         {
             Time.timeScale = 0.7f;
             shake.ShakeObject();
             Debug.Log(col.gameObject.name);
-            if (col.gameObject.GetComponent<BeDestroyedObject>().Type == ObjectType.ENEMY)
+            col.gameObject.GetComponent<BeDestroyedObject>().BeginDamage();
+            if (col.gameObject.GetComponent<BeDestroyedObject>().Type != ObjectType.SATELLITE)
             {
-                col.gameObject.GetComponent<BeDestroyedObject>().BeginDamage();
+
                 energy.AddEnergy(25.0f);
                 AudioManager.Instance.PlaySE(AUDIO.SE_ENERGYGET);
             }
