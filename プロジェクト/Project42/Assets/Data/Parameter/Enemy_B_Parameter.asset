@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9804a3297d00953479dc885927db3747, type: 3}
   m_Name: Enemy_B_Parameter
   m_EditorClassIdentifier: 
-  maxHp: 1
+  type: 1
   giveEnergyPoint: 10
   isNecessaryEnergy: 0
   beAbsorptionSpeed: 3

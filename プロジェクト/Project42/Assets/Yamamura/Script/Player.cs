@@ -31,16 +31,13 @@ public abstract class Player : MonoBehaviour {
                 isHit = false;
                 GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             }
-            else if (hitCount < noMoveCount)
-            {
-                GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-            }
         }
     }
 
     public void Reset()
     {
         speed = 0;
+        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
     }
 
     public Vector3 GetDirectionVector()

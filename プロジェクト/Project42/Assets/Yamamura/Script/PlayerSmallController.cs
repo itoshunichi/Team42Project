@@ -9,6 +9,23 @@ public class PlayerSmallController : Player
     Player_StageOut stageOut;
     float accelerator = 0;
     public float acceleratorMax;
+
+    private bool isMoveStop;
+    public bool IsMoveStop
+    {
+        get { return isMoveStop; }
+        set { isMoveStop = value; }
+    }
+
+    /// <summary>
+    /// アクションエリアにいるかどうか
+    /// </summary>
+    private bool isActionEria;
+    public bool IsActionEria
+    {
+        get { return isActionEria; }
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -37,6 +54,7 @@ public class PlayerSmallController : Player
     //向きに対して移動
     private void RotationMove()
     {
+        if (GetComponent<Player_StageOut>().IsStageOut()) return;
         if (transform.rotation.z != flick.transform.rotation.z) GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         if (speed < speedMax) speed += 0.002f;
         transform.rotation = flick.transform.rotation;
@@ -45,6 +63,7 @@ public class PlayerSmallController : Player
         float angleDirection = transform.eulerAngles.z * (Mathf.PI / 180.0f);
 
         dir = new Vector3(-Mathf.Sin(angleDirection), Mathf.Cos(angleDirection), 0.0f);
+        if (isMoveStop) return;
         transform.position += dir * (speed + accelerator);
     }
     //加速値を下げる
@@ -65,15 +84,29 @@ public class PlayerSmallController : Player
     {
         return isHit;
     }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "ActionEria")
+        {
+            isActionEria = true;
+        }
+    }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "ActionEria")
+        {
+            isActionEria = false;
+        }
+    }
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "BeDestroyedObject")
         {
             AudioManager.Instance.PlaySE(AUDIO.SE_DAMAGE);
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             isHit = true;
             speed = 0;
-            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             Debug.Log("HIT");
             Vector2 dir = transform.position - col.gameObject.transform.position;
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;

@@ -30,6 +30,11 @@ public class FlickController : MonoBehaviour
     private bool isTap = false;         //Tapしたかどうか
     bool isFlick = false;
 
+    public int FlickCount
+    {
+        get { return flickCount; }
+    }
+
     // Use this for initialization
     void Start()
     {

@@ -51,7 +51,11 @@ Animator:
   m_GameObject: {fileID: 1752210198923328}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
+<<<<<<< HEAD
   m_Controller: {fileID: 9100000, guid: c5cfdaf70246da34181c0d42e36c257a, type: 2}
+=======
+  m_Controller: {fileID: 9100000, guid: b93e3b4b5093ec24f90dd90979f5f1f4, type: 2}
+>>>>>>> 317099be5d1c650a23ec3bae7529f481f314eb6d
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -95,7 +99,11 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+<<<<<<< HEAD
   m_StitchLightmapSeams: 0
+=======
+  m_StitchSeams: 0
+>>>>>>> 317099be5d1c650a23ec3bae7529f481f314eb6d
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5

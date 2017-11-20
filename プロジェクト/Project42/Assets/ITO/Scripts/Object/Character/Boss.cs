@@ -13,31 +13,6 @@ public class Boss : MonoBehaviour
     [SerializeField]
     private float maxEnergy;
 
-    ///// <summary>
-    ///// ウェーブ
-    ///// </summary>
-    //private GameObject attckWave;
-    //private GameObject stopWave;
-
-
-
-    ///// <summary>
-    ///// ウェーブの間隔
-    ///// </summary>
-    //[SerializeField]
-    //private int waveTime;
-
-    ///// <summary>
-    ///// ウェーブ準備開始時間
-    ///// </summary>
-    //[SerializeField]
-    //private int startReadyWaveTime;
-
-    ///// <summary>
-    ///// ウェーブ用のタイマー
-    ///// </summary>
-    //private float waveTimer = 0;
-
 
     /// <summary>
     /// エネルギー
@@ -45,36 +20,30 @@ public class Boss : MonoBehaviour
     private float energy = 0;
 
 
+    private Animator animator;
+
+
     void Start()
     {
-
-        //attckWave = Resources.Load<GameObject>("Prefab/Wave/AttackWave");
-        //stopWave = Resources.Load<GameObject>("Prefab/Wave/StopWave");
-        //StartCoroutine(InstantiateWave());
-        //InstantiateAttackWave();
+        
+        AudioManager.Instance.PlaySE(AUDIO.SE_MATHERSPAWN);
+        StartCoroutine(AnimationStart());
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        //GameObject.Find("BossEnergyText").GetComponent<Text>().text = "ボスエネルギー" + energy;
+        
+        AwakeFade();
         SetScale();
-        // InstantiateWave();
-
+        Debug.Log(GetComponent<SpriteRenderer>().color);
     }
 
-    public void BeginDamage()
-    {
-        // hp -= 1;
-       // InstantiateStopWave();
-        //InterruptWave();
-    }
 
-    public void Dead()
+    public virtual void Dead()
     {
         SceneNavigater.Instance.Change("GameClear");
-       // Destroy(gameObject);
     }
 
     /// <summary>
@@ -83,10 +52,15 @@ public class Boss : MonoBehaviour
     private void SetScale()
     {
         //エネルギーが0以下だったらスケールは変わらない
-        if (energy <= 0) transform.localScale = new Vector3(1, 1, 1);
-
-        float scale = energy / 100;
-        transform.localScale = new Vector3(1 + scale, 1 + scale, 1);
+        if (energy <= 0)
+        {
+            transform.localScale = new Vector3(1f, 1f, 1);
+        }
+        else
+        {
+            float scale = energy / 100;
+            transform.localScale = new Vector3(1f + scale, 1f + scale, 1);
+        }
     }
 
     #region　エネルギー関係
@@ -115,69 +89,38 @@ public class Boss : MonoBehaviour
 
     #endregion
 
-    #region ウェーブ関係
-    ///// <summary>
-    ///// ウェーブの生成
-    ///// </summary>
-    //private void InstantiateWave()
-    //{
-    //    if (waveTimer <= waveTime)
-    //    {
-    //        waveTimer += Time.deltaTime;
-    //        Debug.Log((int)waveTimer);
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("end");
-    //        wave = (GameObject)Instantiate(wavePrefab);
-    //        waveTimer = 0;
-    //    }
-    //}
 
+    public bool IsEndAnimation()
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).loop == false) return false;
+        return animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1;
+    }
 
-    //private IEnumerator InstantiateWave()
-    //{
+    /// <summary>
+    /// 生成時のフェード
+    /// </summary>
+    private void AwakeFade()
+    {   
+        Color color = GetComponent<SpriteRenderer>().color;
         
+        if (color.a < 1)
+        {
+            color.a += 0.1f;
+            GetComponent<SpriteRenderer>().color = color;
+            animator.speed = 0f;
+            Debug.Log("フェード");
+        }    
+    }
 
-    //    while(true)
-    //    {
-    //        yield return new WaitForSeconds(waveTime);
-    //        InstantiateAttackWave();
-    //    }
-    //}
+    private IEnumerator AnimationStart()
+    {
+        yield return new WaitForSeconds(1.5f);
+        animator.speed = 1f;
+        Debug.Log("start");
+        
+    }
 
-    //public void InstantiateAttackWave()
-    //{
-    //    Instantiate(attckWave);
-    //}
 
-    //private void InstantiateStopWave()
-    //{
-    //    Instantiate(stopWave);
-    //}
-
-    ///// <summary>
-    ///// ウェーブ中断
-    ///// </summary>
-    //private void InterruptWave()
-    //{
-    //    //ウェーブ準備時間だったら
-    //    if (IsReadyWaveTime())
-    //    {
-    //        Destroy(attckWave);//ウェーブ削除
-    //    }
-    //}
-
-    ///// <summary>
-    ///// ウェーブ準備時間に突入したかどうか
-    ///// </summary>
-    ///// <returns></returns>
-    //private bool IsReadyWaveTime()
-    //{
-    //    return waveTimer >= startReadyWaveTime;
-    //}
-
-    #endregion
 
 
 

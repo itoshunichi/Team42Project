@@ -27,14 +27,27 @@ public class CameraControl : MonoBehaviour
     float cameraRangeY_Radius;
 
     //各座標の最大値
-    float maxLeft ;
+    float maxLeft;
     float maxRight;
     float maxTop;
     float maxBottom;
+    //ゲームプレイ中のカメラのサイズ
+    private float gamePlayCameraSize = 14;
+
+    private bool isMove;
+    public bool IsMove
+    {
+        set { isMove = value; }
+    }
 
 
-    void Start()
-    {       
+
+    /// <summary>
+    /// カメラの範囲の設定
+    /// </summary>
+    private void SetCameraRange()
+    {
+        //if (!isGameStart) return;
         //各オブジェクトの座標を取得
         frameTopPos = GameObject.Find("TopCollider").transform.position;
         frameBottomPos = GameObject.Find("BottomCollider").transform.position;
@@ -51,14 +64,19 @@ public class CameraControl : MonoBehaviour
         maxRight = frameRightPos.x - cameraRangeX_Radius;
         maxTop = frameTopPos.y - cameraRangeY_Radius;
         maxBottom = frameBottomPos.y + cameraRangeY_Radius;
+    }
 
+    void Start()
+    {
+       // StartCoroutine(CameraZoom());
+           
     }
 
     void Update()
     {
 
         MoveCamera();
-
+        //CameraZoom();
     }
 
     /// <summary>
@@ -66,10 +84,10 @@ public class CameraControl : MonoBehaviour
     /// </summary>
     private void MoveCamera()
     {
+        if (!isMove) return;
         float posX = Mathf.Clamp(target.transform.position.x, maxLeft, maxRight);
         float posY = Mathf.Clamp(target.transform.position.y, maxBottom, maxTop);
         Vector3 pos = new Vector3(posX, posY, -10);
-        
         transform.position = pos;
     }
 
@@ -95,5 +113,16 @@ public class CameraControl : MonoBehaviour
         //上下反転
         bottomRight = (new Vector3(1f, -1f, 1f));
         return bottomRight;
+    }
+
+    public IEnumerator CameraZoom()
+    {
+       while (GetComponent<Camera>().orthographicSize >= gamePlayCameraSize)
+        {
+            GetComponent<Camera>().orthographicSize -= 0.1f;
+            yield return null;
+        }
+
+        SetCameraRange();   
     }
 }

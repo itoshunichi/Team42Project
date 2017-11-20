@@ -112,6 +112,18 @@ public class ActionEria : MonoBehaviour
         CreatePolygon();
     }
 
+
+    /// <summary>
+    /// エリアポイントの生成(場所指定)
+    /// </summary>
+    public void InstantiateEriaPoint(Vector2 pos)
+    {
+       
+        AddEriaPoint(pos);
+        //ポリゴンを作成
+        CreatePolygon();
+    }
+
     /// <summary>
     /// エリアポイントの追加
     /// </summary>
@@ -121,6 +133,7 @@ public class ActionEria : MonoBehaviour
         eriaPointObjects.Remove(BottomEriaPoint);
         //指定した位置にエリアポイントを生成
         GameObject eriaP = Instantiate(eriaPointPrefab, position, Quaternion.identity);
+        eriaP.name = eriaPointPrefab.name;
         //このオブジェクトを親に
         eriaP.transform.parent = transform;
         //リストに追加

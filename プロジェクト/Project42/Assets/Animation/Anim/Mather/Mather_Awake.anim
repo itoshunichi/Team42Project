@@ -95,7 +95,11 @@ AnimationClip:
     m_Level: 0
     m_CycleOffset: 0
     m_HasAdditiveReferencePose: 0
+<<<<<<< HEAD
     m_LoopTime: 1
+=======
+    m_LoopTime: 0
+>>>>>>> 317099be5d1c650a23ec3bae7529f481f314eb6d
     m_LoopBlend: 0
     m_LoopBlendOrientation: 0
     m_LoopBlendPositionY: 0
