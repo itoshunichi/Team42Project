@@ -15,9 +15,9 @@ public class HammerSpriteChange : MonoBehaviour {
     //レベルによって見た目を変える
     public void SpriteChange()
     {
-        if (energy.level == 1) GetComponent<SpriteRenderer>().sprite = hammerLv[0];
-        else if (energy.level == 2 && energy.GetEnergy() < 200) GetComponent<SpriteRenderer>().sprite = hammerLv[1];
-        else if (energy.level == 3) GetComponent<SpriteRenderer>().sprite = hammerLv[2];
+        if (energy.GetEnergy() < 100) GetComponent<SpriteRenderer>().sprite = hammerLv[0];
+        else if (energy.GetEnergy() >= 100 && energy.GetEnergy() < 200) GetComponent<SpriteRenderer>().sprite = hammerLv[1];
+        else if (energy.GetEnergy() >= 200) GetComponent<SpriteRenderer>().sprite = hammerLv[2];
     }
 
 }

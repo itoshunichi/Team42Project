@@ -31,7 +31,7 @@ public abstract class Player : MonoBehaviour {
                 isHit = false;
                 GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             }
-            else 
+            else if (hitCount < noMoveCount)
             {
                 GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
             }

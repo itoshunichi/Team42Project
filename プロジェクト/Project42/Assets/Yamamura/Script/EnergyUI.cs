@@ -48,7 +48,7 @@ public class EnergyUI : MonoBehaviour
     private void Move()
     {
         transform.position = hammer.GetComponent<HammerMove>().GetLerpPos();
-            //Vector2.Lerp(transform.position, hammer.transform.position, 1.0f);
+        //Vector2.Lerp(transform.position, hammer.transform.position, 1.0f);
         gameObject.transform.rotation = hammer.transform.rotation;
     }
 }

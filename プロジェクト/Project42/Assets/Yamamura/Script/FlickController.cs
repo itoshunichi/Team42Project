@@ -74,7 +74,7 @@ public class FlickController : MonoBehaviour
                 RadianCheck(GetRadian());
                 pcs.Reset();//プレイヤーの速度等リセット
                 foreach (var chain in chains) chain.Reset();
-              
+
                 flickCount += 1;//フリックした回数をカウント
             }
             tapTimer = 0.0f;

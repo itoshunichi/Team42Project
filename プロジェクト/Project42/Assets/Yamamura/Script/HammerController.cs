@@ -9,9 +9,8 @@ public class HammerController : MonoBehaviour {
     public Hammer hammer;
     public HammerMove hammerMove;
     public HammerSpriteChange hammerSprite;
-    public EnergyEffect effect;
+    public EnergyEffect energyEffect;
     public float DestroyValue;
-
 	// Use this for initialization
 	void Start () {
   	}
@@ -21,23 +20,20 @@ public class HammerController : MonoBehaviour {
         hammer.HammerUpdate();
         hammerMove.Move();
         hammerSprite.SpriteChange();
-        effect.EnergyLevelEffect();
+        energyEffect.EnergyLevelEffect();
 	}
 
-    //数値リセット
     public void Reset()
     {
         hammer.Reset();
         hammerMove.Reset();
     }
 
-    //あたり判定
-    void OnTriggerEnter2D(Collider2D col)
+    void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "BeDestroyedObject" && (transform.GetComponent<Rigidbody2D>().velocity.x > DestroyValue || transform.GetComponent<Rigidbody2D>().velocity.y > DestroyValue))
         {
             Time.timeScale = 0.7f;
-            
             shake.ShakeObject();
             Debug.Log(col.gameObject.name);
             if (col.gameObject.GetComponent<BeDestroyedObject>().Type == ObjectType.ENEMY)
@@ -48,11 +44,14 @@ public class HammerController : MonoBehaviour {
             }
             Time.timeScale = 1f;
         }
+    }
 
+    void OnTriggerEnter2D(Collider2D col)
+    {
         if (col.gameObject.tag == "Boss" && energy.LevelMax() && (transform.GetComponent<Rigidbody2D>().velocity.x > DestroyValue || transform.GetComponent<Rigidbody2D>().velocity.y > DestroyValue))
         {
             col.gameObject.GetComponent<Boss>().Dead();
             AudioManager.Instance.PlaySE(AUDIO.SE_ATTACK);
-        }
+            }
     }
 }

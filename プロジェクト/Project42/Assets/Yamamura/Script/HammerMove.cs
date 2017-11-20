@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HammerMove : MonoBehaviour {
+public class HammerMove : MonoBehaviour
+{
 
     public PlayerSmallController playerSC;
     public Player_StageOut stageOut;
@@ -10,10 +11,11 @@ public class HammerMove : MonoBehaviour {
     float alpha = 1;
     public float alphaPuls;
     Hammer hammer;
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         hammer = GetComponent<Hammer>();
-	}
+    }
 
     public void Move()
     {
