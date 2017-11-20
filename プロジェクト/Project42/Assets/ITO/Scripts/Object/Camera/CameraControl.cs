@@ -66,9 +66,6 @@ public class CameraControl : MonoBehaviour
     /// </summary>
     private void MoveCamera()
     {
-
-
-
         float posX = Mathf.Clamp(target.transform.position.x, maxLeft, maxRight);
         float posY = Mathf.Clamp(target.transform.position.y, maxBottom, maxTop);
         Vector3 pos = new Vector3(posX, posY, -10);

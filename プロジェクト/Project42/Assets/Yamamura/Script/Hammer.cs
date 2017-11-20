@@ -10,21 +10,21 @@ public class Hammer : MonoBehaviour
     public float powerOne;          //一段階目の力
     public float powerTwo;          //二段階目の力
     public float powerThree;        //三段階目の力
-    
+
     int addForceCount = 120;        //
     public int ForceCountMax;
     float addForceAlpha = 0;        //
     float countVelocity = 120;      //velocityをゼロにするカウント
     public float velocityCountMax;
 
-    
+
     // Use this for initialization
     void Start()
     {
-   
+
     }
 
-
+    //
     public void HammerUpdate()
     {
         LerpRotaion();
@@ -37,7 +37,7 @@ public class Hammer : MonoBehaviour
         {
             addForceCount++;
             var force = transform.right * (rotationPower);
-            addForceAlpha += 0.02f;
+            addForceAlpha += 0.005f;
 
             GetComponent<Rigidbody2D>().AddForce(Vector2.Lerp(transform.right * (rotationPower), Vector2.zero, addForceAlpha));
         }
@@ -45,16 +45,13 @@ public class Hammer : MonoBehaviour
     //velocityをゼロにする処理
     private void VelocityZero()
     {
-        if (countVelocity > velocityCountMax)
-        {
-            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        }
-        else if (countVelocity <= velocityCountMax)
-        {
-            countVelocity++;
-        }
-    }
 
+        if (!VelocityCount())
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        else if (VelocityCount())
+            countVelocity++;
+    }
+    //指定数値を０に
     public void Reset()
     {
         countVelocity = 0;
@@ -62,7 +59,7 @@ public class Hammer : MonoBehaviour
         addForceAlpha = 0;
         GetComponent<HammerMove>().Reset();
     }
-
+    //回転する力を設定
     public void SetRotationForce(bool isRight, int powerNum)
     {
         transform.rotation = player.transform.rotation;
@@ -79,18 +76,10 @@ public class Hammer : MonoBehaviour
             else if (powerNum == 1) rotationPower = -powerTwo;
             else if (powerNum == 2) rotationPower = -powerThree;
         }
+        AudioManager.Instance.PlaySE(AUDIO.SE_SWING);
     }
 
-    private void FlickRotation(bool isRight, float power)
-    {
-        if (isRight)
-            GetComponent<Rigidbody2D>().AddForce(transform.right * (power));
-        else if (!isRight)
-            GetComponent<Rigidbody2D>().AddForce(transform.right * (-power));
-    }
-
-   
-    public bool VelocityCountUp()
+    public bool VelocityCount()
     {
         if (countVelocity < velocityCountMax) return true;
         return false;

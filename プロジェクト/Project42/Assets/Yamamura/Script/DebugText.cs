@@ -17,6 +17,6 @@ public class DebugText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = "Radian" + obj.transform.rotation.z + "Velocity" + obj.GetComponent<Rigidbody2D>().velocity;
+        text.text = "" + flick.GetRadian();
     }
 }
