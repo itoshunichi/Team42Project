@@ -11840,6 +11840,11 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 8bdd74fda77b67d469b9f34fea8a7a6a,
         type: 3}
+    - target: {fileID: 223451162801895716, guid: 32296d469d95ffb46b1c9e49edc1d3d4,
+        type: 2}
+      propertyPath: m_SortingLayerID
+      value: -1821609183
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 32296d469d95ffb46b1c9e49edc1d3d4, type: 2}
   m_IsPrefabParent: 0
@@ -15995,6 +16000,8 @@ MonoBehaviour:
   hammerMove: {fileID: 1448062317}
   hammerSprite: {fileID: 1448062316}
   energyEffect: {fileID: 1448062315}
+  player: {fileID: 642335588}
+  flick: {fileID: 453572399}
   DestroyValue: 1.2
 --- !u!58 &1448062321
 CircleCollider2D:

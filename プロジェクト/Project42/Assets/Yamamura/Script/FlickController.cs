@@ -101,30 +101,46 @@ public class FlickController : MonoBehaviour
         //0より小さかったら+360足す
         if (beforeRadian < 0) beforeRadian += 360;
         if (afterRadian < 0) afterRadian += 360;
-
+        float radian = 0;
         //radian = 値が大きい方 - 値が小さい方
-        float radian = afterRadian - beforeRadian;
-        if (radian < 0) radian += 360;
+        if (afterRadian > beforeRadian) radian = afterRadian - beforeRadian;
+        else radian = beforeRadian - afterRadian;
         return radian;
     }
 
     private void RadianCheck(float radian)
     {       //前回の角度と比べて大きさくなるほど回す力を大きくするメソッドを呼ぶ
         if (radian >= radianMaxOne && radian < radianMaxTwo)
-            hammer.SetRotationForce(RadinaShortest(radian), 0);
+            hammer.SetRotationForce(RadinaShortest(), 0);
         else if (radian >= radianMaxTwo && radian < radianMaxThree)
-            hammer.SetRotationForce(RadinaShortest(radian), 1);
+            hammer.SetRotationForce(RadinaShortest(), 1);
         else if (radian >= radianMaxThree)
-            hammer.SetRotationForce(RadinaShortest(radian), 2);
+            hammer.SetRotationForce(RadinaShortest(), 2);
         else if (radian < radianMaxOne)
         {
             pcs.SetAccelerator();
-            hammer.Reset();
         }
     }
     //角度の最短距離
-    private bool RadinaShortest(float radian)
+    private bool RadinaShortest()
     {
+        var rotation = Quaternion.LookRotation(Vector3.forward, Input.mousePosition - touchStartPos);
+        transform.localRotation = rotation; //マウスの方向に向く
+        Vector2 afterDirection = touchEndPos - touchStartPos;
+
+        if (flickCount == 0) beforeRadian = 90; //初期90
+        else beforeRadian = afterRadian;        //二回目以降afterRadianセット
+        //角度取得
+        afterRadian = Mathf.Atan2(afterDirection.y, afterDirection.x) * Mathf.Rad2Deg;
+
+        //0より小さかったら+360足す
+        if (beforeRadian < 0) beforeRadian += 360;
+        if (afterRadian < 0) afterRadian += 360;
+
+        //radian = 値が大きい方 - 値が小さい方
+        float radian = afterRadian - beforeRadian;
+        if (radian < 0) radian += 360;
+
         if (radian < 180) return true;//時計回り
         return false;//反時計周り
     }

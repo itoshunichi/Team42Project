@@ -79,6 +79,11 @@ public class Hammer : MonoBehaviour
         AudioManager.Instance.PlaySE(AUDIO.SE_SWING);
     }
 
+    public float RotationPower()
+    {
+        return rotationPower;
+    }
+
     public bool VelocityCount()
     {
         if (countVelocity < velocityCountMax) return true;

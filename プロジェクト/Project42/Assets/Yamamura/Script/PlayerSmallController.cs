@@ -74,6 +74,12 @@ public class PlayerSmallController : Player
             accelerator -= acceleratorMax / 30;
         }
     }
+
+    public float GetAccelerator()
+    {
+        return accelerator;
+    }
+
     //加速数値セット
     public void SetAccelerator()
     {
@@ -99,6 +105,7 @@ public class PlayerSmallController : Player
             isActionEria = false;
         }
     }
+
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "BeDestroyedObject")
@@ -107,7 +114,6 @@ public class PlayerSmallController : Player
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             isHit = true;
             speed = 0;
-            Debug.Log("HIT");
             Vector2 dir = transform.position - col.gameObject.transform.position;
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             GetComponent<Rigidbody2D>().AddForce(dir * collisionPower);
