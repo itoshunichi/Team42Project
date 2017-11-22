@@ -26,8 +26,8 @@ public class GameStartEvent : MonoBehaviour {
         player = GameObject.Find("PlayerSmall");
         player.GetComponent<PlayerSmallController>().IsMoveStop = true;
 
-        topSatellite = GameObject.Find("TopPoint");
-        bottomSatellite = GameObject.Find("BottomPoint");
+        topSatellite = GameObject.Find("TopSatellite");
+        bottomSatellite = GameObject.Find("BottomSatellite");
    
         StartCoroutine(Event());
         //AudioManager.Instance.PlayBGM(AUDIO.BGM_GAMEPLAY);
@@ -55,17 +55,21 @@ public class GameStartEvent : MonoBehaviour {
         //ズーム開始
         StartCoroutine(Camera.main.GetComponent<CameraControl>().CameraZoom());
 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(4.0f);
 
         //衛星を表示
         topSatellite.GetComponent<SpriteRenderer>().enabled = true;
         bottomSatellite.GetComponent<SpriteRenderer>().enabled = true;
+        topSatellite.GetComponent<Animator>().enabled = true;
+        bottomSatellite.GetComponent<Animator>().enabled = true;
         satelliteMoveStartTime = Time.timeSinceLevelLoad;
-       
+        //boss.GetComponent<Animator>().SetBool("isSatellite", true);
+        AudioManager.Instance.PlaySE(AUDIO.SE_SATELLITESPAWN);
 
         //衛星とエリアの生成
-        yield return new WaitForSeconds(1.5f);
-        GameObject.Find("RightEria").GetComponent<ActionEria>().InstantiateEriaPoint(new Vector2(8,0));
+        yield return new WaitForSeconds(1f);
+        Vector2 pointPos = new Vector2(6, 0);
+        GameObject.Find("RightEria").GetComponent<ActionEria>().InstantiateEriaPoint(pointPos);
 
         //エネミーを生成
         yield return new WaitForSeconds(1.0f);
@@ -73,13 +77,15 @@ public class GameStartEvent : MonoBehaviour {
 
         yield return new WaitForSeconds(5.0f);
         
-        GameObject.Find("RightEria").GetComponent<ActionEria>().BreakEriaPoint(GameObject.Find("ActionEriaPoint"));
+        GameObject.Find("RightEria").GetComponent<ActionEria>().BreakEriaPoint(GameObject.Find("Satellite"),false);
 
         //スクリプトを有効化　プレイヤーの移動を開始
         yield return new WaitForSeconds(2.0f);
+        AudioManager.Instance.PlayBGM(AUDIO.BGM_GAMEPLAY);
         GameObject.Find("ActionEria").GetComponent<FormActionEriaPoint>().enabled = true;
         GameObject.Find("FormBeDestroyedObject").GetComponent<FormBeDestroyedObject>().enabled = true;
         GameObject.Find("FlickController").GetComponent<FlickController>().enabled = true;
+        Camera.main.GetComponent<CameraControl>().IsMove = true;
         player.GetComponent<PlayerSmallController>().IsMoveStop = false;
     }
 
@@ -104,7 +110,7 @@ public class GameStartEvent : MonoBehaviour {
     private void InstantiateEnemy()
     {
         Vector2 pos = new Vector2(10, 0);
-        GameObject enemy = Resources.Load<GameObject>("Prefab/BeDestroyedObject/Enemy/Enemy_C");
+        GameObject enemy = Resources.Load<GameObject>("Prefab/BeDestroyedObject/Enemy/Shot_Enemy");
         Instantiate(enemy,pos,Quaternion.identity);
 
     }

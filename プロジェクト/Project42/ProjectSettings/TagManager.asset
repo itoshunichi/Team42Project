@@ -5,10 +5,15 @@ TagManager:
   serializedVersion: 2
   tags:
   - Boss
-  - ActionEria
-  - BeDestroyedObject
-  - Chain
+  - Enemy
   - Wall
+  - BeDestoryedObject
+  - Chain
+  - AttackWave
+  - StopWave
+  - Obj
+  - BeDestroyedObject
+  - ActionEria
   layers:
   - Default
   - TransparentFX
@@ -18,12 +23,12 @@ TagManager:
   - UI
   - 
   - 
-  - Player
-  - Chain
-  - Hammer
   - BeDestroyedObject
   - Player
   - Chain
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -46,6 +51,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Chain
+    uniqueID: 3942281879
+    locked: 0
   - name: Player
-    uniqueID: 2473358113
+    uniqueID: 1685970385
     locked: 0

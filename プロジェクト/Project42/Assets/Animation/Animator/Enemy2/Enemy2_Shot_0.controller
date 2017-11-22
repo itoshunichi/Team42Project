@@ -28,11 +28,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Enemy2_Bullet
-<<<<<<< HEAD
-  m_Speed: 1
-=======
   m_Speed: 3
->>>>>>> 317099be5d1c650a23ec3bae7529f481f314eb6d
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -60,11 +56,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 1102137048175388084}
-<<<<<<< HEAD
-    m_Position: {x: 200, y: 0, z: 0}
-=======
     m_Position: {x: 228, y: 120, z: 0}
->>>>>>> 317099be5d1c650a23ec3bae7529f481f314eb6d
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

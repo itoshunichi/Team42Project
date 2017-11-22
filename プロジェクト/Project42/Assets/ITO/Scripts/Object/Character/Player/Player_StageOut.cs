@@ -37,10 +37,8 @@ public class Player_StageOut : MonoBehaviour
 
         foreach (var c in GetPlayerChildren())
         {
-            c.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             c.GetComponent<Rigidbody2D>().freezeRotation = true;
         }
-        
         //力のリセット
         ResetPlayerVelocity();
 

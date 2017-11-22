@@ -23,7 +23,7 @@ public class Boss : MonoBehaviour
     private Animator animator;
 
 
-    void Start()
+   protected virtual void Start()
     {
         
         AudioManager.Instance.PlaySE(AUDIO.SE_MATHERSPAWN);
@@ -32,12 +32,10 @@ public class Boss : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+  protected virtual  void Update()
     {
-        
         AwakeFade();
         SetScale();
-        Debug.Log(GetComponent<SpriteRenderer>().color);
     }
 
 
@@ -68,9 +66,9 @@ public class Boss : MonoBehaviour
     /// <summary>
     /// エネルギーの追加
     /// </summary>
-    public void AddEnergy(float energy)
+    public void AddEnergy()
     {
-        this.energy += energy;
+        energy += 20;
         MaxEnergy();
     }
 
@@ -90,44 +88,28 @@ public class Boss : MonoBehaviour
     #endregion
 
 
-    public bool IsEndAnimation()
-    {
-        if (animator.GetCurrentAnimatorStateInfo(0).loop == false) return false;
-        return animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1;
-    }
+    
 
     /// <summary>
     /// 生成時のフェード
     /// </summary>
     private void AwakeFade()
     {   
+       
         Color color = GetComponent<SpriteRenderer>().color;
         
         if (color.a < 1)
         {
-            color.a += 0.1f;
+            color.a += 0.05f;
             GetComponent<SpriteRenderer>().color = color;
             animator.speed = 0f;
-            Debug.Log("フェード");
         }    
     }
 
     private IEnumerator AnimationStart()
-    {
+    {      
         yield return new WaitForSeconds(1.5f);
         animator.speed = 1f;
-        Debug.Log("start");
-        
     }
-
-
-
-
-
-
-
-
-
-
 
 }

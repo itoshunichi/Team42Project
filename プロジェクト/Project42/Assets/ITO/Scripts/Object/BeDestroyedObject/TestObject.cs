@@ -19,6 +19,7 @@ public class TestObject : BeDestroyedObject {
     protected override void Start()
     {
         type = ObjectType.NORMAL;
+        
     }
 
     public override void BeginDamage()

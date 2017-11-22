@@ -33,6 +33,7 @@ public class FormActionEriaPoint : MonoBehaviour {
         while(true)
         {
             yield return new WaitForSeconds(instantiateInterval);
+            AudioManager.Instance.PlaySE(AUDIO.SE_SATELLITESPAWN);
 
             int rnd = Random.Range(0, 2);
             if(rnd == 0)
