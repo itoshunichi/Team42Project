@@ -7,6 +7,7 @@ public class Energy : MonoBehaviour
 {
 
     float energy = 0;
+    public float getEnergy;
     public int level;
     public float levelUpEnergy;
     public float levelMaxEnergy;
@@ -22,9 +23,9 @@ public class Energy : MonoBehaviour
         Level();
     }
 
-    public void AddEnergy(float energy)
+    public void AddEnergy()
     {
-        this.energy += energy;
+        this.energy += getEnergy;
     }
 
     public float GetEnergy()

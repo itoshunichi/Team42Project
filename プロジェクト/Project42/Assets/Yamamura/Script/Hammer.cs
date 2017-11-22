@@ -30,7 +30,7 @@ public class Hammer : MonoBehaviour
         LerpRotaion();
         VelocityZero();
     }
-
+    //回転処理
     private void LerpRotaion()
     {
         if (addForceCount < ForceCountMax)
@@ -45,7 +45,6 @@ public class Hammer : MonoBehaviour
     //velocityをゼロにする処理
     private void VelocityZero()
     {
-
         if (!VelocityCount())
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         else if (VelocityCount())
@@ -64,12 +63,12 @@ public class Hammer : MonoBehaviour
     {
         transform.rotation = player.transform.rotation;
         Reset();
-        if (isRight)
+        if (isRight)//半時計回り
         {
             if (powerNum == 0) rotationPower = powerOne;
             else if (powerNum == 1) rotationPower = powerTwo;
             else if (powerNum == 2) rotationPower = powerThree;
-        }
+        }//時計回り
         else if (!isRight)
         {
             if (powerNum == 0) rotationPower = -powerOne;

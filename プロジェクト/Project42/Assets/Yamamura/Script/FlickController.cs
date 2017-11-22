@@ -8,7 +8,7 @@ public class FlickController : MonoBehaviour
     public Player_StageOut stageOut;
     public PlayerSmallController pcs;
     public Hammer hammer;           //ハンマー
-    public ChainMove[] chains;
+    public LerpPoint[] chains;
     //Object
     public GameObject mainCamera;
     //Vector
@@ -45,7 +45,7 @@ public class FlickController : MonoBehaviour
     {
         if (!stageOut.IsStageOut()) Flick();
 
-        if (!isTap) transform.position = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 0); //タッチ位置に合わせる
+        if (!Input.GetMouseButton(0)) transform.position = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 0); //タッチ位置に合わせる
     }
 
     /// <summary>
@@ -117,10 +117,10 @@ public class FlickController : MonoBehaviour
         else if (radian >= radianMaxThree)
             hammer.SetRotationForce(RadinaShortest(), 2);
         else if (radian < radianMaxOne)
-        {
             pcs.SetAccelerator();
-        }
     }
+
+    
     //角度の最短距離
     private bool RadinaShortest()
     {

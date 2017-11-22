@@ -16616,6 +16616,8 @@ MonoBehaviour:
   hammerMove: {fileID: 1895520469}
   hammerSprite: {fileID: 1895520467}
   energyEffect: {fileID: 1895520466}
+  player: {fileID: 1970875377}
+  flick: {fileID: 1099144304}
   DestroyValue: 1.2
 --- !u!58 &1895520472
 CircleCollider2D:

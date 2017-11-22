@@ -18,7 +18,7 @@ public class HammerMove : MonoBehaviour
     }
 
     public void Move()
-    {
+    {   //ガタつきを抑えるために指定した位置にLerpする
         if (//!stageOut.IsStageOut() &&!playerSC.GetHit() && 
             !hammer.VelocityCount())
         {

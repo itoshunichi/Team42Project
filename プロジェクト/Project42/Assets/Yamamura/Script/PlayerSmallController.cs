@@ -73,17 +73,17 @@ public class PlayerSmallController : Player
         {
             accelerator -= acceleratorMax / 30;
         }
+
+    }
+
+    public void SetAccelerator()
+    {   //加速数値セット
+        accelerator = acceleratorMax;
     }
 
     public float GetAccelerator()
     {
         return accelerator;
-    }
-
-    //加速数値セット
-    public void SetAccelerator()
-    {
-        accelerator = acceleratorMax;
     }
 
     public bool GetHit()
