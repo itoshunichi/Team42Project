@@ -6733,7 +6733,7 @@ ParticleSystemRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: b2af5278c0de0f5438dc2564dcb03eba, type: 2}
+  - {fileID: 2100000, guid: 8df0aa8eae2dab44aa82c4428f3974a1, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -6751,7 +6751,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1821609183
+  m_SortingLayerID: 1685970385
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_RenderMode: 0
@@ -6805,7 +6805,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1821609183
+  m_SortingLayerID: 1685970385
   m_SortingLayer: 2
   m_SortingOrder: 2
   m_RenderMode: 0

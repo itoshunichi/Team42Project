@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 50399155751144038}
   - component: {fileID: 58098261070706826}
   - component: {fileID: 114780126330966734}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Shot_Enemy
   m_TagString: BeDestroyedObject
   m_Icon: {fileID: 0}

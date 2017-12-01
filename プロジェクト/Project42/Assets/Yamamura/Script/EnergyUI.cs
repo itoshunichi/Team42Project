@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class EnergyUI : MonoBehaviour
 {
+    public GameObject hammer;
     public Energy energy;
     Image image;
     

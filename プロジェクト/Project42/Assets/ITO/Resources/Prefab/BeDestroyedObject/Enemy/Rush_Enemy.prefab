@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114238363026201264}
   - component: {fileID: 58796987379688540}
   - component: {fileID: 50686193579674858}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Rush_Enemy
   m_TagString: BeDestroyedObject
   m_Icon: {fileID: 0}

@@ -28,10 +28,10 @@ public class HammerController : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if(GetComponent<Renderer>().isVisible)
         if (col.gameObject.tag == "BeDestroyedObject" && hammerMove.GetAlpha() < 1.0f)
            // (transform.GetComponent<Rigidbody2D>().velocity.x > DestroyValue || transform.GetComponent<Rigidbody2D>().velocity.y > DestroyValue))
         {
+            Debug.Log("ヒット");
             Time.timeScale = 0.7f;
             shake.ShakeObject();
             Debug.Log(col.gameObject.name);
