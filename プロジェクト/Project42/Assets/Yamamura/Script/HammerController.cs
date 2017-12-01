@@ -5,12 +5,11 @@ using UnityEngine;
 public class HammerController : MonoBehaviour {
 
     public Shake shake;
-    public Energy energy;
     public Hammer hammer;
     public HammerMove hammerMove;
-    public HammerSpriteChange hammerSprite;
-    public EnergyEffect energyEffect;
     public float DestroyValue;
+    public Energy energy;
+
 	// Use this for initialization
 	void Start () {
   	}
@@ -19,8 +18,6 @@ public class HammerController : MonoBehaviour {
 	void Update () {
         hammer.HammerUpdate();
         hammerMove.Move();
-        hammerSprite.SpriteChange();
-        energyEffect.EnergyLevelEffect();
 	}
 
     public void Reset()
@@ -31,9 +28,9 @@ public class HammerController : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
-
-        if (col.gameObject.tag == "BeDestroyedObject" && 
-            (transform.GetComponent<Rigidbody2D>().velocity.x > DestroyValue || transform.GetComponent<Rigidbody2D>().velocity.y > DestroyValue))
+        if(GetComponent<Renderer>().isVisible)
+        if (col.gameObject.tag == "BeDestroyedObject" && hammerMove.GetAlpha() < 1.0f)
+           // (transform.GetComponent<Rigidbody2D>().velocity.x > DestroyValue || transform.GetComponent<Rigidbody2D>().velocity.y > DestroyValue))
         {
             Time.timeScale = 0.7f;
             shake.ShakeObject();
@@ -41,17 +38,17 @@ public class HammerController : MonoBehaviour {
             col.gameObject.GetComponent<BeDestroyedObject>().BeginDamage();
             if (col.gameObject.GetComponent<BeDestroyedObject>().Type != ObjectType.SATELLITE)
             {
-
-                energy.AddEnergy(25.0f);
+                energy.CombPuls();
                 AudioManager.Instance.PlaySE(AUDIO.SE_ENERGYGET);
             }
             Time.timeScale = 1f;
         }
 
-        if (col.gameObject.tag == "Boss" && energy.LevelMax() && 
-            (transform.GetComponent<Rigidbody2D>().velocity.x > DestroyValue || transform.GetComponent<Rigidbody2D>().velocity.y > DestroyValue))
+        if (col.gameObject.tag == "Boss" && 
+            hammerMove.GetAlpha() < 1.0f)
+            //(transform.GetComponent<Rigidbody2D>().velocity.x > DestroyValue || transform.GetComponent<Rigidbody2D>().velocity.y > DestroyValue))
         {
-            col.gameObject.GetComponent<Boss>().Dead();
+            //col.gameObject.GetComponent<Boss>().Dead();
             AudioManager.Instance.PlaySE(AUDIO.SE_ATTACK);
         }
     }

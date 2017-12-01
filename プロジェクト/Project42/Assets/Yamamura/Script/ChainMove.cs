@@ -28,6 +28,8 @@ public class ChainMove : MonoBehaviour
             alpha += alphaPuls;
             transform.position = Vector2.Lerp(transform.position, point.transform.position, alpha);
         }
+        else if (hammer.VelocityCount())
+            alpha = 0;
     }
 
     public void Reset()

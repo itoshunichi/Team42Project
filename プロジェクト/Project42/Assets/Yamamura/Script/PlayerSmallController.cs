@@ -5,12 +5,12 @@ using UnityEngine;
 public class PlayerSmallController : Player
 {
     HingeJoint2D joint;
-    public Energy soulEnergy;
     Player_StageOut stageOut;
     float accelerator = 0;
     public float acceleratorMax;
-
+    float alpha;
     private bool isMoveStop;
+
     public bool IsMoveStop
     {
         get { return isMoveStop; }
@@ -56,7 +56,7 @@ public class PlayerSmallController : Player
     {
         if (GetComponent<Player_StageOut>().IsStageOut()) return;
         if (transform.rotation.z != flick.transform.rotation.z) GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        if (speed < speedMax) speed += 0.002f;
+        if (speed < speedMax) speed += 0.02f;
         transform.rotation = flick.transform.rotation;
         //自身の向きベクトル取得
         //自身の角度をラジアンで取得
@@ -74,6 +74,12 @@ public class PlayerSmallController : Player
             accelerator -= acceleratorMax / 30;
         }
     }
+
+    public float GetAccelerator()
+    {
+        return accelerator;
+    }
+
     //加速数値セット
     public void SetAccelerator()
     {
@@ -99,6 +105,7 @@ public class PlayerSmallController : Player
             isActionEria = false;
         }
     }
+
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "BeDestroyedObject")

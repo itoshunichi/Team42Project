@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class HammerMove : MonoBehaviour
 {
-
     public PlayerSmallController playerSC;
     public Player_StageOut stageOut;
     public GameObject point;
     float alpha = 1;
     public float alphaPuls;
     Hammer hammer;
+
     // Use this for initialization
     void Start()
     {
@@ -35,5 +35,10 @@ public class HammerMove : MonoBehaviour
     public void Reset()
     {
         alpha = 0;
+    }
+
+    public float GetAlpha()
+    {
+        return alpha;
     }
 }
