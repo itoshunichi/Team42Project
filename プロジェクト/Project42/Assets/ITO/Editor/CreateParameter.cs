@@ -9,7 +9,7 @@ public class CreateParameter{
     [MenuItem("Assets/Create/CreateBeDestroyedObjectParameter")]
     public static void CreateBeDestroyedObjectParameter()
     {
-        CreateAsset<BeDestroyedObjectParameter>();
+        CreateAsset<EnemyParameter>();
     }
 
 

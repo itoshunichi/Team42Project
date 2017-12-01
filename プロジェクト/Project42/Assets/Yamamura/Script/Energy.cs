@@ -6,11 +6,12 @@ using UnityEngine.UI;
 public class Energy : MonoBehaviour
 {
 
-    float energy = 0;
-    public float getEnergy;
-    public int level;
-    public float levelUpEnergy;
-    public float levelMaxEnergy;
+    public float energy;
+    public float addEnergy;
+    public float maxEnergy;
+    float energyTime; //時間
+    float combTime;
+    int combCount;//コンボ
 
     // Use this for initialization
     void Start()
@@ -20,38 +21,48 @@ public class Energy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Level();
+        energyTime += Time.deltaTime;
+        if (energyTime >= 0.01f){
+            energy -= 0.01f;
+            energyTime = 0;
+        }
+        combTime += Time.deltaTime;
+        if (combTime >= 1.5f)
+        {
+            combTime = 0;
+            Debug.Log("Reset");
+            if (combCount > 0) combCount = 0;
+        }
     }
 
+    public void CombPuls()
+    {
+        combTime = 0;
+        combCount++;
+    }
+
+    /// <summary>
+    /// Energyを足す
+    /// </summary>
     public void AddEnergy()
     {
-        this.energy += getEnergy;
+        combTime = 0;
+        energy += addEnergy;
+    }
+
+    public void CombAddEnergy()
+    {
+        energy += addEnergy * (combCount + combCount);
+    }
+
+    public int GetCombCount()
+    {
+        return combCount;
     }
 
     public float GetEnergy()
     {
         return energy;
     }
-    //レベルの上げ下げ
-    private void Level()
-    {
-        if (energy >= levelUpEnergy * 2)
-            level = 3;
-        else if (energy >= levelUpEnergy)
-            level = 2;
-        else if (energy < levelUpEnergy)
-            level = 1;
 
-        if (energy >= levelMaxEnergy)
-            energy = levelMaxEnergy;
-    }
-
-    public bool LevelMax()
-    {
-        if (energy >= levelMaxEnergy)
-        {
-            return true;
-        }
-        return false;
-    }
 }

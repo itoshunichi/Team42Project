@@ -5,13 +5,21 @@ using UnityEngine;
 /// <summary>
 /// プレイヤーを追尾するエネミー
 /// </summary>
-public class Enemy_B : BeDestroyedObject
-{
+public class Ruh_Enemy : Enemy
+{ 
+
+    private GameObject player;
+
+    protected override void Start()
+    {
+        base.Start();
+        player = GameObject.Find("PlayerSmall");
+    }
 
     protected override void Update()
     {
         Move();
-        SetSprite();
+        //SetSprite();
     }
 
     private void Move()
@@ -36,22 +44,6 @@ public class Enemy_B : BeDestroyedObject
             //吸収
             BeAbsorption();
         }
-    }
-
-    /// <summary>
-    /// プレイヤー取得
-    /// </summary>
-    private void SetPlayer()
-    {
-        
-       // if (GameObject.Find("PlayerSmall").GetComponent<PlayerSmallController>().playerMode == PlayerMode.PLAYER)
-        {
-            player = GameObject.Find("PlayerSmall");
-        }
-        //else
-        //{
-        //    player = GameObject.Find("PlayerBig");
-        //}
     }
 
     /// <summary>

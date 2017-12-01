@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EriaPoint : BeDestroyedObject {
+public class Satellite : BeDestroyedObject {
 
     /// <summary>
     /// 壊せるかどうか
@@ -21,15 +21,11 @@ public class EriaPoint : BeDestroyedObject {
 
     }
 
-    protected override void OnTriggerEnter2D(Collider2D collision)
-    {
-    }
-
     public override void BeginDamage()
     {
         if (!canDestroy) return;
         base.BeginDamage();
-        transform.parent.GetComponent<ActionEria>().BreakEriaPoint(gameObject);
+        transform.parent.GetComponent<ActionEria>().BreakEriaPoint(gameObject,true);
     }
 
 }

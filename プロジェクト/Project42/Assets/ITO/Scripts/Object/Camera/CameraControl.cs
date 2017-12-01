@@ -75,7 +75,7 @@ public class CameraControl : MonoBehaviour
     void Update()
     {
 
-        MoveCamera();
+        //MoveCamera();
         //CameraZoom();
     }
 
@@ -88,6 +88,7 @@ public class CameraControl : MonoBehaviour
         float posX = Mathf.Clamp(target.transform.position.x, maxLeft, maxRight);
         float posY = Mathf.Clamp(target.transform.position.y, maxBottom, maxTop);
         Vector3 pos = new Vector3(posX, posY, -10);
+
         transform.position = pos;
     }
 

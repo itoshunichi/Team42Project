@@ -5,31 +5,27 @@ using UnityEngine;
 /// <summary>
 /// 弾を飛ばすエネミー
 /// </summary>
-public class Enemy_C : BeDestroyedObject
+public class Shot_Enemy : Enemy
 {
 
     private float attackTimer;
 
     /// <summary>
-    /// 弾のリスト
+    /// 弾
     /// </summary>
     [SerializeField]
-    private List<GameObject> bullets;
+    private GameObject bullet;
 
     /// <summary>
-    /// 弾での攻撃
+    /// 弾の生成
     /// </summary>
-    private void BulletAttack()
+    private void InstantiateBullet()
     {
         attackTimer += Time.deltaTime;
         //1秒間隔で生成する
-        if (attackTimer > 1f)
+        if (attackTimer > 0.5f)
         {
-            for (int i = 0; i < bullets.Count; i++)
-            {
-                Instantiate(bullets[i], transform.position, Quaternion.identity);
-
-            }
+            Instantiate(bullet, transform.position, transform.rotation);
             attackTimer = 0f;
         }
 
@@ -38,8 +34,7 @@ public class Enemy_C : BeDestroyedObject
 
     protected override void Action()
     {
-        //Debug.Log("攻撃");
-        BulletAttack();
+        InstantiateBullet();
     }
 
 

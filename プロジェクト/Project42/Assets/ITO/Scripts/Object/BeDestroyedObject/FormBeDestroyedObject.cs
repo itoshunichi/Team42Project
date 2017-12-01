@@ -117,7 +117,7 @@ public class FormBeDestroyedObject : MonoBehaviour
             yield return new WaitForSeconds(randomFormTime);
             GameObject obj = randomFormObjectsGroup[Random.Range(0, randomFormObjectsGroup.Count)];
             Vector2 pos = randomFormPoints[Random.Range(0, randomFormPoints.Count)];
-            Debug.Log(pos);
+           // Debug.Log(pos);
             AddObject(obj, pos);
         }
     }

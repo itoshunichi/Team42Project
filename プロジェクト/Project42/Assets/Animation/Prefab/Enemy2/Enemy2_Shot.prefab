@@ -95,11 +95,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-<<<<<<< HEAD
-  m_StitchLightmapSeams: 0
-=======
   m_StitchSeams: 0
->>>>>>> 317099be5d1c650a23ec3bae7529f481f314eb6d
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5

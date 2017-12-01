@@ -248,17 +248,21 @@ public class ActionEria : MonoBehaviour
     /// エリアポイントの破壊
     /// </summary>
     /// <param name="point"></param>
-    public void BreakEriaPoint(GameObject point)
+    public void BreakEriaPoint(GameObject point,bool isAuto)
     {
 
         //リストから削除
         eriaPointObjects.Remove(point);
-        //生成位置の候補に追加
-        instantiatePosX.Add(point.transform.position.x);
         SetColliderPoint();
         CreatePolygon();
         //削除
         Destroy(point);
+
+        if (isAuto)
+        {
+            //生成位置の候補に追加
+            instantiatePosX.Add(point.transform.position.x);
+        }
 
     }
 }
