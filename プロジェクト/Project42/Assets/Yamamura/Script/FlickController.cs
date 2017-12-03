@@ -5,7 +5,6 @@ using UnityEngine;
 public class FlickController : MonoBehaviour
 {
     //スクリプト
-    public Player_StageOut stageOut;
     public PlayerSmallController[] playerController;
     public Hammer[] hammer;           //ハンマー
     //Object
@@ -42,7 +41,7 @@ public class FlickController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!stageOut.IsStageOut()) Flick();
+        Flick();
 
         if (!isTap) transform.position = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 0); //タッチ位置に合わせる
     }
