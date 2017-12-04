@@ -84,6 +84,15 @@ public class PlayerSmallController : Player
     {
         return isHit;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.name.Contains("TopCollider"))
+        {
+            //Debug.Log("Top");
+            StartCoroutine(FindObjectOfType<GamePlayEvent>().NextWave());
+        }
+    }
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.tag == "ActionEria")

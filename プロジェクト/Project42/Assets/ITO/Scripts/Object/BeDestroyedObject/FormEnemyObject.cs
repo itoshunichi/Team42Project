@@ -60,8 +60,8 @@ public class FormEnemyObject : MonoBehaviour
         formObjects.Remove(enemy);
         if (formObjects.Count == 0)
         {
-            GameObject.FindObjectOfType<GamePlayEvent>().SetArrowEnabled(true);
-            //Destroy(gameObject);
+            FindObjectOfType<GamePlayEvent>().SetArrowEnabled(true);
+            Destroy(enemy);
         }
     }
 
