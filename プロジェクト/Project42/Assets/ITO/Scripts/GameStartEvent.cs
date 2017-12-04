@@ -38,7 +38,7 @@ public class GameStartEvent : MonoBehaviour {
 
         AudioManager.Instance.PlaySE(AUDIO.SE_SATELLITESPAWN);
 
-        GameObject.Find("FormBeDestroyedObject").GetComponent<FormBeDestroyedObject>().enabled = true;
+   //     GameObject.Find("FormBeDestroyedObject").GetComponent<>().enabled = true;
 
 	}
 	
@@ -77,7 +77,7 @@ public class GameStartEvent : MonoBehaviour {
         //衛星とエリアの生成
         //yield return new WaitForSeconds(1f);
         Vector2 pointPos = new Vector2(6, 0);
-        GameObject.Find("RightEria").GetComponent<ActionEria>().InstantiateEriaPoint(pointPos);
+     //   GameObject.Find("RightEria").GetComponent<ActionEria>().InstantiateEriaPoint(pointPos);
 
         //エネミーを生成
         //yield return new WaitForSeconds(1.0f);
@@ -85,13 +85,13 @@ public class GameStartEvent : MonoBehaviour {
         //
         //yield return new WaitForSeconds(5.0f);
         
-        GameObject.Find("RightEria").GetComponent<ActionEria>().BreakEriaPoint(GameObject.Find("Satellite"),false);
+      //  GameObject.Find("RightEria").GetComponent<ActionEria>().BreakEriaPoint(GameObject.Find("Satellite"),false);
 
         //スクリプトを有効化　プレイヤーの移動を開始
         //yield return new WaitForSeconds(2.0f);
         AudioManager.Instance.PlayBGM(AUDIO.BGM_GAMEPLAY);
-        GameObject.Find("ActionEria").GetComponent<FormActionEriaPoint>().enabled = true;
-        GameObject.Find("FormBeDestroyedObject").GetComponent<FormBeDestroyedObject>().enabled = true;
+      //  GameObject.Find("ActionEria").GetComponent<FormActionEriaPoint>().enabled = true;
+      //  GameObject.Find("FormBeDestroyedObject").GetComponent<FormBeDestroyedObject>().enabled = true;
         //GameObject.Find("FlickController").GetComponent<FlickController>().enabled = true;
         //Camera.main.GetComponent<CameraControl>().IsMove = true;
         //player.GetComponent<PlayerSmallController>().IsMoveStop = false;

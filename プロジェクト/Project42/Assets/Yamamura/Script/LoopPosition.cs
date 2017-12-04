@@ -25,36 +25,6 @@ public class LoopPosition : MonoBehaviour
     private void AreaCheck()
     {
         Area();
-        foreach (var hammer in hammers)
-        {   //上面エリアか下面エリアにいるとき
-            if (transform.position.y < frontPos[0].transform.position.y - 1 || transform.position.y > frontPos[1].transform.position.y + 1)
-            {
-                if (transform.position.x < frontPos[0].transform.position.x + 0.1f)
-                {
-                    transform.position = new Vector2(frontPos[1].transform.position.x - 0.1f, transform.position.y);
-                    hammer.transform.position = new Vector2(frontPos[1].transform.position.x, hammer.transform.position.y);
-                }
-                else if (transform.position.x > frontPos[1].transform.position.x - 0.1f)
-                {
-                    transform.position = new Vector2(frontPos[0].transform.position.x + 0.1f, transform.position.y);
-                    hammer.transform.position = new Vector2(frontPos[0].transform.position.x, hammer.transform.position.y);
-                }
-            }
-            //左エリアか右エリアにいるとき
-            else if (transform.position.x < frontPos[0].transform.position.x|| transform.position.x > frontPos[1].transform.position.x)
-            {
-                if (transform.position.y < frontPos[0].transform.position.y)
-                {
-                    transform.position = new Vector2(transform.position.x, frontPos[1].transform.position.y);
-                    hammer.transform.position = new Vector2(hammer.transform.position.x, frontPos[1].transform.position.y);
-                }
-                else if (transform.position.y > frontPos[1].transform.position.y)
-                {
-                    transform.position = new Vector2(transform.position.x, frontPos[0].transform.position.y);
-                    hammer.transform.position = new Vector2(hammer.transform.position.x, frontPos[0].transform.position.y);
-                }
-            }
-        }
     }
 
     private void Area()

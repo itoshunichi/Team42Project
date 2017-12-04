@@ -30,8 +30,6 @@ public class PlayerSmallController : Player
     void Start()
     {
         flickController = flick.GetComponent<FlickController>();
-        joint = GetComponent<HingeJoint2D>();
-        joint.enabled = true;
         stageOut = GetComponent<Player_StageOut>();
     }
 

@@ -54,7 +54,7 @@ public class Tutorial : MonoBehaviour
         Instantiate(Resources.Load<GameObject>("Prefab/MiniBoss"));
         yield return new WaitForSeconds(1f);
         //ズーム開始
-        StartCoroutine(Camera.main.GetComponent<CameraControl>().CameraZoom());
+     //   StartCoroutine(Camera.main.GetComponent<CameraControl>().CameraZoom());
         yield return new WaitForSeconds(1f);
         player.GetComponent<PlayerSmallController>().IsMoveStop = false;
         yield return new WaitForSeconds(3f);
@@ -102,7 +102,7 @@ public class Tutorial : MonoBehaviour
         player.GetComponent<PlayerSmallController>().IsMoveStop = false;
         player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         player.GetComponent<CircleCollider2D>().enabled = true;
-        Camera.main.GetComponent<CameraControl>().IsMove = true;
+        //Camera.main.GetComponent<CameraControl>().IsMove = true;
         
     }
 }
