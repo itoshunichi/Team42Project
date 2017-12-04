@@ -22,7 +22,7 @@ public class Player_StageOut : MonoBehaviour
     {
         if (collision.tag == "Wall")
         {
-            StartCoroutine(StageOut());
+        //    StartCoroutine(StageOut());
         }
     }
 

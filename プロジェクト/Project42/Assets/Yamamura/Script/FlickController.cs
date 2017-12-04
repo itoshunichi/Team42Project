@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class FlickController : MonoBehaviour
 {
-
-    public GameObject playerSmall;      //プレイヤースモール
-    public GameObject hammer;        //プレイヤービッグ
+    //スクリプト
+    public Player_StageOut stageOut;
+    public PlayerSmallController[] playerController;
+    public Hammer[] hammer;           //ハンマー
+    //Object
     public GameObject mainCamera;
-    public GameObject spriteobj;
-    public GameObject spriteArrow;
-    private bool isTap = false;         //Tapしたかどうか
+    //Vector
     private Vector3 touchStartPos;      //タッチした場所
     private Vector3 touchEndPos;        //タッチ終わりの場所
     private Vector3 beforeEndPos;       //前回のタッチ終わりの場所
+    //値
     int flickCount = 0;
     float tapTimer = 0.0f;              //タッチしている時間
     public float flickTime;           //フリック判定時間
@@ -24,21 +25,24 @@ public class FlickController : MonoBehaviour
     public float radianMaxTwo = 60;
     public float radianMaxThree = 90;
     public float radianMaxFour = 120;
+    //bool
+    private bool isTap = false;         //Tapしたかどうか
     bool isFlick = false;
 
-    PlayerSmallController pcs;
+    public int FlickCount
+    {
+        get { return flickCount; }
+    }
 
     // Use this for initialization
     void Start()
     {
-        pcs = playerSmall.GetComponent<PlayerSmallController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //TapHit();
-        Flick();
+        if (!stageOut.IsStageOut()) Flick();
 
         if (!isTap) transform.position = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 0); //タッチ位置に合わせる
     }
@@ -52,7 +56,6 @@ public class FlickController : MonoBehaviour
         {   //位置セット
             touchStartPos = Input.mousePosition;
             transform.position = touchStartPos;
-            if (isFlick) isFlick = false;
             isTap = true;
         }
         if (Input.GetMouseButton(0))
@@ -66,33 +69,31 @@ public class FlickController : MonoBehaviour
             touchEndPos = Input.mousePosition;
 
             Vector2 dir = touchEndPos - touchStartPos;
-            if (dir.magnitude >= flickMagnitude && tapTimer <= flickTime)
+            if (tapTimer <= flickTime && dir.magnitude <= flickMagnitude)
             {
-
+                // pcs.SetAccelerator();
+            }
+            else if (dir.magnitude >= flickMagnitude) //&& tapTimer <= flickTime)
+            {
                 var rotation = Quaternion.LookRotation(Vector3.forward, Input.mousePosition - touchStartPos);
                 transform.localRotation = rotation; //マウスの方向に向く
                 Vector2 afterDirection = touchEndPos - touchStartPos;
-
                 if (flickCount == 0) beforeRadian = 90; //初期90
                 else beforeRadian = afterRadian;        //二回目以降afterRadianセット
                 //角度取得
                 afterRadian = Mathf.Atan2(afterDirection.y, afterDirection.x) * Mathf.Rad2Deg;
+
                 //0より小さかったら+360足す
                 if (beforeRadian < 0) beforeRadian += 360;
                 if (afterRadian < 0) afterRadian += 360;
-                //radian = 値が大きい方 - 値が小さい方
-                float radian;
-                if (beforeRadian < afterRadian) radian = afterRadian - beforeRadian;
-                else radian = beforeRadian - afterRadian;
 
-                isFlick = true;
+                //最短距離の場合(最大距離の場合は逆)
+                //radian 179以下 - 時計回り
+                //radina 181以上 + 反時計回り
                 //radianの値が規定値以下だったら回転しない
-                RadianCheck(radian);
-
-                pcs.Reset();//プレイヤーの速度等リセット
-                //矢印画像生成
-                Instantiate(spriteArrow, new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 0), transform.rotation);
-
+                RadianCheck(GetRadian());
+                foreach (var pc in playerController) pc.Reset();
+               
                 flickCount += 1;//フリックした回数をカウント
             }
             tapTimer = 0.0f;
@@ -100,70 +101,73 @@ public class FlickController : MonoBehaviour
         }
     }
 
+    public float GetRadian()
+    {
+        //radian = 値が大きい方 - 値が小さい方
+        float radian = 0;
+        if (afterRadian > beforeRadian) radian = afterRadian - beforeRadian;
+        else radian = beforeRadian - afterRadian;
+        return radian;
+    }
+
     private void RadianCheck(float radian)
     {       //前回の角度と比べて大きさくなるほど回す力を大きくするメソッドを呼ぶ
-        if (radian > radianMaxOne && radian < radianMaxTwo)
-            hammer.GetComponent<Hammer>().SetRotationForceOne(RightFlick(touchStartPos, touchEndPos));
-        else if (radian > radianMaxTwo && radian < radianMaxThree)
-            hammer.GetComponent<Hammer>().SetRotationForceTwo(RightFlick(touchStartPos, touchEndPos));
-        else if (radian >= radianMaxThree)
-            hammer.GetComponent<Hammer>().SetRotationForceThree(RightFlick(touchStartPos, touchEndPos));
-    }
-
-
-    bool RightFlick(Vector2 start, Vector2 end)
-    {
-        if (start.x > end.x) return true;
-        return false;
-    }
-
-    //float RightFlick(Vector2 start, Vector2 end)
-    //{
-    //    Vector2 dir = end - start;
-    //    if (dir.normalized.x > start.x) return 1;
-    //    return -1;
-    //}
-
-    //線より右側
-    bool LineRight(Vector2 pos1, Vector2 pos2, Vector2 dot)
-    {
-        Vector2 v1 = new Vector2(pos2.x - pos1.x, pos2.y - pos1.y);
-        Vector2 v2 = new Vector2(dot.x - pos1.x, dot.y - pos1.y);
-        float det = v1.x * v2.y - v2.x * v1.y;
-        if (det < 0) return true;
-        return false;
-    }
-
-    #region タップした位置にプレイヤー、エネミーがいるかどうか
-    private void TapHit()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            var tapPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            var collition2d = Physics2D.OverlapPoint(tapPoint);
-            if (collition2d)
+        foreach (var h in hammer)
+            if (radian >= radianMaxOne && radian < radianMaxTwo)
+                h.SetRotationForce(RadinaShortest(), 0);
+            else if (radian >= radianMaxTwo && radian < radianMaxThree)
+                h.SetRotationForce(RadinaShortest(), 1);
+            else if (radian >= radianMaxThree)
+                h.SetRotationForce(RadinaShortest(), 2);
+            else if (radian < radianMaxOne)
             {
-                var hitObject = Physics2D.Raycast(tapPoint, -Vector2.up);
-
-                //プレイヤー
-                if (hitObject.collider.gameObject.tag != "Player" || hitObject == null)
-                {
-                    isTap = true;
-                    Debug.Log("hit object is " + hitObject.collider.gameObject.name);
-                }
-
+                foreach (var pc in playerController) pc.SetAccelerator();
+                //playerController.SetAccelerator();
             }
+    }
+    //角度の最短距離
+    public bool RadinaShortest()
+    {
+        //radian = 値が大きい方 - 値が小さい方
+        float radian = 0;
+
+        radian = beforeRadian - afterRadian;
+
+        //反時計回り
+        //    180以上　0以下ー180以上
+        if (radian <= 0)
+        {
+            if (radian <= -180) return false;
+            else if (radian > -180) return true;
         }
-    }
-    #endregion
+        if (radian >= 0)
+        {
+            if (radian >= 180) return true;
+            else if (radian < 180) return false;
+        }
 
-    public void SetRotation(Vector3 pos)
-    {
-        transform.localRotation = Quaternion.LookRotation(Vector3.forward, pos);
+        return false;
     }
 
-    public bool GetFlick()
+    public float DebugCheck()
     {
-        return isFlick;
+        var rotation = Quaternion.LookRotation(Vector3.forward, Input.mousePosition - touchStartPos);
+        transform.localRotation = rotation; //マウスの方向に向く
+        Vector2 afterDirection = touchEndPos - touchStartPos;
+
+        if (flickCount == 0) beforeRadian = 90; //初期90
+        else beforeRadian = afterRadian;        //二回目以降afterRadianセット
+        //角度取得
+        afterRadian = Mathf.Atan2(afterDirection.y, afterDirection.x) * Mathf.Rad2Deg;
+
+        //0より小さかったら+360足す
+        if (beforeRadian < 0) beforeRadian += 360;
+        if (afterRadian < 0) afterRadian += 360;
+
+        //radian = 値が大きい方 - 値が小さい方
+        float radian = 0;
+        radian = afterRadian - beforeRadian;
+
+        return radian;
     }
 }

@@ -6,11 +6,11 @@ using UnityEditor;
 public class CreateParameter{
 
    
-    [MenuItem("Assets/Create/CreateBeDestroyedObjectParameter")]
-    public static void CreateBeDestroyedObjectParameter()
-    {
-        CreateAsset<BeDestroyedObjectParameter>();
-    }
+    //[MenuItem("Assets/Create/CreateBeDestroyedObjectParameter")]
+    //public static void CreateBeDestroyedObjectParameter()
+    //{
+    //    CreateAsset<EnemyParameter>();
+    //}
 
 
     public static void CreateAsset<Type>()where Type:ScriptableObject
