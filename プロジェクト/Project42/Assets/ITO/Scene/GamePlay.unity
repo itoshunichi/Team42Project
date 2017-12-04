@@ -431,7 +431,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &56985725
 Transform:
   m_ObjectHideFlags: 0
@@ -970,11 +970,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fec23fc3e6c91845a8775cf9125c207, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMax: 0.06
+  speedMax: 0.1
   flick: {fileID: 453572399}
   collisionPower: 130
   noMoveCount: 45
-  acceleratorMax: 0.3
+  acceleratorMax: 0.5
 --- !u!1 &198221601
 GameObject:
   m_ObjectHideFlags: 0
@@ -1843,7 +1843,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &377367699
 Transform:
   m_ObjectHideFlags: 0
@@ -1924,7 +1924,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &436701063
 Transform:
   m_ObjectHideFlags: 0
@@ -3208,7 +3208,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &726554490
 Transform:
   m_ObjectHideFlags: 0
@@ -3240,7 +3240,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &735255370
 Transform:
   m_ObjectHideFlags: 0
@@ -3591,7 +3591,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &769801503
 Transform:
   m_ObjectHideFlags: 0
@@ -3755,7 +3755,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &891466973
 Transform:
   m_ObjectHideFlags: 0
@@ -5218,6 +5218,7 @@ GameObject:
   - component: {fileID: 1188080338}
   - component: {fileID: 1188080334}
   - component: {fileID: 1188080341}
+  - component: {fileID: 1188080342}
   m_Layer: 10
   m_Name: Hammer
   m_TagString: Player
@@ -5287,8 +5288,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 0.0001
-  m_LinearDrag: 2.17
-  m_AngularDrag: 0
+  m_LinearDrag: 0.3
+  m_AngularDrag: 0.3
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -5367,7 +5368,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1188080333}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.77, z: 0}
+  m_LocalPosition: {x: -0.04, y: -2.58, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 1882549758}
@@ -5390,9 +5391,27 @@ SpringJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 0
-  m_Distance: 3
-  m_DampingRatio: 1
-  m_Frequency: 1000
+  m_Distance: 1.5
+  m_DampingRatio: 0
+  m_Frequency: 2
+--- !u!232 &1188080342
+DistanceJoint2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1188080333}
+  m_Enabled: 0
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 2098637389}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 0
+  m_Distance: 2.5803099
+  m_MaxDistanceOnly: 1
 --- !u!1 &1190845979
 GameObject:
   m_ObjectHideFlags: 0
@@ -6896,7 +6915,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1560614144
 Transform:
   m_ObjectHideFlags: 0
@@ -10107,7 +10126,6 @@ GameObject:
   - component: {fileID: 175635529}
   - component: {fileID: 2098637390}
   - component: {fileID: 2098637389}
-  - component: {fileID: 2098637387}
   - component: {fileID: 175635523}
   - component: {fileID: 2098637386}
   m_Layer: 8
@@ -10165,25 +10183,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 1188080333}
---- !u!232 &2098637387
-DistanceJoint2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 232609410363358610, guid: 337dd4e33e1b7e0499b374397f3d0aba,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2098637384}
-  m_Enabled: 0
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 1188080337}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 0
-  m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 0}
-  m_AutoConfigureDistance: 0
-  m_Distance: 6
-  m_MaxDistanceOnly: 0
 --- !u!50 &2098637389
 Rigidbody2D:
   serializedVersion: 4

@@ -27,21 +27,6 @@ public class Hammer : MonoBehaviour
     //
     public void HammerUpdate()
     {
-        if (GetComponent<SpringJoint2D>().distance < 3)
-        {
-            GetComponent<SpringJoint2D>().autoConfigureDistance = true;
-            GetComponent<SpringJoint2D>().frequency = 1;
-        }
-        else if (GetComponent<SpringJoint2D>().distance > 3)
-        {
-            if (GetComponent<SpringJoint2D>().distance > 6) GetComponent<SpringJoint2D>().frequency = 8;
-            GetComponent<SpringJoint2D>().distance = 3;
-            GetComponent<SpringJoint2D>().autoConfigureDistance = false;
-        }
-        if (Input.GetMouseButton(1))
-        {
-            GetComponent<Rigidbody2D>().AddForce(Vector2.up * 0.5f);
-        }
         // LerpRotaion();
         //VelocityZero();
     }

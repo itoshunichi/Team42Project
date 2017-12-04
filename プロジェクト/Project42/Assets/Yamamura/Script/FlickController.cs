@@ -119,7 +119,7 @@ public class FlickController : MonoBehaviour
             //else if (radian >= radianMaxThree)
             //  //  h.SetRotationForce(RadinaShortest(), 2);
            // else 
-        if (radian < radianMaxOne)
+      //  if (radian < radianMaxOne)
             {
                 foreach (var pc in playerController) pc.SetAccelerator();
                 //playerController.SetAccelerator();
