@@ -30,7 +30,6 @@ public class Energy : MonoBehaviour
         if (combTime >= 1.5f)
         {
             combTime = 0;
-            Debug.Log("Reset");
             if (combCount > 0) combCount = 0;
         }
     }
