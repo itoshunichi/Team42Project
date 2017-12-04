@@ -78,6 +78,11 @@ public class PlayerSmallController : Player
         accelerator = acceleratorMax;
     }
 
+    public Vector2 GetDirection()
+    {
+        return dir;
+    }
+
     public bool GetHit()
     {
         return isHit;

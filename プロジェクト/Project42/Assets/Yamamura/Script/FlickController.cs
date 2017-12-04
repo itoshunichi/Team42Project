@@ -112,13 +112,14 @@ public class FlickController : MonoBehaviour
     private void RadianCheck(float radian)
     {       //前回の角度と比べて大きさくなるほど回す力を大きくするメソッドを呼ぶ
         foreach (var h in hammer)
-            if (radian >= radianMaxOne && radian < radianMaxTwo)
-                h.SetRotationForce(RadinaShortest(), 0);
-            else if (radian >= radianMaxTwo && radian < radianMaxThree)
-                h.SetRotationForce(RadinaShortest(), 1);
-            else if (radian >= radianMaxThree)
-                h.SetRotationForce(RadinaShortest(), 2);
-            else if (radian < radianMaxOne)
+            //if (radian >= radianMaxOne && radian < radianMaxTwo)
+            //  //  h.SetRotationForce(RadinaShortest(), 0);
+            //else if (radian >= radianMaxTwo && radian < radianMaxThree)
+            // //   h.SetRotationForce(RadinaShortest(), 1);
+            //else if (radian >= radianMaxThree)
+            //  //  h.SetRotationForce(RadinaShortest(), 2);
+           // else 
+        if (radian < radianMaxOne)
             {
                 foreach (var pc in playerController) pc.SetAccelerator();
                 //playerController.SetAccelerator();

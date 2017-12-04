@@ -17,7 +17,7 @@ public class Hammer : MonoBehaviour
     float countVelocity = 120;      //velocityをゼロにするカウント
     public float velocityCountMax;
     public GameObject effect;       //ハンマー振る際の
-  
+    float time;
     // Use this for initialization
     void Start()
     {
@@ -27,8 +27,23 @@ public class Hammer : MonoBehaviour
     //
     public void HammerUpdate()
     {
-        LerpRotaion();
-        VelocityZero();
+        if (GetComponent<SpringJoint2D>().distance < 3)
+        {
+            GetComponent<SpringJoint2D>().autoConfigureDistance = true;
+            GetComponent<SpringJoint2D>().frequency = 1;
+        }
+        else if (GetComponent<SpringJoint2D>().distance > 3)
+        {
+            if (GetComponent<SpringJoint2D>().distance > 6) GetComponent<SpringJoint2D>().frequency = 8;
+            GetComponent<SpringJoint2D>().distance = 3;
+            GetComponent<SpringJoint2D>().autoConfigureDistance = false;
+        }
+        if (Input.GetMouseButton(1))
+        {
+            GetComponent<Rigidbody2D>().AddForce(Vector2.up * 0.5f);
+        }
+        // LerpRotaion();
+        //VelocityZero();
     }
 
     private void LerpRotaion()
