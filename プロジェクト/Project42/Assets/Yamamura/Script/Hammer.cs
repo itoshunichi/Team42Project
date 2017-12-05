@@ -27,6 +27,15 @@ public class Hammer : MonoBehaviour
     //
     public void HammerUpdate()
     {
+        if (GetComponent<SpringJoint2D>().distance <= 1.5f)
+        {
+            GetComponent<SpringJoint2D>().autoConfigureDistance = true;
+        }
+        else if (GetComponent<SpringJoint2D>().distance > 1.5f)
+        {
+            GetComponent<SpringJoint2D>().autoConfigureDistance = false;
+            GetComponent<SpringJoint2D>().distance = 1.5f;
+        }
         // LerpRotaion();
         //VelocityZero();
     }
