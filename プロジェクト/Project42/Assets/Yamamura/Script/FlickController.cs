@@ -92,7 +92,7 @@ public class FlickController : MonoBehaviour
                 //radianの値が規定値以下だったら回転しない
                 RadianCheck(GetRadian());
                 foreach (var pc in playerController) pc.Reset();
-               
+
                 flickCount += 1;//フリックした回数をカウント
             }
             tapTimer = 0.0f;
@@ -111,19 +111,20 @@ public class FlickController : MonoBehaviour
 
     private void RadianCheck(float radian)
     {       //前回の角度と比べて大きさくなるほど回す力を大きくするメソッドを呼ぶ
-        foreach (var h in hammer)
-            //if (radian >= radianMaxOne && radian < radianMaxTwo)
-            //  //  h.SetRotationForce(RadinaShortest(), 0);
-            //else if (radian >= radianMaxTwo && radian < radianMaxThree)
-            // //   h.SetRotationForce(RadinaShortest(), 1);
-            //else if (radian >= radianMaxThree)
-            //  //  h.SetRotationForce(RadinaShortest(), 2);
-           // else 
-      //  if (radian < radianMaxOne)
-            {
-                foreach (var pc in playerController) pc.SetAccelerator();
-                //playerController.SetAccelerator();
-            }
+
+        //if (radian >= radianMaxOne && radian < radianMaxTwo)
+        //  //  h.SetRotationForce(RadinaShortest(), 0);
+        //else if (radian >= radianMaxTwo && radian < radianMaxThree)
+        // //   h.SetRotationForce(RadinaShortest(), 1);
+        //else if (radian >= radianMaxThree)
+        //  //  h.SetRotationForce(RadinaShortest(), 2);
+        // else 
+        //  if (radian < radianMaxOne)
+        {
+            foreach (var pc in playerController) pc.SetAccelerator();
+            foreach (var h in hammer) h.Reset();
+            //playerController.SetAccelerator();
+        }
     }
     //角度の最短距離
     public bool RadinaShortest()

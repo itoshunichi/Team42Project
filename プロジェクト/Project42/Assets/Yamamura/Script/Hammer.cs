@@ -18,6 +18,7 @@ public class Hammer : MonoBehaviour
     public float velocityCountMax;
     public GameObject effect;       //ハンマー振る際の
     float time;
+
     // Use this for initialization
     void Start()
     {
@@ -27,15 +28,10 @@ public class Hammer : MonoBehaviour
     //
     public void HammerUpdate()
     {
-        if (GetComponent<SpringJoint2D>().distance <= 1.5f)
-        {
-            GetComponent<SpringJoint2D>().autoConfigureDistance = true;
-        }
-        else if (GetComponent<SpringJoint2D>().distance > 1.5f)
-        {
-            GetComponent<SpringJoint2D>().autoConfigureDistance = false;
-            GetComponent<SpringJoint2D>().distance = 1.5f;
-        }
+        GetComponent<LineRenderer>().SetPosition(0, transform.position);
+        GetComponent<LineRenderer>().SetPosition(1, player.transform.position);
+        time += Time.deltaTime;
+        GetComponent<Rigidbody2D>().velocity = Vector2.Lerp(GetComponent<Rigidbody2D>().velocity, Vector2.zero, time/100);
         // LerpRotaion();
         //VelocityZero();
     }
@@ -63,10 +59,11 @@ public class Hammer : MonoBehaviour
     //指定数値を０に
     public void Reset()
     {
-        countVelocity = 0;
-        addForceCount = 0;
-        addForceAlpha = 0;
-        GetComponent<HammerMove>().Reset();
+        time = 0;
+        //countVelocity = 0;
+        //addForceCount = 0;
+        //addForceAlpha = 0;
+        //GetComponent<HammerMove>().Reset();
     }
     //回転する力を設定
     public void SetRotationForce(bool isRight, int powerNum)
