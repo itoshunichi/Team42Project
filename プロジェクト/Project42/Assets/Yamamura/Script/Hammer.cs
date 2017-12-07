@@ -36,6 +36,11 @@ public class Hammer : MonoBehaviour
         //VelocityZero();
     }
 
+    public float GetLerpTime()
+    {
+        return time / 100;
+    }
+
     private void LerpRotaion()
     {
         if (addForceCount < ForceCountMax)
