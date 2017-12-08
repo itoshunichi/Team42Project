@@ -9,12 +9,12 @@ public class PlayerSmallController : Player
     float accelerator = 0;
     public float acceleratorMax;
     float alpha;
-    private bool isMoveStop;
+    private bool isMove;
 
-    public bool IsMoveStop
+    public bool IsMove
     {
-        get { return isMoveStop; }
-        set { isMoveStop = value; }
+        get { return isMove; }
+        set { isMove = value; }
     }
 
     /// <summary>
@@ -38,6 +38,7 @@ public class PlayerSmallController : Player
     // Update is called once per frame
     void Update()
     {
+
         Move();//移動処理
         Accelerator();//加速処理
     }
@@ -63,7 +64,7 @@ public class PlayerSmallController : Player
         float angleDirection = transform.eulerAngles.z * (Mathf.PI / 180.0f);
 
         dir = new Vector3(-Mathf.Sin(angleDirection), Mathf.Cos(angleDirection), 0.0f);
-        if (isMoveStop) return;
+        if (!isMove) return;
         transform.position += dir * (speed + accelerator);
     }
     //加速値を下げる
@@ -83,6 +84,15 @@ public class PlayerSmallController : Player
     public bool GetHit()
     {
         return isHit;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.name.Contains("TopCollider"))
+        {
+            //Debug.Log("Top");
+            StartCoroutine(FindObjectOfType<GamePlayEvent>().WaveFinish());
+        }
     }
     private void OnTriggerStay2D(Collider2D collision)
     {

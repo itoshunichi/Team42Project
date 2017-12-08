@@ -4,108 +4,140 @@ using UnityEngine;
 
 public class FormBossStageObject : MonoBehaviour
 {
-
-
+    /// <summary>
+    /// 生成するエネミーの種類
+    /// </summary>
     [SerializeField]
     private List<GameObject> enemyObjectTypes;
+
     /// <summary>
-    /// 最初に生成するコアの数
+    /// 生成した敵のリスト
     /// </summary>
-    [SerializeField]
-    private int initEnemyIndex;
-    /// <summary>
-    /// 生成するコアのリスト
-    /// </summary>
-    private List<GameObject> cores = new List<GameObject>();
-    public List<GameObject> Cores
+    private List<GameObject> enemys = new List<GameObject>();
+    public List<GameObject> Enemys
     {
-        get { return cores; }
+        get { return enemys; }
+    }
+    /// <summary>
+    /// シールドエネミーのリスト
+    /// </summary>
+    private List<GameObject> shieldEnemys = new List<GameObject>();
+    public List<GameObject> ShieldEnemys
+    {
+        get { return shieldEnemys; }
     }
 
-    /// <summary>
-    /// 生成するコアの位置
-    /// </summary>
-    [SerializeField]
-    private List<Vector2> formPositions;
 
     /// <summary>
-    /// コアのプレファブ
+    /// 最初に生成するシールドエネミーの数
     /// </summary>
-    private GameObject corePrefab;
-
     [SerializeField]
-    private List<Vector2> canFormPositions;
+    private int initShieldEnemyIndex;
+
+    /// <summary>
+    /// 生成するエネミーの数
+    /// </summary>
+    [SerializeField]
+    private int enemyIndex;
+
+    /// <summary>
+    /// 生成する位置
+    /// </summary>
+    [SerializeField]
+    private List<Vector2> setFormPositions;
+
+    /// <summary>
+    /// 生成できる位置
+    /// </summary>
+    private List<Vector2> canFormPositions = new List<Vector2>();
 
 
-    private void Awake()
-    {
-        //プレファブの読込
-        corePrefab = Resources.Load<GameObject>("Prefab/BeDestroyedObject/Core");
-
-
-    }
-
-    // Use this for initialization
     void Start()
     {
-
-        canFormPositions = formPositions;
-        InitFormEnemy();
+        //InitFormEnemy();
+        
+        SetCanFormPositions();
     }
 
-    // Update is called once per frame
+    private void SetCanFormPositions()
+    {
+        
+        for(int i = 0;i<setFormPositions.Count;i++)
+        {
+            canFormPositions.Add((Vector2)Camera.main.transform.position + setFormPositions[i]);
+        }
+    }
+   
     void Update()
     {
     }
 
     /// <summary>
-    /// ボス生成時のコアの生成
+    /// ボス生成時のシールドエネミーの生成
     /// </summary>
     public void InitFormEnemy()
     {
 
-        for (int i = 0; i < initEnemyIndex; i++)
+        for (int i = 0; i < initShieldEnemyIndex; i++)
         {
-            FormRandomEnemy();
+            FormRandomEnemy(EnemyMode.SHIELD);
         }
+
+        SetCanFormPositions();
     }
+
+    /// <summary>
+    ///エネミーを同時に生成
+    /// </summary>
+    public void FormEnemyGroup()
+    {
+        for(int i = 0;i<enemyIndex;i++)
+        {
+            FormRandomEnemy(EnemyMode.NORMAL);
+        }
+        SetCanFormPositions();
+    }
+
 
     /// <summary>
     /// 敵のランダム生成
+    /// 生成するときの状態を設定
     /// </summary>
-    public void FormRandomEnemy()
+    public void FormRandomEnemy(EnemyMode mode)
     {
+        //オブジェクトの種類をランダムで決定
         GameObject obj = enemyObjectTypes[Random.Range(0, enemyObjectTypes.Count)];
-        Vector2 pos = (Vector2)transform.position + formPositions[Random.Range(0, formPositions.Count)];
-        Instantiate(obj, pos, Quaternion.identity);
+        //位置を候補からランダムで決定
+        //Vector2 randomPos = setFormPositions[Random.Range(0, setFormPositions.Count)];
+        Vector2 pos = (Vector2)Camera.main.transform.position + setFormPositions[Random.Range(0, setFormPositions.Count)];
+        canFormPositions.Remove(pos);
+        Quaternion rot = obj.transform.rotation;
+        //生成
+       GameObject formEnemy =  Instantiate(obj, pos, rot);
+        //状態をシールドに
+        formEnemy.GetComponent<Enemy>().ChangeMode(mode);
+        //リストに保存
+        if (mode == EnemyMode.NORMAL)
+        {
+            enemys.Add(formEnemy);
+        }
+        if(mode == EnemyMode.SHIELD)
+        {
+            shieldEnemys.Add(formEnemy);
+        }
+
     }
 
-
-    /// <summary>
-    /// コアの生成
-    /// </summary>
-    public void FormCore()
+    public void DestroyEnemy(GameObject enemy)
     {
-        //リストからランダムで位置を決定して生成
-        int index = Random.Range(0, canFormPositions.Count);
-        Vector2 pos = (Vector2)transform.position + canFormPositions[index];
-        GameObject obj = Instantiate(corePrefab, pos, Quaternion.identity);
-        canFormPositions.RemoveAt(index);
+        if (enemy.GetComponent<Enemy>().IsSelectMode(EnemyMode.NORMAL))
+        {
+            enemys.Remove(enemy);
+        }
+        if(enemy.GetComponent<Enemy>().IsSelectMode(EnemyMode.SHIELD))
+        {
+            shieldEnemys.Remove(enemy);
+        }
+        Destroy(enemy);
     }
-
-
-    /// <summary>
-    /// コアの破壊
-    /// </summary>
-    /// <param name="obj"></param>
-    public void BreakCore(GameObject obj)
-    {
-        //配置可能な位置のListにコアの座標を格納
-        canFormPositions.Add((Vector2)obj.transform.position - (Vector2)transform.position);
-        //オブジェクトの削除
-        // cores.Remove(obj);
-        Destroy(obj);
-    }
-
-
 }
