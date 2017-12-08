@@ -48,7 +48,10 @@ public class GamePlayEvent : MonoBehaviour {
     private List<GameObject> formEnemy;
 
     private GameObject boss;
-    private GameObject formCoreObject;
+
+    private FlickController flickController;
+
+    private Energy energy;
 
 
 
@@ -57,7 +60,7 @@ public class GamePlayEvent : MonoBehaviour {
     {
         //プレイヤーの移動を止める
         players = FindObjectsOfType<PlayerSmallController>();
-        SetPlayerIsMoveStop(true);
+       
 
 
         textBack = GameObject.Find("TextBack").GetComponent<Image>();
@@ -67,9 +70,11 @@ public class GamePlayEvent : MonoBehaviour {
         arrow = GameObject.Find("Arrow");
 
         boss = Resources.Load<GameObject>("Prefab/Boss");
-        formCoreObject = Resources.Load<GameObject>("Prefab/FormBossStageObject");
+        //formCoreObject = Resources.Load<GameObject>("Prefab/FormBossStageObject");
         missionText.text = "エネルギーがなくなる前に\nWAVE" + waveIndex + "のボスを倒せ";
-
+        flickController = FindObjectOfType<FlickController>();
+        energy = FindObjectOfType<Energy>();
+        SetPlayerEnabled(false);
         StartCoroutine(GameStart());
 
     }
@@ -105,8 +110,7 @@ public class GamePlayEvent : MonoBehaviour {
         yield return new WaitForSeconds(1f);
         AudioManager.Instance.PlayBGM(AUDIO.BGM_GAMEPLAY);
         GameObject.Find("FlickController").GetComponent<FlickController>().enabled = true;
-        SetPlayerIsMoveStop(false);
-        FindObjectOfType<Energy>().isReduceEnergy =true;
+        SetPlayerEnabled(true);
     }
 
     private void SetWaveText()
@@ -114,58 +118,76 @@ public class GamePlayEvent : MonoBehaviour {
         waveText.text = "WAVE" + currentWave;
     }
 
-    public IEnumerator NextWave()
+    /// <summary>
+    /// 次のウェーブへ
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator WaveFinish()
     {
+        //既に最終ウェーブだったら処理しない
         if (IsBossWave()) yield break;
-        if (GameObject.FindObjectOfType<FormEnemyObject>().FormObjects.Count != 0) yield break;
+        if (FindObjectOfType<FormEnemyObject>().FormObjects.Count != 0) yield break;
         //矢印の描画を無効
         SetArrowEnabled(false);
         //エネミー生成オブジェクトを削除
         Destroy(GameObject.FindObjectOfType<FormEnemyObject>());
         //プレイヤーの動きを止める
-        SetPlayerIsMoveStop(true);
-        FindObjectOfType<Energy>().isReduceEnergy = false;
+        SetPlayerEnabled(false);
         //背景の生成
         Vector3 backGroundPos = new Vector3(0, Camera.main.transform.position.y + Camera.main.GetComponent<CameraControl>().getScreenTopLeft().y * 1.5f, 0);
         Instantiate(Resources.Load<GameObject>("Prefab/BackGround"), backGroundPos, Quaternion.identity);
         //カメラのスクロールを開始
         Camera.main.GetComponent<CameraControl>().StartCameraScroll();
 
-
-
         yield return new WaitForSeconds(2f);
 
-        //最後のウェーブの一個手前
-        if (currentWave == waveIndex - 1)
-        {
-            AddCurrentWave();
-            yield return new WaitForSeconds(waveTextTime);
-            SetWaveTextEnabled(false);
-            //Instantiate(formEnemy[currentWave - 1], (Vector2)Camera.main.transform.position, Quaternion.identity);
-            Instantiate(boss, (Vector2)Camera.main.transform.position, Quaternion.identity);
-
-        }
-        else
-        {
-            AddCurrentWave();
-            Instantiate(formEnemy[currentWave - 1], (Vector2)Camera.main.transform.position, Quaternion.identity);
-            SetWaveTextEnabled(true);
-
-            yield return new WaitForSeconds(waveTextTime);
-            SetWaveTextEnabled(false);
-        }
-
-        //プレイヤーの動きを再開させる
-        SetPlayerIsMoveStop(false);
-        FindObjectOfType<Energy>().isReduceEnergy = true;
-        GameObject.Find("StageWall").transform.position = Camera.main.transform.position;
-
+        StartCoroutine(StartNextWave());
     }
 
-    private void AddCurrentWave()
+
+
+    /// <summary>
+    ///次のウェーブの開始
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator StartNextWave()
     {
+        SetStageWallTrigger(false);
+        //現在のウェーブを進める
         currentWave++;
+        //テキストを描画
         SetWaveTextEnabled(true);
+        //待機
+        yield return new WaitForSeconds(waveTextTime);
+        //テキスト無効
+        SetWaveTextEnabled(false);
+        //敵の生成
+        FormEnemy();
+        //ステージの位置の調整
+        GameObject.Find("StageWall").transform.position = Camera.main.transform.position;
+    }
+
+    /// <summary>
+    /// 敵の生成
+    /// </summary>
+    private void FormEnemy()
+    {
+        //最後のウェーブ
+        if (IsBossWave())
+        {
+            //ボス生成
+            Instantiate(boss, (Vector2)Camera.main.transform.position+(Vector2)boss.transform.position, Quaternion.identity);
+
+        }
+        //その他
+        else
+        {
+            //エネミー生成
+            Instantiate(formEnemy[currentWave - 1], (Vector2)Camera.main.transform.position, Quaternion.identity);
+            //プレイヤーの動きを再開させる
+            SetPlayerEnabled(true);
+            
+        }
     }
 
     private void SetWaveTextEnabled(bool enabled)
@@ -198,14 +220,26 @@ public class GamePlayEvent : MonoBehaviour {
 
     }
 
+    public void SetStageWallTrigger(bool isTrigger)
+    {
+        Collider2D[] walls = GameObject.Find("StageWall").transform.GetComponentsInChildren<Collider2D>();
+        for(int i = 0;i<walls.Length;i++)
+        {
+            walls[i].isTrigger = isTrigger;
+        }
+    }
+
     /// <summary>
-    /// 全てのプレイヤーの動きを停止
+    /// 全てのプレイヤーの動きを変更
     /// </summary>
-    private void SetPlayerIsMoveStop(bool enabled)
+    public void SetPlayerEnabled(bool enabled)
     {
         foreach(var player in players)
         {
-            player.IsMoveStop = enabled;
+            player.IsMove = enabled;
         }
+        flickController.enabled = enabled;
+        energy.enabled = enabled;
+       
     }
 }

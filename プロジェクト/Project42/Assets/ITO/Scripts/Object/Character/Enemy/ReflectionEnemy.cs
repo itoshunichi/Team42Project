@@ -12,10 +12,6 @@ public class ReflectionEnemy : Enemy
         SetVelocity();
     }
 
-    protected override void OnTriggerEnter2D(Collider2D collision)
-    {
-        rigid.velocity = new Vector2(-rigid.velocity.x, rigid.velocity.y);
-    }
 
     private void SetVelocity()
     {
@@ -28,6 +24,9 @@ public class ReflectionEnemy : Enemy
 
     protected override void Move()
     {
-        throw new NotImplementedException();
+        if(rigid.velocity == Vector2.zero)
+        {
+            SetVelocity();
+        }
     }
 }

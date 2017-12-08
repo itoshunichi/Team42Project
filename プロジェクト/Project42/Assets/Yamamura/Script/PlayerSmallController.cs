@@ -6,15 +6,15 @@ public class PlayerSmallController : Player
 {
     float accelerator = 0;                  //加速
     public float acceleratorMax;            //加速の最大値
-    private bool isMoveStop;                //止まっているかどうか
+    private bool isMove;                //止まっているかどうか
     public Energy energy;                   //エネルギー
     private int enemyHitCount = 0;          //エネミーに当たった回数
     public int EnemyHitCount 
     { get { return enemyHitCount; } }
-    public bool IsMoveStop
+    public bool IsMove
     {
-        get { return isMoveStop; }
-        set { isMoveStop = value; }
+        get { return isMove; }
+        set { isMove = value; }
     }
 
     /// <summary>
@@ -57,7 +57,7 @@ public class PlayerSmallController : Player
         float angleDirection = transform.eulerAngles.z * (Mathf.PI / 180.0f);
 
         dir = new Vector3(-Mathf.Sin(angleDirection), Mathf.Cos(angleDirection), 0.0f);
-        if (isMoveStop) return;
+        if (!isMove) return;
 
         transform.position += dir * (speed + accelerator);
     }
@@ -107,7 +107,16 @@ public class PlayerSmallController : Player
             isActionEria = false;
         }
     }
-  
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.name.Contains("TopCollider"))
+        {
+            //Debug.Log("Top");
+            StartCoroutine(FindObjectOfType<GamePlayEvent>().WaveFinish());
+        }
+    }
+
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "BeDestroyedObject" && !isHit)
