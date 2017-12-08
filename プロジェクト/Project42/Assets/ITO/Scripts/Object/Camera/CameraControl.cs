@@ -84,15 +84,11 @@ public class CameraControl : MonoBehaviour
     void Start()
     {
         // StartCoroutine(CameraZoom());
-        Debug.Log("BottomRight"+getScreenBottomRight());
-        Debug.Log("TopLeft"+getScreenTopLeft());
+       
     }
 
     void Update()
-    {
-
-        // MoveCamera();
-        //CameraZoom();
+    { 
         CameraScroll();
     }
 

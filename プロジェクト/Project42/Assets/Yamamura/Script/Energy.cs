@@ -12,6 +12,7 @@ public class Energy : MonoBehaviour
     float energyTime;           //時間
     float combTime;             //コンボ判定時間
     int combCount;              //コンボ
+    public bool isReduceEnergy = false;
 
     // Use this for initialization
     void Start()
@@ -21,8 +22,10 @@ public class Energy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!isReduceEnergy) return;
         energyTime += Time.deltaTime;
-        if (energyTime >= 0.01f){
+        if (energyTime >= 0.01f)
+        {
             energy -= 0.01f;
             energyTime = 0;
         }

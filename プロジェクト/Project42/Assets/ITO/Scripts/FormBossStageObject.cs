@@ -5,7 +5,8 @@ using UnityEngine;
 public class FormBossStageObject : MonoBehaviour
 {
 
-
+    [SerializeField]
+    private GameObject normalEnemy;
     [SerializeField]
     private List<GameObject> enemyObjectTypes;
     /// <summary>
@@ -35,6 +36,8 @@ public class FormBossStageObject : MonoBehaviour
 
     [SerializeField]
     private List<Vector2> canFormPositions;
+
+    private List<GameObject> enemys = new List<GameObject>();
 
 
     private void Awake()
@@ -77,7 +80,15 @@ public class FormBossStageObject : MonoBehaviour
     {
         GameObject obj = enemyObjectTypes[Random.Range(0, enemyObjectTypes.Count)];
         Vector2 pos = (Vector2)transform.position + formPositions[Random.Range(0, formPositions.Count)];
-        Instantiate(obj, pos, Quaternion.identity);
+        Quaternion rot = obj.transform.rotation;
+         enemys.Add(Instantiate(obj, pos, rot));
+    }
+
+    public void AddNormalEnemy(GameObject enemy)
+    {
+       
+        Vector2 pos = enemy.transform.position;
+        enemys.Add(Instantiate(normalEnemy, pos, Quaternion.identity));
     }
 
 
@@ -105,6 +116,21 @@ public class FormBossStageObject : MonoBehaviour
         //オブジェクトの削除
         // cores.Remove(obj);
         Destroy(obj);
+    }
+
+    public void DestroyEnemy(GameObject enemy)
+    {
+        enemys.Remove(enemy);
+        Destroy(enemy);
+    }
+
+    public void EnemyActionReset()
+    {
+        foreach(var e in enemys)
+        {
+            e.GetComponent<Enemy>().IsTarkingPlayer = false;
+            e.GetComponent<Enemy>().SetStartRotation();
+        }
     }
 
 

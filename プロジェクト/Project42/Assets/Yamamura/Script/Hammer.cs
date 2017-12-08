@@ -18,7 +18,12 @@ public class Hammer : MonoBehaviour
     public float velocityCountMax;
     public GameObject effect;       //ハンマー振る際の
     float time;
+    private bool isCamera;
 
+    public bool IsCamera
+    {
+        get { return isCamera; }
+    }
     // Use this for initialization
     void Start()
     {
@@ -31,7 +36,7 @@ public class Hammer : MonoBehaviour
         GetComponent<LineRenderer>().SetPosition(0, transform.position);
         GetComponent<LineRenderer>().SetPosition(1, player.transform.position);
         time += Time.deltaTime;
-        GetComponent<Rigidbody2D>().velocity = Vector2.Lerp(GetComponent<Rigidbody2D>().velocity, Vector2.zero, time/100);
+        GetComponent<Rigidbody2D>().velocity = Vector2.Lerp(GetComponent<Rigidbody2D>().velocity, Vector2.zero, time / 100);
         // LerpRotaion();
         //VelocityZero();
     }
@@ -101,8 +106,13 @@ public class Hammer : MonoBehaviour
     {   //SceneCameraとプレビューカメラに反応しないように
         if (Camera.current.name != "SceneCamera" && Camera.current.name != "Preview Camera")
         {
+            isCamera = true;
             if (addForceCount < ForceCountMax)
                 Instantiate(effect, transform.position, effect.transform.rotation);
+        }
+        else
+        {
+            isCamera = false;
         }
     }
 }

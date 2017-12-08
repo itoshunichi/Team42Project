@@ -36,7 +36,6 @@ public abstract class Player : MonoBehaviour {
 
     public void Reset()
     {
-        speed = 0;
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
     }
 

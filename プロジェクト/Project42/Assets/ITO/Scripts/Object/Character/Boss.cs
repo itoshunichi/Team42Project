@@ -109,8 +109,7 @@ public class Boss : BeDestroyedObject
         formBossStageObjectScript.FormCore();
         //HPを減らす
         hp -= 1;
-        //ウェーブの生成
-        InstantiateWave();
+        FindObjectOfType<FormBossStageObject>().EnemyActionReset();
         //待機状態に
         mode = BossMode.NO;
     }

@@ -106,6 +106,7 @@ public class GamePlayEvent : MonoBehaviour {
         AudioManager.Instance.PlayBGM(AUDIO.BGM_GAMEPLAY);
         GameObject.Find("FlickController").GetComponent<FlickController>().enabled = true;
         SetPlayerIsMoveStop(false);
+        FindObjectOfType<Energy>().isReduceEnergy =true;
     }
 
     private void SetWaveText()
@@ -123,6 +124,7 @@ public class GamePlayEvent : MonoBehaviour {
         Destroy(GameObject.FindObjectOfType<FormEnemyObject>());
         //プレイヤーの動きを止める
         SetPlayerIsMoveStop(true);
+        FindObjectOfType<Energy>().isReduceEnergy = false;
         //背景の生成
         Vector3 backGroundPos = new Vector3(0, Camera.main.transform.position.y + Camera.main.GetComponent<CameraControl>().getScreenTopLeft().y * 1.5f, 0);
         Instantiate(Resources.Load<GameObject>("Prefab/BackGround"), backGroundPos, Quaternion.identity);
@@ -155,6 +157,7 @@ public class GamePlayEvent : MonoBehaviour {
 
         //プレイヤーの動きを再開させる
         SetPlayerIsMoveStop(false);
+        FindObjectOfType<Energy>().isReduceEnergy = true;
         GameObject.Find("StageWall").transform.position = Camera.main.transform.position;
 
     }

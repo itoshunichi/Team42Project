@@ -7,9 +7,10 @@ public class PlayerSmallController : Player
     float accelerator = 0;                  //加速
     public float acceleratorMax;            //加速の最大値
     private bool isMoveStop;                //止まっているかどうか
-    public PlayerSmallController[] players; //他のプレイヤー
     public Energy energy;                   //エネルギー
-
+    private int enemyHitCount = 0;          //エネミーに当たった回数
+    public int EnemyHitCount 
+    { get { return enemyHitCount; } }
     public bool IsMoveStop
     {
         get { return isMoveStop; }
@@ -29,6 +30,7 @@ public class PlayerSmallController : Player
     void Start()
     {
         flickController = flick.GetComponent<FlickController>();
+       
     }
 
     // Update is called once per frame
@@ -49,7 +51,6 @@ public class PlayerSmallController : Player
     {
         if (GetComponent<Player_StageOut>().IsStageOut()) return;
         if (transform.rotation.z != flick.transform.rotation.z) GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        if (speed < speedMax) speed += 0.02f;
         transform.rotation = flick.transform.rotation;
         //自身の向きベクトル取得
         //自身の角度をラジアンで取得
@@ -57,6 +58,7 @@ public class PlayerSmallController : Player
 
         dir = new Vector3(-Mathf.Sin(angleDirection), Mathf.Cos(angleDirection), 0.0f);
         if (isMoveStop) return;
+
         transform.position += dir * (speed + accelerator);
     }
     //加速値を下げる
@@ -64,13 +66,21 @@ public class PlayerSmallController : Player
     {
         if (accelerator > 0)
         {
-            accelerator -= acceleratorMax / 30;
+            accelerator -= acceleratorMax / 20;
+        }
+        Debug.Log(speed);
+        if (accelerator <= 0 && speed > 0)
+        {
+            Debug.Log("SPEEDDOWN");
+            speed -= speedMax / 60;
         }
     }
     //加速数値セット
     public void SetAccelerator()
     {
+        Debug.Log("SET");
         accelerator = acceleratorMax;
+        speed = speedMax;
     }
 
     public Vector2 GetDirection()
@@ -97,26 +107,12 @@ public class PlayerSmallController : Player
             isActionEria = false;
         }
     }
-    /// <summary>
-    /// 他のプレイヤーが当たった時
-    /// </summary>
-    /// <param name="col"></param>
-    public void OtherPlayerHit(Collision2D col)
-    {
-        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-        isHit = true;
-        speed = 0;
-        Vector2 dir = transform.position - col.gameObject.transform.position;
-        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        GetComponent<Rigidbody2D>().AddForce(dir * collisionPower);
-    }
-
+  
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "BeDestroyedObject" && !isHit)
         {
             AudioManager.Instance.PlaySE(AUDIO.SE_DAMAGE);
-            foreach (var p in players) p.OtherPlayerHit(col);
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             isHit = true;
             speed = 0;

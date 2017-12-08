@@ -5,10 +5,10 @@ using UnityEngine;
 public class FlickController : MonoBehaviour
 {
     //スクリプト
-    public PlayerSmallController[] playerController;
-    public Hammer[] hammer;           //ハンマー
+    public PlayerSmallController playerController;
+    public Hammer hammer;             //ハンマー
     //Object
-    public GameObject mainCamera;
+    public GameObject mainCamera;       
     //Vector
     private Vector3 touchStartPos;      //タッチした場所
     private Vector3 touchEndPos;        //タッチ終わりの場所
@@ -16,17 +16,17 @@ public class FlickController : MonoBehaviour
     //値
     int flickCount = 0;
     float tapTimer = 0.0f;              //タッチしている時間
-    public float flickTime;           //フリック判定時間
+    public float flickTime;             //フリック判定時間
     public float flickMagnitude = 100;
-    float beforeRadian = 0; //フリックする前の角度
-    float afterRadian = 0;  //フリックした後の角度
+    float beforeRadian = 0;             //フリックする前の角度
+    float afterRadian = 0;              //フリックした後の角度
     public float radianMaxOne = 30;
     public float radianMaxTwo = 60;
     public float radianMaxThree = 90;
     public float radianMaxFour = 120;
     //bool
     private bool isTap = false;         //Tapしたかどうか
-    bool isFlick = false;
+    bool isFlick = false;               
 
     public int FlickCount
     {
@@ -91,7 +91,7 @@ public class FlickController : MonoBehaviour
                 //radina 181以上 + 反時計回り
                 //radianの値が規定値以下だったら回転しない
                 RadianCheck(GetRadian());
-                foreach (var pc in playerController) pc.Reset();
+                playerController.Reset();
 
                 flickCount += 1;//フリックした回数をカウント
             }
@@ -121,8 +121,8 @@ public class FlickController : MonoBehaviour
         // else 
         //  if (radian < radianMaxOne)
         {
-            foreach (var pc in playerController) pc.SetAccelerator();
-            foreach (var h in hammer) h.Reset();
+            playerController.SetAccelerator();
+            hammer.Reset();
             //playerController.SetAccelerator();
         }
     }
