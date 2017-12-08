@@ -55,24 +55,22 @@ public class FlickController : MonoBehaviour
         {   //位置セット
             touchStartPos = Input.mousePosition;
             transform.position = touchStartPos;
-            isTap = true;
         }
         if (Input.GetMouseButton(0))
         {   //タップカウント
             tapTimer += 0.01f;
         }
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0)) { isTap = false; }
+        touchEndPos = Input.mousePosition;
+
+
+        if (touchStartPos != touchEndPos && !isTap)
         {
             if (flickCount == 0) beforeEndPos = Vector2.up;
             else beforeEndPos = touchEndPos;
-            touchEndPos = Input.mousePosition;
 
             Vector2 dir = touchEndPos - touchStartPos;
-            if (tapTimer <= flickTime && dir.magnitude <= flickMagnitude)
-            {
-                // pcs.SetAccelerator();
-            }
-            else if (dir.magnitude >= flickMagnitude) //&& tapTimer <= flickTime)
+            if (dir.magnitude >= flickMagnitude) //&& tapTimer <= flickTime)
             {
                 var rotation = Quaternion.LookRotation(Vector3.forward, Input.mousePosition - touchStartPos);
                 transform.localRotation = rotation; //マウスの方向に向く
@@ -96,7 +94,8 @@ public class FlickController : MonoBehaviour
                 flickCount += 1;//フリックした回数をカウント
             }
             tapTimer = 0.0f;
-            isTap = false;
+            touchStartPos = Input.mousePosition;
+            isTap = true;
         }
     }
 

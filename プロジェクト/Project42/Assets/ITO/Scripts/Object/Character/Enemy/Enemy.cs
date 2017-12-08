@@ -29,7 +29,7 @@ public abstract class Enemy : BeDestroyedObject
     {
         base.Start();
         startRotation = transform.rotation;
-        player = GameObject.Find("PlayerFront").transform.GetChild(1).gameObject;
+        player = GameObject.Find("PlayerFront");
     }
 
     protected virtual void Update()

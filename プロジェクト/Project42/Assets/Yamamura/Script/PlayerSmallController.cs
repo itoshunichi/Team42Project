@@ -9,6 +9,9 @@ public class PlayerSmallController : Player
     private bool isMoveStop;                //止まっているかどうか
     public Energy energy;                   //エネルギー
     private int enemyHitCount = 0;          //エネミーに当たった回数
+    public GameObject[] point;
+    Vector2 spriteSize;
+    public GameObject[] effect;
     public int EnemyHitCount 
     { get { return enemyHitCount; } }
     public bool IsMoveStop
@@ -30,7 +33,7 @@ public class PlayerSmallController : Player
     void Start()
     {
         flickController = flick.GetComponent<FlickController>();
-       
+        spriteSize = GetComponent<SpriteRenderer>().bounds.size;
     }
 
     // Update is called once per frame
@@ -58,8 +61,11 @@ public class PlayerSmallController : Player
 
         dir = new Vector3(-Mathf.Sin(angleDirection), Mathf.Cos(angleDirection), 0.0f);
         if (isMoveStop) return;
-
-        transform.position += dir * (speed + accelerator);
+        //移動制限
+        transform.position = 
+            new Vector3(
+                Mathf.Clamp(transform.position.x + dir.x * (speed + accelerator),point[0].transform.position.x + spriteSize.x,point[1].transform.position.x - spriteSize.x),
+           Mathf.Clamp(transform.position.y + dir.y * (speed + accelerator), point[0].transform.position.y + spriteSize.y, point[1].transform.position.y - spriteSize.y));
     }
     //加速値を下げる
     private void Accelerator()
@@ -67,6 +73,7 @@ public class PlayerSmallController : Player
         if (accelerator > 0)
         {
             accelerator -= acceleratorMax / 20;
+            Instantiate(effect[0], transform.position, new Quaternion(-90,0,0,1));
         }
         Debug.Log(speed);
         if (accelerator <= 0 && speed > 0)
@@ -120,6 +127,7 @@ public class PlayerSmallController : Player
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             GetComponent<Rigidbody2D>().AddForce(dir * collisionPower);
             energy.MinusEnergy();
+            Instantiate(effect[1], transform.position, effect[1].transform.rotation);
         }
     }
 }
