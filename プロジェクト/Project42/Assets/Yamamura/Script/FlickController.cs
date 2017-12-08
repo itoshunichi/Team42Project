@@ -8,7 +8,7 @@ public class FlickController : MonoBehaviour
     public PlayerSmallController playerController;
     public Hammer hammer;             //ハンマー
     //Object
-    public GameObject mainCamera;       
+    public GameObject mainCamera;
     //Vector
     private Vector3 touchStartPos;      //タッチした場所
     private Vector3 touchEndPos;        //タッチ終わりの場所
@@ -26,7 +26,7 @@ public class FlickController : MonoBehaviour
     public float radianMaxFour = 120;
     //bool
     private bool isTap = false;         //Tapしたかどうか
-    bool isFlick = false;               
+    bool isFlick = false;
 
     public int FlickCount
     {
@@ -43,7 +43,7 @@ public class FlickController : MonoBehaviour
     {
         Flick();
 
-        if (!isTap) transform.position = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 0); //タッチ位置に合わせる
+       // if (!isTap) transform.position = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 0); //タッチ位置に合わせる
     }
 
     /// <summary>
@@ -61,18 +61,15 @@ public class FlickController : MonoBehaviour
         {   //タップカウント
             tapTimer += 0.01f;
         }
-        if (Input.GetMouseButtonUp(0))
+        touchEndPos = Input.mousePosition;
+        if (touchStartPos != touchEndPos && isTap)
         {
             if (flickCount == 0) beforeEndPos = Vector2.up;
             else beforeEndPos = touchEndPos;
             touchEndPos = Input.mousePosition;
 
             Vector2 dir = touchEndPos - touchStartPos;
-            if (tapTimer <= flickTime && dir.magnitude <= flickMagnitude)
-            {
-                // pcs.SetAccelerator();
-            }
-            else if (dir.magnitude >= flickMagnitude) //&& tapTimer <= flickTime)
+         //   if (dir.magnitude >= flickMagnitude) //&& tapTimer <= flickTime)
             {
                 var rotation = Quaternion.LookRotation(Vector3.forward, Input.mousePosition - touchStartPos);
                 transform.localRotation = rotation; //マウスの方向に向く
@@ -96,6 +93,10 @@ public class FlickController : MonoBehaviour
                 flickCount += 1;//フリックした回数をカウント
             }
             tapTimer = 0.0f;
+            isTap = false;
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
             isTap = false;
         }
     }

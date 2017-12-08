@@ -7,7 +7,6 @@ public class HammerController : MonoBehaviour
 
     public Shake shake;
     public Hammer hammer;
-    public HammerMove hammerMove;
     public float DestroyValue;
     public Energy energy;
 
@@ -20,13 +19,11 @@ public class HammerController : MonoBehaviour
     void Update()
     {
         hammer.HammerUpdate();
-        hammerMove.Move();
     }
 
     public void Reset()
     {
         hammer.Reset();
-        hammerMove.Reset();
     }
 
     void OnTriggerEnter2D(Collider2D col)

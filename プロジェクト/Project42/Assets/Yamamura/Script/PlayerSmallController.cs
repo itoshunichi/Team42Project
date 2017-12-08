@@ -9,6 +9,9 @@ public class PlayerSmallController : Player
     private bool isMove;                //止まっているかどうか
     public Energy energy;                   //エネルギー
     private int enemyHitCount = 0;          //エネミーに当たった回数
+    public GameObject[] point;
+    public GameObject[] effect;
+    private Vector2 spriteSize;
     public int EnemyHitCount 
     { get { return enemyHitCount; } }
     public bool IsMove
@@ -30,7 +33,7 @@ public class PlayerSmallController : Player
     void Start()
     {
         flickController = flick.GetComponent<FlickController>();
-       
+        spriteSize = GetComponent<SpriteRenderer>().bounds.size;
     }
 
     // Update is called once per frame
@@ -59,7 +62,9 @@ public class PlayerSmallController : Player
         dir = new Vector3(-Mathf.Sin(angleDirection), Mathf.Cos(angleDirection), 0.0f);
         if (!isMove) return;
 
-        transform.position += dir * (speed + accelerator);
+        transform.position = new Vector3(
+            Mathf.Clamp(transform.position.x + dir.x * (speed + accelerator), point[0].transform.position.x + spriteSize.x, point[1].transform.position.x - spriteSize.x), 
+            Mathf.Clamp(transform.position.y + dir.y * (speed + accelerator), point[0].transform.position.y, point[1].transform.position.y));
     }
     //加速値を下げる
     private void Accelerator()
@@ -67,6 +72,7 @@ public class PlayerSmallController : Player
         if (accelerator > 0)
         {
             accelerator -= acceleratorMax / 20;
+            Instantiate(effect[0], transform.position, effect[1].transform.rotation);
         }
         if (accelerator <= 0 && speed > 0)
         {
@@ -94,7 +100,6 @@ public class PlayerSmallController : Player
     {
         if (collision.name.Contains("TopCollider"))
         {
-            //Debug.Log("Top");
             StartCoroutine(FindObjectOfType<GamePlayEvent>().WaveFinish());
         }
     }
@@ -107,6 +112,7 @@ public class PlayerSmallController : Player
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             isHit = true;
             speed = 0;
+            Instantiate(effect[0], transform.position, effect[1].transform.rotation);
             Vector2 dir = transform.position - col.gameObject.transform.position;
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             GetComponent<Rigidbody2D>().AddForce(dir * collisionPower);
