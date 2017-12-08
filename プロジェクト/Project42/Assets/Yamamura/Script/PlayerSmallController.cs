@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class PlayerSmallController : Player
 {
-    HingeJoint2D joint;
-    Player_StageOut stageOut;
-    float accelerator = 0;
-    public float acceleratorMax;
-    float alpha;
-    private bool isMoveStop;
+    float accelerator = 0;                  //加速
+    public float acceleratorMax;            //加速の最大値
+    private bool isMoveStop;                //止まっているかどうか
+    public PlayerSmallController[] players; //他のプレイヤー
+    public Energy energy;                   //エネルギー
 
     public bool IsMoveStop
     {
@@ -30,7 +29,6 @@ public class PlayerSmallController : Player
     void Start()
     {
         flickController = flick.GetComponent<FlickController>();
-        stageOut = GetComponent<Player_StageOut>();
     }
 
     // Update is called once per frame
@@ -43,10 +41,7 @@ public class PlayerSmallController : Player
     private void Move()
     {
         NotMoveCount();
-        if (!isHit || !stageOut.IsStageOut())
-        {
-            RotationMove();
-        }
+        RotationMove();
     }
 
     //向きに対して移動
@@ -102,20 +97,33 @@ public class PlayerSmallController : Player
             isActionEria = false;
         }
     }
+    /// <summary>
+    /// 他のプレイヤーが当たった時
+    /// </summary>
+    /// <param name="col"></param>
+    public void OtherPlayerHit(Collision2D col)
+    {
+        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+        isHit = true;
+        speed = 0;
+        Vector2 dir = transform.position - col.gameObject.transform.position;
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        GetComponent<Rigidbody2D>().AddForce(dir * collisionPower);
+    }
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "BeDestroyedObject")
+        if (col.gameObject.tag == "BeDestroyedObject" && !isHit)
         {
             AudioManager.Instance.PlaySE(AUDIO.SE_DAMAGE);
+            foreach (var p in players) p.OtherPlayerHit(col);
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             isHit = true;
             speed = 0;
-            Debug.Log("HIT");
             Vector2 dir = transform.position - col.gameObject.transform.position;
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             GetComponent<Rigidbody2D>().AddForce(dir * collisionPower);
+            energy.MinusEnergy();
         }
     }
-
 }
