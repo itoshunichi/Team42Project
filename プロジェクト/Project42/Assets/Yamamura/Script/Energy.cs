@@ -5,17 +5,13 @@ using UnityEngine.UI;
 
 public class Energy : MonoBehaviour
 {
-
-    public float energy;
-    public float addEnergy;
-    public float maxEnergy;
-    float energyTime; //時間
-    float combTime;
-    int combCount;//コンボ
-
-    /// <summary>
-    /// エネルギーを減らすか
-    /// </summary>
+    public float energy;        //エネルギー
+    public float addEnergy;     //足す値
+    public float minusEnergy;   //引く値
+    public float maxEnergy;     //最大エネルギー
+    float energyTime;           //時間
+    float combTime;             //コンボ判定時間
+    int combCount;              //コンボ
     public bool isReduceEnergy = false;
 
     // Use this for initialization
@@ -28,7 +24,8 @@ public class Energy : MonoBehaviour
     {
         if (!isReduceEnergy) return;
         energyTime += Time.deltaTime;
-        if (energyTime >= 0.01f){
+        if (energyTime >= 0.01f)
+        {
             energy -= 0.01f;
             energyTime = 0;
         }
@@ -53,6 +50,11 @@ public class Energy : MonoBehaviour
     {
         combTime = 0;
         energy += addEnergy;
+    }
+
+    public void MinusEnergy()
+    {
+        energy -= minusEnergy;
     }
 
     public void CombAddEnergy()

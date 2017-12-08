@@ -23,7 +23,7 @@ public class HammerMove : MonoBehaviour
             !hammer.VelocityCount())
         {
             alpha += alphaPuls;
-            transform.position = Vector2.Lerp(transform.position, point.transform.position, alpha);
+          //  transform.position = Vector2.Lerp(transform.position, point.transform.position, alpha);
         }
     }
 
