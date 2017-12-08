@@ -68,17 +68,14 @@ public class PlayerSmallController : Player
         {
             accelerator -= acceleratorMax / 20;
         }
-        Debug.Log(speed);
         if (accelerator <= 0 && speed > 0)
         {
-            Debug.Log("SPEEDDOWN");
             speed -= speedMax / 60;
         }
     }
     //加速数値セット
     public void SetAccelerator()
     {
-        Debug.Log("SET");
         accelerator = acceleratorMax;
         speed = speedMax;
     }
@@ -92,22 +89,7 @@ public class PlayerSmallController : Player
     {
         return isHit;
     }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.tag == "ActionEria")
-        {
-            isActionEria = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "ActionEria")
-        {
-            isActionEria = false;
-        }
-    }
-  
+   
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "BeDestroyedObject" && !isHit)
