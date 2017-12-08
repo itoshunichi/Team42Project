@@ -54,7 +54,7 @@ public class PlayerSmallController : Player
     {
         if (GetComponent<Player_StageOut>().IsStageOut()) return;
         if (transform.rotation.z != flick.transform.rotation.z) GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        transform.rotation = flick.transform.rotation;
+        
         //自身の向きベクトル取得
         //自身の角度をラジアンで取得
         float angleDirection = transform.eulerAngles.z * (Mathf.PI / 180.0f);
@@ -89,6 +89,11 @@ public class PlayerSmallController : Player
     public Vector2 GetDirection()
     {
         return dir;
+    }
+
+    public void SetRotationPlayer(Quaternion quaternion)
+    {
+        transform.rotation = quaternion;
     }
 
     public bool GetHit()

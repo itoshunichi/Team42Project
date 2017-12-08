@@ -43,7 +43,7 @@ public class FlickController : MonoBehaviour
     {
         Flick();
 
-       // if (!isTap) transform.position = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 0); //タッチ位置に合わせる
+        if (!isTap) transform.position = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 0); //タッチ位置に合わせる
     }
 
     /// <summary>
@@ -55,6 +55,7 @@ public class FlickController : MonoBehaviour
         {   //位置セット
             touchStartPos = Input.mousePosition;
             transform.position = touchStartPos;
+            touchEndPos = touchStartPos;
             isTap = true;
         }
         if (Input.GetMouseButton(0))
@@ -62,14 +63,15 @@ public class FlickController : MonoBehaviour
             tapTimer += 0.01f;
         }
         touchEndPos = Input.mousePosition;
-        if (touchStartPos != touchEndPos && isTap)
+
+        if (Vector2.Distance(touchStartPos, touchEndPos) > 20 && isTap)
         {
             if (flickCount == 0) beforeEndPos = Vector2.up;
             else beforeEndPos = touchEndPos;
             touchEndPos = Input.mousePosition;
 
             Vector2 dir = touchEndPos - touchStartPos;
-         //   if (dir.magnitude >= flickMagnitude) //&& tapTimer <= flickTime)
+            //if (dir.magnitude >= flickMagnitude) //&& tapTimer <= flickTime)
             {
                 var rotation = Quaternion.LookRotation(Vector3.forward, Input.mousePosition - touchStartPos);
                 transform.localRotation = rotation; //マウスの方向に向く
@@ -82,7 +84,7 @@ public class FlickController : MonoBehaviour
                 //0より小さかったら+360足す
                 if (beforeRadian < 0) beforeRadian += 360;
                 if (afterRadian < 0) afterRadian += 360;
-
+                playerController.SetRotationPlayer(rotation);
                 //最短距離の場合(最大距離の場合は逆)
                 //radian 179以下 - 時計回り
                 //radina 181以上 + 反時計回り
