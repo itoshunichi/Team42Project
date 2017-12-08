@@ -9,4 +9,11 @@ public class Shield : BeDestroyedObject
     {
 
     }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        transform.parent.GetComponent<Boss>().TargetEnemy_ChangeSheild(collision);
+    }
+
+
 }

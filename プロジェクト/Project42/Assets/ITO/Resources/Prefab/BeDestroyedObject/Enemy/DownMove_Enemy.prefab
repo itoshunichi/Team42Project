@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4843285014119956}
   - component: {fileID: 212977538195895678}
   - component: {fileID: 95370006237704148}
-  - component: {fileID: 122797303626709774}
   - component: {fileID: 58946219508482396}
   - component: {fileID: 50529498407081790}
   - component: {fileID: 114924392879030378}
@@ -112,17 +111,6 @@ MonoBehaviour:
     type: 2}
   speed: 5
   energy: {fileID: 1813752885674446, guid: 556858126826e0545b15602ba1530588, type: 2}
---- !u!122 &122797303626709774
-Halo:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1755229733179726}
-  m_Enabled: 1
-  m_Color:
-    serializedVersion: 2
-    rgba: 4278229503
-  m_Size: 1
 --- !u!212 &212977538195895678
 SpriteRenderer:
   m_ObjectHideFlags: 1

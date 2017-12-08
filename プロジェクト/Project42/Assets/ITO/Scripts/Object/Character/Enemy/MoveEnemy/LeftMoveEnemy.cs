@@ -4,10 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LeftMoveEnemy : MoveEnemy {
+
+  //  GameObject rightCollider;
+
+    protected override void Start()
+    {
+        base.Start();
+        velocity = new Vector2(-speed, 0);
+        wallCollider = GameObject.Find("LeftCollider");
+    }
     protected override void StageOut()
     {
-        float rightPosX = GameObject.Find("RightCollider").transform.position.x;
-        transform.position = new Vector3(rightPosX, transform.position.y);
+        transform.position = new Vector3(-wallCollider.transform.position.x, transform.position.y);
     }
 
 }

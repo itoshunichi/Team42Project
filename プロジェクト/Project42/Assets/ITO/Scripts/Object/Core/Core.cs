@@ -15,7 +15,7 @@ public class Core : BeDestroyedObject
 
     public override void BeginDamage()
     {
-        GameObject.FindObjectOfType<FormBossStageObject>().BreakCore(gameObject);
+        //GameObject.FindObjectOfType<FormBossStageObject>().BreakCore(gameObject);
     }
 
 }
