@@ -354,7 +354,7 @@ Prefab:
     - target: {fileID: 114986882140018038, guid: 598e72aa27145e549af26f036d242ffe,
         type: 2}
       propertyPath: energy
-      value: 30
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 114986882140018038, guid: 598e72aa27145e549af26f036d242ffe,
         type: 2}
@@ -393,7 +393,7 @@ Prefab:
     - target: {fileID: 114986882140018038, guid: 598e72aa27145e549af26f036d242ffe,
         type: 2}
       propertyPath: minusEnergy
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 224316811941168064, guid: 598e72aa27145e549af26f036d242ffe,
         type: 2}
