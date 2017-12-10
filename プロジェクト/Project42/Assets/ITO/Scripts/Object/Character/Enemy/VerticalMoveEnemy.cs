@@ -35,7 +35,7 @@ public class VerticalMoveEnemy : Enemy
 
     protected override void OnTriggerExit2D(Collider2D collision)
     {
-        base.OnTriggerExit2D(collision);
+        //base.OnTriggerExit2D(collision);
         if (collision.tag == "Wall")
         {
             //GetComponent<Collider2D>().isTrigger = false;
