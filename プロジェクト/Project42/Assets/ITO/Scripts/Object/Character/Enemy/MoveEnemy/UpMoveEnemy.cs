@@ -4,10 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UpMoveEnemy : MoveEnemy {
+
+    //GameObject bottomCollider;
+    protected override void Start()
+    {
+        base.Start();
+        velocity = new Vector2(0, speed);
+        wallCollider = GameObject.Find("TopCollider");
+
+    }
     protected override void StageOut()
     {
-        float bottomPosY = GameObject.Find("BottomCollider").transform.position.y;
-        transform.position = new Vector3(transform.position.x, bottomPosY);
+        transform.position = new Vector3(transform.position.x, GameObject.Find("BottomCollider").transform.position.y);
     }
 
     

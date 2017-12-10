@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4858343473984002}
   - component: {fileID: 198905045544473078}
   - component: {fileID: 199071117049520518}
-  - component: {fileID: 114681525713152584}
+  - component: {fileID: 114107068468277594}
   m_Layer: 0
   m_Name: Player_Damage
   m_TagString: Untagged
@@ -73,7 +73,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
---- !u!114 &114681525713152584
+--- !u!114 &114107068468277594
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -96,7 +96,7 @@ ParticleSystem:
   stopAction: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -3377,7 +3377,7 @@ ParticleSystem:
   stopAction: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1

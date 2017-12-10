@@ -5,33 +5,56 @@ using UnityEngine;
 
 public abstract class MoveEnemy : Enemy {
 
-    
-
+    protected GameObject stageWall;
+    protected GameObject wallCollider;
+    protected Vector2 velocity;
     private void Awake()
     {
        
     }
     protected override void Start()
-    {
-       
+    {      
         base.Start();
-        
+        stageWall = GameObject.Find("StageWall");
     }
     protected override void Move()
     {
-        transform.position += Direction() * speed * Time.deltaTime;
+        rigid.velocity = velocity;
+        //transform.position += Direction() * speed * Time.deltaTime;
         
     }
 
     protected abstract void StageOut();
 
-    /// <summary>
-    /// 画面から出たら
-    /// </summary>
-    private void OnBecameInvisible()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        StageOut();
+        if (IsSelectMode(EnemyMode.TARKING)) return;
+        if (collision.gameObject == wallCollider)
+        {
+           
+            GetComponent<Collider2D>().isTrigger = true;
+        }
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (IsSelectMode(EnemyMode.TARKING)) return;
+        if (collision.gameObject == wallCollider)
+        {
+            StageOut();       
+        }
+    }
+    protected override void OnTriggerEnter2D(Collider2D collision)
+    {
+        base.OnTriggerEnter2D(collision);
+        GetComponent<Collider2D>().isTrigger = false;
+
+    }
+    //protected override void OnBecameInvisible()
+    //{
+    //    base.OnBecameInvisible();
+        
+    //}
+    
    
 }

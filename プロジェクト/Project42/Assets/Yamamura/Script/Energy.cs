@@ -59,7 +59,7 @@ public class Energy : MonoBehaviour
 
     public void CombAddEnergy()
     {
-        energy += addEnergy * (combCount + combCount);
+        energy += addEnergy + (combCount / 2);
     }
 
     public int GetCombCount()

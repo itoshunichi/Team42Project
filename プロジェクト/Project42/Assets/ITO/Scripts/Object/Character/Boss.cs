@@ -1,15 +1,16 @@
-﻿using System;
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public enum BossMode
 {
-    NO,
+    // NO,
+    WAIT,
     MOVE,
-    STOP,
+    BREAK_EMEMY,
     DAMEGE,
-    SELECT_TARGETCORE,
+    SELECT_TARGETENEMY,
 }
 
 public class Boss : BeDestroyedObject
@@ -20,26 +21,21 @@ public class Boss : BeDestroyedObject
     [SerializeField]
     private int hp;
 
+    /// <summary>
+    /// 移動速度
+    /// </summary>
     [SerializeField]
     private float speed;
 
-
     /// <summary>
-    /// ターゲットのコア
+    /// ラストステージで生成するオブジェ
     /// </summary>
-    private GameObject formBossStageObject;
+   // private FormBossStageObject formBossStageObject;
 
-   [SerializeField]
-    private GameObject formCoreObject;
+    //シールド
+    private GameObject shield;
 
-
-    /// <summary>
-    /// コアを生成するオブジェ
-    /// </summary>
-    private FormBossStageObject formBossStageObjectScript;
-
-    private GameObject sheild;
-
+    //線
     private LineController line;
 
     /// <summary>
@@ -48,43 +44,72 @@ public class Boss : BeDestroyedObject
     private BossMode mode;
 
     [SerializeField]
-    private float stopTime;
-    private Timer stopModeTimer;
+    private float waitTime;
+    private Timer waitTimer;
 
     [SerializeField]
     private float formEnemyTime;
     private Timer formEnemyTimer;
 
+    //目標のエネミー
+    private GameObject targetEnemy;
+
+    /// <summary>
+    /// 登場の演出が終わったかどうか
+    /// </summary>
+    private bool isAppearedInDirectorEnd;
+    public bool IsAppearedInDirectorEnd
+    {
+        get { return isAppearedInDirectorEnd; }
+    }
+
+    private bool isShield = true;
+
+
+
 
     private void Awake()
     {
-
+        formEnemyTimer = new Timer(formEnemyTime);
+        waitTimer = new Timer(waitTime);
+        line = GetComponent<LineController>();
+        //formBossStageObject.GetComponent<FormBossStageObject>();
     }
 
     protected override void Start()
     {
         base.Start();
-        stopModeTimer = new Timer(stopTime);
-        formEnemyTimer = new Timer(formEnemyTime);
-        sheild = transform.GetChild(0).gameObject;
-        line = GetComponent<LineController>();
+        StartCoroutine(AppearedInDirector());
+        //stopModeTimer = new Timer(stopTime);
+
+
+        shield = transform.GetChild(0).gameObject;
+
         AudioManager.Instance.PlaySE(AUDIO.SE_MATHERSPAWN);
-        InstantiateFormCore();
     }
 
-    /// <summary>
-    /// コアを生成するオブジェクトの生成
-    /// </summary>
-    private void InstantiateFormCore()
-    {
-        GameObject obj = Instantiate(formCoreObject, transform.position, Quaternion.identity);
-        formBossStageObjectScript = obj.GetComponent<FormBossStageObject>();
-    }
+
     private void Update()
     {
+        SetShield();
         ModeMagager();
         Debug.Log(mode);
     }
+
+    /// <summary>
+    /// 登場演出
+    /// </summary>
+    private IEnumerator AppearedInDirector()
+    {
+        yield return new WaitForSeconds(2f);
+        GetComponent<FormBossStageObject>().FormEnemyGroup();
+
+        yield return new WaitForSeconds(1f);
+        isAppearedInDirectorEnd = true;
+        FindObjectOfType<GamePlayEvent>().SetPlayerEnabled(true);
+    }
+
+    
 
 
 
@@ -99,49 +124,38 @@ public class Boss : BeDestroyedObject
     /// </summary>
     public override void BeginDamage()
     {
-        if (!CheckMode(BossMode.STOP)) return;
-        //タイマーリセット
-        stopModeTimer.Reset();
-        //シールドを有効に
-        sheild.GetComponent<SpriteRenderer>().enabled = true;
-        sheild.GetComponent<Collider2D>().enabled = true;
-        //コアの生成
-        formBossStageObjectScript.FormCore();
+        if (isShield) return;
         //HPを減らす
         hp -= 1;
-        FindObjectOfType<FormBossStageObject>().EnemyActionReset();
         //待機状態に
-        mode = BossMode.NO;
+        mode = BossMode.WAIT;
+        if(hp == 0)
+        {
+            SceneNavigater.Instance.Change("Result");
+        }
     }
 
-
-
-
-    /// <summary>
-    /// ターゲットコアの設定
-    /// </summary>
-    private void SetTargetCore()
-    {
-        // yield return new WaitForSeconds(1f);
-        formBossStageObjectScript.FormCore();
-        formBossStageObject = FindObjectOfType<Core>().gameObject;
-        //線を伸ばすのを開始する
-        line.StartLineExtend(transform.position, formBossStageObject.transform.position);
-        //コアを探す状態にする
-        mode = BossMode.SELECT_TARGETCORE;
-
-    }
 
     /// <summary>
     /// 状態管理
     /// </summary>
     private void ModeMagager()
     {
+        //登場の演出が終わってなかったら処理しない
+        if (!isAppearedInDirectorEnd) return;
         //待機状態
-        if (mode == BossMode.NO)
+        if (mode == BossMode.WAIT)
         {
+            waitTimer.UpdateTimer();
             line.SetEnabled(false);
-            SetTargetCore();
+            if (waitTimer.IsEnd)
+            {
+                SetTargetEnemy();
+                if(IsExistenceTargetEnemy())
+                waitTimer.Reset();
+            }
+
+
         }
         //移動状態
         if (CheckMode(BossMode.MOVE))
@@ -151,40 +165,45 @@ public class Boss : BeDestroyedObject
             //敵の生成
             FormEnemy();
             //移動の中断
-            CoreNullMode();
+            TargetEnemyBreakMode();
+        }
+        if(CheckMode(BossMode.BREAK_EMEMY))
+        {
+            //線が引き終わったら待機状態に
+            if (!line.IsExtend)
+            {
+                mode = BossMode.WAIT;
+            }
         }
         //コアに線を引いてる状態
-        if (CheckMode(BossMode.SELECT_TARGETCORE))
+        if (CheckMode(BossMode.SELECT_TARGETENEMY))
         {
-            CoreNullMode();
+            TargetEnemyBreakMode();
 
             //引き終わったら移動状態にする
-            if (line.IsEndExtend) mode = BossMode.MOVE;
-        }
-        if (mode == BossMode.STOP)
-        {
-            StopMode();
+            if (!line.IsExtend) mode = BossMode.MOVE;
         }
     }
+
+
     /// <summary>
-    ///止まっている状態の処理
+    /// シールドの設定
     /// </summary>
-    private void StopMode()
+    private void SetShield()
     {
-        stopModeTimer.UpdateTimer();
-
-        sheild.GetComponent<SpriteRenderer>().enabled = false;
-        sheild.GetComponent<Collider2D>().enabled = false;
-
-        if (stopModeTimer.IsEnd)
+        //シールドエネミーがいなかったら無効
+         if (GetComponent<FormBossStageObject>().ShieldEnemys.Count == 0)
         {
-            stopModeTimer.Reset();
-            sheild.GetComponent<SpriteRenderer>().enabled = true;
-            sheild.GetComponent<Collider2D>().enabled = true;
-            mode = BossMode.NO;
+            isShield = false;
+            shield.GetComponent<SpriteRenderer>().enabled = false;
+            shield.GetComponent<Collider2D>().enabled = false;
         }
-
-
+         else
+        {
+            isShield = true;
+            shield.GetComponent<SpriteRenderer>().enabled = true;
+            shield.GetComponent<Collider2D>().enabled = true;
+        }
     }
 
     /// <summary>
@@ -192,8 +211,8 @@ public class Boss : BeDestroyedObject
     /// </summary>
     private void Move()
     {
-        if (formBossStageObject == null) return;
-        Vector2 targetPos = formBossStageObject.transform.position;
+        if (!IsExistenceTargetEnemy()) return;
+        Vector2 targetPos = targetEnemy.transform.position;
         //ラジアン
         float rad = Mathf.Atan2(targetPos.y - transform.position.y,
             targetPos.x - transform.position.x);
@@ -210,34 +229,36 @@ public class Boss : BeDestroyedObject
     /// </summary>
     private void FormEnemy()
     {
+        //一定間隔でエネミーを生成
         formEnemyTimer.UpdateTimer();
         if (formEnemyTimer.IsEnd)
         {
             //エネミー生成
-            formBossStageObjectScript.FormRandomEnemy();
+            GetComponent<FormBossStageObject>().FormRandomEnemy();
             formEnemyTimer.Reset();
         }
     }
 
     /// <summary>
-    /// 行動中にコアが破壊されたときの処理
+    /// 行動中にターゲットにしていエネミーが破壊されたときの処理
     /// </summary>
-    private void CoreNullMode()
+    private void TargetEnemyBreakMode()
     {
-        //コアがなくなったら
-        if (formBossStageObject == null)
+        //エネミーがなくなったら
+        if (CheckMode(BossMode.MOVE)&&!IsExistenceTargetEnemy())
         {
+            mode = BossMode.BREAK_EMEMY;
             //線を伸ばすのを開始する
             line.StartLineExtend(GetComponent<LineRenderer>().GetPosition(1), transform.position);
             formEnemyTimer.Reset();
-            //ウェーブの生成
-            InstantiateWave();
-            //停止状態に
-            mode = BossMode.STOP;
+           
         }
     }
 
-    private void InstantiateWave()
+    /// <summary>
+    /// ウェーブの生成
+    /// </summary>
+    public void InstantiateWave()
     {
         GameObject obj = Resources.Load<GameObject>("Prefab/Wave/AttackWave");
         Instantiate(obj, transform.position, Quaternion.identity);
@@ -253,32 +274,65 @@ public class Boss : BeDestroyedObject
         return this.mode == mode;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        //移動状態かつ当たったオブジェクトの名前にCoreが含まれていたら
-        if (CheckMode(BossMode.MOVE) && collision.gameObject.name.Contains("Core"))
+        if (!isShield)
         {
-            AbsorptionCore(collision.gameObject);
-            formEnemyTimer.Reset();
+            TargetEnemy_ChangeSheild(collision);
         }
+    }
 
+
+    /// <summary>
+    /// 目標のエネミーをシールドエネミーに変更
+    /// </summary>
+    /// <param name="colision"></param>
+    public void TargetEnemy_ChangeSheild(Collision2D collision)
+    {
+        //移動状態かつ当たったオブジェクトがターゲットだったら
+        if (CheckMode(BossMode.MOVE) && collision.gameObject == targetEnemy)
+        {
+            //エネミーのモードをシールドに
+            targetEnemy.GetComponent<Enemy>().ChangeMode(EnemyMode.SHIELD);
+            //エネミーリストから削除
+            GetComponent<FormBossStageObject>().Enemys.Remove(targetEnemy);
+            //シールドエネミーのリストに追加
+            GetComponent<FormBossStageObject>().ShieldEnemys.Add(targetEnemy);
+            //移動再開
+            targetEnemy.GetComponent<Enemy>().IsMove = true;
+            formEnemyTimer.Reset();
+            //待機状態に
+            mode = BossMode.WAIT;
+        }
     }
 
     /// <summary>
-    /// コアの吸収
+    /// ターゲットのエネミーを設定
     /// </summary>
-    private void AbsorptionCore(GameObject obj)
+    public void SetTargetEnemy()
     {
-        //新しいコアの生成
-        //formCore.FormCore();
-        //コアを削除
-        formBossStageObjectScript.BreakCore(obj);
-        //待機状態
-        mode = BossMode.NO;
-        //ターゲットコアの設定
-        SetTargetCore();
-
+        List<GameObject> enemys = GetComponent<FormBossStageObject>().Enemys;
+        if (enemys.Count == 0) return;
+        int index = Random.Range(0, enemys.Count);
+        targetEnemy = enemys[index];
+        if (targetEnemy.GetComponent<Enemy>().IsVisible == true)
+        {
+            //エネミーの動きを無効
+            targetEnemy.GetComponent<Enemy>().Stop();
+            //線を伸ばすのを開始する
+            line.StartLineExtend(transform.position, targetEnemy.transform.position);
+            //エネミーを探す状態にする
+            mode = BossMode.SELECT_TARGETENEMY;
+        }
     }
 
+    /// <summary>
+    ///目標のエネミーが存在するかどうか
+    /// </summary>
+    /// <returns></returns>
+    public bool IsExistenceTargetEnemy()
+    {
+        return targetEnemy;
+    }
 
 }

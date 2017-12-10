@@ -8,7 +8,7 @@ public class FlickController : MonoBehaviour
     public PlayerSmallController playerController;
     public Hammer hammer;             //ハンマー
     //Object
-    public GameObject mainCamera;       
+    public GameObject mainCamera;
     //Vector
     private Vector3 touchStartPos;      //タッチした場所
     private Vector3 touchEndPos;        //タッチ終わりの場所
@@ -26,7 +26,7 @@ public class FlickController : MonoBehaviour
     public float radianMaxFour = 120;
     //bool
     private bool isTap = false;         //Tapしたかどうか
-    bool isFlick = false;               
+    bool isFlick = false;
 
     public int FlickCount
     {
@@ -55,22 +55,23 @@ public class FlickController : MonoBehaviour
         {   //位置セット
             touchStartPos = Input.mousePosition;
             transform.position = touchStartPos;
+            touchEndPos = touchStartPos;
+            isTap = true;
         }
         if (Input.GetMouseButton(0))
         {   //タップカウント
             tapTimer += 0.01f;
         }
-        if (Input.GetMouseButtonUp(0)) { isTap = false; }
         touchEndPos = Input.mousePosition;
 
-
-        if (touchStartPos != touchEndPos && !isTap)
+        if (Vector2.Distance(touchStartPos, touchEndPos) > 20 && isTap)
         {
             if (flickCount == 0) beforeEndPos = Vector2.up;
             else beforeEndPos = touchEndPos;
+            touchEndPos = Input.mousePosition;
 
             Vector2 dir = touchEndPos - touchStartPos;
-            if (dir.magnitude >= flickMagnitude) //&& tapTimer <= flickTime)
+            //if (dir.magnitude >= flickMagnitude) //&& tapTimer <= flickTime)
             {
                 var rotation = Quaternion.LookRotation(Vector3.forward, Input.mousePosition - touchStartPos);
                 transform.localRotation = rotation; //マウスの方向に向く
@@ -83,7 +84,7 @@ public class FlickController : MonoBehaviour
                 //0より小さかったら+360足す
                 if (beforeRadian < 0) beforeRadian += 360;
                 if (afterRadian < 0) afterRadian += 360;
-
+                playerController.SetRotationPlayer(rotation);
                 //最短距離の場合(最大距離の場合は逆)
                 //radian 179以下 - 時計回り
                 //radina 181以上 + 反時計回り
@@ -94,8 +95,11 @@ public class FlickController : MonoBehaviour
                 flickCount += 1;//フリックした回数をカウント
             }
             tapTimer = 0.0f;
-            touchStartPos = Input.mousePosition;
-            isTap = true;
+            isTap = false;
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            isTap = false;
         }
     }
 

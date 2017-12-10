@@ -11,10 +11,10 @@ public class LineController : MonoBehaviour
     private float lineExtendTime;
     private Vector2 extendStartPosition;
     private Vector2 extenddEndPosition;
-    private bool isEndExtend;
-    public bool IsEndExtend
+    private bool isExtend;
+    public bool IsExtend
     {
-        get { return isEndExtend; }
+        get { return isExtend; }
     }
 
 
@@ -46,7 +46,7 @@ public class LineController : MonoBehaviour
     public void StartLineExtend(Vector2 startPos, Vector2 targetPos)
     {
 
-        isEndExtend = false;
+        isExtend = true;
         lineExtendTime = Time.timeSinceLevelLoad;
         extendStartPosition = startPos;
         extenddEndPosition = targetPos;
@@ -55,12 +55,12 @@ public class LineController : MonoBehaviour
 
     private void Extend()
     {
-        if (isEndExtend) return;
+        if (!isExtend) return;
         float time = 2;
         var dift = Time.timeSinceLevelLoad - lineExtendTime;
         if (dift > time)
         {
-            isEndExtend = true;
+            isExtend = false;
         }
 
         var rate = dift / time;
