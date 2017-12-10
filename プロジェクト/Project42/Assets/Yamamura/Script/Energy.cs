@@ -17,6 +17,7 @@ public class Energy : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        isReduceEnergy = true;
     }
 
     // Update is called once per frame

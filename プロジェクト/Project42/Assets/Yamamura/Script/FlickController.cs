@@ -61,44 +61,45 @@ public class FlickController : MonoBehaviour
         if (Input.GetMouseButton(0))
         {   //タップカウント
             tapTimer += 0.01f;
-        }
-        touchEndPos = Input.mousePosition;
-
-        if (Vector2.Distance(touchStartPos, touchEndPos) > 20 && isTap)
-        {
-            if (flickCount == 0) beforeEndPos = Vector2.up;
-            else beforeEndPos = touchEndPos;
             touchEndPos = Input.mousePosition;
 
-            Vector2 dir = touchEndPos - touchStartPos;
-            //if (dir.magnitude >= flickMagnitude) //&& tapTimer <= flickTime)
+            if (Vector2.Distance(touchStartPos, touchEndPos) > 20 && isTap)
             {
-                var rotation = Quaternion.LookRotation(Vector3.forward, Input.mousePosition - touchStartPos);
-                transform.localRotation = rotation; //マウスの方向に向く
-                Vector2 afterDirection = touchEndPos - touchStartPos;
-                if (flickCount == 0) beforeRadian = 90; //初期90
-                else beforeRadian = afterRadian;        //二回目以降afterRadianセット
-                //角度取得
-                afterRadian = Mathf.Atan2(afterDirection.y, afterDirection.x) * Mathf.Rad2Deg;
+                if (flickCount == 0) beforeEndPos = Vector2.up;
+                else beforeEndPos = touchEndPos;
+                touchEndPos = Input.mousePosition;
 
-                //0より小さかったら+360足す
-                if (beforeRadian < 0) beforeRadian += 360;
-                if (afterRadian < 0) afterRadian += 360;
-                playerController.SetRotationPlayer(rotation);
-                //最短距離の場合(最大距離の場合は逆)
-                //radian 179以下 - 時計回り
-                //radina 181以上 + 反時計回り
-                //radianの値が規定値以下だったら回転しない
-                RadianCheck(GetRadian());
-                playerController.Reset();
+                Vector2 dir = touchEndPos - touchStartPos;
+                //if (dir.magnitude >= flickMagnitude) //&& tapTimer <= flickTime)
+                {
+                    var rotation = Quaternion.LookRotation(Vector3.forward, Input.mousePosition - touchStartPos);
+                    transform.localRotation = rotation; //マウスの方向に向く
+                    Vector2 afterDirection = touchEndPos - touchStartPos;
+                    if (flickCount == 0) beforeRadian = 90; //初期90
+                    else beforeRadian = afterRadian;        //二回目以降afterRadianセット
+                    //角度取得
+                    afterRadian = Mathf.Atan2(afterDirection.y, afterDirection.x) * Mathf.Rad2Deg;
 
-                flickCount += 1;//フリックした回数をカウント
+                    //0より小さかったら+360足す
+                    if (beforeRadian < 0) beforeRadian += 360;
+                    if (afterRadian < 0) afterRadian += 360;
+                    playerController.SetRotationPlayer(rotation);
+                    //最短距離の場合(最大距離の場合は逆)
+                    //radian 179以下 - 時計回り
+                    //radina 181以上 + 反時計回り
+                    //radianの値が規定値以下だったら回転しない
+                    RadianCheck(GetRadian());
+                    playerController.Reset();
+
+                    flickCount += 1;//フリックした回数をカウント
+                }
+                isTap = false;
             }
-            tapTimer = 0.0f;
-            isTap = false;
         }
+       
         if (Input.GetMouseButtonUp(0))
         {
+            tapTimer = 0.0f;
             isTap = false;
         }
     }
