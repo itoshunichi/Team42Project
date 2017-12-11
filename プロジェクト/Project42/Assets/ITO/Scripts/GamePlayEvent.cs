@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GamePlayEvent : MonoBehaviour {
+public class GamePlayEvent : MonoBehaviour
+{
 
     /// <summary>
     /// ウェーブ数
@@ -28,7 +29,7 @@ public class GamePlayEvent : MonoBehaviour {
     private float waveTextTime;
 
     //プレイヤー
-    private PlayerSmallController[] players;
+    private GameObject player;
 
     //衛星のLerp移動関係の変数
     private float satelliteMoveStartTime;
@@ -47,6 +48,7 @@ public class GamePlayEvent : MonoBehaviour {
     [SerializeField]
     private List<GameObject> formEnemy;
 
+    private GameObject bossPrefab;
     private GameObject boss;
 
     private FlickController flickController;
@@ -59,8 +61,8 @@ public class GamePlayEvent : MonoBehaviour {
     void Start()
     {
         //プレイヤーの移動を止める
-        players = FindObjectsOfType<PlayerSmallController>();
-       
+        player = FindObjectOfType<PlayerSmallController>().gameObject;
+
 
 
         textBack = GameObject.Find("TextBack").GetComponent<Image>();
@@ -69,7 +71,7 @@ public class GamePlayEvent : MonoBehaviour {
         descriptionText = GameObject.Find("DescriptionText");
         arrow = GameObject.Find("Arrow");
 
-        boss = Resources.Load<GameObject>("Prefab/Boss");
+        bossPrefab = Resources.Load<GameObject>("Prefab/Boss");
         //formCoreObject = Resources.Load<GameObject>("Prefab/FormBossStageObject");
         missionText.text = "エネルギーがなくなる前に\nWAVE" + waveIndex + "のボスを倒せ";
         flickController = FindObjectOfType<FlickController>();
@@ -137,7 +139,7 @@ public class GamePlayEvent : MonoBehaviour {
         Vector3 backGroundPos = new Vector3(0, Camera.main.transform.position.y + Camera.main.GetComponent<CameraControl>().getScreenTopLeft().y * 1.5f, 0);
         Instantiate(Resources.Load<GameObject>("Prefab/BackGround"), backGroundPos, Quaternion.identity);
         //カメラのスクロールを開始
-        Camera.main.GetComponent<CameraControl>().StartCameraScroll();
+        Camera.main.GetComponent<CameraControl>().StartCameraScroll(0, player.transform.position.y, 2);
 
         yield return new WaitForSeconds(2f);
 
@@ -176,7 +178,7 @@ public class GamePlayEvent : MonoBehaviour {
         if (IsBossWave())
         {
             //ボス生成
-            Instantiate(boss, (Vector2)Camera.main.transform.position+(Vector2)boss.transform.position, Quaternion.identity);
+            boss = Instantiate(bossPrefab, (Vector2)Camera.main.transform.position + (Vector2)bossPrefab.transform.position, Quaternion.identity);
 
         }
         //その他
@@ -186,7 +188,7 @@ public class GamePlayEvent : MonoBehaviour {
             Instantiate(formEnemy[currentWave - 1], (Vector2)Camera.main.transform.position, Quaternion.identity);
             //プレイヤーの動きを再開させる
             SetPlayerEnabled(true);
-            
+
         }
     }
 
@@ -200,7 +202,7 @@ public class GamePlayEvent : MonoBehaviour {
     /// ボスのウェーブにいる状態
     /// </summary>
     /// <returns></returns>
-    private bool IsBossWave()
+    public bool IsBossWave()
     {
         return currentWave == waveIndex;
     }
@@ -223,7 +225,7 @@ public class GamePlayEvent : MonoBehaviour {
     public void SetStageWallTrigger(bool isTrigger)
     {
         Collider2D[] walls = GameObject.Find("StageWall").transform.GetComponentsInChildren<Collider2D>();
-        for(int i = 0;i<walls.Length;i++)
+        for (int i = 0; i < walls.Length; i++)
         {
             walls[i].isTrigger = isTrigger;
         }
@@ -234,12 +236,58 @@ public class GamePlayEvent : MonoBehaviour {
     /// </summary>
     public void SetPlayerEnabled(bool enabled)
     {
-        foreach(var player in players)
-        {
-            player.IsMove = enabled;
-        }
+
+        player.GetComponent<PlayerSmallController>().IsMove = enabled;
+
         flickController.enabled = enabled;
         energy.enabled = enabled;
-       
+
+    }
+
+    /// <summary>
+    /// ゲーム終了
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator GameEnd()
+    {
+
+        //BGM停止
+        Instantiate(Resources.Load<GameObject>("Prefab/WhiteFade")).transform.SetParent(GameObject.Find("Canvas").transform, false);
+        AudioManager.Instance.StopBGM();
+        //プレイヤーを止める
+        SetPlayerEnabled(false);
+        //ハンマーを止める
+        GameObject.Find("HammerFront").GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        //ボスの動きを止める
+        boss.GetComponent<Boss>().enabled = false;
+        boss.GetComponent<LineRenderer>().enabled = false;
+        boss.GetComponent<FormBossStageObject>().AllEnemyStop();
+       // Camera.main.transform.position = new Vector3(boss.transform.position.x, boss.transform.position.y,-10);
+        //1秒待機
+        yield return new WaitForSeconds(1f);     
+        Vector3 bossPos = boss.transform.position;
+        FindObjectOfType<CameraControl>().StartCameraScroll(bossPos.x, bossPos.y, 1f);
+       //boss.GetComponent<Shake>().ShakeObject();
+
+        //カメラズーム開始
+        StartCoroutine(FindObjectOfType<CameraControl>().CameraZoom());
+        yield return new WaitForSeconds(4f);
+        //ボス死亡
+        boss.GetComponent<Boss>().Dead();
+        Destroy(boss);
+        boss.GetComponent<FormBossStageObject>().AllEnemyDead();
+        SetShakeCamera(1f, 1f, 1);
+        yield return new WaitForSeconds(1f);
+        Instantiate(Resources.Load<GameObject>("Prefab/Text/ResultUI")).transform.SetParent(GameObject.Find("Canvas").transform);
+    }
+
+    private void SetShakeCamera(float x, float y, float time)
+    {
+        Shake shake = FindObjectOfType<Shake>();
+        //カメラ振動の値を設定
+        shake.x = x;
+        shake.y = y;
+        shake.shakeTime = time;
+        shake.ShakeObject();
     }
 }

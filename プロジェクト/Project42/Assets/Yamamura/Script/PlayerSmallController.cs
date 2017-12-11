@@ -68,7 +68,7 @@ public class PlayerSmallController : Player
         {
             accelerator -= acceleratorMax / 20;
         }
-        Debug.Log(speed);
+       // Debug.Log(speed);
         if (accelerator <= 0 && speed > 0)
         {
             Debug.Log("SPEEDDOWN");

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShakeCamera : MonoBehaviour {
+public class ShakeObject : MonoBehaviour {
 
     [SerializeField]
     private float shake_decay = 0.002f;
@@ -17,7 +17,7 @@ public class ShakeCamera : MonoBehaviour {
     private void Start()
     {
         //Debug.Log(GameObject.Find("FormEnemyObj").GetComponent<FormEnemyObject>().FormEnemys.Count);
-        Shake();//テスト
+       // Shake();//テスト
     }
 
 

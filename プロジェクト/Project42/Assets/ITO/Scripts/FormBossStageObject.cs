@@ -114,6 +114,7 @@ public class FormBossStageObject : MonoBehaviour
     /// </summary>
     public void FormRandomEnemy()
     {
+        if (enemys.Count > 5) return;
         //オブジェクトの種類をランダムで決定
         GameObject obj = enemyObjectTypes[Random.Range(0, enemyObjectTypes.Count)];
         //位置を候補からランダムで決定
@@ -134,15 +135,32 @@ public class FormBossStageObject : MonoBehaviour
 
     public void DestroyEnemy(GameObject enemy)
     {
-        FormRandomEnemy();
-        if (enemy.GetComponent<Enemy>().IsSelectMode(EnemyMode.NORMAL))
-        {
-            enemys.Remove(enemy);
-        }
+       // FormRandomEnemy();
+       
         if (enemy.GetComponent<Enemy>().IsSelectMode(EnemyMode.SHIELD))
         {
             shieldEnemys.Remove(enemy);
         }
+        else
+        {
+            enemys.Remove(enemy);
+        }
         Destroy(enemy);
+    }
+
+    public void AllEnemyStop()
+    {
+        foreach(var e in FindObjectsOfType<Enemy>())
+        {
+            e.Stop();
+        }
+    }
+
+    public void AllEnemyDead()
+    {
+        foreach (var e in FindObjectsOfType<Enemy>())
+        {
+            e.BeginDamage();
+        }
     }
 }
