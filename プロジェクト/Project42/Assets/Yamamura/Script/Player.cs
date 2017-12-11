@@ -37,6 +37,7 @@ public abstract class Player : MonoBehaviour {
     public void Reset()
     {
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
+        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     public Vector3 GetDirectionVector()

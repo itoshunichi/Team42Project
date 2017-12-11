@@ -46,7 +46,7 @@ public class PlayerSmallController : Player
     private void Move()
     {
         NotMoveCount();
-        RotationMove();
+        if(!isHit) RotationMove();
     }
 
     //向きに対して移動
