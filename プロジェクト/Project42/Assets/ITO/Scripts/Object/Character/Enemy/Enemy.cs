@@ -70,6 +70,7 @@ public abstract class Enemy : BeDestroyedObject
         player = GameObject.Find("PlayerFront");
         StartCoroutine(StartMove());
         Debug.Log(mode);
+        
     }
 
     protected virtual void Update()
@@ -117,7 +118,24 @@ public abstract class Enemy : BeDestroyedObject
     #region OnCollision
     protected virtual void OnCollisionStay2D(Collision2D collision)
     {
-        AttackPlayer(collision);
+        CollisionPlayer(collision);
+       // AttackPlayer(collision);
+    }
+
+    private void CollisionPlayer(Collision2D collision)
+    {
+        if (mode == EnemyMode.SHIELD) return;
+        if (collision.collider.tag == "Player")
+        {
+            if (FindObjectOfType<GamePlayEvent>().IsBossWave())
+            {
+                FindObjectOfType<FormBossStageObject>().DestroyEnemy(gameObject);
+            }
+            else
+            {
+                FindObjectOfType<FormEnemyObject>().DestoryObject(gameObject);
+            }
+        }
     }
 
     /// <summary>
@@ -133,10 +151,8 @@ public abstract class Enemy : BeDestroyedObject
         if (IsSelectMode(EnemyMode.TARKING) && collision.collider.gameObject.name == "PlayerSmall")
         {
             //collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Direction() * 1000,ForceMode2D.Impulse);
-           // player.transform.rotation = Quaternion.FromToRotation(Vector3.up, Direction());
-            transform.rotation = startRotation;
-            //通常の移動に
-            ChangeMode(EnemyMode.NORMAL);
+            // player.transform.rotation = Quaternion.FromToRotation(Vector3.up, Direction());
+            FindObjectOfType<FormBossStageObject>().DestroyEnemy(gameObject);
         }
 
     }

@@ -17,6 +17,9 @@ public class GamePlayEvent : MonoBehaviour
     /// </summary>
     private int currentWave = 1;
 
+    [SerializeField]
+    private float startMissionTextTime = 0.5f;
+
     /// <summary>
     /// ミッションテキストの表示時間
     /// </summary>
@@ -93,7 +96,7 @@ public class GamePlayEvent : MonoBehaviour
     /// <returns></returns>
     private IEnumerator GameStart()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(startMissionTextTime);
         //テキストを表示
         textBack.enabled = true;
         missionText.enabled = true;
@@ -266,11 +269,14 @@ public class GamePlayEvent : MonoBehaviour
         //1秒待機
         yield return new WaitForSeconds(1f);     
         Vector3 bossPos = boss.transform.position;
-        FindObjectOfType<CameraControl>().StartCameraScroll(bossPos.x, bossPos.y, 1f);
-       //boss.GetComponent<Shake>().ShakeObject();
-
+        FindObjectOfType<CameraControl>().StartCameraScroll(bossPos.x, bossPos.y, 0.5f);
         //カメラズーム開始
         StartCoroutine(FindObjectOfType<CameraControl>().CameraZoom());
+
+        yield return new WaitForSeconds(1f);
+        SetShakeCamera(2,2,4);
+        //boss.GetComponent<Shake>().ShakeObject();
+
         yield return new WaitForSeconds(4f);
         //ボス死亡
         boss.GetComponent<Boss>().Dead();
@@ -283,7 +289,7 @@ public class GamePlayEvent : MonoBehaviour
 
     private void SetShakeCamera(float x, float y, float time)
     {
-        Shake shake = FindObjectOfType<Shake>();
+        Shake shake = Camera.main.GetComponent<Shake>();
         //カメラ振動の値を設定
         shake.x = x;
         shake.y = y;

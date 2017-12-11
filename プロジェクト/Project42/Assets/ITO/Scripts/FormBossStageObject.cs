@@ -125,7 +125,7 @@ public class FormBossStageObject : MonoBehaviour
         //生成
         GameObject formEnemy = Instantiate(obj, pos, rot);
         //状態をシールドに
-        formEnemy.GetComponent<Enemy>().ChangeMode(EnemyMode.NORMAL);
+        formEnemy.GetComponent<Enemy>().ChangeMode(EnemyMode.TARKING);
 
         enemys.Add(formEnemy);
 

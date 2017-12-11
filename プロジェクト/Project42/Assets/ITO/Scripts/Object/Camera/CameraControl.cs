@@ -181,7 +181,7 @@ public class CameraControl : MonoBehaviour
         while (GetComponent<Camera>().orthographicSize >= 12)
         {
            
-            GetComponent<Camera>().orthographicSize -= 0.08f;
+            GetComponent<Camera>().orthographicSize -= 0.2f;
             yield return null;
         }
 
