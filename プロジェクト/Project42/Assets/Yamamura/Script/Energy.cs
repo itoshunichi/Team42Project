@@ -36,6 +36,7 @@ public class Energy : MonoBehaviour
             combTime = 0;
             if (combCount > 0) combCount = 0;
         }
+        energy = Mathf.Clamp(energy, 0, maxEnergy);
     }
 
     public void CombPuls()
@@ -60,7 +61,7 @@ public class Energy : MonoBehaviour
 
     public void CombAddEnergy()
     {
-        energy += addEnergy + (combCount / 2);
+        energy += addEnergy + (combCount / 2) + 1;
     }
 
     public int GetCombCount()
