@@ -220,4 +220,20 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         PlayerPrefs.SetFloat(BGM_VOLUME_KEY, BGMVolume);
         PlayerPrefs.SetFloat(SE_VOLUME_KEY, SEVolume);
     }
+
+    public void ChangeBGMVolume(float BGMVolume)
+    {
+        _bgmSource.volume = BGMVolume;
+        PlayerPrefs.SetFloat(BGM_VOLUME_KEY, BGMVolume);
+    }
+
+    public void ChangeSEVolume(float SEVolume)
+    {
+        foreach (AudioSource seSource in _seSourceList)
+        {
+            seSource.volume = SEVolume;
+        }
+
+        PlayerPrefs.SetFloat(SE_VOLUME_KEY, SEVolume);
+    }
 }
