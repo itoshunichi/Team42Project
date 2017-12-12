@@ -10,6 +10,7 @@ public class TargetMove : MonoBehaviour
     Energy energy;          //Energy
     bool isBonus = true;   //コンボ中に発生したかどうか
     Vector2[] c = new Vector2[3];
+
     // Use this for initialization
     void Start()
     {
