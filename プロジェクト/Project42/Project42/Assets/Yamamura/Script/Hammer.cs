@@ -24,6 +24,7 @@ public class Hammer : MonoBehaviour
     {
         get { return isCamera; }
     }
+
     // Use this for initialization
     void Start()
     {
@@ -36,7 +37,7 @@ public class Hammer : MonoBehaviour
         GetComponent<LineRenderer>().SetPosition(0, transform.position);
         GetComponent<LineRenderer>().SetPosition(1, player.transform.position);
         time += Time.deltaTime;
-        GetComponent<Rigidbody2D>().velocity = Vector2.Lerp(GetComponent<Rigidbody2D>().velocity, Vector2.zero, time / 100);
+        GetComponent<Rigidbody2D>().velocity = Vector2.Lerp(GetComponent<Rigidbody2D>().velocity, Vector2.zero, time / 50);
         // LerpRotaion();
         //VelocityZero();
     }

@@ -31,7 +31,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
     //BGM用、SE用に分けてオーディオソースを待つ
     private AudioSource _bgmSource;
     private List<AudioSource> _seSourceList;
-    private  int SE_SOURCE_NUM;
+    private int SE_SOURCE_NUM;
 
 
     //全Audio保持
@@ -101,7 +101,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
 
 
 
-       
+
 
     }
 
@@ -218,6 +218,29 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         }
 
         PlayerPrefs.SetFloat(BGM_VOLUME_KEY, BGMVolume);
+        PlayerPrefs.SetFloat(SE_VOLUME_KEY, SEVolume);
+    }
+
+    /// <summary>
+    /// BGMだけ音量を変更保存
+    /// </summary>
+    /// <param name="BGMVolume"></param>
+    public void ChangeBGMVolume(float BGMVolume)
+    {
+        _bgmSource.volume = BGMVolume;
+        PlayerPrefs.SetFloat(BGM_VOLUME_KEY, BGMVolume);
+    }
+
+    /// <summary>
+    /// SEだけ音量を変更保存
+    /// </summary>
+    /// <param name="SEVolume"></param>
+    public void ChangeSEVolume(float SEVolume)
+    {
+        foreach (AudioSource seSource in _seSourceList)
+        {
+            seSource.volume = SEVolume;
+        }
         PlayerPrefs.SetFloat(SE_VOLUME_KEY, SEVolume);
     }
 }

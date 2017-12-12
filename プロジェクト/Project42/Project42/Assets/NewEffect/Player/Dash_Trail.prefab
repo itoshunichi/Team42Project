@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4601845026637434}
   - component: {fileID: 198165782525802450}
   - component: {fileID: 199262069805850752}
-  - component: {fileID: 114072010559360272}
+  - component: {fileID: 114835745543966954}
   m_Layer: 0
   m_Name: Dash_Trail
   m_TagString: Untagged
@@ -42,7 +42,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114072010559360272
+--- !u!114 &114835745543966954
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

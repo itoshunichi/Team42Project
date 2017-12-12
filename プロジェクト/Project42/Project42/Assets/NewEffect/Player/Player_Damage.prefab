@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4858343473984002}
   - component: {fileID: 198905045544473078}
   - component: {fileID: 199071117049520518}
-  - component: {fileID: 114107068468277594}
+  - component: {fileID: 114401201812000772}
   m_Layer: 0
   m_Name: Player_Damage
   m_TagString: Untagged
@@ -73,7 +73,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
---- !u!114 &114107068468277594
+--- !u!114 &114401201812000772
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

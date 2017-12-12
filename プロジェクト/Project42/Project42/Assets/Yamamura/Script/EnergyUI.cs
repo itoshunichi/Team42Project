@@ -19,9 +19,8 @@ public class EnergyUI : MonoBehaviour
     void Update()
     {
         FillAmout();
-        if (energy.GetEnergy() <= 0)
+        if (energy.GetEnergy() <= 0 && !SceneNavigater.Instance.IsFading)
         {
-            if (SceneNavigater.Instance.IsFading) return;
             SceneNavigater.Instance.Change("GameOver");
         }
 
