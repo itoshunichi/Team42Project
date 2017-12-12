@@ -5,22 +5,19 @@ using UnityEngine.UI;
 
 public class Energy : MonoBehaviour
 {
-
-    public float energy;
-    public float addEnergy;
-    public float maxEnergy;
-    float energyTime; //時間
-    float combTime;
-    int combCount;//コンボ
-
-    /// <summary>
-    /// エネルギーを減らすか
-    /// </summary>
+    public float energy;        //エネルギー
+    public float addEnergy;     //足す値
+    public float minusEnergy;   //引く値
+    public float maxEnergy;     //最大エネルギー
+    float energyTime;           //時間
+    float combTime;             //コンボ判定時間
+    int combCount;              //コンボ
     public bool isReduceEnergy = false;
 
     // Use this for initialization
     void Start()
     {
+        isReduceEnergy = true;
     }
 
     // Update is called once per frame
@@ -28,7 +25,8 @@ public class Energy : MonoBehaviour
     {
         if (!isReduceEnergy) return;
         energyTime += Time.deltaTime;
-        if (energyTime >= 0.01f){
+        if (energyTime >= 0.01f)
+        {
             energy -= 0.01f;
             energyTime = 0;
         }
@@ -38,6 +36,7 @@ public class Energy : MonoBehaviour
             combTime = 0;
             if (combCount > 0) combCount = 0;
         }
+        energy = Mathf.Clamp(energy, 0, maxEnergy);
     }
 
     public void CombPuls()
@@ -55,9 +54,14 @@ public class Energy : MonoBehaviour
         energy += addEnergy;
     }
 
+    public void MinusEnergy()
+    {
+        energy -= minusEnergy;
+    }
+
     public void CombAddEnergy()
     {
-        energy += addEnergy * (combCount + combCount);
+        energy += addEnergy + (combCount / 2) + 1;
     }
 
     public int GetCombCount()

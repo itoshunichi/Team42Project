@@ -8,9 +8,8 @@ using UnityEngine;
 /// </summary>
 public class LoopPosition : MonoBehaviour
 {
-    public GameObject[] frontPos;//正面エリア
     public GameObject[] sidePos;//左右エリア
-    public GameObject[] UpDownPos;//上下エリア
+    public GameObject[] upDownPos;//上下エリア
     public GameObject[] hammers;
 
     // Update is called once per frame
@@ -30,22 +29,25 @@ public class LoopPosition : MonoBehaviour
     private void Area()
     {
         foreach (var hammer in hammers)
-        {
-            if (transform.position.y > UpDownPos[0].transform.position.y)
+        {   //上のエリアより上に行ったら
+            if (transform.position.y > upDownPos[0].transform.position.y)
             {
-                transform.position = new Vector2(transform.position.x, UpDownPos[1].transform.position.y);
-                hammer.transform.position = new Vector2(hammer.transform.position.x, UpDownPos[1].transform.position.y);
+                transform.position = new Vector2(transform.position.x, upDownPos[1].transform.position.y);
+                hammer.transform.position = new Vector2(hammer.transform.position.x, upDownPos[1].transform.position.y);
             }
-            else if (transform.position.y < UpDownPos[1].transform.position.y)
+            //下のエリアより下に行ったら
+            else if (transform.position.y < upDownPos[1].transform.position.y)
             {
-                transform.position = new Vector2(transform.position.x, UpDownPos[0].transform.position.y);
-                hammer.transform.position = new Vector2(hammer.transform.position.x, UpDownPos[0].transform.position.y);
+                transform.position = new Vector2(transform.position.x, upDownPos[0].transform.position.y);
+                hammer.transform.position = new Vector2(hammer.transform.position.x, upDownPos[0].transform.position.y);
             }
+            //左のエリアより左に行ったら
             else if (transform.position.x < sidePos[0].transform.position.x)
             {
                 transform.position = new Vector2(sidePos[1].transform.position.x, transform.position.y);
                 hammer.transform.position = new Vector2(sidePos[1].transform.position.x, hammer.transform.position.y);
             }
+            //右のエリアより右に行ったら
             else if (transform.position.x > sidePos[1].transform.position.x)
             {
                 transform.position = new Vector2(sidePos[0].transform.position.x, transform.position.y);

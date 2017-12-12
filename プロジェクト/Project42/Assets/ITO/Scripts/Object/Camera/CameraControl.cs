@@ -18,10 +18,13 @@ public class CameraControl : MonoBehaviour
     private bool isScroll;
     //スクロール開始位置
     private Vector3 scrollStartPosition;
+    Vector3 endPosition;
     //スクロール開始時間
     private float scrollStartTime;
     //スクロール終了までの時間
     private float scrollTime = 2;
+
+    Vector3 playerPos;
 
     ///// <summary>
     ///// 追尾するターゲット
@@ -83,13 +86,16 @@ public class CameraControl : MonoBehaviour
 
     void Start()
     {
+
         // StartCoroutine(CameraZoom());
-       
+
     }
 
     void Update()
-    { 
+    {
         CameraScroll();
+        Debug.Log("スクロール"+isScroll);
+        //Scroll();
     }
 
     ///// <summary>
@@ -134,21 +140,27 @@ public class CameraControl : MonoBehaviour
     /// </summary>
     /// <param name="time"></param>
     /// <returns></returns>
-    public void StartCameraScroll()
+    public void StartCameraScroll(float targetPosX,float targetPosY,float time)
     {
+        if (isScroll) return;
         //カメラの縦の範囲の半径
-        cameraRangeY_Radius = getScreenTopLeft().y - transform.position.y;
-        isScroll = true;
+        //cameraRangeY_Radius = getScreenTopLeft().y - transform.position.y;
+        scrollTime = time;
+       
         scrollStartTime = Time.timeSinceLevelLoad;
         scrollStartPosition = transform.position;
+        //playerPos = GameObject.Find("PlayerFront").transform.position;
+        endPosition = new Vector3(targetPosX,targetPosY, -10);
+        isScroll = true;
+        
+       
     }
 
     private void CameraScroll()
     {
         if (!isScroll) return;
-        Debug.Log("スクロール");
         var diff = Time.timeSinceLevelLoad - scrollStartTime;
-        Vector3 endPosition = new Vector3(0, scrollStartPosition.y + cameraRangeY_Radius, -10);
+        Debug.Log(endPosition);
         if (diff > scrollTime)
         {
             transform.position = endPosition;
@@ -161,14 +173,56 @@ public class CameraControl : MonoBehaviour
 
     }
 
-    //public IEnumerator CameraZoom()
-    //{
-    //   while (GetComponent<Camera>().orthographicSize >= gamePlayCameraSize)
-    //    {
-    //        GetComponent<Camera>().orthographicSize -= 0.1f;
-    //        yield return null;
-    //    }
+    
+    public IEnumerator CameraZoom()
+    {
+        //StartCameraScroll();
+      
+        while (GetComponent<Camera>().orthographicSize >= 12)
+        {
+           
+            GetComponent<Camera>().orthographicSize -= 0.2f;
+            yield return null;
+        }
 
-    //    SetCameraRange();   
-    //}
+
+        // SetCameraRange();
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

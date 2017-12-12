@@ -20,7 +20,7 @@ public class FormBossStageObjectEditor : Editor
         var snapX = EditorPrefs.GetFloat("MoveSnapX", 1f);
         var snapY = EditorPrefs.GetFloat("MoveSnapY", 1f);
         snap = new Vector3(snapX, snapY, 0);
-        coreFormPositions = serializedObject.FindProperty("setFormPositions");
+        coreFormPositions = serializedObject.FindProperty("formPositions");
     }
 
     private void OnSceneGUI()

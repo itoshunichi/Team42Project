@@ -11,6 +11,7 @@ public enum BossMode
     BREAK_EMEMY,
     DAMEGE,
     SELECT_TARGETENEMY,
+    NO,
 }
 
 public class Boss : BeDestroyedObject
@@ -102,23 +103,22 @@ public class Boss : BeDestroyedObject
     private IEnumerator AppearedInDirector()
     {
         yield return new WaitForSeconds(2f);
-        GetComponent<FormBossStageObject>().InitFormEnemy();
-
-        yield return new WaitForSeconds(2f);
         GetComponent<FormBossStageObject>().FormEnemyGroup();
+        shield.GetComponent<ParticleSystem>().Play();
 
         yield return new WaitForSeconds(1f);
         isAppearedInDirectorEnd = true;
         FindObjectOfType<GamePlayEvent>().SetPlayerEnabled(true);
     }
 
-    
+
 
 
 
     public virtual void Dead()
     {
-        SceneNavigater.Instance.Change("GameClear");
+        Instantiate(breakEffect, transform.position, Quaternion.identity).GetComponent<ParticleSystem>().Play();
+        //Destroy(gameObject);
     }
 
 
@@ -130,13 +130,12 @@ public class Boss : BeDestroyedObject
         if (isShield) return;
         //HPを減らす
         hp -= 1;
-        GetComponent<FormBossStageObject>().InitFormEnemy();
-        GetComponent<FormBossStageObject>().FormEnemyGroup();
         //待機状態に
         mode = BossMode.WAIT;
-        if(hp == 0)
+        if (hp == 0)
         {
-            SceneNavigater.Instance.Change("Result");
+           StartCoroutine(FindObjectOfType<GamePlayEvent>().GameEnd());
+
         }
     }
 
@@ -156,8 +155,8 @@ public class Boss : BeDestroyedObject
             if (waitTimer.IsEnd)
             {
                 SetTargetEnemy();
-                if(IsExistenceTargetEnemy())
-                waitTimer.Reset();
+                if (IsExistenceTargetEnemy())
+                    waitTimer.Reset();
             }
 
 
@@ -172,7 +171,7 @@ public class Boss : BeDestroyedObject
             //移動の中断
             TargetEnemyBreakMode();
         }
-        if(CheckMode(BossMode.BREAK_EMEMY))
+        if (CheckMode(BossMode.BREAK_EMEMY))
         {
             //線が引き終わったら待機状態に
             if (!line.IsExtend)
@@ -197,16 +196,16 @@ public class Boss : BeDestroyedObject
     private void SetShield()
     {
         //シールドエネミーがいなかったら無効
-         if (GetComponent<FormBossStageObject>().ShieldEnemys.Count == 0)
+        if (GetComponent<FormBossStageObject>().ShieldEnemys.Count == 0)
         {
             isShield = false;
-            shield.GetComponent<SpriteRenderer>().enabled = false;
+            shield.GetComponent<ParticleSystem>().Stop();
             shield.GetComponent<Collider2D>().enabled = false;
         }
-         else
+        else
         {
             isShield = true;
-            shield.GetComponent<SpriteRenderer>().enabled = true;
+            shield.GetComponent<ParticleSystem>().Play();
             shield.GetComponent<Collider2D>().enabled = true;
         }
     }
@@ -239,7 +238,7 @@ public class Boss : BeDestroyedObject
         if (formEnemyTimer.IsEnd)
         {
             //エネミー生成
-            GetComponent<FormBossStageObject>().FormRandomEnemy(EnemyMode.NORMAL);
+            GetComponent<FormBossStageObject>().FormRandomEnemy();
             formEnemyTimer.Reset();
         }
     }
@@ -250,13 +249,13 @@ public class Boss : BeDestroyedObject
     private void TargetEnemyBreakMode()
     {
         //エネミーがなくなったら
-        if (CheckMode(BossMode.MOVE)&&!IsExistenceTargetEnemy())
+        if (!IsExistenceTargetEnemy())
         {
             mode = BossMode.BREAK_EMEMY;
             //線を伸ばすのを開始する
             line.StartLineExtend(GetComponent<LineRenderer>().GetPosition(1), transform.position);
             formEnemyTimer.Reset();
-           
+
         }
     }
 
@@ -277,6 +276,11 @@ public class Boss : BeDestroyedObject
     public bool CheckMode(BossMode mode)
     {
         return this.mode == mode;
+    }
+
+    public void ChangeMode(BossMode mode)
+    {
+        this.mode = mode;
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -305,6 +309,7 @@ public class Boss : BeDestroyedObject
             GetComponent<FormBossStageObject>().ShieldEnemys.Add(targetEnemy);
             //移動再開
             targetEnemy.GetComponent<Enemy>().IsMove = true;
+
             formEnemyTimer.Reset();
             //待機状態に
             mode = BossMode.WAIT;
@@ -320,15 +325,14 @@ public class Boss : BeDestroyedObject
         if (enemys.Count == 0) return;
         int index = Random.Range(0, enemys.Count);
         targetEnemy = enemys[index];
-        if (targetEnemy.GetComponent<Enemy>().IsVisible == true)
-        {
-            //エネミーの動きを無効
-            targetEnemy.GetComponent<Enemy>().Stop();
-            //線を伸ばすのを開始する
-            line.StartLineExtend(transform.position, targetEnemy.transform.position);
-            //エネミーを探す状態にする
-            mode = BossMode.SELECT_TARGETENEMY;
-        }
+
+        //エネミーの動きを無効
+        targetEnemy.GetComponent<Enemy>().Stop();
+        //線を伸ばすのを開始する
+        line.StartLineExtend(transform.position, targetEnemy.transform.position);
+        //エネミーを探す状態にする
+        mode = BossMode.SELECT_TARGETENEMY;
+
     }
 
     /// <summary>
@@ -339,5 +343,7 @@ public class Boss : BeDestroyedObject
     {
         return targetEnemy;
     }
+
+   
 
 }

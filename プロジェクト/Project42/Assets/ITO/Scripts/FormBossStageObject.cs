@@ -55,21 +55,21 @@ public class FormBossStageObject : MonoBehaviour
     void Start()
     {
         //InitFormEnemy();
-        
-        SetCanFormPositions();
+
+        //SetCanFormPositions();
     }
 
     private void SetCanFormPositions()
     {
-        
-        for(int i = 0;i<setFormPositions.Count;i++)
+        if (canFormPositions.Count == 0)
         {
-            canFormPositions.Add((Vector2)Camera.main.transform.position + setFormPositions[i]);
+            canFormPositions = setFormPositions;
         }
     }
-   
+
     void Update()
     {
+        SetCanFormPositions();
     }
 
     /// <summary>
@@ -77,13 +77,22 @@ public class FormBossStageObject : MonoBehaviour
     /// </summary>
     public void InitFormEnemy()
     {
-
         for (int i = 0; i < initShieldEnemyIndex; i++)
         {
-            FormRandomEnemy(EnemyMode.SHIELD);
-        }
+            //オブジェクトの種類をランダムで決定
+            GameObject obj = enemyObjectTypes[4];
+            //位置を候補からランダムで決定
+            //Vector2 randomPos = setFormPositions[Random.Range(0, setFormPositions.Count)];
+            Vector2 pos = (Vector2)Camera.main.transform.position + setFormPositions[Random.Range(0, setFormPositions.Count)];
+            canFormPositions.Remove(pos);
+            Quaternion rot = obj.transform.rotation;
+            //生成
+            GameObject formEnemy = Instantiate(obj, pos, rot);
+            //状態をシールドに
+            formEnemy.GetComponent<Enemy>().ChangeMode(EnemyMode.SHIELD);
 
-        SetCanFormPositions();
+            shieldEnemys.Add(formEnemy);
+        }
     }
 
     /// <summary>
@@ -91,11 +100,11 @@ public class FormBossStageObject : MonoBehaviour
     /// </summary>
     public void FormEnemyGroup()
     {
-        for(int i = 0;i<enemyIndex;i++)
+        for (int i = 0; i < enemyIndex; i++)
         {
-            FormRandomEnemy(EnemyMode.NORMAL);
+            FormRandomEnemy();
         }
-        SetCanFormPositions();
+        InitFormEnemy();
     }
 
 
@@ -103,8 +112,9 @@ public class FormBossStageObject : MonoBehaviour
     /// 敵のランダム生成
     /// 生成するときの状態を設定
     /// </summary>
-    public void FormRandomEnemy(EnemyMode mode)
+    public void FormRandomEnemy()
     {
+        if (enemys.Count > 5) return;
         //オブジェクトの種類をランダムで決定
         GameObject obj = enemyObjectTypes[Random.Range(0, enemyObjectTypes.Count)];
         //位置を候補からランダムで決定
@@ -113,31 +123,44 @@ public class FormBossStageObject : MonoBehaviour
         canFormPositions.Remove(pos);
         Quaternion rot = obj.transform.rotation;
         //生成
-       GameObject formEnemy =  Instantiate(obj, pos, rot);
+        GameObject formEnemy = Instantiate(obj, pos, rot);
         //状態をシールドに
-        formEnemy.GetComponent<Enemy>().ChangeMode(mode);
-        //リストに保存
-        if (mode == EnemyMode.NORMAL)
-        {
-            enemys.Add(formEnemy);
-        }
-        if(mode == EnemyMode.SHIELD)
-        {
-            shieldEnemys.Add(formEnemy);
-        }
+        formEnemy.GetComponent<Enemy>().ChangeMode(EnemyMode.TARKING);
+
+        enemys.Add(formEnemy);
 
     }
 
+
+
     public void DestroyEnemy(GameObject enemy)
     {
-        if (enemy.GetComponent<Enemy>().IsSelectMode(EnemyMode.NORMAL))
-        {
-            enemys.Remove(enemy);
-        }
-        if(enemy.GetComponent<Enemy>().IsSelectMode(EnemyMode.SHIELD))
+       // FormRandomEnemy();
+       
+        if (enemy.GetComponent<Enemy>().IsSelectMode(EnemyMode.SHIELD))
         {
             shieldEnemys.Remove(enemy);
         }
+        else
+        {
+            enemys.Remove(enemy);
+        }
         Destroy(enemy);
+    }
+
+    public void AllEnemyStop()
+    {
+        foreach(var e in FindObjectsOfType<Enemy>())
+        {
+            e.Stop();
+        }
+    }
+
+    public void AllEnemyDead()
+    {
+        foreach (var e in FindObjectsOfType<Enemy>())
+        {
+            e.BeginDamage();
+        }
     }
 }

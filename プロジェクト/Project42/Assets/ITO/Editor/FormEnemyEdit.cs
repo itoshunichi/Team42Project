@@ -145,7 +145,7 @@ public class FormEnemyEdit : Editor
             {
                 if (t.name == objectNames[selectPop])
                 {
-                    GameObject enemy = (GameObject)Instantiate(t, component.transform.position + (Vector3)formObjectPos, Quaternion.identity);
+                    GameObject enemy = (GameObject)Instantiate(t, component.transform.position + (Vector3)formObjectPos,t.transform.rotation);
                     formObjects.arraySize += 1;
                     formObjects.GetArrayElementAtIndex(formObjects.arraySize - 1).objectReferenceValue = enemy;
                     enemy.transform.SetParent(component.transform);

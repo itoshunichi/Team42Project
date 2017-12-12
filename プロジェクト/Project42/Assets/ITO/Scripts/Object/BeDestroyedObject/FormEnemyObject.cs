@@ -57,13 +57,18 @@ public class FormEnemyObject : MonoBehaviour
     /// <param name="enemy"></param>
     public void DestoryObject(GameObject enemy)
     {
+       
         formObjects.Remove(enemy);
+        Destroy(enemy);
         if (formObjects.Count == 0)
         {
+            FindObjectOfType<GamePlayEvent>().SetStageWallTrigger(true);
             FindObjectOfType<GamePlayEvent>().SetArrowEnabled(true);
-            Destroy(enemy);
+            //Destroy(enemy);
         }
     }
+
+    
 
 
 }

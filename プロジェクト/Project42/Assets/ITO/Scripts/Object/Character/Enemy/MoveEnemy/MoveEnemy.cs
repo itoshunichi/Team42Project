@@ -26,16 +26,30 @@ public abstract class MoveEnemy : Enemy {
 
     protected abstract void StageOut();
 
-    protected  void OnTriggerExit2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (IsSelectMode(EnemyMode.TARKING)) return;
         if (collision.gameObject == wallCollider)
         {
-            Debug.Log("ステージ外");
-            StageOut();
+           
+            GetComponent<Collider2D>().isTrigger = true;
         }
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (IsSelectMode(EnemyMode.TARKING)) return;
+        if (collision.gameObject == wallCollider)
+        {
+            StageOut();       
+        }
+    }
+    protected override void OnTriggerEnter2D(Collider2D collision)
+    {
+        base.OnTriggerEnter2D(collision);
+        GetComponent<Collider2D>().isTrigger = false;
+
+    }
     //protected override void OnBecameInvisible()
     //{
     //    base.OnBecameInvisible();
