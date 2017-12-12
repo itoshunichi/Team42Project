@@ -41,6 +41,7 @@ public class PlayerSmallController : Player
     {
         Move();//移動処理
         Accelerator();//加速処理
+        GetComponent<Animator>().SetBool("IsHit", isHit);
     }
 
     private void Move()

@@ -25,14 +25,12 @@ public abstract class Player : MonoBehaviour {
         if (isHit)
         {
             hitCount++;
-            GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 0);
-            GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
+            
             if (hitCount > noMoveCount)
             {
                 hitCount = 0;
                 isHit = false;
                 GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
             }
             
         }
