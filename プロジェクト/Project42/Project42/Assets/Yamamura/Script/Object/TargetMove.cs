@@ -10,7 +10,7 @@ public class TargetMove : MonoBehaviour
     Energy energy;          //Energy
     bool isBonus = true;   //コンボ中に発生したかどうか
     Vector2[] c = new Vector2[3];
-
+    float time;
     // Use this for initialization
     void Start()
     {
@@ -25,15 +25,28 @@ public class TargetMove : MonoBehaviour
         }
         c[2] = target.transform.position;
         c[1] = transform.position - target.transform.position / 3;
-        if (Random.Range(-1, 1) >= 0) c[1].x += 20;
-        else c[1].x -= 20;
+        if (Random.Range(-1, 1) >= 0)
+        {
+            c[1].x += 18;
+            iTween.MoveBy(gameObject, iTween.Hash("x", -4, "y", 2, "easeType", iTween.EaseType.easeInOutCubic, "loopType", "none", "time", 0.6f));
+        }
+        else
+        {
+            c[1].x -= 18;
+            iTween.MoveBy(gameObject, iTween.Hash("x", 4, "y", -2, "easeType", iTween.EaseType.easeInOutCubic, "loopType", "none", "time", 0.6f));
+        } 
         c[0] = transform.position;
-    }
+        }
 
     // Update is called once per frame
     void Update()
     {
-        Move();
+        time += 0.02f;
+        if (time < 1f)
+        {
+            c[0] = transform.position;
+        }
+        else if (time > 1f) Move();
     }
 
     //移動処理
