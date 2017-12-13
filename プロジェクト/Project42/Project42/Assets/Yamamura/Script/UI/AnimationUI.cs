@@ -8,7 +8,7 @@ public class AnimationUI : MonoBehaviour {
     public Animator tapStartAnim;
 	// Use this for initialization
 	void Start () {
-        AudioManager.Instance.PlayBGM(AUDIO.BGM_GAMEPLAY);
+        AudioManager.Instance.PlayBGM(AUDIO.BGM_TITLE);
 	}
 	
 	// Update is called once per frame
@@ -22,6 +22,7 @@ public class AnimationUI : MonoBehaviour {
 
     public void IsOpen()
     {
+        AudioManager.Instance.PlaySE(AUDIO.SE_DECISION);
         if (!optionBackAnim.GetBool("IsOpen"))
         {
             optionBackAnim.SetBool("IsOpen", true);

@@ -15,4 +15,5 @@ public static class AUDIO
 	public const string SE_SATELLITELOAD = "satelliteLoad";
 	public const string SE_SATELLITESPAWN = "satelliteSpawn";
 	public const string SE_SWING = "swing";
+    public const string SE_DECISION = "kettei";
 }
