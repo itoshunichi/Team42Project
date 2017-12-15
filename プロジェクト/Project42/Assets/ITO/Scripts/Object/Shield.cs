@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Shield : BeDestroyedObject
 {
+    [SerializeField]
+    private GameObject breakEffect;
     public override void BeginDamage()
     {
 
@@ -15,5 +17,14 @@ public class Shield : BeDestroyedObject
         transform.parent.GetComponent<Boss>().TargetEnemy_ChangeSheild(collision);
     }
 
+    public void BreakShield()
+    {
+        if (!FindObjectOfType<Boss>().IsShield) return;
+        if (FindObjectOfType<FormBossStageObject>().ShieldEnemys.Count == 0)
+        {
+            //GetComponent<ParticleSystem>().Stop();
+            Instantiate(breakEffect, transform.position, breakEffect.transform.rotation).GetComponent<ParticleSystem>().Play();
+        }
+    }
 
 }

@@ -8,10 +8,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8299bd415f268d049b24e736e6eb0243, type: 3}
-  m_Name: EnemyParameter 1
-  m_EditorClassIdentifier: 
-  type: 0
-  maxHp: 0
-  stunning_HP: 0
-  recoveryTime: 0
+  m_Script: {fileID: 0}
+  m_Name: Enemy_CommonParametert
+  m_EditorClassIdentifier: Assembly-CSharp::Enemy_CommonParametert
+  spawnEffect: {fileID: 0}
+  breakEffect: {fileID: 0}
+  energy: {fileID: 0}
+  spaenEffectTime: 0
+  speed: 0

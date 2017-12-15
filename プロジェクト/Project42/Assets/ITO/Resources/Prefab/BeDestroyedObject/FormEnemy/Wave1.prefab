@@ -279,7 +279,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 65f659385318d7545b13a07e367b231f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -334,7 +334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fcdb5cfa32c2d34cbc60a09e999f37e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffect: {fileID: 1050925298657214, guid: 9af4293f61005f44995d4c37aabe9389,
+  breakEffect: {fileID: 1673473076622026, guid: 7e4de68f6ab94804aa8e1204f1a33cad,
     type: 2}
   speed: 5
   energy: {fileID: 1813752885674446, guid: 556858126826e0545b15602ba1530588, type: 2}
@@ -349,7 +349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fcdb5cfa32c2d34cbc60a09e999f37e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffect: {fileID: 1050925298657214, guid: 9af4293f61005f44995d4c37aabe9389,
+  breakEffect: {fileID: 1673473076622026, guid: 7e4de68f6ab94804aa8e1204f1a33cad,
     type: 2}
   speed: 5
   energy: {fileID: 1813752885674446, guid: 556858126826e0545b15602ba1530588, type: 2}
@@ -364,7 +364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fcdb5cfa32c2d34cbc60a09e999f37e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffect: {fileID: 1050925298657214, guid: 9af4293f61005f44995d4c37aabe9389,
+  breakEffect: {fileID: 1673473076622026, guid: 7e4de68f6ab94804aa8e1204f1a33cad,
     type: 2}
   speed: 5
   energy: {fileID: 1813752885674446, guid: 556858126826e0545b15602ba1530588, type: 2}

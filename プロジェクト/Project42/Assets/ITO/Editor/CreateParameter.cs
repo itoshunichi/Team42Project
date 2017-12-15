@@ -5,12 +5,12 @@ using UnityEditor;
 
 public class CreateParameter{
 
-   
-    //[MenuItem("Assets/Create/CreateBeDestroyedObjectParameter")]
-    //public static void CreateBeDestroyedObjectParameter()
-    //{
-    //    CreateAsset<EnemyParameter>();
-    //}
+
+    [MenuItem("Assets/Create/CretaeEnemy_CommonParametert")]
+    public static void CreateBeDestroyedObjectParameter()
+    {
+        CreateAsset<Enemy_CommonParametert>();
+    }
 
 
     public static void CreateAsset<Type>()where Type:ScriptableObject

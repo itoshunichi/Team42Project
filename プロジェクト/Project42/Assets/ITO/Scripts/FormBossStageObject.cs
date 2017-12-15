@@ -80,7 +80,7 @@ public class FormBossStageObject : MonoBehaviour
         for (int i = 0; i < initShieldEnemyIndex; i++)
         {
             //オブジェクトの種類をランダムで決定
-            GameObject obj = enemyObjectTypes[4];
+            GameObject obj = enemyObjectTypes[0];
             //位置を候補からランダムで決定
             //Vector2 randomPos = setFormPositions[Random.Range(0, setFormPositions.Count)];
             Vector2 pos = (Vector2)Camera.main.transform.position + setFormPositions[Random.Range(0, setFormPositions.Count)];
@@ -114,7 +114,8 @@ public class FormBossStageObject : MonoBehaviour
     /// </summary>
     public void FormRandomEnemy()
     {
-        if (enemys.Count > 5) return;
+        if (enemys.Count > enemyIndex) return;
+        if (FindObjectOfType<GamePlayEvent>().IsGameEnd) return;
         //オブジェクトの種類をランダムで決定
         GameObject obj = enemyObjectTypes[Random.Range(0, enemyObjectTypes.Count)];
         //位置を候補からランダムで決定

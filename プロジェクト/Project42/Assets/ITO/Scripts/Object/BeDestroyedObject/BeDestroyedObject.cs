@@ -16,8 +16,8 @@ public abstract class BeDestroyedObject : MonoBehaviour
     //オブジェクトの種類
     //protected ObjectType type;
 
-    [SerializeField]
-    protected GameObject breakEffect;
+    //[SerializeField]
+   
 
 
     //public ObjectType Type

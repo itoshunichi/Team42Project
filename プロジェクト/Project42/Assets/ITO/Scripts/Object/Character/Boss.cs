@@ -28,6 +28,9 @@ public class Boss : BeDestroyedObject
     [SerializeField]
     private float speed;
 
+    [SerializeField]
+    private GameObject breakEffect;
+
     /// <summary>
     /// ラストステージで生成するオブジェ
     /// </summary>
@@ -65,6 +68,11 @@ public class Boss : BeDestroyedObject
     }
 
     private bool isShield = true;
+    public bool IsShield
+    {
+        get { return isShield; }
+    }
+
 
 
 
@@ -198,6 +206,7 @@ public class Boss : BeDestroyedObject
         //シールドエネミーがいなかったら無効
         if (GetComponent<FormBossStageObject>().ShieldEnemys.Count == 0)
         {
+            
             isShield = false;
             shield.GetComponent<ParticleSystem>().Stop();
             shield.GetComponent<Collider2D>().enabled = false;

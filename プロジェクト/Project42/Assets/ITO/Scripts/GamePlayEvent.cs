@@ -6,58 +6,50 @@ using UnityEngine.UI;
 public class GamePlayEvent : MonoBehaviour
 {
 
-    /// <summary>
-    /// ウェーブ数
-    /// </summary>
-    [SerializeField]
+    [SerializeField,Tooltip("ゲームプレイ中にでるテキスト")]
+    private GamePlayText gamePlayText;
+
+    [SerializeField,Tooltip("ウェーブ数")]
     private int waveIndex;
+
+    [SerializeField,Tooltip("背景")]
+    private GameObject backGround;
+
+    [SerializeField,Tooltip("ボスのプレファブ")]
+    private GameObject bossPrefab;
+    private GameObject boss;
+
+
 
     /// <summary>
     /// 現在のウェーブ
     /// </summary>
     private int currentWave = 1;
 
-    [SerializeField]
-    private float startMissionTextTime = 0.5f;
-
-    /// <summary>
-    /// ミッションテキストの表示時間
-    /// </summary>
-    [SerializeField]
-    private float missionTextTime;
-    /// <summary>
-    /// テキストの表示時間
-    /// </summary>
-    [SerializeField]
-    private float waveTextTime;
-
     //プレイヤー
     private GameObject player;
+
+    
+
+    //ステージの半径のY座標
+    private float stageRadiusY;
 
     //衛星のLerp移動関係の変数
     private float satelliteMoveStartTime;
 
-    //テキストの背景
-    private Image textBack;
-    //ミッションのテキスト
-    private Text missionText;
-    //ウェーブのテキスト
-    private Text waveText;
-    //操作説明のテキスト
-    private GameObject descriptionText;
+
+
     //矢印の画像
     private GameObject arrow;
 
     [SerializeField]
     private List<GameObject> formEnemy;
 
-    private GameObject bossPrefab;
-    private GameObject boss;
-
-    private FlickController flickController;
-
-    private Energy energy;
-
+    private bool isGameEnd;
+    public bool IsGameEnd
+    {
+        get { return isGameEnd; }
+    }
 
 
 
@@ -66,27 +58,16 @@ public class GamePlayEvent : MonoBehaviour
         //プレイヤーの移動を止める
         player = FindObjectOfType<PlayerSmallController>().gameObject;
 
-
-
-        textBack = GameObject.Find("TextBack").GetComponent<Image>();
-        missionText = GameObject.Find("MissionText").GetComponent<Text>();
-        waveText = GameObject.Find("WaveText").GetComponent<Text>();
-        descriptionText = GameObject.Find("DescriptionText");
         arrow = GameObject.Find("Arrow");
-
-        bossPrefab = Resources.Load<GameObject>("Prefab/Boss");
-        //formCoreObject = Resources.Load<GameObject>("Prefab/FormBossStageObject");
-        missionText.text = "エネルギーがなくなる前に\nWAVE" + waveIndex + "のボスを倒せ";
-        flickController = FindObjectOfType<FlickController>();
-        energy = FindObjectOfType<Energy>();
         SetPlayerEnabled(false);
+        stageRadiusY = GameObject.Find("TopCollider").transform.position.y;
         StartCoroutine(GameStart());
 
     }
 
     void Update()
     {
-        SetWaveText();
+        //SetWaveText();
 
     }
 
@@ -96,32 +77,27 @@ public class GamePlayEvent : MonoBehaviour
     /// <returns></returns>
     private IEnumerator GameStart()
     {
-        yield return new WaitForSeconds(startMissionTextTime);
-        //テキストを表示
-        textBack.enabled = true;
-        missionText.enabled = true;
+        gamePlayText.SetMissionText(waveIndex);
+        //ミッションのテキスト表示開始
+        StartCoroutine(gamePlayText.StartMissionTextDisplay());
 
-        yield return new WaitForSeconds(missionTextTime);
-
-        missionText.enabled = false;
-        waveText.enabled = true;
-
-        yield return new WaitForSeconds(waveTextTime);
-        SetWaveTextEnabled(false);
-        descriptionText.GetComponent<Image>().enabled = true;
-        descriptionText.GetComponentInChildren<Text>().enabled = true;
+        //テキストの表示合計時間待機
+        yield return new WaitForSeconds(gamePlayText.TotalStartTextDiplayTime());
+        
+        //エネミーを生成
         Instantiate(formEnemy[0]);
 
+        //1秒待機
         yield return new WaitForSeconds(1f);
+
+        //BGM再生
         AudioManager.Instance.PlayBGM(AUDIO.BGM_GAMEPLAY);
-        GameObject.Find("FlickController").GetComponent<FlickController>().enabled = true;
+
+       
+        //プレイヤーの動きを有効に
         SetPlayerEnabled(true);
     }
 
-    private void SetWaveText()
-    {
-        waveText.text = "WAVE" + currentWave;
-    }
 
     /// <summary>
     /// 次のウェーブへ
@@ -139,8 +115,8 @@ public class GamePlayEvent : MonoBehaviour
         //プレイヤーの動きを止める
         SetPlayerEnabled(false);
         //背景の生成
-        Vector3 backGroundPos = new Vector3(0, Camera.main.transform.position.y + Camera.main.GetComponent<CameraControl>().getScreenTopLeft().y * 1.5f, 0);
-        Instantiate(Resources.Load<GameObject>("Prefab/BackGround"), backGroundPos, Quaternion.identity);
+        Vector3 backGroundPos = new Vector3(0, Camera.main.transform.position.y + stageRadiusY * 2, 0);
+        Instantiate(backGround, backGroundPos, Quaternion.identity);
         //カメラのスクロールを開始
         Camera.main.GetComponent<CameraControl>().StartCameraScroll(0, player.transform.position.y, 2);
 
@@ -160,12 +136,13 @@ public class GamePlayEvent : MonoBehaviour
         SetStageWallTrigger(false);
         //現在のウェーブを進める
         currentWave++;
-        //テキストを描画
-        SetWaveTextEnabled(true);
-        //待機
-        yield return new WaitForSeconds(waveTextTime);
-        //テキスト無効
-        SetWaveTextEnabled(false);
+
+        gamePlayText.SetCurrentWaveText(currentWave);
+        //テキスト表示開始
+        StartCoroutine(gamePlayText.StartCurrnetWaveTextDisplay());
+
+        yield return new WaitForSeconds(gamePlayText.DisplayTime);
+
         //敵の生成
         FormEnemy();
         //ステージの位置の調整
@@ -195,12 +172,6 @@ public class GamePlayEvent : MonoBehaviour
         }
     }
 
-    private void SetWaveTextEnabled(bool enabled)
-    {
-        textBack.enabled = enabled;
-        waveText.enabled = enabled;
-    }
-
     /// <summary>
     /// ボスのウェーブにいる状態
     /// </summary>
@@ -217,11 +188,6 @@ public class GamePlayEvent : MonoBehaviour
     {
         arrow.GetComponent<Image>().enabled = enabled;
         arrow.GetComponent<Blinker>().enabled = enabled;
-
-        if (currentWave == 1)
-        {
-            Destroy(descriptionText);
-        }
 
     }
 
@@ -242,8 +208,9 @@ public class GamePlayEvent : MonoBehaviour
 
         player.GetComponent<PlayerSmallController>().IsMove = enabled;
 
-        flickController.enabled = enabled;
-        energy.enabled = enabled;
+        //フリック有効
+        FindObjectOfType<FlickController>().enabled = true;
+        FindObjectOfType<Energy>().enabled = enabled;
 
     }
 
@@ -253,7 +220,7 @@ public class GamePlayEvent : MonoBehaviour
     /// <returns></returns>
     public IEnumerator GameEnd()
     {
-
+        isGameEnd = true;
         //BGM停止
         Instantiate(Resources.Load<GameObject>("Prefab/WhiteFade")).transform.SetParent(GameObject.Find("Canvas").transform, false);
         AudioManager.Instance.StopBGM();
@@ -261,11 +228,11 @@ public class GamePlayEvent : MonoBehaviour
         SetPlayerEnabled(false);
         //ハンマーを止める
         GameObject.Find("HammerFront").GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        boss.GetComponent<FormBossStageObject>().AllEnemyStop();
         //ボスの動きを止める
         boss.GetComponent<Boss>().enabled = false;
         boss.GetComponent<LineRenderer>().enabled = false;
-        boss.GetComponent<FormBossStageObject>().AllEnemyStop();
-       // Camera.main.transform.position = new Vector3(boss.transform.position.x, boss.transform.position.y,-10);
+
         //1秒待機
         yield return new WaitForSeconds(1f);     
         Vector3 bossPos = boss.transform.position;
