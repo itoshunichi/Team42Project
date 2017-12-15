@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4601845026637434}
   - component: {fileID: 198165782525802450}
   - component: {fileID: 199262069805850752}
+  - component: {fileID: 114833810898347568}
   m_Layer: 0
   m_Name: Dash_Trail
   m_TagString: Untagged
@@ -41,6 +42,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114833810898347568
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1255621464488298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33f14219f05684d458995f4087140e43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198165782525802450
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -2574,8 +2586,7 @@ ParticleSystem:
     serializedVersion: 2
     enabled: 0
     subEmitters:
-    - serializedVersion: 2
-      emitter: {fileID: 0}
+    - emitter: {fileID: 0}
       type: 0
       properties: 0
   LightsModule:
@@ -3385,7 +3396,7 @@ ParticleSystemRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
+  m_StitchSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5

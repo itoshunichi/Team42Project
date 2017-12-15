@@ -5,19 +5,19 @@ using UnityEditor;
 
 public class CreateParameter{
 
-   
-    //[MenuItem("Assets/Create/CreateBeDestroyedObjectParameter")]
-    //public static void CreateBeDestroyedObjectParameter()
-    //{
-    //    CreateAsset<EnemyParameter>();
-    //}
+
+    [MenuItem("Assets/Create/CreateCommonEnemyParametr")]
+    public static void CreateBeDestroyedObjectParameter()
+    {
+        CreateAsset<Enemy_CommonParametert>();
+    }
 
 
     public static void CreateAsset<Type>()where Type:ScriptableObject
     {
         Type item = ScriptableObject.CreateInstance<Type>();
 
-        string path = AssetDatabase.GenerateUniqueAssetPath("Assets/Data/Parameter/" + typeof(Type) + ".asset");
+        string path = AssetDatabase.GenerateUniqueAssetPath("Assets/ITO/Resources/Data/" + typeof(Type) + ".asset");
 
         AssetDatabase.CreateAsset(item, path);
         AssetDatabase.SaveAssets();

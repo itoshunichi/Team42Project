@@ -73,39 +73,39 @@ public class FormBossStageObject : MonoBehaviour
     }
 
     /// <summary>
-    /// ボス生成時のシールドエネミーの生成
+    /// ボス生成時の生成
     /// </summary>
     public void InitFormEnemy()
     {
-        for (int i = 0; i < initShieldEnemyIndex; i++)
+        for (int i = 0; i < initShieldEnemyIndex+enemyIndex; i++)
         {
             //オブジェクトの種類をランダムで決定
-            GameObject obj = enemyObjectTypes[4];
+            GameObject obj = enemyObjectTypes[Random.Range(0,enemyObjectTypes.Count)];
             //位置を候補からランダムで決定
             //Vector2 randomPos = setFormPositions[Random.Range(0, setFormPositions.Count)];
-            Vector2 pos = (Vector2)Camera.main.transform.position + setFormPositions[Random.Range(0, setFormPositions.Count)];
-            canFormPositions.Remove(pos);
+            Vector2 pos = (Vector2)Camera.main.transform.position + setFormPositions[i];
+            //canFormPositions.Remove(pos);
             Quaternion rot = obj.transform.rotation;
             //生成
             GameObject formEnemy = Instantiate(obj, pos, rot);
+            enemys.Add(formEnemy);
             //状態をシールドに
-            formEnemy.GetComponent<Enemy>().ChangeMode(EnemyMode.SHIELD);
+            formEnemy.GetComponent<Enemy>().ChangeMode(EnemyMode.TARKING);
 
-            shieldEnemys.Add(formEnemy);
+            //shieldEnemys.Add(formEnemy);
         }
-    }
 
-    /// <summary>
-    ///エネミーを同時に生成
-    /// </summary>
-    public void FormEnemyGroup()
-    {
-        for (int i = 0; i < enemyIndex; i++)
+        for(int i = 0;i<initShieldEnemyIndex;i++)
         {
-            FormRandomEnemy();
+            GameObject shieldEnemy = enemys[Random.Range(0, enemys.Count)];
+            shieldEnemy.GetComponent<Enemy>().ChangeMode(EnemyMode.SHIELD);
+            shieldEnemy.GetComponent<Enemy>().SetShieldModeColor();
+            shieldEnemys.Add(shieldEnemy);
+            enemys.Remove(shieldEnemy);
         }
-        InitFormEnemy();
     }
+
+   
 
 
     /// <summary>
@@ -114,11 +114,10 @@ public class FormBossStageObject : MonoBehaviour
     /// </summary>
     public void FormRandomEnemy()
     {
-        if (enemys.Count > 5) return;
+        if (enemys.Count > enemyIndex) return;
+        if (FindObjectOfType<GamePlayEvent>().IsGameEnd) return;
         //オブジェクトの種類をランダムで決定
         GameObject obj = enemyObjectTypes[Random.Range(0, enemyObjectTypes.Count)];
-        //位置を候補からランダムで決定
-        //Vector2 randomPos = setFormPositions[Random.Range(0, setFormPositions.Count)];
         Vector2 pos = (Vector2)Camera.main.transform.position + setFormPositions[Random.Range(0, setFormPositions.Count)];
         canFormPositions.Remove(pos);
         Quaternion rot = obj.transform.rotation;

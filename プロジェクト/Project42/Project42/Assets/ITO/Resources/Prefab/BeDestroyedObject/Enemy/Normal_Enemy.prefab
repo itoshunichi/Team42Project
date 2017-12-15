@@ -108,10 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fcdb5cfa32c2d34cbc60a09e999f37e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffect: {fileID: 1050925298657214, guid: 9af4293f61005f44995d4c37aabe9389,
-    type: 2}
-  speed: 5
-  energy: {fileID: 1813752885674446, guid: 556858126826e0545b15602ba1530588, type: 2}
+  commonParameter: {fileID: 11400000, guid: d27db954d2d517d48b1519aa4bc8dd40, type: 2}
 --- !u!122 &122727830113078702
 Halo:
   m_ObjectHideFlags: 1

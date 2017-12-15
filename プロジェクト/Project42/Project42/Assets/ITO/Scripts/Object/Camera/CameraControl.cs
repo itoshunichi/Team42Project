@@ -7,7 +7,8 @@ using UnityEngine;
 /// </summary>
 public class CameraControl : MonoBehaviour
 {
-
+    [SerializeField]
+    private GameObject backGround;
     //カメラの縦の範囲の半径
     private float cameraRangeY_Radius;
     public float CameraRangeY_Radius
@@ -169,6 +170,7 @@ public class CameraControl : MonoBehaviour
 
         var rate = diff / scrollTime;
 
+        //backGround.transform.position = Vector2.Lerp(scrollStartPosition, endPosition, rate);
         transform.position = Vector3.Lerp(scrollStartPosition, endPosition, rate);
 
     }

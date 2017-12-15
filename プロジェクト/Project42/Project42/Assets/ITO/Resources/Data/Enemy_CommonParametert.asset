@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Enemy_CommonParametert
+  m_EditorClassIdentifier: Assembly-CSharp::Enemy_CommonParametert
+  spawnEffect: {fileID: 1254838350163470, guid: f634eb01a11e9f149bfa61d02498e622,
+    type: 2}
+  spawnEffect_Shield: {fileID: 1254838350163470, guid: f634eb01a11e9f149bfa61d02498e622,
+    type: 2}
+  breakEffect: {fileID: 1673473076622026, guid: 5bf89f898ecd2e847a763e10cef200f8,
+    type: 2}
+  breakEffect_Shield: {fileID: 1673473076622026, guid: 5bf89f898ecd2e847a763e10cef200f8,
+    type: 2}
+  energy: {fileID: 1813752885674446, guid: 556858126826e0545b15602ba1530588, type: 2}
+  spaenEffectTime: 1
+  speed: 5

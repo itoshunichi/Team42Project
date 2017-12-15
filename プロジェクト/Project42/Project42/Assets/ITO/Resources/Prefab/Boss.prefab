@@ -232,7 +232,6 @@ MonoBehaviour:
   - {fileID: 1147387932112976, guid: fd2cea8e7789fe944ab411477c338b12, type: 2}
   - {fileID: 1246752412389328, guid: 714e634a20378024cacd9a247a407fe7, type: 2}
   - {fileID: 1759716974505742, guid: 64ddb5efe1fa6e140a2f6e83ff4e4f6f, type: 2}
-  - {fileID: 1948345735846664, guid: 52d24e08e9d3ddb4b9b43da67f72c947, type: 2}
   initShieldEnemyIndex: 3
   enemyIndex: 5
   setFormPositions:
@@ -268,10 +267,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38e60c2a173154a4788872e4e311789a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffect: {fileID: 1525949901305226, guid: 53c1952b713b50743a1aba7d6b7dc88e,
-    type: 2}
   hp: 1
   speed: 2
+  breakEffect: {fileID: 1525949901305226, guid: 53c1952b713b50743a1aba7d6b7dc88e,
+    type: 2}
   waitTime: 2
   formEnemyTime: 2
 --- !u!114 &114773014721819930
@@ -285,7 +284,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc2e19e98e12beb4587b7c70484dd346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffect: {fileID: 0}
+  breakEffect: {fileID: 1601927646562814, guid: 021be2296d32fc04497dc9b3eac96db3,
+    type: 2}
 --- !u!120 &120642000623949410
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -295,12 +295,12 @@ LineRenderer:
   m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 13be47d51461d1548a62d9a74b0faae4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -325,7 +325,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 1
+    widthMultiplier: 0.5
     widthCurve:
       serializedVersion: 2
       m_Curve:
