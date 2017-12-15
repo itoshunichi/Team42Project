@@ -19,11 +19,7 @@ public class EnergyUI : MonoBehaviour
     void Update()
     {
         FillAmout();
-        if (energy.GetEnergy() <= 0 && !SceneNavigater.Instance.IsFading)
-        {
-            SceneNavigater.Instance.Change("GameOver");
-        }
-
+      
         barSide[1].transform.position = Vector2.Lerp(barSide[0].transform.position, barSide[2].transform.position, image.fillAmount);
 
     }

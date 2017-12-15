@@ -279,7 +279,7 @@ LineRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchSeams: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -423,8 +423,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 0.0001
-  m_LinearDrag: 0.8
-  m_AngularDrag: 0.8
+  m_LinearDrag: 1.2
+  m_AngularDrag: 1.2
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -457,7 +457,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchSeams: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -532,7 +532,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 581742853}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 135.5, y: 80, z: 0}
+  m_LocalPosition: {x: -60, y: 80, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1856119074}
@@ -730,8 +730,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 884990432}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 164.5, y: 292.5, z: 0}
-  m_LocalScale: {x: 0.73125, y: 0.73125, z: 0.73125}
+  m_LocalPosition: {x: 360, y: 640, z: 0}
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
   m_Children:
   - {fileID: 261289380}
   - {fileID: 1791274677}
@@ -857,7 +857,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchSeams: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -1032,7 +1032,7 @@ Prefab:
     - target: {fileID: 224772453388366530, guid: deceda211409dd3459d7bbad8bb57b4e,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: -7.1100006
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 61295644233447590, guid: deceda211409dd3459d7bbad8bb57b4e,
         type: 2}
@@ -1068,7 +1068,39 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4198430383571200, guid: deceda211409dd3459d7bbad8bb57b4e, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 30.4
+      value: 27.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 224107093397195176, guid: deceda211409dd3459d7bbad8bb57b4e,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 21.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224772453388366530, guid: deceda211409dd3459d7bbad8bb57b4e,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 21.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224772453388366530, guid: deceda211409dd3459d7bbad8bb57b4e,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 21.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224107093397195176, guid: deceda211409dd3459d7bbad8bb57b4e,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 21.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4536119435146700, guid: deceda211409dd3459d7bbad8bb57b4e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 29.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4991570566960430, guid: deceda211409dd3459d7bbad8bb57b4e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 29.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4557486068587196, guid: deceda211409dd3459d7bbad8bb57b4e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 29.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: deceda211409dd3459d7bbad8bb57b4e, type: 2}
@@ -1142,7 +1174,7 @@ MonoBehaviour:
   flick: {fileID: 453572399}
   collisionPower: 130
   noMoveCount: 45
-  acceleratorMax: 0.5
+  acceleratorMax: 0.4
   energy: {fileID: 1692033980}
   point:
   - {fileID: 2056077251}
@@ -1151,6 +1183,7 @@ MonoBehaviour:
   - {fileID: 1255621464488298, guid: 20a852bd1f8e1db4ba98f559051052a3, type: 2}
   - {fileID: 1338872362540812, guid: 9030e2c25685fbd4db4f0f973d892ea3, type: 2}
   - {fileID: 1648438261777428, guid: 51a4627ac0d76fa42b0c7f9a3e69e1c7, type: 2}
+  gameOverUI: {fileID: 1885601109534772, guid: 149b49775c3267743b281159cfdc616f, type: 2}
 --- !u!114 &1214045463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1681,7 +1714,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1856119070}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 164.5, y: 292.5, z: 0}
+  m_LocalPosition: {x: 360, y: 640, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 581742854}
@@ -1817,7 +1850,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchSeams: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5

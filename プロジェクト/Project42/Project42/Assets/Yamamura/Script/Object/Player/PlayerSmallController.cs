@@ -9,11 +9,11 @@ public class PlayerSmallController : Player
     private bool isMove;                    //止まっているかどうか
     public Energy energy;                   //エネルギー
     private int enemyHitCount = 0;          //エネミーに当たった回数
-    public GameObject[] point;
-    public GameObject[] effect;
-    private Vector2 spriteSize;
-
-    public int EnemyHitCount 
+    public GameObject[] point;              //移動範囲制御
+    public GameObject[] effect;             //エフェクト
+    private Vector2 spriteSize;             //画像サイズ
+    public GameObject gameOverUI;           //ゲームオーバーUI
+    public int EnemyHitCount
     { get { return enemyHitCount; } }
     public bool IsMove
     {
@@ -40,8 +40,11 @@ public class PlayerSmallController : Player
     // Update is called once per frame
     void Update()
     {
-        if(energy.GetEnergy() <= 0)
+        if (Time.timeScale != 1.0f) return;
+        if (energy.GetEnergy() <= 0)
         {
+            if (FindObjectOfType<GamePlayEvent>().IsBossWave()) FindObjectOfType<FormBossStageObject>().AllEnemyStop();
+            Instantiate(gameOverUI);
             Instantiate(effect[2], transform.position, effect[2].transform.rotation);
             GameObject.Find("Main Camera").GetComponent<Shake>().ShakeObject();
             Destroy(gameObject);
@@ -58,7 +61,7 @@ public class PlayerSmallController : Player
     private void Move()
     {
         NotMoveCount();
-        if(!isHit) RotationMove();
+        if (!isHit) RotationMove();
     }
 
     //向きに対して移動
@@ -66,7 +69,7 @@ public class PlayerSmallController : Player
     {
         if (GetComponent<Player_StageOut>().IsStageOut()) return;
         if (transform.rotation.z != flick.transform.rotation.z) GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        
+
         //自身の向きベクトル取得
         //自身の角度をラジアンで取得
         float angleDirection = transform.eulerAngles.z * (Mathf.PI / 180.0f);
@@ -75,7 +78,7 @@ public class PlayerSmallController : Player
         if (!isMove) return;
 
         transform.position = new Vector3(
-            Mathf.Clamp(transform.position.x + dir.x * (speed + accelerator), point[0].transform.position.x + spriteSize.x, point[1].transform.position.x - spriteSize.x), 
+            Mathf.Clamp(transform.position.x + dir.x * (speed + accelerator), point[0].transform.position.x + spriteSize.x, point[1].transform.position.x - spriteSize.x),
             Mathf.Clamp(transform.position.y + dir.y * (speed + accelerator), point[0].transform.position.y, point[1].transform.position.y));
     }
     //加速値を下げる
@@ -126,6 +129,7 @@ public class PlayerSmallController : Player
         if (col.gameObject.tag == "BeDestroyedObject" && !isHit)
         {
             AudioManager.Instance.PlaySE(AUDIO.SE_DAMAGE);
+            GameObject.Find("Main Camera").GetComponent<Shake>().ShakeObject();
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             isHit = true;
             speed = 0;
