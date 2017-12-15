@@ -43,6 +43,7 @@ public class PlayerSmallController : Player
         if(energy.GetEnergy() <= 0)
         {
             Instantiate(effect[1], transform.position, effect[1].transform.rotation);
+            GameObject.Find("Main Camera").GetComponent<Shake>().ShakeObject();
             Destroy(gameObject);
             Destroy(GameObject.Find("HammerFront"));
         }

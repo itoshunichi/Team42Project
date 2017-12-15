@@ -28,12 +28,14 @@ public class TargetMove : MonoBehaviour
         if (Random.Range(-1, 1) >= 0)
         {
             c[1].x += 18;
-            iTween.MoveBy(gameObject, iTween.Hash("x", -4, "y", 2, "easeType", iTween.EaseType.easeInOutCubic, "loopType", "none", "time", 0.6f));
+            if (Random.Range(-1, 1) >= 0) iTween.MoveBy(gameObject, iTween.Hash("x", -4, "y", 2, "easeType", iTween.EaseType.easeInOutCubic, "loopType", "none", "time", 0.6f));
+            else iTween.MoveBy(gameObject, iTween.Hash("x", -4, "y", -2, "easeType", iTween.EaseType.easeInOutCubic, "loopType", "none", "time", 0.6f));
         }
         else
         {
             c[1].x -= 18;
-            iTween.MoveBy(gameObject, iTween.Hash("x", 4, "y", -2, "easeType", iTween.EaseType.easeInOutCubic, "loopType", "none", "time", 0.6f));
+            if (Random.Range(-1, 1) >= 0) iTween.MoveBy(gameObject, iTween.Hash("x", 4, "y", -2, "easeType", iTween.EaseType.easeInOutCubic, "loopType", "none", "time", 0.6f));
+            else iTween.MoveBy(gameObject, iTween.Hash("x", 4, "y", 2, "easeType", iTween.EaseType.easeInOutCubic, "loopType", "none", "time", 0.6f));
         } 
         c[0] = transform.position;
         }
@@ -53,7 +55,7 @@ public class TargetMove : MonoBehaviour
     private void Move()
     {
         //c[2] = target.transform.position;
-        alpha += 0.016f;
+        alpha += 0.032f;
         transform.position = BezierCurve2(c[0], c[1], c[2], alpha);
         //iTween.MoveTo(gameObject, BezierCurve2(c, Time.deltaTime), 3);
         // iTween.MoveTo(gameObject, iTween.Hash("c", "c", "time", 2,"easetype" ,iTween.EaseType.easeOutSine));
