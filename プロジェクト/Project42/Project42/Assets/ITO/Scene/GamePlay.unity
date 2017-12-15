@@ -1176,6 +1176,11 @@ Prefab:
       propertyPath: m_Offset.y
       value: -0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 114704852066619286, guid: deceda211409dd3459d7bbad8bb57b4e,
+        type: 2}
+      propertyPath: energy
+      value: 40
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: deceda211409dd3459d7bbad8bb57b4e, type: 2}
   m_IsPrefabParent: 0
@@ -1249,6 +1254,7 @@ MonoBehaviour:
   effect:
   - {fileID: 1255621464488298, guid: 20a852bd1f8e1db4ba98f559051052a3, type: 2}
   - {fileID: 1338872362540812, guid: 9030e2c25685fbd4db4f0f973d892ea3, type: 2}
+  - {fileID: 1648438261777428, guid: 51a4627ac0d76fa42b0c7f9a3e69e1c7, type: 2}
 --- !u!114 &1214045463
 MonoBehaviour:
   m_ObjectHideFlags: 0
