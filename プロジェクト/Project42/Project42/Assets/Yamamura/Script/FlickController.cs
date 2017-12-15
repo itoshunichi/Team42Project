@@ -41,6 +41,7 @@ public class FlickController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Time.timeScale != 1.0f) return;
         Flick();
 
         if (!isTap) transform.position = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 0); //タッチ位置に合わせる

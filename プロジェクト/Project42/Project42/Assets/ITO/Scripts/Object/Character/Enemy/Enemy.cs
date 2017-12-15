@@ -244,7 +244,7 @@ public abstract class Enemy : BeDestroyedObject
         rigid.velocity = Vector2.zero;
         
     }
-
+    
     public void SetStartRotation()
     {
         transform.rotation= startRotation;

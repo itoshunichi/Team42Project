@@ -9,7 +9,8 @@ public class HammerController : MonoBehaviour
     public Hammer hammer;
     public float DestroyValue;
     public Energy energy;
-
+    bool isHit = false;
+    float time;
     // Use this for initialization
     void Start()
     {
@@ -19,6 +20,16 @@ public class HammerController : MonoBehaviour
     void Update()
     {
         hammer.HammerUpdate();
+        if (isHit)
+        {
+            time += 0.01f;
+            if (time > 0.05f)
+            {
+                Time.timeScale = 1f;
+                isHit = false;
+                time = 0;
+            }
+        }
     }
 
     public void Reset()
@@ -34,15 +45,14 @@ public class HammerController : MonoBehaviour
         // (transform.GetComponent<Rigidbody2D>().velocity.x > DestroyValue || transform.GetComponent<Rigidbody2D>().velocity.y > DestroyValue))
         {
             Debug.Log("ヒット");
-            Time.timeScale = 0.7f;
-            shake.ShakeObject();
+            Time.timeScale = 0.0f;
+            shake.ShakeCamera(2.5f, 2.5f, 0.25f);
             Debug.Log(col.gameObject.name);
             col.gameObject.GetComponent<BeDestroyedObject>().BeginDamage();
 
             energy.CombPuls();
             AudioManager.Instance.PlaySE(AUDIO.SE_ENERGYGET);
-
-            Time.timeScale = 1f;
+            isHit = true;
         }
 
         if (col.gameObject.tag == "Boss" &&

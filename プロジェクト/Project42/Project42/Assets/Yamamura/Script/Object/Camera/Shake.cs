@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shake : MonoBehaviour {
+public class Shake : MonoBehaviour
+{
 
     public float x;
     public float y;
@@ -11,5 +12,10 @@ public class Shake : MonoBehaviour {
     public void ShakeObject()
     {
         iTween.ShakePosition(gameObject, iTween.Hash("x", x, "y", y, "time", shakeTime));
+    }
+
+    public void ShakeCamera(float x, float y,float time)
+    {
+        iTween.ShakePosition(gameObject, iTween.Hash("x", x, "y", y, "time", time));
     }
 }

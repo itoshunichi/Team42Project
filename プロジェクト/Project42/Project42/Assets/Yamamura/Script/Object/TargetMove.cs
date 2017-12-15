@@ -21,10 +21,12 @@ public class TargetMove : MonoBehaviour
         {
             //カラー変更                                     赤　　緑　　青　　アルファ値
             this.GetComponent<SpriteRenderer>().color = new Color(1.0f, 0.0f, 1.0f, 1.0f);
+
             isBonus = true;
         }
         c[2] = target.transform.position;
         c[1] = transform.position - target.transform.position / 3;
+        //ランダムで撮った値に応じて
         if (Random.Range(-1, 1) >= 0)
         {
             c[1].x += 18;
