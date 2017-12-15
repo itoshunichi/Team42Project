@@ -19,6 +19,10 @@ public class GamePlayEvent : MonoBehaviour
     private GameObject bossPrefab;
     private GameObject boss;
 
+    [SerializeField]
+    private GameObject resutUI;
+
+
 
 
     /// <summary>
@@ -55,6 +59,7 @@ public class GamePlayEvent : MonoBehaviour
 
     void Start()
     {
+        
         //プレイヤーの移動を止める
         player = FindObjectOfType<PlayerSmallController>().gameObject;
 
@@ -88,7 +93,7 @@ public class GamePlayEvent : MonoBehaviour
         Instantiate(formEnemy[0]);
 
         //1秒待機
-        yield return new WaitForSeconds(1f);
+       // yield return new WaitForSeconds(1f);
 
         //BGM再生
         AudioManager.Instance.PlayBGM(AUDIO.BGM_GAMEPLAY);
@@ -226,6 +231,7 @@ public class GamePlayEvent : MonoBehaviour
         AudioManager.Instance.StopBGM();
         //プレイヤーを止める
         SetPlayerEnabled(false);
+       
         //ハンマーを止める
         GameObject.Find("HammerFront").GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         boss.GetComponent<FormBossStageObject>().AllEnemyStop();
@@ -242,7 +248,6 @@ public class GamePlayEvent : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         SetShakeCamera(2,2,4);
-        //boss.GetComponent<Shake>().ShakeObject();
 
         yield return new WaitForSeconds(4f);
         //ボス死亡
@@ -250,8 +255,13 @@ public class GamePlayEvent : MonoBehaviour
         Destroy(boss);
         boss.GetComponent<FormBossStageObject>().AllEnemyDead();
         SetShakeCamera(1f, 1f, 1);
+        StartCoroutine(DisplayResulltUI());
+    }
+
+    private IEnumerator DisplayResulltUI()
+    {
         yield return new WaitForSeconds(1f);
-        Instantiate(Resources.Load<GameObject>("Prefab/Text/ResultUI")).transform.SetParent(GameObject.Find("Canvas").transform);
+        Instantiate(resutUI).transform.SetParent(GameObject.Find("Canvas").transform, false);
     }
 
     private void SetShakeCamera(float x, float y, float time)

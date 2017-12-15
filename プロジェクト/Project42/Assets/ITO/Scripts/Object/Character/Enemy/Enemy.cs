@@ -38,7 +38,7 @@ public abstract class Enemy : BeDestroyedObject
     public bool IsMove
     {
         get { return isMove; }
-        set { this.isMove = value; }
+        set {this.isMove = value; }
     }
 
     /// <summary>
@@ -92,7 +92,7 @@ public abstract class Enemy : BeDestroyedObject
     protected virtual void Update()
     {
         SelectMove();
-        SetShieldModeColor();
+        //SetShieldModeColor();
     }
 
     /// <summary>
@@ -124,6 +124,7 @@ public abstract class Enemy : BeDestroyedObject
         GameObject spawnEffectPrefab = commonParameter.spawnEffect;
         GameObject spawnEffect = Instantiate(spawnEffectPrefab, transform.position, spawnEffectPrefab.transform.rotation);
         spawnEffect.GetComponent<ParticleSystem>().Play();
+        //if(spawnEffect.GetComponent<ParticleSystem>().)
 
         yield return new WaitForSeconds(commonParameter.spaenEffectTime);
         GetComponent<Collider2D>().enabled = true;
@@ -160,12 +161,17 @@ public abstract class Enemy : BeDestroyedObject
     /// <summary>
     /// 仮
     /// </summary>
-    private void SetShieldModeColor()
+    public void SetShieldModeColor()
     {
-        if (IsSelectMode(EnemyMode.SHIELD))
-        {
+       
             GetComponent<SpriteRenderer>().color = Color.magenta;
-        }
+           // ParticleSystem.MinMaxGradient color = new ParticleSystem.MinMaxGradient();
+           // color.mode = ParticleSystemGradientMode.Color;
+           // color.color = Color.magenta;
+           // ParticleSystem.MainModule main = breakEffect.GetComponent<ParticleSystem>().main;
+           // main.startColor = Color.magenta;
+           //// SpawnEffect
+        
     }
 
     /// <summary>

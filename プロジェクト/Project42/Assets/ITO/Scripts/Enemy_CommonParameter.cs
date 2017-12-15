@@ -10,8 +10,14 @@ public class Enemy_CommonParametert:ScriptableObject  {
     [Tooltip("生成時のエフェクト")]
     public GameObject spawnEffect;
 
+    [Tooltip("シールド状態の生成時のエフェクト")]
+    public GameObject spawnEffect_Shield;
+
     [Tooltip("破壊時のエフェクト")]
     public GameObject breakEffect;
+
+    [Tooltip("シールド状態の破壊時のエフェクト")]
+    public GameObject breakEffect_Shield;
 
     [Tooltip("エネルギー")]
     public GameObject energy;

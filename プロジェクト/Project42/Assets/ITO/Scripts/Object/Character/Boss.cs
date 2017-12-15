@@ -111,7 +111,7 @@ public class Boss : BeDestroyedObject
     private IEnumerator AppearedInDirector()
     {
         yield return new WaitForSeconds(2f);
-        GetComponent<FormBossStageObject>().FormEnemyGroup();
+        GetComponent<FormBossStageObject>().InitFormEnemy();
         shield.GetComponent<ParticleSystem>().Play();
 
         yield return new WaitForSeconds(1f);
@@ -312,12 +312,16 @@ public class Boss : BeDestroyedObject
         {
             //エネミーのモードをシールドに
             targetEnemy.GetComponent<Enemy>().ChangeMode(EnemyMode.SHIELD);
+
+            targetEnemy.GetComponent<Enemy>().SetShieldModeColor();
             //エネミーリストから削除
             GetComponent<FormBossStageObject>().Enemys.Remove(targetEnemy);
             //シールドエネミーのリストに追加
             GetComponent<FormBossStageObject>().ShieldEnemys.Add(targetEnemy);
             //移動再開
             targetEnemy.GetComponent<Enemy>().IsMove = true;
+
+
 
             formEnemyTimer.Reset();
             //待機状態に
@@ -334,7 +338,7 @@ public class Boss : BeDestroyedObject
         if (enemys.Count == 0) return;
         int index = Random.Range(0, enemys.Count);
         targetEnemy = enemys[index];
-
+        if (!targetEnemy.GetComponent<Enemy>().IsMove) return;
         //エネミーの動きを無効
         targetEnemy.GetComponent<Enemy>().Stop();
         //線を伸ばすのを開始する
