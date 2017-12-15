@@ -11,8 +11,12 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: Enemy_CommonParametert
   m_EditorClassIdentifier: Assembly-CSharp::Enemy_CommonParametert
-  spawnEffect: {fileID: 0}
-  breakEffect: {fileID: 0}
-  energy: {fileID: 0}
-  spaenEffectTime: 0
-  speed: 0
+  spawnEffect: {fileID: 1254838350163470, guid: a95f1bedcbb91154abc41f0558cb6052,
+    type: 2}
+  spawnEffect_Shield: {fileID: 0}
+  breakEffect: {fileID: 1673473076622026, guid: 7e4de68f6ab94804aa8e1204f1a33cad,
+    type: 2}
+  breakEffect_Shield: {fileID: 0}
+  energy: {fileID: 1813752885674446, guid: 556858126826e0545b15602ba1530588, type: 2}
+  spaenEffectTime: 1
+  speed: 5

@@ -267,10 +267,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38e60c2a173154a4788872e4e311789a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffect: {fileID: 1525949901305226, guid: 53c1952b713b50743a1aba7d6b7dc88e,
-    type: 2}
   hp: 1
   speed: 2
+  breakEffect: {fileID: 1525949901305226, guid: 53c1952b713b50743a1aba7d6b7dc88e,
+    type: 2}
   waitTime: 2
   formEnemyTime: 2
 --- !u!114 &114773014721819930
@@ -284,7 +284,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc2e19e98e12beb4587b7c70484dd346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffect: {fileID: 0}
+  breakEffect: {fileID: 1601927646562814, guid: 021be2296d32fc04497dc9b3eac96db3,
+    type: 2}
 --- !u!120 &120642000623949410
 LineRenderer:
   m_ObjectHideFlags: 1
