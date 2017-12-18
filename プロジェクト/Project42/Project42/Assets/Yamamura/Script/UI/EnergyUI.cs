@@ -33,6 +33,7 @@ public class EnergyUI : MonoBehaviour
         if (image.fillAmount >= 0.5f) image.sprite = sprite[2];
         else if (image.fillAmount >= 0.25f && image.fillAmount < 0.5f) image.sprite = sprite[1];
         else if (image.fillAmount < 0.25f) image.sprite = sprite[0];
+
     }
 
     /// <summary>
@@ -51,6 +52,10 @@ public class EnergyUI : MonoBehaviour
             delay += Time.deltaTime;
             if(delay > 0.5f)damegeGageTime += Time.deltaTime / 2;
             redGageBar.fillAmount = Mathf.Lerp(redGageBar.fillAmount, image.fillAmount, damegeGageTime);
+        }
+        else if (!energy.IsDamage)
+        {
+            redGageBar.fillAmount = (energy.GetEnergy() / energy.maxEnergy);
         }
     }
 }

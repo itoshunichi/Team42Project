@@ -20,29 +20,38 @@ public class Energy : MonoBehaviour
         get { return isDamage; }
         set { isDamage = value; }
     }
+    float energyStartTime;
     // Use this for initialization
     void Start()
     {
-        isReduceEnergy = true;
+        isReduceEnergy = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isReduceEnergy) return;
-        energyTime += Time.deltaTime;
-        if (energyTime >= 0.01f)
+        if (!isReduceEnergy)
         {
-            energy -= 0.01f;
-            energyTime = 0;
+            energyStartTime += Time.deltaTime;
+            energy = Mathf.Lerp(0.1f,maxEnergy,energyStartTime);
+            if (energyStartTime >= 1.0f) isReduceEnergy = true;
         }
-        combTime += Time.deltaTime;
-        if (combTime >= combTimeLimt)
+        else if (isReduceEnergy)
         {
-            combTime = 0;
-            if (combCount > 0) combCount = 0;
+            energyTime += Time.deltaTime;
+            if (energyTime >= 0.01f)
+            {
+                energy -= 0.01f;
+                energyTime = 0;
+            }
+            combTime += Time.deltaTime;
+            if (combTime >= combTimeLimt)
+            {
+                combTime = 0;
+                if (combCount > 0) combCount = 0;
+            }
+            energy = Mathf.Clamp(energy, 0, maxEnergy);
         }
-        energy = Mathf.Clamp(energy, 0, maxEnergy);
     }
 
     public void CombPuls()
