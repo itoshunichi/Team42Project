@@ -11,17 +11,17 @@ public class TargetMove : MonoBehaviour
     bool isBonus = true;   //コンボ中に発生したかどうか
     Vector2[] c = new Vector2[3];
     float time;
+    public Material material;//コンボ用マテリアル
     // Use this for initialization
     void Start()
     {
         target = GameObject.Find("BarPoint");
-
         energy = GameObject.Find("bar").GetComponent<Energy>();
         if (energy.GetCombCount() > 1)
         {
             //カラー変更                                     赤　　緑　　青　　アルファ値
             this.GetComponent<SpriteRenderer>().color = new Color(1.0f, 0.0f, 1.0f, 1.0f);
-
+            this.GetComponent<TrailRenderer>().material = material;
             isBonus = true;
         }
         c[2] = target.transform.position;

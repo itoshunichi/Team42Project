@@ -15,21 +15,31 @@ public abstract class Enemy : BeDestroyedObject
     //プレイヤー
     private GameObject player;
     //移動速度
-    [SerializeField]
     protected float speed;
     //エネルギー
-    [SerializeField]
     protected GameObject energy;
     //開始時の角度
     protected Quaternion startRotation;
     //エネミーの状態
     EnemyMode mode;
 
+    protected GameObject breakEffect;
+    //登場時のエフェクト
+    //private GameObject spawnEffect;
+
+    /// <summary>
+    /// 共通のパラメーター
+    /// </summary>
+    [SerializeField]
+    private Enemy_CommonParametert commonParameter;
+
+
+
     private bool isMove;
     public bool IsMove
     {
         get { return isMove; }
-        set { this.isMove = value; }
+        set {this.isMove = value; }
     }
 
     /// <summary>
@@ -42,8 +52,8 @@ public abstract class Enemy : BeDestroyedObject
     }
 
 
-    
-   
+
+
     /// <summary>
     /// 指定した状態かどうか
     /// </summary>
@@ -61,22 +71,87 @@ public abstract class Enemy : BeDestroyedObject
     {
         this.mode = mode;
     }
-    
-   
+
+
     protected override void Start()
     {
         base.Start();
+        commonParameter = Resources.Load<Enemy_CommonParametert>("Data/Enemy_CommonParametert");
+        speed = commonParameter.speed;
+        energy = commonParameter.energy;
+        breakEffect = commonParameter.breakEffect;
+        isMove = false;
+        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<Animator>().enabled = false;
         startRotation = transform.rotation;
         player = GameObject.Find("PlayerFront");
         StartCoroutine(StartMove());
-        Debug.Log(mode);
-        
+        AppearedInDirector();
+
     }
 
     protected virtual void Update()
     {
         SelectMove();
-        SetShieldModeColor();
+        //SetShieldModeColor();
+    }
+
+    /// <summary>
+    /// 登場演出
+    /// </summary>
+    /// <returns></returns>
+    private void AppearedInDirector()
+    {
+
+        //エフェクト生成
+        StartCoroutine(SpawnEffect());
+
+
+        GetComponent<SpriteRenderer>().enabled = true;
+        //フェードして出現
+        StartCoroutine(FadeSpawn());
+        GetComponent<Animator>().enabled = true;
+
+
+
+    }
+
+    /// <summary>
+    /// 登場時のエフェクトの生成
+    /// </summary>
+    private IEnumerator SpawnEffect()
+    {
+        GetComponent<Collider2D>().enabled = false;
+        GameObject spawnEffectPrefab = commonParameter.spawnEffect;
+        GameObject spawnEffect = Instantiate(spawnEffectPrefab, transform.position, spawnEffectPrefab.transform.rotation);
+        spawnEffect.GetComponent<ParticleSystem>().Play();
+        //if(spawnEffect.GetComponent<ParticleSystem>().)
+
+        yield return new WaitForSeconds(commonParameter.spaenEffectTime);
+        GetComponent<Collider2D>().enabled = true;
+        //エフェクト削除
+        Destroy(spawnEffect);
+
+        yield return new WaitForSeconds(0.5f);
+        isMove = true;
+    }
+
+    /// <summary>
+    /// 登場時フェードして出現
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator FadeSpawn()
+    {
+        Color color = GetComponent<SpriteRenderer>().color;
+        color.a = 0;
+        //不透明になるまでループ
+        while (color.a <= 255)
+        {
+            color.a += 0.1f;
+            GetComponent<SpriteRenderer>().color = color;
+        }
+        yield break;
+
     }
 
     private IEnumerator StartMove()
@@ -87,12 +162,17 @@ public abstract class Enemy : BeDestroyedObject
     /// <summary>
     /// 仮
     /// </summary>
-    private void SetShieldModeColor()
+    public void SetShieldModeColor()
     {
-        if (IsSelectMode(EnemyMode.SHIELD))
-        {
+       
             GetComponent<SpriteRenderer>().color = Color.magenta;
-        }
+           // ParticleSystem.MinMaxGradient color = new ParticleSystem.MinMaxGradient();
+           // color.mode = ParticleSystemGradientMode.Color;
+           // color.color = Color.magenta;
+           // ParticleSystem.MainModule main = breakEffect.GetComponent<ParticleSystem>().main;
+           // main.startColor = Color.magenta;
+           //// SpawnEffect
+        
     }
 
     /// <summary>
@@ -115,59 +195,15 @@ public abstract class Enemy : BeDestroyedObject
 
     protected abstract void Move();
 
-    #region OnCollision
-    protected virtual void OnCollisionStay2D(Collision2D collision)
-    {
-        CollisionPlayer(collision);
-       // AttackPlayer(collision);
-    }
-
-    private void CollisionPlayer(Collision2D collision)
-    {
-        if (mode == EnemyMode.SHIELD) return;
-        if (collision.collider.tag == "Player")
-        {
-            if (FindObjectOfType<GamePlayEvent>().IsBossWave())
-            {
-                FindObjectOfType<FormBossStageObject>().DestroyEnemy(gameObject);
-            }
-            else
-            {
-                FindObjectOfType<FormEnemyObject>().DestoryObject(gameObject);
-            }
-        }
-    }
-
-    /// <summary>
-    /// プレイヤーに攻撃
-    /// </summary>
-    /// <returns></returns>
-    private void AttackPlayer(Collision2D collision)
-    {
-        //player.GetComponent<PlayerSmallController>().IsMove = true;
-       
-        //isStop = true;
-
-        if (IsSelectMode(EnemyMode.TARKING) && collision.collider.gameObject.name == "PlayerSmall")
-        {
-            //collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Direction() * 1000,ForceMode2D.Impulse);
-            // player.transform.rotation = Quaternion.FromToRotation(Vector3.up, Direction());
-            FindObjectOfType<FormBossStageObject>().DestroyEnemy(gameObject);
-        }
-
-    }
-
-    #endregion
 
 
-
-#region OnTrigger
+    #region OnTrigger
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         OnTriggerWave(collision);
     }
 
-  
+
     /// <summary>
     /// ウェーブと当たったときの処理
     /// </summary>
@@ -182,7 +218,7 @@ public abstract class Enemy : BeDestroyedObject
         }
     }
 
-#endregion
+    #endregion
 
     public override void BeginDamage()
     {
@@ -190,20 +226,18 @@ public abstract class Enemy : BeDestroyedObject
         if (FindObjectOfType<FormEnemyObject>())
         {
             FindObjectOfType<FormEnemyObject>().DestoryObject(gameObject);
-           
+
         }
         //ボスウェーブ
-        if(FindObjectOfType<FormBossStageObject>())
+        if (FindObjectOfType<FormBossStageObject>())
         {
+
+            FindObjectOfType<FormBossStageObject>().FormRandomEnemy();
+
             FindObjectOfType<FormBossStageObject>().DestroyEnemy(gameObject);
-           
-        }
+            FindObjectOfType<Shield>().BreakShield();
 
-        if(IsSelectMode(EnemyMode.SHIELD))
-        {
-            FindObjectOfType<Boss>().InstantiateWave();
         }
-
         Instantiate(breakEffect, transform.position, Quaternion.identity).GetComponent<ParticleSystem>().Play();
         Instantiate(energy, transform.position, Quaternion.identity);
     }
@@ -238,16 +272,16 @@ public abstract class Enemy : BeDestroyedObject
         transform.rotation = Quaternion.FromToRotation(Vector2.up, vec);
     }
 
-   public void Stop()
+    public void Stop()
     {
         isMove = false;
         rigid.velocity = Vector2.zero;
-        
+
     }
-    
+
     public void SetStartRotation()
     {
-        transform.rotation= startRotation;
+        transform.rotation = startRotation;
     }
 
     /// <summary>

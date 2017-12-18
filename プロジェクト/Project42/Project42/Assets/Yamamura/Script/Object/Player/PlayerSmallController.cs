@@ -43,6 +43,8 @@ public class PlayerSmallController : Player
         if (Time.timeScale != 1.0f) return;
         if (energy.GetEnergy() <= 0)
         {
+            AudioManager.Instance.StopBGM();
+            AudioManager.Instance.PlaySE(AUDIO.SE_PLAYERBREAK);
             if (FindObjectOfType<GamePlayEvent>().IsBossWave()) FindObjectOfType<FormBossStageObject>().AllEnemyStop();
             Instantiate(gameOverUI);
             Instantiate(effect[2], transform.position, effect[2].transform.rotation);
