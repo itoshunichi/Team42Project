@@ -16,7 +16,7 @@ public class EnergyUI : MonoBehaviour
     void Start()
     {
         image = GetComponent<Image>();
-        beforeFillAmout = image.fillAmount = (energy.GetEnergy() / energy.maxEnergy);
+        image.fillAmount = (energy.GetEnergy() / energy.maxEnergy);
     }
 
     void Update()
