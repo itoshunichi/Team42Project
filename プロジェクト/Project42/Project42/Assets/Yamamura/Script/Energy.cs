@@ -9,8 +9,10 @@ public class Energy : MonoBehaviour
     public float addEnergy;     //足す値
     public float minusEnergy;   //引く値
     public float maxEnergy;     //最大エネルギー
+    public float combTimeLimt;  //コンボ制限時間
     float energyTime;           //時間
     float combTime;             //コンボ判定時間
+
     int combCount;              //コンボ
     public bool isReduceEnergy = false;
 
@@ -31,7 +33,7 @@ public class Energy : MonoBehaviour
             energyTime = 0;
         }
         combTime += Time.deltaTime;
-        if (combTime >= 1.5f)
+        if (combTime >= combTimeLimt)
         {
             combTime = 0;
             if (combCount > 0) combCount = 0;
@@ -67,6 +69,11 @@ public class Energy : MonoBehaviour
     public int GetCombCount()
     {
         return combCount;
+    }
+
+    public void SetCombCount(int setNum)
+    {
+        combCount = setNum;
     }
 
     public float GetEnergy()
