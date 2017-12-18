@@ -12,10 +12,14 @@ public class Energy : MonoBehaviour
     public float combTimeLimt;  //コンボ制限時間
     float energyTime;           //時間
     float combTime;             //コンボ判定時間
-
+    private bool isDamage;
     int combCount;              //コンボ
     public bool isReduceEnergy = false;
-
+    public bool IsDamage
+    {
+        get { return isDamage; }
+        set { isDamage = value; }
+    }
     // Use this for initialization
     void Start()
     {
@@ -58,6 +62,7 @@ public class Energy : MonoBehaviour
 
     public void MinusEnergy()
     {
+        isDamage = true;
         energy -= minusEnergy;
     }
 
@@ -80,5 +85,4 @@ public class Energy : MonoBehaviour
     {
         return energy;
     }
-
 }
