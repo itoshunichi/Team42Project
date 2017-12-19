@@ -1676,6 +1676,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optionCanvas: {fileID: 1283335336}
+  camera: {fileID: 1486628176}
 --- !u!1 &1121301140
 GameObject:
   m_ObjectHideFlags: 0
@@ -1757,6 +1758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optionCanvas: {fileID: 1283335336}
+  camera: {fileID: 0}
 --- !u!1 &1180166807
 GameObject:
   m_ObjectHideFlags: 0
@@ -1977,6 +1979,7 @@ GameObject:
   - component: {fileID: 1486628179}
   - component: {fileID: 1486628178}
   - component: {fileID: 1486628177}
+  - component: {fileID: 1486628176}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1984,6 +1987,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1486628176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1486628175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c12f52b61f594141a764d1ecc67b3d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  x: 0.4
+  y: 0.4
+  shakeTime: 0.15
 --- !u!124 &1486628177
 Behaviour:
   m_ObjectHideFlags: 0
@@ -2519,6 +2536,16 @@ Prefab:
     - target: {fileID: 4986104869819808, guid: 1978fd6848723724997343f327da69b1, type: 2}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 198182962624725460, guid: 1978fd6848723724997343f327da69b1,
+        type: 2}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198182962624725460, guid: 1978fd6848723724997343f327da69b1,
+        type: 2}
+      propertyPath: randomSeed
+      value: 1878451756
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1978fd6848723724997343f327da69b1, type: 2}

@@ -5,7 +5,7 @@ using UnityEngine;
 public class TitleLogo : MonoBehaviour {
 
     public GameObject optionCanvas;
-
+    public Shake camera;
 	// Use this for initialization
 	void Start () {
         optionCanvas.SetActive(false);
@@ -19,4 +19,15 @@ public class TitleLogo : MonoBehaviour {
             GetComponent<Animator>().SetBool("IsStart", false);
         }	
 	}
+
+    public void Shake()
+    {
+        camera.ShakeObject();
+    }
+
+    public void AnimEnd()
+    {
+        optionCanvas.SetActive(true);
+        GetComponent<Animator>().SetBool("IsStart", false);
+    }
 }
