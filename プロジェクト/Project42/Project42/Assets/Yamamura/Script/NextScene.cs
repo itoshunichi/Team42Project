@@ -18,6 +18,8 @@ public class NextScene : MonoBehaviour {
 
     public void NextSceneGo()
     {
+        AudioManager.Instance.StopBGM();
+        AudioManager.Instance.PlaySE(AUDIO.SE_DECISION);
         SceneNavigater.Instance.Change(sceneName);
     }
 }

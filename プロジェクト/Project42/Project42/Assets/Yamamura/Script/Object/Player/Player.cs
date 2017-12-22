@@ -46,4 +46,9 @@ public abstract class Player : MonoBehaviour {
     {
         return dir;
     }
+
+    public bool IsHit()
+    {
+        return isHit;
+    }
 }
