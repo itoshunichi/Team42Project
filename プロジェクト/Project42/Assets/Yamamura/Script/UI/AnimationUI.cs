@@ -9,7 +9,6 @@ public class AnimationUI : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         AudioManager.Instance.PlayBGM(AUDIO.BGM_TITLE);
-
 	}
 	
 	// Update is called once per frame

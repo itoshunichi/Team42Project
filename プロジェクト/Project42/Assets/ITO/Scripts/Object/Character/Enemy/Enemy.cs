@@ -231,16 +231,16 @@ public abstract class Enemy : BeDestroyedObject
         if (FindObjectOfType<FormEnemyObject>())
         {
             FindObjectOfType<FormEnemyObject>().DestoryObject(gameObject);
-            // FindObjectOfType<GamePlayEvent>().WaveEndPlayerAutoMove();
+            
 
         }
         //ボスウェーブ
         if (FindObjectOfType<FormBossStageObject>())
         {
-
             FindObjectOfType<FormBossStageObject>().FormRandomEnemy();
-
             FindObjectOfType<FormBossStageObject>().DestroyEnemy(gameObject);
+            
+
             FindObjectOfType<Shield>().BreakShield();
 
         }

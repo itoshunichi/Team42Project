@@ -41,16 +41,9 @@ public class PlayerSmallController : Player
     void Update()
     {
         if (Time.timeScale != 1.0f) return;
-        if (energy.GetEnergy() <= 0)
+        if (energy.GetEnergy() <= 0 && !energy.IsImmortality)
         {
-            AudioManager.Instance.StopBGM();
-            AudioManager.Instance.PlaySE(AUDIO.SE_PLAYERBREAK);
-            if (FindObjectOfType<GamePlayEvent>().IsBossWave()) FindObjectOfType<FormBossStageObject>().AllEnemyStop();
-            Instantiate(gameOverUI);
-            Instantiate(effect[2], transform.position, effect[2].transform.rotation);
-            GameObject.Find("Main Camera").GetComponent<Shake>().ShakeObject();
-            Destroy(gameObject);
-            Destroy(GameObject.Find("HammerFront"));
+            PlayerDead();
         }
         else if (energy.GetEnergy() > 0)
         {
@@ -58,6 +51,18 @@ public class PlayerSmallController : Player
             Accelerator();//加速処理
             GetComponent<Animator>().SetBool("IsHit", isHit);
         }
+    }
+
+    private void PlayerDead()
+    {
+        AudioManager.Instance.StopBGM();
+        AudioManager.Instance.PlaySE(AUDIO.SE_PLAYERBREAK);
+        if (FindObjectOfType<GamePlayEvent>().IsBossWave()) FindObjectOfType<FormBossStageObject>().AllEnemyStop();
+        Instantiate(gameOverUI);
+        Instantiate(effect[2], transform.position, effect[2].transform.rotation);
+        GameObject.Find("Main Camera").GetComponent<Shake>().ShakeObject();
+        Destroy(gameObject);
+        Destroy(GameObject.Find("HammerFront"));
     }
 
     private void Move()
@@ -136,7 +141,7 @@ public class PlayerSmallController : Player
     {
         if (col.gameObject.tag == "BeDestroyedObject" && !isHit)
         {
-            AudioManager.Instance.PlaySE(AUDIO.SE_DAMAGE);
+            //AudioManager.Instance.PlaySE(AUDIO.SE_DAMAGE);
             GameObject.Find("Main Camera").GetComponent<Shake>().ShakeObject();
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             isHit = true;

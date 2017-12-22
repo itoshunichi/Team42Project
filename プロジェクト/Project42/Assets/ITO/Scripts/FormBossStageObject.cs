@@ -153,15 +153,20 @@ public class FormBossStageObject : MonoBehaviour
 
     public void DestroyEnemy(GameObject enemy)
     {
-       // FormRandomEnemy();
-       
+        // FormRandomEnemy();
+        AudioManager.Instance.PlaySE(AUDIO.SE_DAMAGE);
         if (enemy.GetComponent<Enemy>().IsSelectMode(EnemyMode.SHIELD))
         {
             shieldEnemys.Remove(enemy);
+            if(shieldEnemys.Count != 0)
+            {
+                AudioManager.Instance.PlaySE(AUDIO.SE_DAMAGE);
+            }
         }
         else
         {
             enemys.Remove(enemy);
+            AudioManager.Instance.PlaySE(AUDIO.SE_DAMAGE);
         }
         Destroy(enemy);
     }
