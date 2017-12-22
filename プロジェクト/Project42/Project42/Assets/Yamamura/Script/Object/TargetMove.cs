@@ -20,7 +20,7 @@ public class TargetMove : MonoBehaviour
         if (energy.GetCombCount() > 1)
         {
             Instantiate(this.gameObject);
-            energy.SetCombCount(1);
+            energy.AddEnergyCount(1);
             isBonus = true;
         }
         c[2] = target.transform.position;
@@ -73,6 +73,7 @@ public class TargetMove : MonoBehaviour
     {
         if (collision.gameObject.name == "bar")
         {
+            energy.AddEnergyCount(-1);
             energy.AddEnergy();
             Destroy(gameObject);
         }
