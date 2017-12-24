@@ -1,0 +1,85 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEditor;
+using System;
+using System.IO;
+using UnityEditorInternal;
+using System.Text;
+
+
+public static class AudioNameCreater
+{
+
+    private const string COMMAND_NAME = "Tools/Create/Audio Name";//コマンド名
+    private const string EXPORT_PATH = "Assets/Scripts/Constants/AUDIO.cs";//作成したスクリプトを保存するパス
+
+    //ファイル名（拡張子あり、なし）
+    private static readonly string FILENAME = Path.GetFileName(EXPORT_PATH);
+    private static readonly string FILENAME_WITHOUT_EXTENSION = Path.GetFileNameWithoutExtension(EXPORT_PATH);
+
+
+    //オーディオのファイル名を定数で管理するクラスを作成する
+    [MenuItem(COMMAND_NAME)]
+    public static void Create()
+    {
+        if (!CanCreate())
+        {
+            return;
+        }
+
+        CreateScript();
+        EditorUtility.DisplayDialog(FILENAME, "作成が完了しました", "OK");
+    }
+
+    public static void CreateScript()
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.AppendLine("/// <summary>");
+        builder.AppendLine("/// オーディオ名を定数で管理するクラス");
+        builder.AppendLine("/// </summary>");
+        builder.AppendFormat("public static class {0}", FILENAME_WITHOUT_EXTENSION).AppendLine();
+        builder.AppendLine("{");
+
+        //指定したパスのリソースをす全て取得
+        object[] bgmList = Resources.LoadAll("Audio/BGM");
+        object[] seList = Resources.LoadAll("Audio/SE");
+
+        foreach (AudioClip bgm in bgmList)
+        {
+            builder.Append("\t").AppendFormat(@"public const string BGM_{0} = ""{1}"";",
+                bgm.name.ToUpper(), bgm.name).AppendLine();
+        }
+
+        builder.AppendLine("\t");
+
+        foreach (AudioClip se in seList)
+        {
+            builder.Append("\t").AppendFormat(@"public const string SE_{0} = ""{1}"";",
+                se.name.ToUpper(), se.name).AppendLine();
+        }
+
+        builder.AppendLine("}");
+
+        string directoryName = Path.GetDirectoryName(EXPORT_PATH);
+        if (!Directory.Exists(directoryName))
+        {
+            Directory.CreateDirectory(directoryName);
+        }
+
+        File.WriteAllText(EXPORT_PATH, builder.ToString(), Encoding.UTF8);
+        AssetDatabase.Refresh(ImportAssetOptions.ImportRecursive);
+    }
+
+    //オーディオのファイル名を定数で管理するクラスを作成できるかを取得します
+    [MenuItem(COMMAND_NAME, true)]
+    private static bool CanCreate()
+    {
+        return !EditorApplication.isPlaying && !Application.isPlaying && !EditorApplication.isCompiling;
+    }
+}
+
+
+
+
+

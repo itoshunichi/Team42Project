@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1849902802262750}
+  m_IsPrefabParent: 1
+--- !u!1 &1849902802262750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4901746308846056}
+  - component: {fileID: 114855199935705576}
+  m_Layer: 0
+  m_Name: FormBossStageObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4901746308846056
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1849902802262750}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114855199935705576
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1849902802262750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f961a32e1479f04e8f52fe99a70d24d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalEnemy: {fileID: 1320317435264938, guid: d30f68e2ad01e6d438d8d0ede6763129,
+    type: 2}
+  enemyObjectTypes:
+  - {fileID: 1755229733179726, guid: 3fa174eeac562e44d8eae15c537edf0f, type: 2}
+  - {fileID: 1147387932112976, guid: fd2cea8e7789fe944ab411477c338b12, type: 2}
+  - {fileID: 1246752412389328, guid: 714e634a20378024cacd9a247a407fe7, type: 2}
+  - {fileID: 1759716974505742, guid: 64ddb5efe1fa6e140a2f6e83ff4e4f6f, type: 2}
+  initEnemyIndex: 5
+  formPositions:
+  - {x: -6.589652, y: -3.932541}
+  - {x: -7.43993, y: 11.691336}
+  - {x: -8.715353, y: -11.585049}
+  - {x: 7.231126, y: -12.520302}
+  - {x: 8.273512, y: -1.8068428}
+  - {x: 8.201569, y: 5.827421}
+  - {x: 0, y: 12.319746}
+  - {x: -5.6396055, y: 3.8952045}
+  canFormPositions: []
