@@ -11,6 +11,7 @@ public static class AUDIO
 	public const string BGM_TITLE = "title";
 	
 	public const string SE_ATTACK = "attack";
+	public const string SE_BARIA = "baria";
 	public const string SE_BARIABREAK = "bariaBreak";
 	public const string SE_BOSSCOMBI = "bossCombi";
 	public const string SE_BOSSEXPLOSION = "bossExplosion";

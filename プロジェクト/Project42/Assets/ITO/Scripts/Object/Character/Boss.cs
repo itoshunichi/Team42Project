@@ -317,16 +317,17 @@ public class Boss : BeDestroyedObject
         //移動状態かつ当たったオブジェクトがターゲットだったら
         if (CheckMode(BossMode.MOVE) && collision.gameObject == targetEnemy)
         {
+            GetComponent<FormBossStageObject>().ChangeShieldEnemy(targetEnemy);
             //エネミーのモードをシールドに
-            targetEnemy.GetComponent<Enemy>().ChangeMode(EnemyMode.SHIELD);
+           // targetEnemy.GetComponent<Enemy>().ChangeMode(EnemyMode.SHIELD);
 
-            targetEnemy.GetComponent<Enemy>().SetShieldModeColor();
+            //targetEnemy.GetComponent<Enemy>().SetShieldModeColor();
             //エネミーリストから削除
-            GetComponent<FormBossStageObject>().Enemys.Remove(targetEnemy);
+            //GetComponent<FormBossStageObject>().Enemys.Remove(targetEnemy);
             //シールドエネミーのリストに追加
-            GetComponent<FormBossStageObject>().ShieldEnemys.Add(targetEnemy);
+           // GetComponent<FormBossStageObject>().ShieldEnemys.Add(targetEnemy);
             //移動再開
-            targetEnemy.GetComponent<Enemy>().IsMove = true;
+           // targetEnemy.GetComponent<Enemy>().IsMove = true;
 
 
 

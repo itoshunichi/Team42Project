@@ -9,7 +9,7 @@ public class Shield : BeDestroyedObject
     private GameObject breakEffect;
     public override void BeginDamage(bool isDamage)
     {
-
+        AudioManager.Instance.PlaySE(AUDIO.SE_BARIA);
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -22,7 +22,6 @@ public class Shield : BeDestroyedObject
         if (!FindObjectOfType<Boss>().IsShield) return;
         if (FindObjectOfType<FormBossStageObject>().ShieldEnemys.Count == 0)
         {
-            //GetComponent<ParticleSystem>().Stop();
             AudioManager.Instance.PlaySE(AUDIO.SE_BARIABREAK);
             Instantiate(breakEffect, transform.position, breakEffect.transform.rotation).GetComponent<ParticleSystem>().Play();
         }

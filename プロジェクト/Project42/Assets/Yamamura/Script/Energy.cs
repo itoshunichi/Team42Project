@@ -17,6 +17,12 @@ public class Energy : MonoBehaviour
     int combCount;              //コンボ
     public bool isReduceEnergy = false;
     private bool isImmortality = false;    //不死状態
+    private int maxCombo;
+    public int MaxCombo
+    {
+        get { return maxCombo; }
+    }
+
     public bool IsImmortality
     {
         get { return isImmortality; }
@@ -70,6 +76,7 @@ public class Energy : MonoBehaviour
     {
         combTime = 0;
         combCount++;
+        maxCombo = Mathf.Max(combCount);
     }
 
     /// <summary>
