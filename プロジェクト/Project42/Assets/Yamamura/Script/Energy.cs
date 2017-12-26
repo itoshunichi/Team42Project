@@ -17,16 +17,7 @@ public class Energy : MonoBehaviour
     int combCount;              //コンボ
     public bool isReduceEnergy = false;
     private bool isImmortality = false;    //不死状態
-    public bool IsImmortality
-    {
-        get { return isImmortality; }
-        set { isImmortality = value; }
-    }
-    public bool IsDamage
-    {
-        get { return isDamage; }
-        set { isDamage = value; }
-    }
+    private bool isCure;        //エネルギーが回復した判定
     float energyStartTime;
     // Use this for initialization
     void Start()
@@ -77,6 +68,7 @@ public class Energy : MonoBehaviour
     /// </summary>
     public void AddEnergy()
     {
+        isCure = true;
         combTime = 0;
         energy += addEnergy;
     }
@@ -109,5 +101,21 @@ public class Energy : MonoBehaviour
     public float GetEnergy()
     {
         return energy;
+    }
+    
+    public bool IsImmortality
+    {
+        get { return isImmortality; }
+        set { isImmortality = value; }
+    }
+    public bool IsDamage
+    {
+        get { return isDamage; }
+        set { isDamage = value; }
+    }
+    public bool IsCure
+    {
+        get { return isCure; }
+        set { isCure = value; }
     }
 }
