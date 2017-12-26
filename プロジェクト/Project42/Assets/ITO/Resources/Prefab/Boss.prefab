@@ -1465,18 +1465,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyObjectTypes:
-  - {fileID: 1665385548971832, guid: 7282884da8ed06b45b979b8603cc4963, type: 2}
+  - {fileID: 1755229733179726, guid: 3fa174eeac562e44d8eae15c537edf0f, type: 2}
   - {fileID: 1147387932112976, guid: fd2cea8e7789fe944ab411477c338b12, type: 2}
   - {fileID: 1246752412389328, guid: 714e634a20378024cacd9a247a407fe7, type: 2}
   - {fileID: 1759716974505742, guid: 64ddb5efe1fa6e140a2f6e83ff4e4f6f, type: 2}
-  - {fileID: 1755229733179726, guid: 3fa174eeac562e44d8eae15c537edf0f, type: 2}
-  shieldEnemyObjectTypes:
-  - {fileID: 1209070673189156, guid: df00f2312e95a3d42a40af4856382904, type: 2}
-  - {fileID: 1220432192751680, guid: 32e92e5ff4041fb4e89c705d1cdb265b, type: 2}
-  - {fileID: 1434304603838858, guid: dd61ddf551cbe954da4921ca0b288104, type: 2}
-  - {fileID: 1537375257275902, guid: 5b284b59e4350614995dcd75eddd72b0, type: 2}
   initShieldEnemyIndex: 3
-  enemyIndex: 5
+  enemyIndex: 3
   setFormPositions:
   - {x: 6.726549, y: 6.556265}
   - {x: -5.0875874, y: 8.584082}

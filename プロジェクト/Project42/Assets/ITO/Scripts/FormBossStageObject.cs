@@ -10,9 +10,6 @@ public class FormBossStageObject : MonoBehaviour
     [SerializeField]
     private List<GameObject> enemyObjectTypes;
 
-    [SerializeField]
-    private List<GameObject> shieldEnemyObjectTypes;
-
     /// <summary>
     /// 生成した敵のリスト
     /// </summary>
@@ -54,8 +51,6 @@ public class FormBossStageObject : MonoBehaviour
     /// </summary>
     private List<Vector2> canFormPositions = new List<Vector2>();
 
-    private int tarkingEnemyCount = 0;
-
 
     void Start()
     {
@@ -74,7 +69,6 @@ public class FormBossStageObject : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("追尾" + tarkingEnemyCount);
         SetCanFormPositions();
     }
 
@@ -87,8 +81,7 @@ public class FormBossStageObject : MonoBehaviour
         for (int i = 0; i < initShieldEnemyIndex; i++)
         {
             //オブジェクトの種類をランダムで決定
-            GameObject obj = shieldEnemyObjectTypes[Random.Range(0, shieldEnemyObjectTypes.Count)];
-            // obj.GetComponent<Enemy>().ChangeMode(EnemyMode.SHIELD);
+            GameObject obj = enemyObjectTypes[Random.Range(0,enemyObjectTypes.Count)];
             //位置を候補からランダムで決定
             //Vector2 randomPos = setFormPositions[Random.Range(0, setFormPositions.Count)];
             Vector2 pos = (Vector2)Camera.main.transform.position + setFormPositions[i];
@@ -96,27 +89,29 @@ public class FormBossStageObject : MonoBehaviour
             Quaternion rot = obj.transform.rotation;
             //生成
             GameObject formEnemy = Instantiate(obj, pos, rot);
-            //formEnemy.GetComponent<Enemy>().SetShieldModeColor();
+            formEnemy.GetComponent<Enemy>().ChangeMode(EnemyMode.SHIELD);
+            formEnemy.GetComponent<Enemy>().SetShieldModeColor();
             shieldEnemys.Add(formEnemy);
         }
+
+        
+
+        //for(int i = 0;i<initShieldEnemyIndex;i++)
+        //{
+        //    GameObject shieldEnemy = enemys[Random.Range(0, enemys.Count)];
+        //    shieldEnemy.GetComponent<Enemy>().ChangeMode(EnemyMode.SHIELD);
+        //    shieldEnemy.GetComponent<Enemy>().SetShieldModeColor();
+        //    shieldEnemys.Add(shieldEnemy);
+        //    enemys.Remove(shieldEnemy);
+        //}
     }
 
     public void InitFormNormalEnemy()
     {
-        for (int i = initShieldEnemyIndex; i < initShieldEnemyIndex + enemyIndex; i++)
+        for(int i = initShieldEnemyIndex;i<initShieldEnemyIndex+enemyIndex;i++)
         {
-            GameObject obj;
-            if(tarkingEnemyCount<3)
-            {
-                obj = enemyObjectTypes[0];
-                tarkingEnemyCount++;
-            }
-            else
-            {
-                obj = enemyObjectTypes[Random.Range(1, enemyObjectTypes.Count)];
-            }
             //オブジェクトの種類をランダムで決定
-            //GameObject obj = enemyObjectTypes[Random.Range(0, enemyObjectTypes.Count)];
+            GameObject obj = enemyObjectTypes[Random.Range(0, enemyObjectTypes.Count)];
             //位置を候補からランダムで決定
             //Vector2 randomPos = setFormPositions[Random.Range(0, setFormPositions.Count)];
             Vector2 pos = (Vector2)Camera.main.transform.position + setFormPositions[i];
@@ -124,24 +119,12 @@ public class FormBossStageObject : MonoBehaviour
             Quaternion rot = obj.transform.rotation;
             //生成
             GameObject formEnemy = Instantiate(obj, pos, rot);
-            // formEnemy.GetComponent<Enemy>().ChangeMode(EnemyMode.TARKING);
+            formEnemy.GetComponent<Enemy>().ChangeMode(EnemyMode.TARKING);
             enemys.Add(formEnemy);
         }
     }
 
-
-    public void ChangeShieldEnemy(GameObject enemy)
-    {
-
-
-        GameObject obj = shieldEnemyObjectTypes[Random.Range(0, shieldEnemyObjectTypes.Count)];
-        shieldEnemys.Add(Instantiate(obj, enemy.transform.position, obj.transform.rotation));
-        
-        DestroyEnemy(enemy, false);
-
-
-    }
-
+   
 
 
     /// <summary>
@@ -152,23 +135,15 @@ public class FormBossStageObject : MonoBehaviour
     {
         if (enemys.Count > enemyIndex) return;
         if (FindObjectOfType<GamePlayEvent>().IsGameEnd) return;
-        GameObject obj;
-        if (tarkingEnemyCount < 3)
-        {
-            obj = enemyObjectTypes[0];
-            tarkingEnemyCount++;
-        }
-        else
-        {
-            obj = enemyObjectTypes[Random.Range(1, enemyObjectTypes.Count)];
-        }
+        //オブジェクトの種類をランダムで決定
+        GameObject obj = enemyObjectTypes[Random.Range(0, enemyObjectTypes.Count)];
         Vector2 pos = (Vector2)Camera.main.transform.position + setFormPositions[Random.Range(0, setFormPositions.Count)];
         canFormPositions.Remove(pos);
         Quaternion rot = obj.transform.rotation;
         //生成
         GameObject formEnemy = Instantiate(obj, pos, rot);
         //状態をシールドに
-        //formEnemy.GetComponent<Enemy>().ChangeMode(EnemyMode.TARKING);
+        formEnemy.GetComponent<Enemy>().ChangeMode(EnemyMode.TARKING);
 
         enemys.Add(formEnemy);
 
@@ -176,29 +151,29 @@ public class FormBossStageObject : MonoBehaviour
 
 
 
-    public void DestroyEnemy(GameObject enemy, bool isDamage)
+    public void DestroyEnemy(GameObject enemy)
     {
+        // FormRandomEnemy();
+        AudioManager.Instance.PlaySE(AUDIO.SE_DAMAGE);
         if (enemy.GetComponent<Enemy>().IsSelectMode(EnemyMode.SHIELD))
         {
             shieldEnemys.Remove(enemy);
-            if (shieldEnemys.Count != 0)
+            if(shieldEnemys.Count != 0)
             {
-                AudioManager.Instance.PlaySE(AUDIO.SE_ENERGYGET);
+                AudioManager.Instance.PlaySE(AUDIO.SE_DAMAGE);
             }
         }
         else
         {
-            if (enemy.GetComponent<TarkingEnemy>()) tarkingEnemyCount--;
             enemys.Remove(enemy);
-            if (isDamage)
-                AudioManager.Instance.PlaySE(AUDIO.SE_ENERGYGET);
+            AudioManager.Instance.PlaySE(AUDIO.SE_DAMAGE);
         }
         Destroy(enemy);
     }
 
     public void AllEnemyStop()
     {
-        foreach (var e in FindObjectsOfType<Enemy>())
+        foreach(var e in FindObjectsOfType<Enemy>())
         {
             e.Stop();
         }

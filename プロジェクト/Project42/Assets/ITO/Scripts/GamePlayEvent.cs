@@ -110,8 +110,6 @@ public class GamePlayEvent : MonoBehaviour
 
         //プレイヤーの動きを有効に
         SetPlayerEnabled(true);
-
-        GetComponent<GamePlayTimer>().TimerFlag = true;
     }
 
     public IEnumerator StartWaveEndPlayerAutoMove()
@@ -143,7 +141,7 @@ public class GamePlayEvent : MonoBehaviour
         if (FindObjectOfType<FormEnemyObject>().FormObjects.Count != 0) yield break;
         player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         //矢印の描画を無効
-       // SetArrowEnabled(false);
+        SetArrowEnabled(false);
         //プレイヤーの動きを止める
         SetPlayerEnabled(false);
         GameObject formEnemy = FindObjectOfType<FormEnemyObject>().gameObject;
@@ -230,7 +228,15 @@ public class GamePlayEvent : MonoBehaviour
         return currentWave == waveIndex;
     }
 
- 
+    /// <summary>
+    /// 矢印の描画
+    /// </summary>
+    public void SetArrowEnabled(bool enabled)
+    {
+        arrow.GetComponent<Image>().enabled = enabled;
+        arrow.GetComponent<Blinker>().enabled = enabled;
+
+    }
 
     public void SetStageWallTrigger(bool isTrigger)
     {
@@ -261,7 +267,6 @@ public class GamePlayEvent : MonoBehaviour
     /// <returns></returns>
     public IEnumerator GameEnd()
     {
-        GetComponent<GamePlayTimer>().TimerFlag = false;
         isGameEnd = true;
         //BGM停止
         Instantiate(Resources.Load<GameObject>("Prefab/WhiteFade")).transform.SetParent(GameObject.Find("Canvas").transform, false);
@@ -283,7 +288,7 @@ public class GamePlayEvent : MonoBehaviour
         //カメラズーム開始
         StartCoroutine(FindObjectOfType<CameraControl>().CameraZoom());
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         AudioManager.Instance.PlayBGM(AUDIO.BGM_BOSSSHAKE);
         yield return null;
         SetShakeCamera(2, 2, 4);
@@ -300,28 +305,10 @@ public class GamePlayEvent : MonoBehaviour
         StartCoroutine(DisplayResulltUI());
     }
 
-
     private IEnumerator DisplayResulltUI()
     {
-        yield return new WaitForSeconds(2f);
-        
-        GameObject result = Instantiate(resutUI);
-        result.transform.SetParent(GameObject.Find("Canvas").transform, false);
-        
         yield return new WaitForSeconds(1f);
-        result.transform.GetChild(1).transform.GetChild(0).GetComponent<Text>().enabled = true;
-        result.transform.GetChild(1).transform.GetChild(0).GetComponent<Text>().text = GetComponent<GamePlayTimer>().Text;
-        result.transform.GetChild(1).transform.GetChild(1).GetComponent<Image>().enabled = true;
-        
-        yield return new WaitForSeconds(1f);
-        result.transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().enabled = true;
-        result.transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text = GetComponent<Energy>().MaxCombo.ToString();
-        result.transform.GetChild(2).transform.GetChild(1).GetComponent<Image>().enabled = true;
-
-        yield return new WaitForSeconds(1f);
-        AudioManager.Instance.PlayBGM(AUDIO.BGM_ENDING);
-        
-
+        Instantiate(resutUI).transform.SetParent(GameObject.Find("Canvas").transform, false);
     }
 
     private void SetShakeCamera(float x, float y, float time)

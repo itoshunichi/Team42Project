@@ -141,7 +141,7 @@ public class PlayerSmallController : Player
     {
         if (col.gameObject.tag == "BeDestroyedObject" && !isHit)
         {
-            AudioManager.Instance.PlaySE(AUDIO.SE_DAMAGE);
+            //AudioManager.Instance.PlaySE(AUDIO.SE_DAMAGE);
             GameObject.Find("Main Camera").GetComponent<Shake>().ShakeObject();
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             isHit = true;
@@ -151,7 +151,7 @@ public class PlayerSmallController : Player
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             GetComponent<Rigidbody2D>().AddForce(dir * collisionPower);
             energy.MinusEnergy();
-            if (col.gameObject.GetComponent<Enemy>() && col.gameObject.GetComponent<Enemy>().IsSelectMode(EnemyMode.NORMAL))
+            if (col.gameObject.GetComponent<Enemy>())
             {
                 col.gameObject.GetComponent<Enemy>().BeginDamage(false);
 

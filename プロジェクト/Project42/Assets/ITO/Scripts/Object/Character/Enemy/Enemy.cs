@@ -5,7 +5,7 @@ using UnityEngine;
 public enum EnemyMode
 {
     NORMAL,//通常
-    //TARKING,//プレイヤー追尾
+    TARKING,//プレイヤー追尾
     SHIELD,//シールドエネミー状態
 }
 
@@ -13,24 +13,19 @@ public enum EnemyMode
 public abstract class Enemy : BeDestroyedObject
 {
     //プレイヤー
-    protected GameObject player;
+    private GameObject player;
     //移動速度
     protected float speed;
     //エネルギー
     protected GameObject energy;
     //開始時の角度
     protected Quaternion startRotation;
-
-    [SerializeField]
     //エネミーの状態
     EnemyMode mode;
 
     protected GameObject breakEffect;
     //登場時のエフェクト
     private GameObject spawnEffect;
-
-   // private GameObject breakEffect_shield;
-   // private GameObject spawnEffect_shield;
 
     /// <summary>
     /// 共通のパラメーター
@@ -45,6 +40,15 @@ public abstract class Enemy : BeDestroyedObject
     {
         get { return isMove; }
         set { this.isMove = value; }
+    }
+
+    /// <summary>
+    /// 画面上にいるかどうか
+    /// </summary>
+    protected bool isVisible;
+    public bool IsVisible
+    {
+        get { return isVisible; }
     }
 
 
@@ -69,21 +73,18 @@ public abstract class Enemy : BeDestroyedObject
     }
 
 
-    private void Awake()
-    {
-        
-    }
-
     protected override void Start()
     {
         base.Start();
+        // commonParameter = Resources.Load<Enemy_CommonParametert>("Data/Enemy_CommonParametert");
         speed = 5;
         energy = Resources.Load<GameObject>("Prefab/Energy");
-        SetEffect();
-        //breakEffect = Resources.Load<GameObject>("Prefab/Effect/Enemy/Break_Enemy_New");
-        //spawnEffect = Resources.Load<GameObject>("Prefab/Effect/Enemy/Enemy_Spawn");
-        // = Resources.Load<GameObject>("Prefab/Effect/Enemy/Break_Enemy_Shield");
-        // spawnEffect_shield = Resources.Load<GameObject>("Prefab/Effect/Enemy/Enemy_Shield_Spawn");
+        breakEffect = Resources.Load<GameObject>("Prefab/Effect/Enemy/Break_Enemy_New");
+        spawnEffect = Resources.Load<GameObject>("Prefab/Effect/Enemy/Enemy_Spawn");
+        //speed = commonParameter.speed;
+        //energy = commonParameter.energy;
+        //breakEffect = commonParameter.breakEffect;
+        //spawnEffect = commonParameter.spawnEffect;
         isMove = false;
         GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<Animator>().enabled = false;
@@ -94,25 +95,9 @@ public abstract class Enemy : BeDestroyedObject
 
     }
 
-    private void SetEffect()
-    {
-        if(mode == EnemyMode.NORMAL)
-        {
-            breakEffect = Resources.Load<GameObject>("Prefab/Effect/Enemy/Break_Enemy_New");
-            //spawnEffect = Resources.Load<GameObject>("Prefab/Effect/Enemy/Enemy_Spawn");
-        }
-        if(mode == EnemyMode.SHIELD)
-        {
-            Debug.Log("Set");
-            breakEffect = Resources.Load<GameObject>("Prefab/Effect/Enemy/Break_Enemy_Shield");
-           // spawnEffect = Resources.Load<GameObject>("Prefab/Effect/Enemy/Enemy_Shield_Spawn");
-        }
-    }
-
     protected virtual void Update()
     {
-        if(isMove)
-        Move();
+        SelectMove();
         //SetShieldModeColor();
     }
 
@@ -142,9 +127,11 @@ public abstract class Enemy : BeDestroyedObject
     private IEnumerator SpawnEffect()
     {
         GetComponent<Collider2D>().enabled = false;
-        // GameObject effect = Instantiate(spawnEffect, transform.position,spawnEffect.transform.rotation);
-        //effect.GetComponent<ParticleSystem>().Play();
-        GameObject effect = transform.GetChild(0).gameObject;
+
+        GameObject effect = Instantiate(spawnEffect, transform.position, spawnEffect.transform.rotation);
+        effect.GetComponent<ParticleSystem>().Play();
+        //if(spawnEffect.GetComponent<ParticleSystem>().)
+
         yield return new WaitForSeconds(1);
         GetComponent<Collider2D>().enabled = true;
         //エフェクト削除
@@ -152,7 +139,6 @@ public abstract class Enemy : BeDestroyedObject
 
         yield return new WaitForSeconds(0.5f);
         isMove = true;
-
     }
 
     /// <summary>
@@ -178,7 +164,39 @@ public abstract class Enemy : BeDestroyedObject
         yield return new WaitForSeconds(1.5f);
         isMove = true;
     }
-   
+    /// <summary>
+    /// 仮
+    /// </summary>
+    public void SetShieldModeColor()
+    {
+
+        GetComponent<SpriteRenderer>().color = Color.magenta;
+        // ParticleSystem.MinMaxGradient color = new ParticleSystem.MinMaxGradient();
+        // color.mode = ParticleSystemGradientMode.Color;
+        // color.color = Color.magenta;
+        // ParticleSystem.MainModule main = breakEffect.GetComponent<ParticleSystem>().main;
+        // main.startColor = Color.magenta;
+        //// SpawnEffect
+
+    }
+
+    /// <summary>
+    /// 移動手段の選択
+    /// </summary>
+    private void SelectMove()
+    {
+        if (!isMove) return;
+        //追尾中だったら
+        if (IsSelectMode(EnemyMode.TARKING))
+        {
+            TrackingPlayer();
+        }
+        else
+        {
+            transform.rotation = startRotation;
+            Move();
+        }
+    }
 
     protected abstract void Move();
 
@@ -187,11 +205,23 @@ public abstract class Enemy : BeDestroyedObject
     #region OnTrigger
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        OnTriggerWave(collision);
     }
 
 
-
+    /// <summary>
+    /// ウェーブと当たったときの処理
+    /// </summary>
+    private void OnTriggerWave(Collider2D collision)
+    {
+        if (collision.tag == "AttackWave" && IsSelectMode(EnemyMode.NORMAL))
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+            rigid.velocity = Vector2.zero;
+            //追尾状態に
+            ChangeMode(EnemyMode.TARKING);
+        }
+    }
 
     #endregion
 
@@ -200,7 +230,7 @@ public abstract class Enemy : BeDestroyedObject
         //通常ウェーブ
         if (FindObjectOfType<FormEnemyObject>())
         {
-            FindObjectOfType<FormEnemyObject>().DestoryObject(gameObject,isDamage);
+            FindObjectOfType<FormEnemyObject>().DestoryObject(gameObject);
             
 
         }
@@ -208,29 +238,47 @@ public abstract class Enemy : BeDestroyedObject
         if (FindObjectOfType<FormBossStageObject>())
         {
             FindObjectOfType<FormBossStageObject>().FormRandomEnemy();
-            FindObjectOfType<FormBossStageObject>().DestroyEnemy(gameObject,isDamage);
+            FindObjectOfType<FormBossStageObject>().DestroyEnemy(gameObject);
             
 
             FindObjectOfType<Shield>().BreakShield();
 
         }
-        //エフェクトの生成
-        InstatiateBreakEffect();
+        Instantiate(breakEffect, transform.position, Quaternion.identity).GetComponent<ParticleSystem>().Play();
         if (isDamage)
         {
             Instantiate(energy, transform.position, Quaternion.identity);
         }
     }
 
+    /// <summary>
+    /// プレイヤー追尾
+    /// </summary>
+    private void TrackingPlayer()
+    {
+        if (IsSelectMode(EnemyMode.TARKING))
+        {
 
+            //プレイヤーの方を向く
+            LookPlayer();
+            //ラジアン
+            float rad = Mathf.Atan2(player.transform.position.y - transform.position.y,
+                player.transform.position.x - transform.position.x);
+
+            Vector2 pos = transform.position;
+            pos.x += speed * Mathf.Cos(rad) * Time.deltaTime;
+            pos.y += speed * Mathf.Sin(rad) * Time.deltaTime;
+            transform.position = pos;
+        }
+    }
 
     /// <summary>
-    /// 破壊エフェクトの生成
+    /// プレイヤーの方を向く
     /// </summary>
-    private void InstatiateBreakEffect()
+    private void LookPlayer()
     {
-       
-        Instantiate(breakEffect, transform.position, Quaternion.identity).GetComponent<ParticleSystem>().Play();
+        Vector2 vec = (player.transform.position - transform.position).normalized;
+        transform.rotation = Quaternion.FromToRotation(Vector2.up, vec);
     }
 
     public void Stop()
@@ -255,6 +303,24 @@ public abstract class Enemy : BeDestroyedObject
         float angleDir = transform.eulerAngles.z * (Mathf.PI / 180f);
         Vector3 dir = new Vector3(-Mathf.Sin(angleDir), Mathf.Cos(angleDir), 0.0f);
         return dir;
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject == FindObjectOfType<PlayerSmallController>())
+        {
+            //BeginDamage();
+        }
+    }
+
+    private void OnBecameVisible()
+    {
+        isVisible = true;
+    }
+
+    protected virtual void OnBecameInvisible()
+    {
+        isVisible = false;
     }
 
 

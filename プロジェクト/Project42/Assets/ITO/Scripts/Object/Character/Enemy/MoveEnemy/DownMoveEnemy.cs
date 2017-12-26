@@ -10,7 +10,6 @@ public class DownMoveEnemy : MoveEnemy {
     protected override void Start()
     {
         base.Start();
-        moveMode = MoveEnemyMode.DOWN;
         velocity = new Vector2(0, -speed);
         wallCollider = GameObject.Find("BottomCollider");
     }
