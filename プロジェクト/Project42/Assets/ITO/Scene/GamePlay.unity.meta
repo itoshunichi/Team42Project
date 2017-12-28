@@ -1,6 +1,10 @@
 fileFormatVersion: 2
 guid: 0ec2c7db91b4e2e498c701e5fc8ff76b
+<<<<<<< HEAD
 timeCreated: 1514256121
+=======
+timeCreated: 1514171194
+>>>>>>> parent of 25ab582... meta
 licenseType: Free
 DefaultImporter:
   externalObjects: {}

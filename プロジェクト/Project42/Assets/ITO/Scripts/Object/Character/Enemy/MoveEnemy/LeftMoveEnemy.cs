@@ -10,6 +10,7 @@ public class LeftMoveEnemy : MoveEnemy {
     protected override void Start()
     {
         base.Start();
+        moveMode = MoveEnemyMode.LEFT;
         velocity = new Vector2(-speed, 0);
         wallCollider = GameObject.Find("LeftCollider");
     }

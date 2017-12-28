@@ -18,6 +18,22 @@ public class Energy : MonoBehaviour
     public bool isReduceEnergy = false;
     private bool isImmortality = false;    //不死状態
     private bool isCure;        //エネルギーが回復した判定
+    private int maxCombo;
+    public int MaxCombo
+    {
+        get { return maxCombo; }
+    }
+
+    public bool IsImmortality
+    {
+        get { return isImmortality; }
+        set { isImmortality = value; }
+    }
+    public bool IsDamage
+    {
+        get { return isDamage; }
+        set { isDamage = value; }
+    }
     float energyStartTime;
     // Use this for initialization
     void Start()
@@ -61,6 +77,7 @@ public class Energy : MonoBehaviour
     {
         combTime = 0;
         combCount++;
+        maxCombo = Mathf.Max(combCount);
     }
 
     /// <summary>
@@ -101,17 +118,6 @@ public class Energy : MonoBehaviour
     public float GetEnergy()
     {
         return energy;
-    }
-    
-    public bool IsImmortality
-    {
-        get { return isImmortality; }
-        set { isImmortality = value; }
-    }
-    public bool IsDamage
-    {
-        get { return isDamage; }
-        set { isDamage = value; }
     }
     public bool IsCure
     {
