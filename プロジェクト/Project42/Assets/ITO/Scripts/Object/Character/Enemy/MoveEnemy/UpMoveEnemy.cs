@@ -9,6 +9,7 @@ public class UpMoveEnemy : MoveEnemy {
     protected override void Start()
     {
         base.Start();
+        moveMode = MoveEnemyMode.UP;
         velocity = new Vector2(0, speed);
         wallCollider = GameObject.Find("TopCollider");
 

@@ -55,11 +55,15 @@ public class FormEnemyObject : MonoBehaviour
     /// リストからオブジェクトを削除
     /// </summary>
     /// <param name="enemy"></param>
-    public void DestoryObject(GameObject enemy)
+    public void DestoryObject(GameObject enemy,bool isDamage)
     {
         
         formObjects.Remove(enemy);
         Destroy(enemy);
+        if (isDamage)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_ENERGYGET);
+        }
         if (formObjects.Count == 0)
         {
             StartCoroutine(FindObjectOfType<GamePlayEvent>().StartWaveEndPlayerAutoMove());
