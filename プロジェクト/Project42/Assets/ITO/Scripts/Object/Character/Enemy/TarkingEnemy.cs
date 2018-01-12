@@ -17,7 +17,7 @@ public class TarkingEnemy : Enemy
     /// </summary>
     private void TrackingPlayer()
     {
-
+        speed = 2.5f;
         //プレイヤーの方を向く
         LookPlayer();
         //ラジアン

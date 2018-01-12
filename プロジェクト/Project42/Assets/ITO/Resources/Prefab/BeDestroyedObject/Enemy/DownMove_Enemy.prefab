@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 122768190652939672}
   - component: {fileID: 58447880253900296}
   - component: {fileID: 50089345077923866}
-  - component: {fileID: 114252322246428532}
+  - component: {fileID: 114316719081161042}
   m_Layer: 11
   m_Name: DownMove_Enemy
   m_TagString: BeDestroyedObject
@@ -190,7 +190,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114252322246428532
+--- !u!114 &114316719081161042
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -201,6 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51177dbe16b8be498e988eb558fcec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parameter: {fileID: 11400000, guid: 6b1dba7d6e7906c4a8d0d7c017193537, type: 2}
   mode: 0
   isMove: 0
 --- !u!122 &122768190652939672

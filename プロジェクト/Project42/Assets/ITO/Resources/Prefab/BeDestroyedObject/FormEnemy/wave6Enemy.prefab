@@ -57,8 +57,8 @@ GameObject:
   - component: {fileID: 95434543447405688}
   - component: {fileID: 122891343873583254}
   - component: {fileID: 58998323025143556}
-  - component: {fileID: 114144060465265546}
   - component: {fileID: 50755586387774082}
+  - component: {fileID: 114662291202518008}
   m_Layer: 11
   m_Name: RightMove_Enemy(Clone)
   m_TagString: BeDestroyedObject
@@ -163,8 +163,8 @@ GameObject:
   - component: {fileID: 95795712798477644}
   - component: {fileID: 122997221227853590}
   - component: {fileID: 58262255647257880}
-  - component: {fileID: 114744268714369914}
   - component: {fileID: 50616527385771634}
+  - component: {fileID: 114925417440584868}
   m_Layer: 11
   m_Name: RightMove_Enemy(Clone)
   m_TagString: BeDestroyedObject
@@ -1480,19 +1480,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114144060465265546
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1102397895903540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fcdb5cfa32c2d34cbc60a09e999f37e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mode: 0
-  isMove: 0
 --- !u!114 &114248244464940556
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1504,6 +1491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83b7acba702f0ec4fabdc556914bfb5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parameter: {fileID: 11400000, guid: 6b1dba7d6e7906c4a8d0d7c017193537, type: 2}
   mode: 0
   isMove: 0
 --- !u!114 &114262406594824848
@@ -1517,6 +1505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51177dbe16b8be498e988eb558fcec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parameter: {fileID: 11400000, guid: 6b1dba7d6e7906c4a8d0d7c017193537, type: 2}
   mode: 0
   isMove: 0
 --- !u!114 &114317604886725352
@@ -1530,6 +1519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83b7acba702f0ec4fabdc556914bfb5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parameter: {fileID: 11400000, guid: 6b1dba7d6e7906c4a8d0d7c017193537, type: 2}
   mode: 0
   isMove: 0
 --- !u!114 &114371241971752330
@@ -1543,6 +1533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51177dbe16b8be498e988eb558fcec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parameter: {fileID: 11400000, guid: 6b1dba7d6e7906c4a8d0d7c017193537, type: 2}
   mode: 0
   isMove: 0
 --- !u!114 &114395051527456212
@@ -1556,6 +1547,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 621621f4ecaa5994380bdd6b08552603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parameter: {fileID: 11400000, guid: 6b1dba7d6e7906c4a8d0d7c017193537, type: 2}
+  mode: 0
+  isMove: 0
+--- !u!114 &114662291202518008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1102397895903540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13544d62d652b74409b6da97868bcbf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parameter: {fileID: 11400000, guid: 6b1dba7d6e7906c4a8d0d7c017193537, type: 2}
   mode: 0
   isMove: 0
 --- !u!114 &114677881834739184
@@ -1569,19 +1575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 621621f4ecaa5994380bdd6b08552603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mode: 0
-  isMove: 0
---- !u!114 &114744268714369914
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1222201629134308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fcdb5cfa32c2d34cbc60a09e999f37e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  parameter: {fileID: 11400000, guid: 6b1dba7d6e7906c4a8d0d7c017193537, type: 2}
   mode: 0
   isMove: 0
 --- !u!114 &114876587640871998
@@ -1611,6 +1605,20 @@ MonoBehaviour:
   - {fileID: 1727502316389826}
   - {fileID: 1222201629134308}
   - {fileID: 1102397895903540}
+--- !u!114 &114925417440584868
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1222201629134308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13544d62d652b74409b6da97868bcbf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parameter: {fileID: 11400000, guid: 6b1dba7d6e7906c4a8d0d7c017193537, type: 2}
+  mode: 0
+  isMove: 0
 --- !u!122 &122004321296700470
 Halo:
   m_ObjectHideFlags: 1

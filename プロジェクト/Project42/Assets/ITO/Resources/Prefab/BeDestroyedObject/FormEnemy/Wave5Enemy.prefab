@@ -412,8 +412,8 @@ GameObject:
   - component: {fileID: 95494766283052578}
   - component: {fileID: 122159710321496818}
   - component: {fileID: 58065268993688894}
-  - component: {fileID: 114004766523271318}
   - component: {fileID: 50775788663795348}
+  - component: {fileID: 114411386575377004}
   m_Layer: 11
   m_Name: RightMove_Enemy(Clone)
   m_TagString: BeDestroyedObject
@@ -1120,19 +1120,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114004766523271318
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1820405599925604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fcdb5cfa32c2d34cbc60a09e999f37e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mode: 0
-  isMove: 0
 --- !u!114 &114021113350720696
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1144,6 +1131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2d1c9791bfef14dabadfbf7682f0cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parameter: {fileID: 11400000, guid: 53d90e9bf2bd1804bb2c8d3c8e61ee2d, type: 2}
   mode: 0
   isMove: 0
 --- !u!114 &114038495368994390
@@ -1157,6 +1145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2d1c9791bfef14dabadfbf7682f0cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parameter: {fileID: 11400000, guid: 53d90e9bf2bd1804bb2c8d3c8e61ee2d, type: 2}
   mode: 0
   isMove: 0
 --- !u!114 &114331227184924558
@@ -1195,6 +1184,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fcdb5cfa32c2d34cbc60a09e999f37e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parameter: {fileID: 0}
+  mode: 0
+  isMove: 0
+--- !u!114 &114411386575377004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1820405599925604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13544d62d652b74409b6da97868bcbf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parameter: {fileID: 11400000, guid: 6b1dba7d6e7906c4a8d0d7c017193537, type: 2}
   mode: 0
   isMove: 0
 --- !u!114 &114645257244606188
@@ -1208,6 +1212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fcdb5cfa32c2d34cbc60a09e999f37e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parameter: {fileID: 0}
   mode: 0
   isMove: 0
 --- !u!114 &114923123541919582
@@ -1221,6 +1226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83b7acba702f0ec4fabdc556914bfb5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parameter: {fileID: 11400000, guid: 6b1dba7d6e7906c4a8d0d7c017193537, type: 2}
   mode: 0
   isMove: 0
 --- !u!122 &122159710321496818

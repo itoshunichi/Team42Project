@@ -14,6 +14,8 @@ public abstract class Enemy : BeDestroyedObject
 {
     //プレイヤー
     protected GameObject player;
+   // [SerializeField]
+    //protected Enemy_CommonParametert parameter;
     //移動速度
     protected float speed;
     //エネルギー
